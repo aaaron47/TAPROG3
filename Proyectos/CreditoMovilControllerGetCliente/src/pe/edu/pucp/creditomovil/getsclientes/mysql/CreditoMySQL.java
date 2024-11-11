@@ -170,7 +170,7 @@ public class CreditoMySQL implements CreditoDAO {
     }
     
     @Override
-    public List<Credito> listarTodosFiltros(String cli, Date fechaini, Date fechafin, String estado){
+    public List<Credito> listarTodosFiltros(int cli, Date fechaini, Date fechafin, String estado){
         List<Credito> listaCreditos = new ArrayList<>();
         Connection conn = null;
         CallableStatement cs = null;
@@ -184,7 +184,7 @@ public class CreditoMySQL implements CreditoDAO {
         
         try{
             cs = conn.prepareCall(sql);
-            cs.setString(1, cli);
+            cs.setInt(1, cli);
             cs.setDate(2, fechainiSQL);
             cs.setDate(3, fechafinSQL);
             cs.setString(4, estado);

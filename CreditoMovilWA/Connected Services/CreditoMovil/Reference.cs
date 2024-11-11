@@ -1811,7 +1811,7 @@ namespace CreditoMovilWA.CreditoMovil {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="https://services.creditomovil.pucp.edu.pe", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string idcli;
+        public int idcli;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="https://services.creditomovil.pucp.edu.pe", Order=1)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -1828,7 +1828,7 @@ namespace CreditoMovilWA.CreditoMovil {
         public listarCreditosFiltroRequest() {
         }
         
-        public listarCreditosFiltroRequest(string idcli, System.DateTime fechaini, System.DateTime fechafin, string estado) {
+        public listarCreditosFiltroRequest(int idcli, System.DateTime fechaini, System.DateTime fechafin, string estado) {
             this.idcli = idcli;
             this.fechaini = fechaini;
             this.fechafin = fechafin;
@@ -2020,7 +2020,7 @@ namespace CreditoMovilWA.CreditoMovil {
             return base.Channel.listarCreditosFiltro(request);
         }
         
-        public CreditoMovilWA.CreditoMovil.credito[] listarCreditosFiltro(string idcli, System.DateTime fechaini, System.DateTime fechafin, string estado) {
+        public CreditoMovilWA.CreditoMovil.credito[] listarCreditosFiltro(int idcli, System.DateTime fechaini, System.DateTime fechafin, string estado) {
             CreditoMovilWA.CreditoMovil.listarCreditosFiltroRequest inValue = new CreditoMovilWA.CreditoMovil.listarCreditosFiltroRequest();
             inValue.idcli = idcli;
             inValue.fechaini = fechaini;
@@ -2035,7 +2035,7 @@ namespace CreditoMovilWA.CreditoMovil {
             return base.Channel.listarCreditosFiltroAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CreditoMovilWA.CreditoMovil.listarCreditosFiltroResponse> listarCreditosFiltroAsync(string idcli, System.DateTime fechaini, System.DateTime fechafin, string estado) {
+        public System.Threading.Tasks.Task<CreditoMovilWA.CreditoMovil.listarCreditosFiltroResponse> listarCreditosFiltroAsync(int idcli, System.DateTime fechaini, System.DateTime fechafin, string estado) {
             CreditoMovilWA.CreditoMovil.listarCreditosFiltroRequest inValue = new CreditoMovilWA.CreditoMovil.listarCreditosFiltroRequest();
             inValue.idcli = idcli;
             inValue.fechaini = fechaini;

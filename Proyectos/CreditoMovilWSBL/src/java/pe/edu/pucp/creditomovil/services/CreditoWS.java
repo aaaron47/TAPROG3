@@ -63,7 +63,7 @@ public class CreditoWS {
     }
     
     @WebMethod(operationName = "listarCreditosFiltro")
-    public List<Credito> listarCreditosFiltro(@WebParam(name = "idcli") String idcli,
+    public List<Credito> listarCreditosFiltro(@WebParam(name = "idcli") int idcli,
             @WebParam(name = "fechaini") Date fechaini, @WebParam(name = "fechafin") Date fechafin,
             @WebParam(name = "estado") String estado) {
         List<Credito> creditos = null;

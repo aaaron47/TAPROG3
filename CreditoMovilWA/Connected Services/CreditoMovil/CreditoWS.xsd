@@ -60,7 +60,7 @@
   </xs:complexType>
   <xs:complexType name="listarCreditosFiltro">
     <xs:sequence>
-      <xs:element minOccurs="0" name="idcli" type="xs:string" />
+      <xs:element name="idcli" type="xs:int" />
       <xs:element minOccurs="0" name="fechaini" type="xs:dateTime" />
       <xs:element minOccurs="0" name="fechafin" type="xs:dateTime" />
       <xs:element minOccurs="0" name="estado" type="xs:string" />
