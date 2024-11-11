@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -30,7 +31,8 @@ namespace CreditoMovilWA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            { 
+
                 CargarBancos();
                 lblError.Text = "";
             }
@@ -84,7 +86,7 @@ namespace CreditoMovilWA
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            /*transaccion trans = new transaccion();
+           /* transaccion trans = new transaccion();
             if (fileUpload.HasFile)
             {
                 // Guarda el archivo en Session para uso posterior
@@ -153,17 +155,22 @@ namespace CreditoMovilWA
         {
             try
             {
+
                 var bancos = daoBanco.listarTodosBancos();
+                ViewState["ListaBancos"] = bancos;
 
                 // Limpiar el dropdown por si ya tiene datos
                 ddlBancoElegido.Items.Clear();
                 ddlBancoElegido.Items.Add(new ListItem("Seleccione un banco", "")); // Opción por defecto
 
                 // Ahora puedes usar la lista de bancos en tu lógica ASP.NET
-                foreach (var banco in bancos)
+                if (bancos!=null)
                 {
-                    ListItem listItem = new ListItem(banco.nombreTitular, banco.CCI); // Asigna el nombre y el CCI como valor
-                    ddlBancoElegido.Items.Add(listItem);
+                    foreach (var banco in bancos)
+                    {
+                        ListItem listItem = new ListItem(banco.nombreBanco); // Asigna el nombre y el CCI como valor
+                        ddlBancoElegido.Items.Add(listItem);
+                    }
                 }
             }
             catch (Exception ex)

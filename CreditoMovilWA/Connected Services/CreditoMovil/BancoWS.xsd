@@ -12,16 +12,6 @@
   <xs:element name="obtenerPorIDBancoResponse" type="tns:obtenerPorIDBancoResponse" />
   <xs:element name="obtenerPorNombreBanco" type="tns:obtenerPorNombreBanco" />
   <xs:element name="obtenerPorNombreBancoResponse" type="tns:obtenerPorNombreBancoResponse" />
-  <xs:complexType name="eliminarBanco">
-    <xs:sequence>
-      <xs:element name="idbanco" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminarBancoResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="listarTodosBancos">
     <xs:sequence />
   </xs:complexType>
@@ -45,6 +35,16 @@
       <xs:element minOccurs="0" name="foto" type="xs:base64Binary" />
       <xs:element name="idMetodoPago" type="xs:int" />
       <xs:element minOccurs="0" name="nombreTitular" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarBanco">
+    <xs:sequence>
+      <xs:element name="idbanco" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarBancoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerPorIDBanco">

@@ -306,9 +306,6 @@
     <Content Include="Connected Services\otroPrueba\CreditoMovilWA.otroPrueba.eliminarClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\otroPrueba\CreditoMovilWA.otroPrueba.insertarClienteParametrosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\otroPrueba\CreditoMovilWA.otroPrueba.listarTodosClientesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -316,6 +313,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\otroPrueba\CreditoMovilWA.otroPrueba.obtenerPorIDClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\otroPrueba\CreditoMovilWA.otroPrueba.insertarClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\otroPrueba\CreditoMovilWA.otroPrueba.obtenerPorDocIdenClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\otroPrueba\Reference.svcmap">
