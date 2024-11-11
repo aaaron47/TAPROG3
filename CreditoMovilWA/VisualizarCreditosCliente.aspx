@@ -136,6 +136,14 @@
             document.getElementById("PagoModal").style.display = "none";
         }
 
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof bancosData !== 'undefined') {
+                console.log("Bancos cargados:", bancosData);
+            } else {
+                console.error("No se pudo cargar la lista de bancos.");
+            }
+        });
+
         function mostrarCamposPago() {
             var metodo = document.getElementById("metodoPago").value;
             var infoBanco = document.getElementById("infoBanco");
@@ -172,6 +180,36 @@
             } else {
                 detallesBanco.style.display = "none";
             }
+        }
+
+        function mostrarDetallesBanco() {
+             document.getElementById("detallesBanco").style.display = "block";
+        }
+
+        function ocultarDetallesBanco() {
+            document.getElementById("detallesBanco").style.display = "none";
+        }
+
+        function actualizarDetallesBanco() {
+            var ddlBanco = document.getElementById("<%= ddlBancoElegido.ClientID %>");
+                var bancoSeleccionado = ddlBanco.value;
+
+                if (bancoSeleccionado) {
+                    // Encuentra el banco seleccionado en bancosData
+                    var banco = bancosData.find(b => b.nombreBanco === bancoSeleccionado);
+                    if (banco) {
+                        document.getElementById("txtCCI").value = banco.CCI;
+                        document.getElementById("txtTitularBanco").value = banco.nombreTitular;
+                        document.getElementById("txtTipoCuenta").value = banco.tipoCuenta;
+                        document.getElementById("detallesBanco").style.display = "block";
+                    }
+                } else {
+                    // Limpiar los campos si no hay banco seleccionado
+                    document.getElementById("txtCCI").value = "";
+                    document.getElementById("txtTitularBanco").value = "";
+                    document.getElementById("txtTipoCuenta").value = "";
+                    document.getElementById("detallesBanco").style.display = "none";
+                }
         }
 
     </script>
@@ -243,7 +281,10 @@
                 <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
                     <asp:ListItem Text="Seleccione" Value="" />
                 </asp:DropDownList>
-                <div id="detallesBanco" style="margin-top: 20px; display: none;">
+<%--                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="select-dropdown" AutoPostBack="false" onchange="actualizarDetallesBanco()">
+                    <asp:ListItem Text="Seleccione" Value="" />
+                </asp:DropDownList>--%> 
+                <div id="detallesBanco" runat="server" style="margin-top: 20px; display: none;">
                     <p>CCI:</p>
                     <asp:TextBox ID="txtCCI" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
 
