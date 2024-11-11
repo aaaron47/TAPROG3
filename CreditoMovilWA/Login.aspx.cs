@@ -14,7 +14,8 @@ namespace CreditoMovilWA
     public partial class Login : System.Web.UI.Page
     {
         private ClienteWSClient daoCliente = new ClienteWSClient();
-        private SupervisorWSClient daoSupervisor = new SupervisorWSClient();    
+        private SupervisorWSClient daoSupervisor = new SupervisorWSClient();
+        private AdministradorWSClient daoAdmin = new AdministradorWSClient();
         protected static cliente[] todoClientes = null;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace CreditoMovilWA
 
                 cliente cli = daoCliente.obtenerPorDocIdenCliente(numDocumentoIdentidad, tipoDocumento);
                 supervisor sup = daoSupervisor.obtenerPorDocIdenSup(numDocumentoIdentidad, tipoDocumento);
-                administrador admin = new administrador();
+                administrador admin = daoAdmin.obtenerPorDocIdenAdmin(numDocumentoIdentidad, tipoDocumento);
                 Session["Cliente"] = cli;
                 Session["Supervisor"] = sup;
                 if (cli != null)

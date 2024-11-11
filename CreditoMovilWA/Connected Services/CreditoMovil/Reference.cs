@@ -2537,6 +2537,20 @@ namespace CreditoMovilWA.CreditoMovil {
             "uest", ReplyAction="http://services.creditomovil.pucp.edu.pe/AdministradorWS/insertarAdministradorRes" +
             "ponse")]
         System.Threading.Tasks.Task<CreditoMovilWA.CreditoMovil.insertarAdministradorResponse> insertarAdministradorAsync(CreditoMovilWA.CreditoMovil.insertarAdministradorRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/obtenerPorDocIdenAdminRe" +
+            "quest", ReplyAction="http://services.creditomovil.pucp.edu.pe/AdministradorWS/obtenerPorDocIdenAdminRe" +
+            "sponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(metodoPago1))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse obtenerPorDocIdenAdmin(CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/obtenerPorDocIdenAdminRe" +
+            "quest", ReplyAction="http://services.creditomovil.pucp.edu.pe/AdministradorWS/obtenerPorDocIdenAdminRe" +
+            "sponse")]
+        System.Threading.Tasks.Task<CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse> obtenerPorDocIdenAdminAsync(CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2692,6 +2706,47 @@ namespace CreditoMovilWA.CreditoMovil {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorDocIdenAdmin", WrapperNamespace="http://services.creditomovil.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorDocIdenAdminRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.creditomovil.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string docIdentidad;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.creditomovil.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string tipoDocumento;
+        
+        public obtenerPorDocIdenAdminRequest() {
+        }
+        
+        public obtenerPorDocIdenAdminRequest(string docIdentidad, string tipoDocumento) {
+            this.docIdentidad = docIdentidad;
+            this.tipoDocumento = tipoDocumento;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorDocIdenAdminResponse", WrapperNamespace="http://services.creditomovil.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorDocIdenAdminResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.creditomovil.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CreditoMovilWA.CreditoMovil.administrador @return;
+        
+        public obtenerPorDocIdenAdminResponse() {
+        }
+        
+        public obtenerPorDocIdenAdminResponse(CreditoMovilWA.CreditoMovil.administrador @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface AdministradorWSChannel : CreditoMovilWA.CreditoMovil.AdministradorWS, System.ServiceModel.IClientChannel {
     }
@@ -2829,6 +2884,31 @@ namespace CreditoMovilWA.CreditoMovil {
             CreditoMovilWA.CreditoMovil.insertarAdministradorRequest inValue = new CreditoMovilWA.CreditoMovil.insertarAdministradorRequest();
             inValue.administrador = administrador;
             return ((CreditoMovilWA.CreditoMovil.AdministradorWS)(this)).insertarAdministradorAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse CreditoMovilWA.CreditoMovil.AdministradorWS.obtenerPorDocIdenAdmin(CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest request) {
+            return base.Channel.obtenerPorDocIdenAdmin(request);
+        }
+        
+        public CreditoMovilWA.CreditoMovil.administrador obtenerPorDocIdenAdmin(string docIdentidad, string tipoDocumento) {
+            CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest inValue = new CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest();
+            inValue.docIdentidad = docIdentidad;
+            inValue.tipoDocumento = tipoDocumento;
+            CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse retVal = ((CreditoMovilWA.CreditoMovil.AdministradorWS)(this)).obtenerPorDocIdenAdmin(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse> CreditoMovilWA.CreditoMovil.AdministradorWS.obtenerPorDocIdenAdminAsync(CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest request) {
+            return base.Channel.obtenerPorDocIdenAdminAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse> obtenerPorDocIdenAdminAsync(string docIdentidad, string tipoDocumento) {
+            CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest inValue = new CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminRequest();
+            inValue.docIdentidad = docIdentidad;
+            inValue.tipoDocumento = tipoDocumento;
+            return ((CreditoMovilWA.CreditoMovil.AdministradorWS)(this)).obtenerPorDocIdenAdminAsync(inValue);
         }
     }
     

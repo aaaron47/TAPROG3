@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\aaron\\OneDrive\\Documentos\\TAPROG3\\TAPROG3\\CreditoMovilWA\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\aaron\\onedrive\\documentos\\taprog3\\taprog3\\creditomovilwa\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\aaron\\onedrive\\documentos\\taprog3\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,6 +27,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Login.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\aaron\\OneDrive\\Documentos\\TAPROG3\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
+              "RelativeDocumentMoniker": "Login.aspx.cs",
+              "ToolTip": "C:\\Users\\aaron\\OneDrive\\Documentos\\TAPROG3\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
+              "RelativeToolTip": "Login.aspx.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCgAAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T18:21:52.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "VisualizarCreditosCliente.aspx.cs",
               "DocumentMoniker": "C:\\Users\\aaron\\OneDrive\\Documentos\\TAPROG3\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.cs",
               "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx.cs",
@@ -35,7 +52,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Registro.aspx.cs",
               "DocumentMoniker": "C:\\Users\\aaron\\OneDrive\\Documentos\\TAPROG3\\TAPROG3\\CreditoMovilWA\\Registro.aspx.cs",
               "RelativeDocumentMoniker": "Registro.aspx.cs",
@@ -43,8 +60,7 @@
               "RelativeToolTip": "Registro.aspx.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAYwE0AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T17:35:46.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T17:35:46.625Z"
             }
           ]
         }

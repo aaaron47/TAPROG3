@@ -58,6 +58,18 @@ public class AdministradorWS {
         return administrador;
     }
     
+    @WebMethod(operationName = "obtenerPorDocIdenAdmin")
+    public Administrador obtenerPorDocIdenAdmin(@WebParam(name = "docIdentidad") String docIdentidad,
+                                                @WebParam(name = "tipoDocumento")String tipoDocumento) {
+        Administrador admin = null;
+        try{
+            admin = daoAdministrador.obtenerPorDocIdentidad(docIdentidad,tipoDocumento);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return admin;
+    }
+    
     @WebMethod(operationName = "listarTodosAdministradores")
     public List<Administrador> listarTodosAdministradores() {
         List<Administrador> administradores = null;

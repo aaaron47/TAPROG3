@@ -15,11 +15,13 @@ import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.rrhh.dao.AdministradorDAO;
 import pe.edu.pucp.creditomovil.model.Administrador;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
+
 /**
  *
  * @author Bleak
  */
-public class AdministradorMySQL implements AdministradorDAO{
+public class AdministradorMySQL implements AdministradorDAO {
+
     private Connection conexion;
     private ResultSet rs;
 
@@ -28,14 +30,14 @@ public class AdministradorMySQL implements AdministradorDAO{
         CallableStatement cs;
         String query = "{CALL InsertarAdmin(?,?,?)}";
         int resultado = 0;
-        
+
         try {
             conexion = DBManager.getInstance().getConnection();
             cs = conexion.prepareCall(query);
             cs.setInt(1, administrador.getIdUsuario());
             cs.setString(2, administrador.getCodigoAdm());
             cs.setInt(3, administrador.getCodigoCargo());
-            
+
             resultado = cs.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,18 +45,18 @@ public class AdministradorMySQL implements AdministradorDAO{
     }
 
     @Override
-    public void modificar(int id,Administrador administrador) {
+    public void modificar(int id, Administrador administrador) {
         CallableStatement cs;
         String query = "{CALL ModificarAdmin(?,?,?)}";
         int resultado = 0;
-        
+
         try {
             conexion = DBManager.getInstance().getConnection();
             cs = conexion.prepareCall(query);
             cs.setInt(1, administrador.getIdUsuario());
             cs.setString(2, administrador.getCodigoAdm());
             cs.setInt(3, administrador.getCodigoCargo());
-            
+
             resultado = cs.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,12 +68,12 @@ public class AdministradorMySQL implements AdministradorDAO{
         CallableStatement cs;
         String query = "{CALL EliminarAdmin(?)}";
         int resultado = 0;
-        
+
         try {
             conexion = DBManager.getInstance().getConnection();
             cs = conexion.prepareCall(query);
             cs.setString(1, codigoAdmin);
-            
+
             resultado = cs.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,17 +85,78 @@ public class AdministradorMySQL implements AdministradorDAO{
         CallableStatement cs;
         String query = "{CALL ObtenerAdmin(?)}";
         int resultado = 0;
-        
+
         try {
             conexion = DBManager.getInstance().getConnection();
             cs = conexion.prepareCall(query);
             cs.setString(1, codigoAdmin);
-            
+
             resultado = cs.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null; //por ahora es null, necesito ver qué añadirle
+    }
+
+    @Override
+    public Administrador obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
+        Administrador admin = null;
+        Connection conn = null;
+        CallableStatement cs = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ObtenerAdminPorDocIdentidad(?, ?) }";
+            cs = conn.prepareCall(sql);
+            cs.setString(1, docIden);
+            cs.setString(2, tipoDocIden);
+            rs = cs.executeQuery();
+
+            if (rs.next()) {
+                String tipoDocStr = rs.getString("tipo_doc");
+                if (tipoDocStr == null) {
+                    tipoDocStr = "DNI"; //Por defecto es peruano
+                }
+                TipoDocumento tipoDoc = null;
+                try {
+                    tipoDoc = TipoDocumento.valueOf(tipoDocStr);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e);
+                }
+                admin = new Administrador(
+                        rs.getInt("usuario_id"),
+                        rs.getDate("fecha"),
+                        rs.getString("nombre"),
+                        rs.getString("ap_paterno"),
+                        rs.getString("ap_materno"),
+                        rs.getString("contrasena"),
+                        rs.getDate("fecha_venc"),
+                        rs.getBoolean("activo"),
+                        tipoDoc,
+                        rs.getString("documento"),
+                        rs.getString("codigo_admin"),
+                        rs.getInt("codigo_cargo")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return admin;
     }
 
     @Override
@@ -104,30 +167,36 @@ public class AdministradorMySQL implements AdministradorDAO{
         ResultSet rs = null;
         try {
             conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);            
+            cs = conexion.prepareCall(query);
             rs = cs.executeQuery();
             while (rs.next()) {
                 //
                 Administrador admin = new Administrador(
-                    rs.getInt("usuario_usuario_id"), 
-                    new java.util.Date(), "Diego", "Pérez", "Gonzalez", "miContrasena", new java.util.Date(), true,
-                        TipoDocumento.DNI,"71608817",rs.getString("codigo_admin"),
-                    rs.getInt("codigo_cargo")
+                        rs.getInt("usuario_usuario_id"),
+                        new java.util.Date(), "Diego", "Pérez", "Gonzalez", "miContrasena", new java.util.Date(), true,
+                        TipoDocumento.DNI, "71608817", rs.getString("codigo_admin"),
+                        rs.getInt("codigo_cargo")
                 );
                 administradores.add(admin);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
-            try{
-                if(rs != null) rs.close();
-                if(cs != null) cs.close();
-                if(conexion!=null) conexion.close();
-            } catch(SQLException e){
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return administradores;
     }
-    
+
 }

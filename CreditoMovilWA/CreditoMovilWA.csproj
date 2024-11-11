@@ -277,6 +277,9 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.obtenerPorNombreBilleteraResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.obtenerPorDocIdenAdminResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CreditoMovil\CreditoWS.wsdl" />
     <None Include="Connected Services\CreditoMovil\CreditoWS.xsd">
       <SubType>Designer</SubType>

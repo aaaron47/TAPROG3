@@ -15,5 +15,6 @@ public interface AdministradorDAO {
     void modificar(int id, Administrador administrador);
     void eliminar(String id);
     Administrador obtenerPorId(String id);
+    public Administrador obtenerPorDocIdentidad(String docIden, String tipoDocIden);
     List<Administrador> listarTodos();
 }
