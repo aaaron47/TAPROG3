@@ -42,24 +42,49 @@ public class Principal {
     public static void main(String[] args) {
         
         ClienteDAO clienteDAO = new ClienteMySQL();
-        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
-        if(cliente != null){
-            System.out.println("ID Usuario: " + cliente.getIdUsuario());
-            System.out.println("Nombre: " + cliente.getNombre());
-            System.out.println("Apellido Paterno: " + cliente.getApPaterno());
-            System.out.println("Apellido Materno: " + cliente.getApMaterno());
-            System.out.println("Codigo Cliente: " + cliente.getCodigoCliente());
-            System.out.println("Direccion: " + cliente.getDireccion());
-            System.out.println("Telefono: " + cliente.getTelefono());
-            System.out.println("Email: " + cliente.getEmail());
-            System.out.println("Tipo Cliente: " + cliente.getTipoCliente());
-            System.out.println("Activo: " + cliente.getActivo());
-            System.out.println("Fecha de Registro: " + cliente.getFecha());
-            System.out.println("ultimo Logueo: " + cliente.getUltimoLogueo());
-            System.out.println("----------------------------------------");
-        }else {
-            System.out.println("No se encuentra sapo");
-        }
+        Calendar fechaNacimiento = Calendar.getInstance();
+        fechaNacimiento.set(1990, Calendar.JANUARY, 1); // Fecha de ejemplo
+
+        Calendar fechaVencimiento = Calendar.getInstance();
+        fechaVencimiento.set(2025, Calendar.DECEMBER, 31); // Fecha de vencimiento de ejemplo
+        
+        Cliente cliente = new Cliente(
+                0, // idUsuario (se generará automáticamente en la base de datos)
+                fechaNacimiento.getTime(),
+                "Diego",
+                "Silvestre",
+                "González",
+                "gaaaa123Password",
+                fechaVencimiento.getTime(),
+                true,
+                TipoDocumento.DNI,
+                "101024777",
+                0,
+                "1563 Calle Falsa",
+                "123456789",
+                "juan.perez@example.com",
+                "EXCELENTE",
+                20
+        );
+        if(clienteDAO.insertar(cliente)){System.out.println("Codigo Cliente: " + cliente.getCodigoCliente());};
+//        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
+//        if(cliente != null){
+//            System.out.println("ID Usuario: " + cliente.getIdUsuario());
+//            System.out.println("Nombre: " + cliente.getNombre());
+//            System.out.println("Apellido Paterno: " + cliente.getApPaterno());
+//            System.out.println("Apellido Materno: " + cliente.getApMaterno());
+//            System.out.println("Codigo Cliente: " + cliente.getCodigoCliente());
+//            System.out.println("Direccion: " + cliente.getDireccion());
+//            System.out.println("Telefono: " + cliente.getTelefono());
+//            System.out.println("Email: " + cliente.getEmail());
+//            System.out.println("Tipo Cliente: " + cliente.getTipoCliente());
+//            System.out.println("Activo: " + cliente.getActivo());
+//            System.out.println("Fecha de Registro: " + cliente.getFecha());
+//            System.out.println("ultimo Logueo: " + cliente.getUltimoLogueo());
+//            System.out.println("----------------------------------------");
+//        }else {
+//            System.out.println("No se encuentra sapo");
+//        }
 //        // Crear la instancia de ClienteDAO
 //        ClienteDAO clienteDAO = new ClienteMySQL();
 //        SupervisorDAO daoSup = new SupervisorMySQL();

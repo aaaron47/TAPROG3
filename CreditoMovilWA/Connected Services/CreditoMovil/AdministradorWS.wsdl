@@ -11,12 +11,6 @@
   <message name="obtenerPorIDAdministradorResponse">
     <part name="parameters" element="tns:obtenerPorIDAdministradorResponse" />
   </message>
-  <message name="insertarAdministrador">
-    <part name="parameters" element="tns:insertarAdministrador" />
-  </message>
-  <message name="insertarAdministradorResponse">
-    <part name="parameters" element="tns:insertarAdministradorResponse" />
-  </message>
   <message name="listarTodosAdministradores">
     <part name="parameters" element="tns:listarTodosAdministradores" />
   </message>
@@ -35,14 +29,16 @@
   <message name="modificarAdministradorResponse">
     <part name="parameters" element="tns:modificarAdministradorResponse" />
   </message>
+  <message name="insertarAdministrador">
+    <part name="parameters" element="tns:insertarAdministrador" />
+  </message>
+  <message name="insertarAdministradorResponse">
+    <part name="parameters" element="tns:insertarAdministradorResponse" />
+  </message>
   <portType name="AdministradorWS">
     <operation name="obtenerPorIDAdministrador">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/obtenerPorIDAdministradorRequest" message="tns:obtenerPorIDAdministrador" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/obtenerPorIDAdministradorResponse" message="tns:obtenerPorIDAdministradorResponse" />
-    </operation>
-    <operation name="insertarAdministrador">
-      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/insertarAdministradorRequest" message="tns:insertarAdministrador" />
-      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/insertarAdministradorResponse" message="tns:insertarAdministradorResponse" />
     </operation>
     <operation name="listarTodosAdministradores">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/listarTodosAdministradoresRequest" message="tns:listarTodosAdministradores" />
@@ -56,19 +52,14 @@
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/modificarAdministradorRequest" message="tns:modificarAdministrador" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/modificarAdministradorResponse" message="tns:modificarAdministradorResponse" />
     </operation>
+    <operation name="insertarAdministrador">
+      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/insertarAdministradorRequest" message="tns:insertarAdministrador" />
+      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/AdministradorWS/insertarAdministradorResponse" message="tns:insertarAdministradorResponse" />
+    </operation>
   </portType>
   <binding name="AdministradorWSPortBinding" type="tns:AdministradorWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="obtenerPorIDAdministrador">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="insertarAdministrador">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -96,6 +87,15 @@
       </output>
     </operation>
     <operation name="modificarAdministrador">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertarAdministrador">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

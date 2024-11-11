@@ -40,8 +40,8 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             // Configura los parámetros
             cs.setInt(1, evaluacion.getNumeroEvaluacion());
             Cliente cli = (Cliente) evaluacion.getClienteAsignado();
-            if(cli.getCodigoCliente()!=null)
-                cs.setString(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
+            if(cli.getCodigoCliente()!=0)
+                cs.setInt(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
             else cs.setString(2, " ");
             cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
             cs.setString(4, evaluacion.getNombreNegocio());
@@ -86,8 +86,8 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             cs = conexion.prepareCall(query);
             cs.setInt(1, evaluacion.getNumeroEvaluacion());
             Cliente cli = (Cliente) evaluacion.getClienteAsignado();
-            if(cli.getCodigoCliente()!=null)
-                cs.setString(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
+            if(cli.getCodigoCliente()!=0)
+                cs.setInt(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
             else cs.setString(2, " ");
             cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
             cs.setString(4, evaluacion.getNombreNegocio());

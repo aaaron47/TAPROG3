@@ -47,7 +47,7 @@ namespace CreditoMovilWA
                         FormsAuthenticationTicket tkt;
                         string cookiestr;
                         HttpCookie ck;
-                        tkt = new FormsAuthenticationTicket(1, cli.codigoCliente, DateTime.Now,
+                        tkt = new FormsAuthenticationTicket(1, "cli.codigoCliente", DateTime.Now,//corregir
                         DateTime.Now.AddMinutes(30), true, cli.nombre+" "+cli.apPaterno+" "+cli.apMaterno);
                         cookiestr = FormsAuthentication.Encrypt(tkt);
                         ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
