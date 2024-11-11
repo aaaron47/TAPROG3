@@ -341,6 +341,7 @@
     <Content Include="images\bancos.png" />
     <Content Include="images\billeteras.png" />
     <Content Include="Login.aspx" />
+    <Content Include="MainAdmin.aspx" />
     <Content Include="MainCliente.aspx" />
     <Content Include="MainSupervisor.aspx" />
     <Content Include="Registro.aspx" />
@@ -393,6 +394,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainAdmin.aspx.cs">
+      <DependentUpon>MainAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainAdmin.aspx.designer.cs">
+      <DependentUpon>MainAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="MainCliente.aspx.cs">
       <DependentUpon>MainCliente.aspx</DependentUpon>

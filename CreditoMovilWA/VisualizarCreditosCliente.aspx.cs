@@ -181,7 +181,7 @@ namespace CreditoMovilWA
             }
 
         }
-        /* esta va xon lo comentado en el aspx
+        // esta va xon lo comentado en el aspx
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -192,7 +192,7 @@ namespace CreditoMovilWA
                 var bancosJson = Newtonsoft.Json.JsonConvert.SerializeObject(bancos);
                 ClientScript.RegisterStartupScript(this.GetType(), "BancosData", $"var bancosData = {bancosJson};", true);
             }
-        }*/
+        }
 
         protected void ddlBancoElegido_SelectedIndexChanged(object sender, EventArgs e)
         {

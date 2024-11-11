@@ -278,12 +278,12 @@
                 <h3>Bancos Aceptados:</h3>
                 <img src="images/bancos.png" alt="Bancos Aceptados" style="width:100%; max-width:400px;">
                     <label for="bancoElegido">Seleccione el banco</label>
-                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
+<%--                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
                     <asp:ListItem Text="Seleccione" Value="" />
-                </asp:DropDownList>
-<%--                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="select-dropdown" AutoPostBack="false" onchange="actualizarDetallesBanco()">
+                </asp:DropDownList>--%>
+                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="false" onchange="actualizarDetallesBanco()">
                     <asp:ListItem Text="Seleccione" Value="" />
-                </asp:DropDownList>--%> 
+                </asp:DropDownList> 
                 <div id="detallesBanco" runat="server" style="margin-top: 20px; display: none;">
                     <p>CCI:</p>
                     <asp:TextBox ID="txtCCI" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>

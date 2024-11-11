@@ -41,6 +41,7 @@ namespace CreditoMovilWA
                 administrador admin = daoAdmin.obtenerPorDocIdenAdmin(numDocumentoIdentidad, tipoDocumento);
                 Session["Cliente"] = cli;
                 Session["Supervisor"] = sup;
+                Session["Admin"] = admin;
                 if (cli != null)
                 {
                     if (cli.contrasenha == password)
@@ -74,7 +75,7 @@ namespace CreditoMovilWA
                         FormsAuthenticationTicket tkt;
                         string cookiestr;
                         HttpCookie ck;
-                        tkt = new FormsAuthenticationTicket(1, sup.codigoEv, DateTime.Now,
+                        tkt = new FormsAuthenticationTicket(1, sup.codigoEv.ToString(), DateTime.Now,
                         DateTime.Now.AddMinutes(30), true, sup.nombre + " " + sup.apPaterno + " " + sup.apMaterno);
                         cookiestr = FormsAuthentication.Encrypt(tkt);
                         ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
@@ -86,6 +87,32 @@ namespace CreditoMovilWA
                         strRedirect = Request["ReturnUrl"];
                         if (strRedirect == null)
                             strRedirect = "MainSupervisor.aspx";
+                        Response.Redirect(strRedirect, true);
+                    }
+                    else
+                    {
+                        lblError.Text = "Usuario o contraseña incorrectos.";
+                    }
+                }
+                if (admin != null)
+                {
+                    if (admin.contrasenha == password)
+                    {
+                        FormsAuthenticationTicket tkt;
+                        string cookiestr;
+                        HttpCookie ck;
+                        tkt = new FormsAuthenticationTicket(1, admin.codigoAdm.ToString(), DateTime.Now,
+                        DateTime.Now.AddMinutes(30), true, admin.nombre + " " + admin.apPaterno + " " + admin.apMaterno);
+                        cookiestr = FormsAuthentication.Encrypt(tkt);
+                        ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
+                        ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
+                        ck.Path = FormsAuthentication.FormsCookiePath;
+                        Response.Cookies.Add(ck);
+
+                        string strRedirect;
+                        strRedirect = Request["ReturnUrl"];
+                        if (strRedirect == null)
+                            strRedirect = "MainAdmin.aspx";
                         Response.Redirect(strRedirect, true);
                     }
                     else
