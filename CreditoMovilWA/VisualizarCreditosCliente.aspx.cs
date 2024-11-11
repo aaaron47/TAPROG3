@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
 
 namespace CreditoMovilWA
 {
@@ -168,7 +169,7 @@ namespace CreditoMovilWA
                 {
                     foreach (var banco in bancos)
                     {
-                        ListItem listItem = new ListItem(banco.nombreBanco); // Asigna el nombre y el CCI como valor
+                        ListItem listItem = new ListItem(banco.nombreBanco, banco.CCI); 
                         ddlBancoElegido.Items.Add(listItem);
                     }
                 }
@@ -180,6 +181,18 @@ namespace CreditoMovilWA
             }
 
         }
+        /* esta va xon lo comentado en el aspx
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+
+            var bancos = ViewState["ListaBancos"] as List<BancoWSClient>;
+            if (bancos != null)
+            {
+                var bancosJson = Newtonsoft.Json.JsonConvert.SerializeObject(bancos);
+                ClientScript.RegisterStartupScript(this.GetType(), "BancosData", $"var bancosData = {bancosJson};", true);
+            }
+        }*/
 
         protected void ddlBancoElegido_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -188,15 +201,15 @@ namespace CreditoMovilWA
             if (!string.IsNullOrEmpty(bancoSeleccionado))
             {
                 // Obtener la información del banco basado en el CCI o algún identificador único
-                BancoWSClient bancoService = new BancoWSClient();
-                var banco = bancoService.obtenerPorNombreBanco(bancoSeleccionado); // Modifica según tu método de obtención
+                var banco = daoBanco.obtenerPorNombreBanco(bancoSeleccionado); // Modifica según tu método de obtención
 
                 if (banco != null)
                 {
                     txtCCI.Text = banco.CCI;
                     txtTitularBanco.Text = banco.nombreTitular;
                     txtTipoCuenta.Text = banco.tipoCuenta;
-                    //detallesBanco.Style["display"] = "block"; // Mostrar la sección de detalles
+                    // Ejecutar la función JavaScript para mostrar detalles
+                    ClientScript.RegisterStartupScript(this.GetType(), "mostrarDetallesBanco", "mostrarDetallesBanco();", true);
                 }
             }
             else
@@ -205,7 +218,9 @@ namespace CreditoMovilWA
                 txtCCI.Text = "";
                 txtTitularBanco.Text = "";
                 txtTipoCuenta.Text = "";
-                //detallesBanco.Style["display"] = "none"; // Ocultar la sección de detalles
+
+                // Ejecutar la función JavaScript para ocultar detalles
+                ClientScript.RegisterStartupScript(this.GetType(), "ocultarDetallesBanco", "ocultarDetallesBanco();", true);
             }
         }
     }

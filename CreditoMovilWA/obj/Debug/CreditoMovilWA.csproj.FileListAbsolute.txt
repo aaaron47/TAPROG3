@@ -298,3 +298,8 @@ C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\Credito
 C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\obj\Debug\CreditoM.19D4B4B0.Up2Date
 C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\obj\Debug\CreditoMovilWA.dll
 C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\obj\Debug\CreditoMovilWA.pdb
+C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\bin\Newtonsoft.Json.Bson.dll
+C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\bin\Newtonsoft.Json.dll
+C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\bin\Newtonsoft.Json.xml
+C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\bin\Newtonsoft.Json.Bson.pdb
+C:\Users\pdext\OneDrive\universidad\fci\7mo ciclo\prog3\proyecto\TAPROG3\CreditoMovilWA\bin\Newtonsoft.Json.Bson.xml
