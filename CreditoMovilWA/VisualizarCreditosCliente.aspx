@@ -112,6 +112,8 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
         .cancel-btn {
@@ -155,7 +157,21 @@
         function mostrarInformacionBanco() {
             const bancoElegido = document.getElementById("bancoElegido").value;
             const detallesBanco = document.getElementById("detallesBanco");
-            detallesBanco.style.display = "block";
+            bancosInfo = {
+                "bcp": { cci: "12345678912345678901", titular: "Titular BCP", cuenta: "Cuenta en soles" },
+                "bbva": { cci: "23456789123456789012", titular: "Titular BBVA", cuenta: "Cuenta en dólares" },
+                "interbank": { cci: "34567891234567890123", titular: "Titular Interbank", cuenta: "Cuenta en soles" },
+                "scotiabank": { cci: "45678912345678901234", titular: "Titular Scotiabank", cuenta: "Cuenta en dólares" }
+            };
+
+            if (bancosInfo[bancoElegido]) {
+                detallesBanco.style.display = "block";
+                document.getElementById("txtCCI").value = bancosInfo[bancoElegido].cci;
+                document.getElementById("txtTitularBanco").value = bancosInfo[bancoElegido].titular;
+                document.getElementById("txtTipoCuenta").value = bancosInfo[bancoElegido].cuenta;
+            } else {
+                detallesBanco.style.display = "none";
+            }
         }
 
     </script>
@@ -206,58 +222,56 @@
     </div>
 
 
-    <div id="PagoModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2>Métodos de Pago:</h2>
+   <div id="PagoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Métodos de Pago:</h2>
 
-        <!-- Selector de método de pago -->
-        <label for="metodoPago">Seleccione el método de pago:</label>
-        <select id="metodoPago" runat="server" onchange="mostrarCamposPago()">
-            <option value="">Seleccione</option>
-            <option value="banco">Banco</option>
-            <option value="billetera">Billetera Digital</option>
-        </select>
-
-        <!-- Información de banco -->
-        <div id="infoBanco" style="display: none; margin-top: 20px;">
-            <h3>Bancos Aceptados:</h3>
-            <img src="images/bancos.png" alt="Bancos Aceptados" style="width:100%; max-width:400px;">
-             <label for="bancoElegido">Seleccione el banco</label>
-            <select id="bancoElegido" runat="server" onchange="mostrarInformacionBanco()">
+            <!-- Selector de método de pago -->
+            <label for="metodoPago">Seleccione el método de pago:</label>
+            <select id="metodoPago" onchange="mostrarCamposPago()">
                 <option value="">Seleccione</option>
-                <option value="bcp">BCP</option>
-                <option value="bbva">BBVA</option>
-                <option value="interbank">Interbank</option>
-                <option value="scotiabank">Scotiabank</option>
+                <option value="banco">Banco</option>
+                <option value="billetera">Billetera Digital</option>
             </select>
-            <div id="detallesBanco" style="margin-top: 20px; display: none;">
-                <p>CCI:</p>
-                <asp:TextBox ID="txtCCI" runat="server" CssClass="input-text" Text="" ReadOnly="False" Enabled="True" />
-                <p>Nombre del Titular:</p>
-                <asp:TextBox ID="txtTitularBanco" runat="server" CssClass="input-text" Text="" ReadOnly="False" Enabled="True" />
-                <p>Tipo de Cuenta:</p>
-                <asp:TextBox ID="txtTipoCuenta" runat="server" CssClass="input-text" Text="" ReadOnly="False" Enabled="True" />
+
+            <!-- Información de banco -->
+            <div id="infoBanco" style="display: none; margin-top: 20px;">
+                <h3>Bancos Aceptados:</h3>
+                <img src="images/bancos.png" alt="Bancos Aceptados" style="width:100%; max-width:400px;">
+                    <label for="bancoElegido">Seleccione el banco</label>
+                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
+                    <asp:ListItem Text="Seleccione" Value="" />
+                </asp:DropDownList>
+                <div id="detallesBanco" style="margin-top: 20px; display: none;">
+                    <p>CCI:</p>
+                    <asp:TextBox ID="txtCCI" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
+
+                    <p>Nombre del Titular:</p>
+                    <asp:TextBox ID="txtTitularBanco" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
+
+                    <p>Tipo de Cuenta:</p>
+                    <asp:TextBox ID="txtTipoCuenta" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
+                </div>
             </div>
-        </div>
 
-        <!-- Información de billetera digital -->
-        <div id="infoBilletera" style="display: none; margin-top: 20px;">
-            <h3>Billeteras Digitales Aceptadas:</h3>
-            <img src="images/billeteras.png" alt="Billeteras Aceptadas" style="width:100%; max-width:180px;">
-            <p>Número de Billetera:</p>
-            <asp:TextBox ID="txtNumeroBilletera" runat="server" CssClass="input-text" Text="" ReadOnly="False" Enabled="True" />
-            <p>Nombre del Titular:</p>
-            <asp:TextBox ID="txtTitularBilletera" runat="server" CssClass="input-text" Text="" ReadOnly="False" Enabled="True" />
-        </div>
+            <!-- Información de billetera digital -->
+            <div id="infoBilletera" style="display: none; margin-top: 20px;">
+                <h3>Billeteras Digitales Aceptadas:</h3>
+                <img src="images/billeteras.png" alt="Billeteras Aceptadas" style="width:100%; max-width:180px;">
+                <p>Número de Billetera:</p>
+                <asp:TextBox ID="txtNumeroBilletera" runat="server" CssClass="input-text" Text="987654321" ReadOnly="True" Enabled="False" />
+                <p>Nombre del Titular:</p>
+                <asp:TextBox ID="txtTitularBilletera" runat="server" CssClass="input-text" Text="Nombre del Titular de la Billetera" ReadOnly="True" Enabled="False" />
+            </div>
 
-        <p>Inserte imagen jpeg:</p>
-        <asp:FileUpload ID="fileUpload" runat="server" />
-        <br /><br />
-    
-        <!-- Botones de acción -->
-        <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancelar" CssClass="cancel-btn" OnClientClick="closeModal(); return false;" />
+            <p>Inserte imagen jpeg o pdf:</p>
+            <asp:FileUpload ID="fileUpload" runat="server" />
+            <br /><br />
+
+            <!-- Botones de acción -->
+            <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" />
+            <asp:Button ID="btnCancel" runat="server" Text="Cancelar" CssClass="cancel-btn" OnClientClick="closeModal(); return false;" />
         </div>
     </div>
 </asp:Content>

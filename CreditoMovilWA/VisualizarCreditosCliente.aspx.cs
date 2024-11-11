@@ -1,7 +1,9 @@
 ﻿using CreditoMovilWA.CreditoMovil;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -29,12 +31,11 @@ namespace CreditoMovilWA
         {
             if (!IsPostBack)
             {
+                CargarBancos();
                 lblError.Text = "";
             }
-            else if (ViewState["ModalAbierto"] != null && (bool)ViewState["ModalAbierto"])
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "AbrirModal", "openModal();", true);
-            }
+
+        
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
@@ -83,7 +84,7 @@ namespace CreditoMovilWA
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            transaccion trans = new transaccion();
+            /*transaccion trans = new transaccion();
             if (fileUpload.HasFile)
             {
                 // Guarda el archivo en Session para uso posterior
@@ -137,7 +138,7 @@ namespace CreditoMovilWA
 
             // Cierra el modal después de grabar
             ViewState["ModalAbierto"] = false;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "CloseModal", "closeModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "CloseModal", "closeModal();", true);*/
         }
 
         protected void btnVerDetalles_Click(object sender, EventArgs e)
@@ -148,5 +149,57 @@ namespace CreditoMovilWA
             Response.Redirect("DetalleCredito.aspx");
         }
 
+        private void CargarBancos()
+        {
+            try
+            {
+                var bancos = daoBanco.listarTodosBancos();
+
+                // Limpiar el dropdown por si ya tiene datos
+                ddlBancoElegido.Items.Clear();
+                ddlBancoElegido.Items.Add(new ListItem("Seleccione un banco", "")); // Opción por defecto
+
+                // Ahora puedes usar la lista de bancos en tu lógica ASP.NET
+                foreach (var banco in bancos)
+                {
+                    ListItem listItem = new ListItem(banco.nombreTitular, banco.CCI); // Asigna el nombre y el CCI como valor
+                    ddlBancoElegido.Items.Add(listItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                lblError.Text = "Error al cargar bancos: " + ex.Message;
+            }
+
+        }
+
+        protected void ddlBancoElegido_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string bancoSeleccionado = ddlBancoElegido.SelectedValue;
+
+            if (!string.IsNullOrEmpty(bancoSeleccionado))
+            {
+                // Obtener la información del banco basado en el CCI o algún identificador único
+                BancoWSClient bancoService = new BancoWSClient();
+                var banco = bancoService.obtenerPorNombreBanco(bancoSeleccionado); // Modifica según tu método de obtención
+
+                if (banco != null)
+                {
+                    txtCCI.Text = banco.CCI;
+                    txtTitularBanco.Text = banco.nombreTitular;
+                    txtTipoCuenta.Text = banco.tipoCuenta;
+                    //detallesBanco.Style["display"] = "block"; // Mostrar la sección de detalles
+                }
+            }
+            else
+            {
+                // Limpiar los campos si no hay banco seleccionado
+                txtCCI.Text = "";
+                txtTitularBanco.Text = "";
+                txtTipoCuenta.Text = "";
+                //detallesBanco.Style["display"] = "none"; // Ocultar la sección de detalles
+            }
+        }
     }
 }
