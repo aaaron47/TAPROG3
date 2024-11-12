@@ -77,6 +77,18 @@ public class ClienteWS {
         return cliente;
     }
     
+    @WebMethod(operationName = "listarClientesPorRanking")
+    public List<Cliente> listarClientesPorRanking(@WebParam(name = "rankini") double rankini,
+                                                @WebParam(name = "rankfin") double rankfin) {
+        List<Cliente> clientes = null;
+        try{
+            clientes = daoCliente.listarPorRanking(rankini, rankfin);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return clientes;
+    }
+    
     @WebMethod(operationName = "listarTodosClientes")
     public List<Cliente> listarTodosClientes() {
         List<Cliente> clientes = null;
