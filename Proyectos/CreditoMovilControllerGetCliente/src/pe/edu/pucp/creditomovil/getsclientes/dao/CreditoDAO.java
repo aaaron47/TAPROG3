@@ -19,5 +19,6 @@ public interface CreditoDAO {
     Credito obtenerPorId(int numCredito);
     public List<Credito> listarTodosFiltros(int cli, Date fechaini, Date fechafin, String estado);
     public List<Credito> listarTodosSinCliFiltros(Date fechaini, Date fechafin, String estado);
+    public List<Credito> listarCreditosPorCliente(int cli);
     public List<Credito> listarTodos(); 
 }

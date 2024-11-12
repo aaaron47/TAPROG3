@@ -277,6 +277,53 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return listaCreditos;
     }
+    
+    @Override
+    public List<Credito> listarCreditosPorCliente(int cli) {
+        List<Credito> listaCreditos = new ArrayList<>();
+        Connection conn = null;
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        conn = DBManager.getInstance().getConnection();
+        String sql = "{ CALL ObtenerCreditosPorClienteSinFiltro(?) }";
+
+        try {
+            cs = conn.prepareCall(sql);
+            cs.setInt(1, cli);
+            rs = cs.executeQuery();
+
+            while (rs.next()) {
+                int numCredito = rs.getInt("num_credito");
+                double monto = rs.getDouble("monto");
+                double tasaInteres = rs.getDouble("tasa_interes");
+                Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
+                String est = rs.getString("estado");
+                int numCuotas = rs.getInt("num_cuotas");
+
+                // Crear el objeto Credito. Nota que el cliente es null por simplicidad
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
+                listaCreditos.add(credito);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listaCreditos;
+    }
 
     public List<Credito> listarTodos() {
         List<Credito> listaCreditos = new ArrayList<>();

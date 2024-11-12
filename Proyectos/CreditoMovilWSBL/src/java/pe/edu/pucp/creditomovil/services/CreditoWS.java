@@ -88,6 +88,17 @@ public class CreditoWS {
         return creditos;
     }
     
+    @WebMethod(operationName = "listarCreditosCliente")
+    public List<Credito> listarCreditosCliente(@WebParam(name = "idcli") int idcli) {
+        List<Credito> creditos = null;
+        try{
+            creditos = daoCredito.listarCreditosPorCliente(idcli);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return creditos;
+    }
+    
     @WebMethod(operationName = "listarTodosCreditos")
     public List<Credito> listarTodosCreditos() {
         List<Credito> creditos = null;
