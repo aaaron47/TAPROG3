@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace CreditoMovilWA
 {
-    public partial class VisualizarCreditos : System.Web.UI.Page
+    public partial class VisualizarCreditosCliente : System.Web.UI.Page
     {
 
         private CreditoWSClient daoCredito = new CreditoWSClient();

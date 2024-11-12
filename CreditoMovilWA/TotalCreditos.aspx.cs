@@ -31,7 +31,7 @@ namespace CreditoMovilWA
 
 
                 //var resultados = ObtenerCreditosPorFecha(fechaInicio, fechaFin);
-                var resultados = daoCredito.li(fechaInicio, fechaFin, estado);//corregir
+                var resultados = daoCredito.listarCreditosSinCliFiltro(fechaInicio, fechaFin, estado);//corregir
 
                 if (resultados != null)
                 {

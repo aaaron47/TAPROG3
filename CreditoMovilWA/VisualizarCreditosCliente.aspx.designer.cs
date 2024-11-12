@@ -11,7 +11,7 @@ namespace CreditoMovilWA
 {
 
 
-    public partial class VisualizarCreditos
+    public partial class VisualizarCreditosCliente
     {
 
         /// <summary>

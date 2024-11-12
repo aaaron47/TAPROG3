@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\totalcreditos.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:totalcreditos.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,22 +13,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\totalcreditos.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:totalcreditos.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\mainadmin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:mainadmin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\totalcreditos.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:totalcreditos.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\mainadmin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:mainadmin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,72 +22,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MainAdmin.aspx",
-              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\MainAdmin.aspx",
-              "RelativeDocumentMoniker": "MainAdmin.aspx",
-              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\MainAdmin.aspx",
-              "RelativeToolTip": "MainAdmin.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-11T20:01:06.826Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainAdmin.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\MainAdmin.aspx.cs",
-              "RelativeDocumentMoniker": "MainAdmin.aspx.cs",
-              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\MainAdmin.aspx.cs",
-              "RelativeToolTip": "MainAdmin.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T20:25:27.345Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TotalCreditos.aspx",
-              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx",
-              "RelativeDocumentMoniker": "TotalCreditos.aspx",
-              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx",
-              "RelativeToolTip": "TotalCreditos.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-11T23:42:01.647Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TotalCreditos.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx.cs",
-              "RelativeDocumentMoniker": "TotalCreditos.aspx.cs",
-              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx.cs",
-              "RelativeToolTip": "TotalCreditos.aspx.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCEAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T00:03:48.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TotalCreditos.aspx.designer.cs",
-              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx.designer.cs",
-              "RelativeDocumentMoniker": "TotalCreditos.aspx.designer.cs",
-              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx.designer.cs",
-              "RelativeToolTip": "TotalCreditos.aspx.designer.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAswCIAAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T00:04:27.183Z",
+              "Title": "VisualizarCreditosCliente.aspx",
+              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx",
+              "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx",
+              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx",
+              "RelativeToolTip": "VisualizarCreditosCliente.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-11-12T01:17:49.969Z",
               "EditorCaption": ""
             },
             {
@@ -114,9 +53,9 @@
               "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx.cs",
               "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.cs",
               "RelativeToolTip": "VisualizarCreditosCliente.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T00:00:19.53Z",
+              "WhenOpened": "2024-11-12T01:17:50.74Z",
               "EditorCaption": ""
             },
             {
@@ -127,18 +66,10 @@
               "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx.designer.cs",
               "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.designer.cs",
               "RelativeToolTip": "VisualizarCreditosCliente.aspx.designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T00:04:16.995Z",
+              "WhenOpened": "2024-11-12T01:17:51.343Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }

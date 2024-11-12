@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Usuario.master" CodeFile="VisualizarCreditosCliente.aspx.cs" Inherits="CreditoMovilWA.VisualizarCreditos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Usuario.master" CodeFile="VisualizarCreditosCliente.aspx.cs" Inherits="CreditoMovilWA.VisualizarCreditosCliente" %>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
@@ -278,7 +278,7 @@
                 <h3>Bancos Aceptados:</h3>
                 <img src="images/bancos.png" alt="Bancos Aceptados" style="width:100%; max-width:400px;">
                     <label for="bancoElegido">Seleccione el banco</label>
-<%--                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
+            <%--<asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
                     <asp:ListItem Text="Seleccione" Value="" />
                 </asp:DropDownList>--%>
                 <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="false" onchange="actualizarDetallesBanco()">

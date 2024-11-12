@@ -13,22 +13,20 @@ namespace CreditoMovilWA
         {
 
         }
+
         protected void btnVisualizarCreditos_Click(object sender, EventArgs e)
         {
-
             Response.Redirect("TotalCreditos.aspx");
         }
 
         protected void btnVisualizarClientes_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("TotalClientes.aspx");
         }
 
         protected void btnVisualizarEvaluaciones_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("TotalTransacciones.aspx");
         }
     }
 }

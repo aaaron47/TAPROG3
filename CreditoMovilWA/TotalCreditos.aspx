@@ -134,8 +134,6 @@
     </script>
 </asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Contenedor principal -->
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Contenedor principal -->
     <div class="container">
