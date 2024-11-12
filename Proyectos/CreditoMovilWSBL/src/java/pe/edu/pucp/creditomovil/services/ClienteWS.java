@@ -55,7 +55,7 @@ public class ClienteWS {
     }
     
     @WebMethod(operationName = "obtenerPorIDCliente")
-    public Cliente obtenerPorIDCliente(@WebParam(name = "idcliente") String id) {
+    public Cliente obtenerPorIDCliente(@WebParam(name = "idcliente") int id) {
         Cliente cliente = null;
         try{
             cliente = daoCliente.obtenerPorId(id);

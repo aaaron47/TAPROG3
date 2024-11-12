@@ -49,7 +49,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
-        <h2>Cliente Nro XXXXXXXXXX</h2>
+        <h2 id="ncliente" runat ="server">Cliente Nro </h2>
         <asp:Button ID="btnGenerarReporte" runat="server" Text="Generar Reporte" CssClass="button" OnClick="btnGenerarReporte_Click" />
 
         <label>Nombre Completo</label>

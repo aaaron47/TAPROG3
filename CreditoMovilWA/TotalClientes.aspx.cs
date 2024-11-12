@@ -49,7 +49,7 @@ namespace CreditoMovilWA
         protected void VerDetalleCliente_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            string idCliente = btn.CommandArgument;
+            int idCliente = int.Parse(btn.CommandArgument);
             Session["IdCliente"] = idCliente;
             Response.Redirect("DetalleCliente.aspx");
         }

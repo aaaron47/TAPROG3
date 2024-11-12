@@ -15,7 +15,7 @@ public interface ClienteDAO {
     boolean insertar(Cliente usuario);
     boolean modificar(Cliente usuario);
     boolean eliminar(String id);
-    Cliente obtenerPorId(String id);
+    Cliente obtenerPorId(int id);
     Cliente obtenerPorDocIdentidad(String docIden, String tipoDocIden);
     public List<Cliente> listarPorRanking(double rankini, double rankfin);
     List<Cliente> listarTodos();
