@@ -6,6 +6,8 @@
   <xs:element name="insertarCreditoResponse" type="tns:insertarCreditoResponse" />
   <xs:element name="listarCreditosFiltro" type="tns:listarCreditosFiltro" />
   <xs:element name="listarCreditosFiltroResponse" type="tns:listarCreditosFiltroResponse" />
+  <xs:element name="listarCreditosSinCliFiltro" type="tns:listarCreditosSinCliFiltro" />
+  <xs:element name="listarCreditosSinCliFiltroResponse" type="tns:listarCreditosSinCliFiltroResponse" />
   <xs:element name="listarTodosCreditos" type="tns:listarTodosCreditos" />
   <xs:element name="listarTodosCreditosResponse" type="tns:listarTodosCreditosResponse" />
   <xs:element name="modificarCredito" type="tns:modificarCredito" />
@@ -67,6 +69,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarCreditosFiltroResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:credito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarCreditosSinCliFiltro">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaini" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechafin" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarCreditosSinCliFiltroResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:credito" />
     </xs:sequence>

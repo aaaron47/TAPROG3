@@ -75,6 +75,19 @@ public class CreditoWS {
         return creditos;
     }
     
+    @WebMethod(operationName = "listarCreditosSinCliFiltro")
+    public List<Credito> listarCreditosSinCliFiltro(
+            @WebParam(name = "fechaini") Date fechaini, @WebParam(name = "fechafin") Date fechafin,
+            @WebParam(name = "estado") String estado) {
+        List<Credito> creditos = null;
+        try{
+            creditos = daoCredito.listarTodosSinCliFiltros(fechaini, fechafin, estado);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return creditos;
+    }
+    
     @WebMethod(operationName = "listarTodosCreditos")
     public List<Credito> listarTodosCreditos() {
         List<Credito> creditos = null;

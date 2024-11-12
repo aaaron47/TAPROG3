@@ -223,6 +223,61 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return listaCreditos;
     }
+    
+    
+    @Override
+    public List<Credito> listarTodosSinCliFiltros(Date fechaini, Date fechafin, String estado){
+        List<Credito> listaCreditos = new ArrayList<>();
+        Connection conn = null;
+        CallableStatement cs = null;
+        ResultSet rs = null;            
+        conn = DBManager.getInstance().getConnection();
+        String sql = "{ CALL ObtenerCreditosFiltro(?, ?, ?) }";
+        
+        java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
+        java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
+
+        
+        try{
+            cs = conn.prepareCall(sql);
+            cs.setDate(1, fechainiSQL);
+            cs.setDate(2, fechafinSQL);
+            cs.setString(3, estado);
+            rs = cs.executeQuery();
+            
+            
+            while (rs.next()) {
+                String numCredito = rs.getString("num_credito");
+                double monto = rs.getDouble("monto");
+                double tasaInteres = rs.getDouble("tasa_interes");
+                Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
+                String est = rs.getString("estado");
+                int numCuotas = rs.getInt("num_cuotas");
+
+                // Crear el objeto Credito. Nota que el cliente es null por simplicidad
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
+                listaCreditos.add(credito);
+            }
+            
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listaCreditos;
+    }
 
 
     public List<Credito> listarTodos() {
