@@ -63,6 +63,22 @@
 
     </style>
     <script>
+
+        window.onload = function () {
+            const backendMin = document.getElementById("<%= minHiddenField.ClientID %>").value;
+            const backendMax = document.getElementById("<%= maxHiddenField.ClientID %>").value;
+
+            console.log("Min Value from Backend:", backendMin);
+            console.log("Max Value from Backend:", backendMax);
+
+            const slider = document.querySelector(`.slider`);
+            slider.min = backendMin;
+            slider.max = backendMax;
+
+            document.getElementById("min-value").textContent = backendMin;
+            document.getElementById("max-value").textContent = backendMax;
+        };
+
         function updateAmount(value) {
             document.getElementById("amountDisplay").innerText = "S/. " + value;
             document.getElementById("<%= hfMonto.ClientID %>").value = value;
@@ -86,8 +102,9 @@
         }
 
         function updateInterest(amount) {
-            const minInterest = (amount * 0.10).toFixed(2); // 5% mínimo
-            const maxInterest = (amount * 0.15).toFixed(2); // 15% máximo
+            const interes = parseFloat(document.getElementById("<%= tasaInteres.ClientID %>").value);
+            const minInterest = (amount * interes).toFixed(2); // interes mínimo
+            const maxInterest = (amount * (interes+0.05)).toFixed(2); // interes máximo
             document.getElementById("interestDisplay").innerText = `Interés aproximado: S/. ${minInterest} - S/. ${maxInterest}   (10% - 15%)`;
         }
     </script>
@@ -99,10 +116,14 @@
         <h1>Registro de Créditos</h1>
         
         <label>¿Cuánto dinero desea solicitar?</label>
+        <asp:HiddenField ID="minHiddenField" runat="server" />
+        <asp:HiddenField ID="maxHiddenField" runat="server" />
+        <asp:HiddenField ID="tasaInteres" runat="server" />
+
         <div class="slider-container">
-            <span>0</span>
+            <span id="min-value">10</span>
             <input type="range" min="1000" max="5000" value="3500" class="slider" oninput="updateAmount(this.value)" />
-            <span>5000</span>
+            <span id="max-value">5000</span>
         </div>
         <div id="amountDisplay" class="amount-display">S/. 3500</div>
 

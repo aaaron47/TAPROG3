@@ -20,6 +20,7 @@ namespace CreditoMovilWA
             {
                 Response.Redirect("Login.aspx");
             }
+            hola.InnerText += " " + sup.nombre + "!";
         }
 
         protected void Page_Load(object sender, EventArgs e)

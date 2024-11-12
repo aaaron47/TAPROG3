@@ -41,10 +41,10 @@ public class Principal {
      */
     public static void main(String[] args) {
         
-        AdministradorDAO adminDao = new AdministradorMySQL();
-        
-        Administrador admin = adminDao.obtenerPorDocIdentidad("24422124", "DNI");
-        System.out.println("ID Usuario: " + admin.getIdUsuario());
+//        AdministradorDAO adminDao = new AdministradorMySQL();
+//        
+//        Administrador admin = adminDao.obtenerPorDocIdentidad("24422124", "DNI");
+//        System.out.println("ID Usuario: " + admin.getIdUsuario());
         
         
 //        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
@@ -279,6 +279,11 @@ public class Principal {
         //seguir similar a Usuario
         
         //EVALUACION
+        EvaluacionDAO daoEv = new EvaluacionMySQL();
+        Evaluacion ev = daoEv.obtenerPorId(14);
+        
+        System.out.println(ev.getClienteAsignado().getNombre() + " " +
+                ev.getClienteAsignado().getApPaterno() + " "+ev.getClienteAsignado().getApMaterno());
         //INSERTAR
         
     }

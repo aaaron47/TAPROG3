@@ -13,6 +13,7 @@ namespace CreditoMovilWA
 {
     public partial class Login : System.Web.UI.Page
     {
+        private UsuarioWSClient daoUsuario = new UsuarioWSClient();
         private ClienteWSClient daoCliente = new ClienteWSClient();
         private SupervisorWSClient daoSupervisor = new SupervisorWSClient();
         private AdministradorWSClient daoAdmin = new AdministradorWSClient();
@@ -35,97 +36,61 @@ namespace CreditoMovilWA
 
             if (tipoDocumento != null && numDocumentoIdentidad != null && password != null)
             {
+                usuario2 user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
 
-                cliente cli = daoCliente.obtenerPorDocIdenCliente(numDocumentoIdentidad, tipoDocumento);
-                supervisor sup = daoSupervisor.obtenerPorDocIdenSup(numDocumentoIdentidad, tipoDocumento);
-                administrador admin = daoAdmin.obtenerPorDocIdenAdmin(numDocumentoIdentidad, tipoDocumento);
-                Session["Cliente"] = cli;
-                Session["Supervisor"] = sup;
-                Session["Admin"] = admin;
-                if (cli != null)
+                Session["Cliente"] = null;
+                Session["Supervisor"] = null;
+                Session["Administrador"] = null;
+
+                if (user != null && password == user.contrasenha)
                 {
-                    if (cli.contrasenha == password)
-                    {
-                        FormsAuthenticationTicket tkt;
-                        string cookiestr;
-                        HttpCookie ck;
-                        tkt = new FormsAuthenticationTicket(1, cli.codigoCliente.ToString(), DateTime.Now,
-                        DateTime.Now.AddMinutes(30), true, cli.nombre+" "+cli.apPaterno+" "+cli.apMaterno);
-                        cookiestr = FormsAuthentication.Encrypt(tkt);
-                        ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-                        ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
-                        ck.Path = FormsAuthentication.FormsCookiePath;
-                        Response.Cookies.Add(ck);
 
-                        string strRedirect;
-                        strRedirect = Request["ReturnUrl"];
-                        if (strRedirect == null)
-                            strRedirect = "MainCliente.aspx";
-                        Response.Redirect(strRedirect, true);
-                    }
-                    else
+                    Session["Rol"] = user.rol;
+
+                    FormsAuthenticationTicket tkt;
+                    string cookiestr;
+                    HttpCookie ck;
+                    tkt = new FormsAuthenticationTicket(1, user.idUsuario.ToString(), DateTime.Now,
+                    DateTime.Now.AddMinutes(30), true, user.nombre + " " + user.apPaterno + " " + user.apMaterno);
+                    cookiestr = FormsAuthentication.Encrypt(tkt);
+                    ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
+                    ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
+                    ck.Path = FormsAuthentication.FormsCookiePath;
+                    Response.Cookies.Add(ck);
+
+                    string strRedirect = Request["ReturnUrl"];
+
+                    switch (user.rol)
                     {
-                        lblError.Text = "Usuario o contraseña incorrectos.";
+                        case rol1.CLIENTE:
+                            cliente cli = daoCliente.obtenerPorDocIdenCliente(user.documento, user.tipoDocumento.ToString());
+                            Session["Cliente"] = cli;
+
+                            if (strRedirect == null)
+                                strRedirect = "MainCliente.aspx";
+                            break;
+                        case rol1.SUPERVISOR:
+                            supervisor sup = daoSupervisor.obtenerPorDocIdenSup(user.documento, user.tipoDocumento.ToString());
+                            Session["Supervisor"] = sup;
+
+                            if (strRedirect == null)
+                                strRedirect = "MainSupervisor.aspx";
+                            break;
+                        case rol1.ADMINISTRADOR:
+                            administrador admin = daoAdmin.obtenerPorDocIdenAdmin(user.documento, user.tipoDocumento.ToString());
+                            Session["Administrador"] = admin;
+
+                            if (strRedirect == null)
+                                strRedirect = "MainAdmin.aspx";
+                            break;
                     }
+                    Response.Redirect(strRedirect, true);
                 }
-                if (sup != null)
+                else
                 {
-                    if (sup.contrasenha == password)
-                    {
-                        FormsAuthenticationTicket tkt;
-                        string cookiestr;
-                        HttpCookie ck;
-                        tkt = new FormsAuthenticationTicket(1, sup.codigoEv.ToString(), DateTime.Now,
-                        DateTime.Now.AddMinutes(30), true, sup.nombre + " " + sup.apPaterno + " " + sup.apMaterno);
-                        cookiestr = FormsAuthentication.Encrypt(tkt);
-                        ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-                        ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
-                        ck.Path = FormsAuthentication.FormsCookiePath;
-                        Response.Cookies.Add(ck);
-
-                        string strRedirect;
-                        strRedirect = Request["ReturnUrl"];
-                        if (strRedirect == null)
-                            strRedirect = "MainSupervisor.aspx";
-                        Response.Redirect(strRedirect, true);
-                    }
-                    else
-                    {
-                        lblError.Text = "Usuario o contraseña incorrectos.";
-                    }
-                }
-                if (admin != null)
-                {
-                    if (admin.contrasenha == password)
-                    {
-                        FormsAuthenticationTicket tkt;
-                        string cookiestr;
-                        HttpCookie ck;
-                        tkt = new FormsAuthenticationTicket(1, admin.codigoAdm.ToString(), DateTime.Now,
-                        DateTime.Now.AddMinutes(30), true, admin.nombre + " " + admin.apPaterno + " " + admin.apMaterno);
-                        cookiestr = FormsAuthentication.Encrypt(tkt);
-                        ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-                        ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
-                        ck.Path = FormsAuthentication.FormsCookiePath;
-                        Response.Cookies.Add(ck);
-
-                        string strRedirect;
-                        strRedirect = Request["ReturnUrl"];
-                        if (strRedirect == null)
-                            strRedirect = "MainAdmin.aspx";
-                        Response.Redirect(strRedirect, true);
-                    }
-                    else
-                    {
-                        lblError.Text = "Usuario o contraseña incorrectos.";
-                    }
+                    lblError.Text = "Usuario o contraseña incorrectos.";
                 }
             }
-            else
-            {
-                lblError.Text = "Por favor, ingrese sus datos.";
-            }
-
         }
 
         private bool VerificarContraseña(string contraseñaIngresada, string salAlmacenada, string contraseñaHashAlmacenada)

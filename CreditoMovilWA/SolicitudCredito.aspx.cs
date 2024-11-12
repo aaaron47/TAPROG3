@@ -20,6 +20,28 @@ namespace CreditoMovilWA
             {
                 Response.Redirect("Login.aspx");
             }
+
+            minHiddenField.Value = (1000 * cli.ranking / 100).ToString();
+            maxHiddenField.Value = (5000 * cli.ranking / 100).ToString();
+
+            if(cli.ranking > 80)
+            {
+                tasaInteres.Value = "0.05";
+            }else if(cli.ranking > 50)
+            {
+                tasaInteres.Value = "0.8";
+            }else if(cli.ranking > 30)
+            {
+                tasaInteres.Value = "0.1";
+            }
+            else if(cli.ranking > 10)
+            {
+                tasaInteres.Value = "0.12";
+            }
+            else
+            {
+                tasaInteres.Value = "0.15";
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -41,9 +63,9 @@ namespace CreditoMovilWA
             //lblInteres.Text = $"Interés aproximado: S/. {minInteres:F2} - S/. {maxInteres:F2}";
 
             credito cred = new credito();
-            cred.cliente = null; //falta guardar al cliente btw, eso se hace desde el login
+            cred.cliente = null; //no es necesario ya que se guarda desde el insertarcredito del dao.
             cred.estado = "Solicitado";
-            cred.tasaInteres = maxInteres;
+            cred.tasaInteres = double.Parse(tasaInteres.Value)*100;
             cred.fechaOtorgamiento = DateTime.Now;
             cred.monto = monto;
             cred.numCuotas = Int32.Parse(selectedCuotas.Value); // no sé cómo colocar esto btw, creo que es así, vamos a ver

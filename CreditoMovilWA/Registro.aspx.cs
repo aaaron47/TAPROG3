@@ -76,7 +76,9 @@ namespace CreditoMovilWA
             Cliente.fechaVencimientoSpecified = true;
             Cliente.ultimoLogueo = DateTime.Now; // falta ver, no lo utiliza para la creacion de cliente
             Cliente.codigoCliente = 0;
-            Cliente.ranking = 30;
+            Cliente.ranking = 50;
+            Cliente.rol = rol.CLIENTE;
+            Cliente.rolSpecified = true;
 
             bool resultado = daoCliente.insertarCliente(Cliente);
             if (resultado)

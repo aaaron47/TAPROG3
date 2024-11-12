@@ -38,7 +38,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Contenedor principal -->
     <div class="container">
-        <h2>¡Hola!</h2>
+        <h2 id="hola" runat="server">¡Hola, </h2>
         <p>Estas son las evaluaciones que posees:</p>
 
         <!-- Tabla de evaluaciones -->

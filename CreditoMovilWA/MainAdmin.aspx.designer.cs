@@ -25,5 +25,7 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.Button btnVisualizarCreditos;
         protected global::System.Web.UI.WebControls.Button btnVisualizarClientes;
         protected global::System.Web.UI.WebControls.Button btnVisualizarEvaluaciones;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hola;
+
     }
 }

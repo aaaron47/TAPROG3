@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CreditoMovilWA.CreditoMovil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,16 @@ namespace CreditoMovilWA
 {
     public partial class MainAdmin : System.Web.UI.Page
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            administrador admin = (administrador)Session["Administrador"];
+            if (admin == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            hola.InnerText += " " + admin.nombre + "!";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

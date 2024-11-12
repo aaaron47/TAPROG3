@@ -54,7 +54,7 @@ public class ClienteMySQL implements ClienteDAO {
             stmtUsuario.executeUpdate();
 
             // Obtener el ID generado
-            int usuarioId = stmtUsuario.getInt(11);
+            int usuarioId = stmtUsuario.getInt(12);
             cliente.setIdUsuario(usuarioId); // Asignar el ID al objeto cliente
 
             // Llamada al procedimiento `InsertarCliente`
