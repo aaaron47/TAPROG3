@@ -337,6 +337,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="DetalleCliente.aspx" />
     <Content Include="DetalleCredito.aspx" />
     <Content Include="DetalleEvaluacion.aspx" />
     <Content Include="DetalleTransaccion.aspx" />
@@ -349,6 +350,7 @@
     <Content Include="MainSupervisor.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="SolicitudCredito.aspx" />
+    <Content Include="TotalClientes.aspx" />
     <Content Include="TotalCreditos.aspx" />
     <Content Include="VisualizarCreditosCliente.aspx" />
     <Content Include="Web.config" />
@@ -363,6 +365,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleCliente.aspx.cs">
+      <DependentUpon>DetalleCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleCliente.aspx.designer.cs">
+      <DependentUpon>DetalleCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetalleCredito.aspx.cs">
       <DependentUpon>DetalleCredito.aspx</DependentUpon>
@@ -434,6 +443,13 @@
     </Compile>
     <Compile Include="SolicitudCredito.aspx.designer.cs">
       <DependentUpon>SolicitudCredito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TotalClientes.aspx.cs">
+      <DependentUpon>TotalClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TotalClientes.aspx.designer.cs">
+      <DependentUpon>TotalClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="TotalCreditos.aspx.cs">
       <DependentUpon>TotalCreditos.aspx</DependentUpon>
