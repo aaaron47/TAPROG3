@@ -52,6 +52,14 @@ namespace CreditoMovilWA
             }
         }
 
+        protected void btnVerDetalles_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string idCredito = btn.CommandArgument;
+            Session["idCredito"] = idCredito;
+            Response.Redirect("DetalleCredito.aspx");
+        }
+
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
         {
             /*try

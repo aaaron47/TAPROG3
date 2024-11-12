@@ -16,7 +16,8 @@ namespace CreditoMovilWA
         protected void Page_Init(object sender, EventArgs e)
         {
             cliente cli = (cliente)Session["Cliente"];
-            if (cli == null)
+            administrador admin = (administrador)Session["Admin"];
+            if (cli == null && admin==null)
             {
                 Response.Redirect("Login.aspx");
             }

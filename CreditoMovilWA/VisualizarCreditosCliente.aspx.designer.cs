@@ -11,7 +11,7 @@ namespace CreditoMovilWA
 {
 
 
-    public partial class VisualizarCreditosCliente
+    public partial class VisualizarCreditos
     {
 
         /// <summary>
@@ -44,11 +44,6 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.HtmlControls.HtmlSelect bancoElegido;
         protected global::System.Web.UI.WebControls.TextBox txtTitularBilletera;
         protected global::System.Web.UI.WebControls.TextBox txtNumeroBilletera;
-
-
-
-
-
 
     }
 }

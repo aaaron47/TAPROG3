@@ -101,7 +101,7 @@
             <asp:GridView ID="gvTransacciones" runat="server" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField DataField="numOperacion" HeaderText="ID_TRANS." />
-                    <asp:BoundField DataField="fecha" HeaderText="FECHA" />
+                    <asp:BoundField DataField="fecha" HeaderText="FECHA" DataFormatString="{0:dd/MM/yyyy}"/>
                     <asp:BoundField DataField="concepto" HeaderText="CONCEPTO" />
                     <asp:BoundField DataField="monto" HeaderText="MONTO" />
                     <asp:BoundField DataField="anulado" HeaderText="ANULADO" />
