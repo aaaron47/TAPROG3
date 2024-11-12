@@ -43,7 +43,7 @@ public class TransaccionMySQL implements TransaccionDAO {
             cs.setDouble(5, transaccion.getMonto());
             cs.setBoolean(6, transaccion.isAnulado());
             cs.setString(7, transaccion.getAgencia());
-            cs.setString(8, transaccion.getCredito().getNumCredito()); // Supone que credito no es null
+            cs.setInt(8, transaccion.getCredito().getNumCredito()); // Supone que credito no es null
             cs.setBytes(9, transaccion.getFoto());
             cs.setInt(10, transaccion.getMetodoPago().getIdMetodoPago());
 

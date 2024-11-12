@@ -16,7 +16,7 @@ public interface CreditoDAO {
     void insertar(Credito credito, String codigoCliente, String tipodocCli);
     void modificar(Credito credito);
     void eliminar(String numCredito);
-    Credito obtenerPorId(String numCredito);
+    Credito obtenerPorId(int numCredito);
     public List<Credito> listarTodosFiltros(int cli, Date fechaini, Date fechafin, String estado);
     public List<Credito> listarTodosSinCliFiltros(Date fechaini, Date fechafin, String estado);
     public List<Credito> listarTodos(); 

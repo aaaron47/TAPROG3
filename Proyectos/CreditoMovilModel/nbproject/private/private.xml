@@ -2,7 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-                                         HEAD
+                                                 HEAD
         
         
         
@@ -15,10 +15,15 @@
         
         
         
-        <group/>
+        
+        
         <group>
             <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Credito.java</file>
             <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Banco.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/aaron/OneDrive/Documentos/TAPROG3/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Administrador.java</file>
+            <file>file:/C:/Users/aaron/OneDrive/Documentos/TAPROG3/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Usuario2.java</file>
         </group>
     </open-files>
 </project-private>

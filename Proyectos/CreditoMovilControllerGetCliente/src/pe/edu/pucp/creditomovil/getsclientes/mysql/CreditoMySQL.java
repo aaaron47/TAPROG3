@@ -37,7 +37,7 @@ public class CreditoMySQL implements CreditoDAO {
             // Insertar en la tabla credito
             String sqlCredito = "{ CALL InsertarCredito(?, ?, ?, ?, ?, ?) }";
             csCredito = conn.prepareCall(sqlCredito);
-            csCredito.setString(1, credito.getNumCredito());
+            csCredito.registerOutParameter(1, java.sql.Types.INTEGER); // Parámetro de salida para el ID
             csCredito.setDouble(2, credito.getMonto());
             csCredito.setDouble(3, credito.getTasaInteres());
             csCredito.setDate(4, new java.sql.Date(credito.getFechaOtorgamiento().getTime()));
@@ -45,10 +45,14 @@ public class CreditoMySQL implements CreditoDAO {
             csCredito.setInt(6, credito.getNumCuotas());
             csCredito.execute();
 
+            // Obtener el ID generado y asignarlo al objeto Credito
+            int numCreditoGenerado = csCredito.getInt(1);
+            credito.setNumCredito(numCreditoGenerado);
+
             // Asociar el crédito al cliente
             String sqlAsociar = "{ CALL AsociarCreditoACliente(?, ?, ?) }";
             csAsociar = conn.prepareCall(sqlAsociar);
-            csAsociar.setString(1, credito.getNumCredito());
+            csAsociar.setInt(1, numCreditoGenerado); // Usar el ID generado en la asociación
             csAsociar.setString(2, codigoCliente);
             csAsociar.setString(3, tipodocCli);
             csAsociar.execute();
@@ -90,7 +94,7 @@ public class CreditoMySQL implements CreditoDAO {
             String sql = "{ CALL ModificarCredito(?, ?, ?, ?, ?, ?) }";
             cs = conn.prepareCall(sql);
 
-            cs.setString(1, credito.getNumCredito());
+            cs.setInt(1, credito.getNumCredito());
             cs.setDouble(2, credito.getMonto());
             cs.setDouble(3, credito.getTasaInteres());
             cs.setDate(4, new java.sql.Date(credito.getFechaOtorgamiento().getTime()));
@@ -142,7 +146,7 @@ public class CreditoMySQL implements CreditoDAO {
     }
 
     @Override
-    public Credito obtenerPorId(String numCredito) {
+    public Credito obtenerPorId(int numCredito) {
         Credito cred = new Credito();
         CallableStatement cs;
         String query = "{CALL ObtenerCredito(?)}";
@@ -151,14 +155,14 @@ public class CreditoMySQL implements CreditoDAO {
         try {
             conexion = DBManager.getInstance().getConnection();
             cs = conexion.prepareCall(query);
-            cs.setString(1, numCredito);
+            cs.setInt(1, numCredito);
 
             rs = cs.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 cred.setEstado(rs.getString("estado"));
                 cred.setFechaOtorgamiento(rs.getDate("fecha_otorgamiento"));
                 cred.setMonto(rs.getDouble("monto"));
-                cred.setNumCredito(rs.getString("num_credito"));
+                cred.setNumCredito(rs.getInt("num_credito"));
                 cred.setNumCuotas(rs.getInt("num_cuotas"));
                 cred.setTasaInteres(rs.getDouble("tasa_interes"));
                 cred.setCliente(null);
@@ -168,31 +172,29 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return cred;
     }
-    
+
     @Override
-    public List<Credito> listarTodosFiltros(int cli, Date fechaini, Date fechafin, String estado){
+    public List<Credito> listarTodosFiltros(int cli, Date fechaini, Date fechafin, String estado) {
         List<Credito> listaCreditos = new ArrayList<>();
         Connection conn = null;
         CallableStatement cs = null;
-        ResultSet rs = null;            
+        ResultSet rs = null;
         conn = DBManager.getInstance().getConnection();
         String sql = "{ CALL ObtenerCreditosPorCliente(?, ?, ?, ?) }";
-        
+
         java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
         java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
 
-        
-        try{
+        try {
             cs = conn.prepareCall(sql);
             cs.setInt(1, cli);
             cs.setDate(2, fechainiSQL);
             cs.setDate(3, fechafinSQL);
             cs.setString(4, estado);
             rs = cs.executeQuery();
-            
-            
+
             while (rs.next()) {
-                String numCredito = rs.getString("num_credito");
+                int numCredito = rs.getInt("num_credito");
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
@@ -203,8 +205,8 @@ public class CreditoMySQL implements CreditoDAO {
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
                 listaCreditos.add(credito);
             }
-            
-        }catch (SQLException ex){
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             try {
@@ -223,31 +225,28 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return listaCreditos;
     }
-    
-    
+
     @Override
-    public List<Credito> listarTodosSinCliFiltros(Date fechaini, Date fechafin, String estado){
+    public List<Credito> listarTodosSinCliFiltros(Date fechaini, Date fechafin, String estado) {
         List<Credito> listaCreditos = new ArrayList<>();
         Connection conn = null;
         CallableStatement cs = null;
-        ResultSet rs = null;            
+        ResultSet rs = null;
         conn = DBManager.getInstance().getConnection();
         String sql = "{ CALL ObtenerCreditosFiltro(?, ?, ?) }";
-        
+
         java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
         java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
 
-        
-        try{
+        try {
             cs = conn.prepareCall(sql);
             cs.setDate(1, fechainiSQL);
             cs.setDate(2, fechafinSQL);
             cs.setString(3, estado);
             rs = cs.executeQuery();
-            
-            
+
             while (rs.next()) {
-                String numCredito = rs.getString("num_credito");
+                int numCredito = rs.getInt("num_credito");
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
@@ -258,8 +257,8 @@ public class CreditoMySQL implements CreditoDAO {
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
                 listaCreditos.add(credito);
             }
-            
-        }catch (SQLException ex){
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             try {
@@ -278,7 +277,6 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return listaCreditos;
     }
-
 
     public List<Credito> listarTodos() {
         List<Credito> listaCreditos = new ArrayList<>();
@@ -293,7 +291,7 @@ public class CreditoMySQL implements CreditoDAO {
             rs = cs.executeQuery();
 
             while (rs.next()) {
-                String numCredito = rs.getString("num_credito");
+                int numCredito = rs.getInt("num_credito");
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");

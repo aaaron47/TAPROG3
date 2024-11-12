@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Credito {
 
-    private String numCredito;
+    private int numCredito;
     private double monto;
     private double tasaInteres;
     private Date fechaOtorgamiento;
@@ -19,7 +19,7 @@ public class Credito {
     private ArrayList<Transaccion> transacciones;
     
     public Credito(){}
-    public Credito(String numCredito, double monto, double tasaInteres,
+    public Credito(int numCredito, double monto, double tasaInteres,
             Date fechaOtorgamiento, Usuario cliente, String estado,
             int numCuotas){
                 this.numCredito = numCredito;
@@ -56,11 +56,11 @@ public class Credito {
         transacciones.add(nuevo);
     }
 
-    public String getNumCredito() {
+    public int getNumCredito() {
         return numCredito;
     }
 
-    public void setNumCredito(String numCredito) {
+    public void setNumCredito(int numCredito) {
         this.numCredito = numCredito;
     }
 

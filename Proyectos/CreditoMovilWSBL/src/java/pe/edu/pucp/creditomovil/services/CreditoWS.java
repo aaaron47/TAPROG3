@@ -52,7 +52,7 @@ public class CreditoWS {
     }
     
     @WebMethod(operationName = "obtenerPorIDCredito")
-    public Credito obtenerPorIDCredito(@WebParam(name = "credito") String id) {
+    public Credito obtenerPorIDCredito(@WebParam(name = "credito") int id) {
         Credito credito = null;
         try{
             credito = daoCredito.obtenerPorId(id);
