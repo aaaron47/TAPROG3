@@ -346,6 +346,7 @@
     <Content Include="MainSupervisor.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="SolicitudCredito.aspx" />
+    <Content Include="TotalCreditos.aspx" />
     <Content Include="VisualizarCreditosCliente.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -430,6 +431,13 @@
     </Compile>
     <Compile Include="SolicitudCredito.aspx.designer.cs">
       <DependentUpon>SolicitudCredito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TotalCreditos.aspx.cs">
+      <DependentUpon>TotalCreditos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TotalCreditos.aspx.designer.cs">
+      <DependentUpon>TotalCreditos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuario.master.cs">
       <DependentUpon>Usuario.master</DependentUpon>
