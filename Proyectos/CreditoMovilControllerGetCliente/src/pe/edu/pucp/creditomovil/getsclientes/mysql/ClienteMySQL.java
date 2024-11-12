@@ -36,7 +36,7 @@ public class ClienteMySQL implements ClienteDAO {
             conn.setAutoCommit(false); // Inicia una transacción
 
             // Llamada al procedimiento `InsertarUsuario`
-            String sqlInsertarUsuario = "{ CALL InsertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?) }";
+            String sqlInsertarUsuario = "{ CALL InsertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?) }";
             stmtUsuario = conn.prepareCall(sqlInsertarUsuario);
             stmtUsuario.setDate(1, new java.sql.Date(cliente.getFecha().getTime()));
             stmtUsuario.setString(2, cliente.getNombre());
@@ -48,8 +48,9 @@ public class ClienteMySQL implements ClienteDAO {
             stmtUsuario.setDate(8, cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : null);
             stmtUsuario.setString(9, cliente.getTipoDocumento().name());
             stmtUsuario.setString(10, cliente.getDocumento());
+            stmtUsuario.setString(11, cliente.getRol().name());
 
-            stmtUsuario.registerOutParameter(11, Types.INTEGER); // Para capturar el ID generado
+            stmtUsuario.registerOutParameter(12, Types.INTEGER); // Para capturar el ID generado
             stmtUsuario.executeUpdate();
 
             // Obtener el ID generado

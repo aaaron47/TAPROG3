@@ -23,7 +23,7 @@ public class Cliente extends Usuario{
             boolean activo, TipoDocumento tipoDocumento, String documento, int codigoCliente, String direccion,
             String telefono, String email, String tipoCliente,double ranking){
                 super(idUsuario,fecha,nombre,apPaterno,apMaterno,contrasenha,
-                      fechaVencimiento,activo, tipoDocumento, documento);
+                      fechaVencimiento,activo, tipoDocumento, documento, Rol.CLIENTE);
                 this.codigoCliente = codigoCliente;
                 this.direccion = direccion;
                 this.telefono = telefono;

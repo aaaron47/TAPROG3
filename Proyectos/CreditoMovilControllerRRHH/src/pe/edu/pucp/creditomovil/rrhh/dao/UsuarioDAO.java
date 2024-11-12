@@ -6,6 +6,7 @@ package pe.edu.pucp.creditomovil.rrhh.dao;
 
 import java.util.List;
 import pe.edu.pucp.creditomovil.model.Usuario;
+import pe.edu.pucp.creditomovil.model.Usuario2;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface UsuarioDAO {
     void modificar(int id,Usuario usuario);
     void eliminar(int id);
     Usuario obtenerPorId(int id);
+    Usuario2 obtenerPorDocIdentidad(String docIden, String tipoDocIden);
     List<Usuario> listarTodos();
 }

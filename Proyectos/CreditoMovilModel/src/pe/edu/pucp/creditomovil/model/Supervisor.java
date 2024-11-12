@@ -20,7 +20,7 @@ public class Supervisor extends Usuario {
             boolean activo, TipoDocumento tipoDocumento, String documento, String codigoEv, int codigoCargo,
             String agenciaAsignacion) {
         super(idUsuario, fecha, nombre, apPaterno, apMaterno, contrasenha,
-                fechaVencimiento, activo, tipoDocumento, documento);
+                fechaVencimiento, activo, tipoDocumento, documento, Rol.SUPERVISOR);
         this.codigoEv = codigoEv;
         this.codigoCargo = codigoCargo;
         this.agenciaAsignacion = agenciaAsignacion;
