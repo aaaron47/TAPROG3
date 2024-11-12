@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CreditoMovilWA.CreditoMovil;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,6 +11,16 @@ namespace CreditoMovilWA
 {
     public partial class TotalClientes : System.Web.UI.Page
     {
+        private ClienteWSClient daoCliente = new ClienteWSClient();
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            administrador admin = (administrador)Session["Administrador"];
+            if (admin == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -17,20 +28,21 @@ namespace CreditoMovilWA
 
         protected void FiltrarClientes_Click(object sender, EventArgs e)
         {
-            try
+            int puntajeMin = int.Parse(txtPuntajeMin.Text);
+            int puntajeMax = int.Parse(txtPuntajeMax.Text);
+
+            var clientes = daoCliente.listarClientesPorRanking(puntajeMin,puntajeMax);
+
+            if(clientes != null)
             {
-                int puntajeMin = int.Parse(txtPuntajeMin.Text);
-                int puntajeMax = int.Parse(txtPuntajeMax.Text);
-
-                // Aquí puedes implementar la lógica de filtrado, llamando al servicio que obtenga los clientes en el rango.
-                /*var clientes = ObtenerClientesPorPuntaje(puntajeMin, puntajeMax);
-
                 gvClientes.DataSource = clientes;
-                gvClientes.DataBind();*/
+                gvClientes.DataBind();
             }
-            catch (Exception ex)
+            else
             {
-                lblError.Text = "Error al filtrar clientes: " + ex.Message;
+                gvClientes.DataSource = null;
+                gvClientes.DataBind();
+                lblError.Text = "Error al filtrar clientes.";
             }
         }
 

@@ -12,9 +12,19 @@ namespace CreditoMovilWA
     {
 
         private CreditoWSClient daoCredito = new CreditoWSClient();
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            administrador admin = (administrador)Session["Administrador"];
+            if (admin == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
@@ -55,7 +65,7 @@ namespace CreditoMovilWA
         protected void btnVerDetalles_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            string idCredito = btn.CommandArgument;
+            int idCredito = int.Parse(btn.CommandArgument);
             Session["idCredito"] = idCredito;
             Response.Redirect("DetalleCredito.aspx");
         }

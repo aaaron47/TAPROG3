@@ -81,15 +81,15 @@
         <div class="table-container">
             <asp:GridView ID="gvClientes" runat="server" AutoGenerateColumns="false" CssClass="client-table">
                 <Columns>
-                    <asp:BoundField DataField="IdCliente" HeaderText="ID_CLIENTE" />
+                    <asp:BoundField DataField="codigoCliente" HeaderText="ID_CLIENTE" />
                     <asp:BoundField DataField="Nombre" HeaderText="NOMBRE" />
-                    <asp:BoundField DataField="ApellidoPaterno" HeaderText="AP.PATERNO" />
-                    <asp:BoundField DataField="ApellidoMaterno" HeaderText="AP.MATERNO" />
+                    <asp:BoundField DataField="apPaterno" HeaderText="AP.PATERNO" />
+                    <asp:BoundField DataField="apMaterno" HeaderText="AP.MATERNO" />
                     <asp:BoundField DataField="Telefono" HeaderText="TELEFONO" />
                     <asp:BoundField DataField="Email" HeaderText="EMAIL" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btnVerDetalle" runat="server" Text="👁️" CssClass="view-btn" CommandArgument='<%# Eval("IdCliente") %>' OnClick="VerDetalleCliente_Click" />
+                            <asp:Button ID="btnVerDetalle" runat="server" Text="👁️" CssClass="view-btn" CommandArgument='<%# Eval("codigoCliente") %>' OnClick="VerDetalleCliente_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
