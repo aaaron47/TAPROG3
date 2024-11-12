@@ -40,6 +40,8 @@ namespace CreditoMovilWA
             txtDireccionNegocio.Text = ev.direccionNegocio;
             txtTelefonoNegocio.Text = ev.telefonoNegocio;
             txtClienteAsignado.Text = ev.clienteAsignado.nombre + " " + ev.clienteAsignado.apPaterno + " " + ev.clienteAsignado.apMaterno;
+            //indica que es null lo del cliente asignado, pero en el java si lo guarda, facil es porque el VS crea sus propias clases y eso no se
+            //traspasa, o no se. Igual se puede hacer la busqueda del cliente con el id desde aqui.
             txtMargenGanancia.Text = ev.margenGanancia.ToString();
             txtVentasDiarias.Text = ev.ventasDiarias.ToString();
             txtInventario.Text = ev.inventario.ToString();

@@ -34,7 +34,7 @@ namespace CreditoMovilWA
 
         private void CargarDetalleCredito()
         {
-            String id = (String) Session["idCredito"];
+            int id = (int)Session["idCredito"];
 
             credito cred = daoCredito.obtenerPorIDCredito(id);
 

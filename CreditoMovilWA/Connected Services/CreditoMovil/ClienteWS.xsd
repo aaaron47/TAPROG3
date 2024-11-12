@@ -4,6 +4,8 @@
   <xs:element name="eliminarClienteResponse" type="tns:eliminarClienteResponse" />
   <xs:element name="insertarCliente" type="tns:insertarCliente" />
   <xs:element name="insertarClienteResponse" type="tns:insertarClienteResponse" />
+  <xs:element name="listarClientesPorRanking" type="tns:listarClientesPorRanking" />
+  <xs:element name="listarClientesPorRankingResponse" type="tns:listarClientesPorRankingResponse" />
   <xs:element name="listarTodosClientes" type="tns:listarTodosClientes" />
   <xs:element name="listarTodosClientesResponse" type="tns:listarTodosClientesResponse" />
   <xs:element name="modificarCliente" type="tns:modificarCliente" />
@@ -47,6 +49,7 @@
       <xs:element minOccurs="0" name="fechaVencimiento" type="xs:dateTime" />
       <xs:element name="idUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rol" type="tns:rol" />
       <xs:element minOccurs="0" name="tipoDocumento" type="tns:tipoDocumento" />
       <xs:element minOccurs="0" name="ultimoLogueo" type="xs:dateTime" />
     </xs:sequence>
@@ -90,6 +93,17 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="listarClientesPorRanking">
+    <xs:sequence>
+      <xs:element name="rankini" type="xs:double" />
+      <xs:element name="rankfin" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarClientesPorRankingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="insertarCliente">
     <xs:sequence>
       <xs:element minOccurs="0" name="cliente" type="tns:cliente" />
@@ -100,6 +114,13 @@
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name="rol">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLIENTE" />
+      <xs:enumeration value="SUPERVISOR" />
+      <xs:enumeration value="ADMINISTRADOR" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="tipoDocumento">
     <xs:restriction base="xs:string">
       <xs:enumeration value="DNI" />

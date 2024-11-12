@@ -47,7 +47,7 @@ namespace CreditoMovilWA
             cred.fechaOtorgamiento = DateTime.Now;
             cred.monto = monto;
             cred.numCuotas = Int32.Parse(selectedCuotas.Value); // no sé cómo colocar esto btw, creo que es así, vamos a ver
-            cred.numCredito = "CRED133";
+            cred.numCredito = 0;//se autogenera
             cred.fechaOtorgamientoSpecified = true;
 
             daoCredito.insertarCredito(cred,cli.documento,cli.tipoDocumento.ToString());

@@ -14,7 +14,7 @@
   <xs:element name="obtenerPorIDTransaccionResponse" type="tns:obtenerPorIDTransaccionResponse" />
   <xs:complexType name="listarTransaccionCredito">
     <xs:sequence>
-      <xs:element minOccurs="0" name="idCred" type="xs:string" />
+      <xs:element name="idCred" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarTransaccionCreditoResponse">
@@ -42,7 +42,7 @@
       <xs:element minOccurs="0" name="estado" type="xs:string" />
       <xs:element minOccurs="0" name="fechaOtorgamiento" type="xs:dateTime" />
       <xs:element name="monto" type="xs:double" />
-      <xs:element minOccurs="0" name="numCredito" type="xs:string" />
+      <xs:element name="numCredito" type="xs:int" />
       <xs:element name="numCuotas" type="xs:int" />
       <xs:element name="tasaInteres" type="xs:double" />
     </xs:sequence>
@@ -58,6 +58,7 @@
       <xs:element minOccurs="0" name="fechaVencimiento" type="xs:dateTime" />
       <xs:element name="idUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rol" type="tns:rol" />
       <xs:element minOccurs="0" name="tipoDocumento" type="tns:tipoDocumento" />
       <xs:element minOccurs="0" name="ultimoLogueo" type="xs:dateTime" />
     </xs:sequence>
@@ -117,6 +118,13 @@
       <xs:element minOccurs="0" name="return" type="tns:transaccion" />
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name="rol">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLIENTE" />
+      <xs:enumeration value="SUPERVISOR" />
+      <xs:enumeration value="ADMINISTRADOR" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="tipoDocumento">
     <xs:restriction base="xs:string">
       <xs:enumeration value="DNI" />

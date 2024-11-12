@@ -283,6 +283,9 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarCreditosSinCliFiltroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarClientesPorRankingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CreditoMovil\CreditoWS.wsdl" />
     <None Include="Connected Services\CreditoMovil\CreditoWS.xsd">
       <SubType>Designer</SubType>

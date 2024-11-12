@@ -5,24 +5,6 @@
       <xsd:import schemaLocation="http://localhost:8080/CreditoMovilWSBL/ClienteWS?xsd=1" namespace="https://services.creditomovil.pucp.edu.pe" />
     </xsd:schema>
   </types>
-  <message name="eliminarCliente">
-    <part name="parameters" element="tns:eliminarCliente" />
-  </message>
-  <message name="eliminarClienteResponse">
-    <part name="parameters" element="tns:eliminarClienteResponse" />
-  </message>
-  <message name="modificarCliente">
-    <part name="parameters" element="tns:modificarCliente" />
-  </message>
-  <message name="modificarClienteResponse">
-    <part name="parameters" element="tns:modificarClienteResponse" />
-  </message>
-  <message name="insertarCliente">
-    <part name="parameters" element="tns:insertarCliente" />
-  </message>
-  <message name="insertarClienteResponse">
-    <part name="parameters" element="tns:insertarClienteResponse" />
-  </message>
   <message name="obtenerPorIDCliente">
     <part name="parameters" element="tns:obtenerPorIDCliente" />
   </message>
@@ -41,19 +23,31 @@
   <message name="listarTodosClientesResponse">
     <part name="parameters" element="tns:listarTodosClientesResponse" />
   </message>
+  <message name="listarClientesPorRanking">
+    <part name="parameters" element="tns:listarClientesPorRanking" />
+  </message>
+  <message name="listarClientesPorRankingResponse">
+    <part name="parameters" element="tns:listarClientesPorRankingResponse" />
+  </message>
+  <message name="insertarCliente">
+    <part name="parameters" element="tns:insertarCliente" />
+  </message>
+  <message name="insertarClienteResponse">
+    <part name="parameters" element="tns:insertarClienteResponse" />
+  </message>
+  <message name="eliminarCliente">
+    <part name="parameters" element="tns:eliminarCliente" />
+  </message>
+  <message name="eliminarClienteResponse">
+    <part name="parameters" element="tns:eliminarClienteResponse" />
+  </message>
+  <message name="modificarCliente">
+    <part name="parameters" element="tns:modificarCliente" />
+  </message>
+  <message name="modificarClienteResponse">
+    <part name="parameters" element="tns:modificarClienteResponse" />
+  </message>
   <portType name="ClienteWS">
-    <operation name="eliminarCliente">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
-    </operation>
-    <operation name="modificarCliente">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteRequest" message="tns:modificarCliente" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteResponse" message="tns:modificarClienteResponse" />
-    </operation>
-    <operation name="insertarCliente">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/insertarClienteRequest" message="tns:insertarCliente" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/insertarClienteResponse" message="tns:insertarClienteResponse" />
-    </operation>
     <operation name="obtenerPorIDCliente">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/obtenerPorIDClienteRequest" message="tns:obtenerPorIDCliente" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/obtenerPorIDClienteResponse" message="tns:obtenerPorIDClienteResponse" />
@@ -66,36 +60,25 @@
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/listarTodosClientesRequest" message="tns:listarTodosClientes" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/listarTodosClientesResponse" message="tns:listarTodosClientesResponse" />
     </operation>
+    <operation name="listarClientesPorRanking">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/listarClientesPorRankingRequest" message="tns:listarClientesPorRanking" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/listarClientesPorRankingResponse" message="tns:listarClientesPorRankingResponse" />
+    </operation>
+    <operation name="insertarCliente">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/insertarClienteRequest" message="tns:insertarCliente" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/insertarClienteResponse" message="tns:insertarClienteResponse" />
+    </operation>
+    <operation name="eliminarCliente">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
+    </operation>
+    <operation name="modificarCliente">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteRequest" message="tns:modificarCliente" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteResponse" message="tns:modificarClienteResponse" />
+    </operation>
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="eliminarCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="modificarCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="insertarCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="obtenerPorIDCliente">
       <soap:operation soapAction="" />
       <input>
@@ -115,6 +98,42 @@
       </output>
     </operation>
     <operation name="listarTodosClientes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarClientesPorRanking">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="insertarCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificarCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

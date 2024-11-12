@@ -57,7 +57,7 @@ namespace CreditoMovilWA
 
                 
                 //var resultados = ObtenerCreditosPorFecha(fechaInicio, fechaFin);
-                var resultados = daoCredito.listarCreditosFiltro(cli.codigoCliente, fechaInicio, fechaFin, estado);//corregir
+                var resultados = daoCredito.listarCreditosFiltro(cli.codigoCliente, fechaInicio, fechaFin, estado);
 
                 if (resultados != null)
                 {
@@ -147,7 +147,7 @@ namespace CreditoMovilWA
         protected void btnVerDetalles_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            string idCredito = btn.CommandArgument;
+            int idCredito = int.Parse(btn.CommandArgument);
             Session["idCredito"] = idCredito;
             Response.Redirect("DetalleCredito.aspx");
         }

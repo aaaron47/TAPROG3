@@ -41,6 +41,7 @@
       <xs:element minOccurs="0" name="fechaVencimiento" type="xs:dateTime" />
       <xs:element name="idUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="rol" type="tns:rol" />
       <xs:element minOccurs="0" name="tipoDocumento" type="tns:tipoDocumento" />
       <xs:element minOccurs="0" name="ultimoLogueo" type="xs:dateTime" />
     </xs:sequence>
@@ -91,6 +92,13 @@
       <xs:element minOccurs="0" name="return" type="tns:administrador" />
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name="rol">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLIENTE" />
+      <xs:enumeration value="SUPERVISOR" />
+      <xs:enumeration value="ADMINISTRADOR" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="tipoDocumento">
     <xs:restriction base="xs:string">
       <xs:enumeration value="DNI" />
