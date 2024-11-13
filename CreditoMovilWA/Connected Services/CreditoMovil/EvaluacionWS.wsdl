@@ -5,23 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/CreditoMovilWSBL/EvaluacionWS?xsd=1" namespace="http://services.creditomovil.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarEvaluacionesSupervisor">
-    <part name="parameters" element="tns:listarEvaluacionesSupervisor" />
+  <message name="eliminarEvaluacion">
+    <part name="parameters" element="tns:eliminarEvaluacion" />
   </message>
-  <message name="listarEvaluacionesSupervisorResponse">
-    <part name="parameters" element="tns:listarEvaluacionesSupervisorResponse" />
+  <message name="eliminarEvaluacionResponse">
+    <part name="parameters" element="tns:eliminarEvaluacionResponse" />
   </message>
   <message name="insertarEvaluacion">
     <part name="parameters" element="tns:insertarEvaluacion" />
   </message>
   <message name="insertarEvaluacionResponse">
     <part name="parameters" element="tns:insertarEvaluacionResponse" />
-  </message>
-  <message name="eliminarEvaluacion">
-    <part name="parameters" element="tns:eliminarEvaluacion" />
-  </message>
-  <message name="eliminarEvaluacionResponse">
-    <part name="parameters" element="tns:eliminarEvaluacionResponse" />
   </message>
   <message name="modificarEvaluacion">
     <part name="parameters" element="tns:modificarEvaluacion" />
@@ -41,18 +35,20 @@
   <message name="listarTodosEvaluacionsResponse">
     <part name="parameters" element="tns:listarTodosEvaluacionsResponse" />
   </message>
+  <message name="listarEvaluacionesSupervisor">
+    <part name="parameters" element="tns:listarEvaluacionesSupervisor" />
+  </message>
+  <message name="listarEvaluacionesSupervisorResponse">
+    <part name="parameters" element="tns:listarEvaluacionesSupervisorResponse" />
+  </message>
   <portType name="EvaluacionWS">
-    <operation name="listarEvaluacionesSupervisor">
-      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/listarEvaluacionesSupervisorRequest" message="tns:listarEvaluacionesSupervisor" />
-      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/listarEvaluacionesSupervisorResponse" message="tns:listarEvaluacionesSupervisorResponse" />
+    <operation name="eliminarEvaluacion">
+      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/eliminarEvaluacionRequest" message="tns:eliminarEvaluacion" />
+      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/eliminarEvaluacionResponse" message="tns:eliminarEvaluacionResponse" />
     </operation>
     <operation name="insertarEvaluacion">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/insertarEvaluacionRequest" message="tns:insertarEvaluacion" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/insertarEvaluacionResponse" message="tns:insertarEvaluacionResponse" />
-    </operation>
-    <operation name="eliminarEvaluacion">
-      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/eliminarEvaluacionRequest" message="tns:eliminarEvaluacion" />
-      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/eliminarEvaluacionResponse" message="tns:eliminarEvaluacionResponse" />
     </operation>
     <operation name="modificarEvaluacion">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/modificarEvaluacionRequest" message="tns:modificarEvaluacion" />
@@ -66,10 +62,14 @@
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/listarTodosEvaluacionsRequest" message="tns:listarTodosEvaluacions" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/listarTodosEvaluacionsResponse" message="tns:listarTodosEvaluacionsResponse" />
     </operation>
+    <operation name="listarEvaluacionesSupervisor">
+      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/listarEvaluacionesSupervisorRequest" message="tns:listarEvaluacionesSupervisor" />
+      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/EvaluacionWS/listarEvaluacionesSupervisorResponse" message="tns:listarEvaluacionesSupervisorResponse" />
+    </operation>
   </portType>
   <binding name="EvaluacionWSPortBinding" type="tns:EvaluacionWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarEvaluacionesSupervisor">
+    <operation name="eliminarEvaluacion">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -79,15 +79,6 @@
       </output>
     </operation>
     <operation name="insertarEvaluacion">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="eliminarEvaluacion">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -115,6 +106,15 @@
       </output>
     </operation>
     <operation name="listarTodosEvaluacions">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarEvaluacionesSupervisor">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

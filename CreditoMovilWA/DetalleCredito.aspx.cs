@@ -68,7 +68,10 @@ namespace CreditoMovilWA
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("VisualizarCreditosCliente.aspx");
+            string rol = (string)Session["Rol"];
+            if (rol == "CLIENTE")
+                Response.Redirect("VisualizarCreditosCliente.aspx");
+            else Response.Redirect("DetalleCliente.aspx");
         }
     }
 }

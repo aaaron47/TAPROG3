@@ -4,6 +4,8 @@
   <xs:element name="eliminarCreditoResponse" type="tns:eliminarCreditoResponse" />
   <xs:element name="insertarCredito" type="tns:insertarCredito" />
   <xs:element name="insertarCreditoResponse" type="tns:insertarCreditoResponse" />
+  <xs:element name="listarCreditosCliente" type="tns:listarCreditosCliente" />
+  <xs:element name="listarCreditosClienteResponse" type="tns:listarCreditosClienteResponse" />
   <xs:element name="listarCreditosFiltro" type="tns:listarCreditosFiltro" />
   <xs:element name="listarCreditosFiltroResponse" type="tns:listarCreditosFiltroResponse" />
   <xs:element name="listarCreditosSinCliFiltro" type="tns:listarCreditosSinCliFiltro" />
@@ -109,6 +111,16 @@
   </xs:complexType>
   <xs:complexType name="eliminarCreditoResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarCreditosCliente">
+    <xs:sequence>
+      <xs:element name="idcli" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarCreditosClienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:credito" />
+    </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="rol">
     <xs:restriction base="xs:string">

@@ -45,7 +45,7 @@ namespace CreditoMovilWA
                 if (user != null && password == user.contrasenha)
                 {
 
-                    Session["Rol"] = user.rol;
+                    Session["Rol"] = user.rol.ToString();
 
                     FormsAuthenticationTicket tkt;
                     string cookiestr;

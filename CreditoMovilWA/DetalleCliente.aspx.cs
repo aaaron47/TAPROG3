@@ -47,13 +47,25 @@ namespace CreditoMovilWA
 
         private void CargarCreditos(cliente cli)
         {
-            
+            var creditos = daoCredito.listarCreditosCliente(cli.codigoCliente);
+            if(creditos != null)
+            {
+                gvCreditos.DataSource = creditos;
+                gvCreditos.DataBind();
+                lblError.Text = "";
+            }
+            else
+            {
+                gvCreditos.DataSource = null;
+                gvCreditos.DataBind();
+                lblError.Text = "No se encontraron créditos para el cliente.";
+            }
         }
 
         protected void btnVerDetalleCredito_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            string idCredito = btn.CommandArgument;
+            int idCredito = int.Parse(btn.CommandArgument);
             Session["idCredito"] = idCredito;
             Response.Redirect("DetalleCredito.aspx");
         }

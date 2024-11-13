@@ -292,6 +292,9 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.usuario2.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarCreditosClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\CreditoMovil\CreditoWS.wsdl" />
     <None Include="Connected Services\CreditoMovil\CreditoWS.xsd">
       <SubType>Designer</SubType>

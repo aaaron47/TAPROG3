@@ -65,7 +65,7 @@
         <div class="table-container">
             <asp:GridView ID="gvCreditos" runat="server" AutoGenerateColumns="false">
                 <Columns>
-                    <asp:BoundField DataField="IdCredito" HeaderText="ID_CRÉDITO" />
+                    <asp:BoundField DataField="numCredito" HeaderText="ID_CRÉDITO" />
                     <asp:BoundField DataField="Monto" HeaderText="MONTO" />
                     <asp:BoundField DataField="NumCuotas" HeaderText="NUM. CUOTAS" />
                     <asp:BoundField DataField="TasaInteres" HeaderText="TASA INTERÉS" />
@@ -73,7 +73,7 @@
                     <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btnVerDetalleCredito" runat="server" Text="👁️" CssClass="button" CommandArgument='<%# Eval("IdCredito") %>' OnClick="btnVerDetalleCredito_Click" />
+                            <asp:Button ID="btnVerDetalleCredito" runat="server" Text="👁️" CssClass="button" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnVerDetalleCredito_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
