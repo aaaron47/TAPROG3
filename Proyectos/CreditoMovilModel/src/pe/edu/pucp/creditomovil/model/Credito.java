@@ -17,11 +17,12 @@ public class Credito {
     private String estado;
     private int numCuotas;
     private ArrayList<Transaccion> transacciones;
+    private int cantCuotasPagadas;
     
     public Credito(){}
     public Credito(int numCredito, double monto, double tasaInteres,
             Date fechaOtorgamiento, Usuario cliente, String estado,
-            int numCuotas){
+            int numCuotas, int cantCuotasPagadas){
                 this.numCredito = numCredito;
                 this.monto = monto;
                 this.tasaInteres = tasaInteres;
@@ -30,6 +31,7 @@ public class Credito {
                 this.estado = estado;
                 this.numCuotas = numCuotas;
                 transacciones = new ArrayList<Transaccion>();
+                this.cantCuotasPagadas = cantCuotasPagadas;
     }
 
     public void CargaDatosCredito(){
@@ -112,5 +114,11 @@ public class Credito {
         this.numCuotas = numCuotas;
     }
 
+    public int getCantCuotasPagadas() {
+        return cantCuotasPagadas;
+    }
 
+    public void setCantCuotasPagadas(int cantCuotasPagadas) {
+        this.cantCuotasPagadas = cantCuotasPagadas;
+    }
 }

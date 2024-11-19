@@ -91,7 +91,7 @@ public class CreditoMySQL implements CreditoDAO {
 
         try {
             conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ModificarCredito(?, ?, ?, ?, ?, ?) }";
+            String sql = "{ CALL ModificarCredito(?, ?, ?, ?, ?, ?, ?) }";
             cs = conn.prepareCall(sql);
 
             cs.setInt(1, credito.getNumCredito());
@@ -100,6 +100,7 @@ public class CreditoMySQL implements CreditoDAO {
             cs.setDate(4, new java.sql.Date(credito.getFechaOtorgamiento().getTime()));
             cs.setString(5, credito.getEstado());
             cs.setInt(6, credito.getNumCuotas());
+            cs.setInt(7, credito.getCantCuotasPagadas());
 
             cs.execute();
         } catch (SQLException ex) {
@@ -166,6 +167,7 @@ public class CreditoMySQL implements CreditoDAO {
                 cred.setNumCuotas(rs.getInt("num_cuotas"));
                 cred.setTasaInteres(rs.getDouble("tasa_interes"));
                 cred.setCliente(null);
+                cred.setCantCuotasPagadas(rs.getInt("cant_cuotas_pagadas"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -200,9 +202,11 @@ public class CreditoMySQL implements CreditoDAO {
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
                 String est = rs.getString("estado");
                 int numCuotas = rs.getInt("num_cuotas");
+                int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
 
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
-                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
+                cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
 
@@ -252,9 +256,10 @@ public class CreditoMySQL implements CreditoDAO {
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
                 String est = rs.getString("estado");
                 int numCuotas = rs.getInt("num_cuotas");
-
+                int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
-                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
+                cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
 
@@ -299,9 +304,10 @@ public class CreditoMySQL implements CreditoDAO {
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
                 String est = rs.getString("estado");
                 int numCuotas = rs.getInt("num_cuotas");
-
+                int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
-                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas);
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
+                cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
 
@@ -344,9 +350,10 @@ public class CreditoMySQL implements CreditoDAO {
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
                 String estado = rs.getString("estado");
                 int numCuotas = rs.getInt("num_cuotas");
-
+                int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
-                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, estado, numCuotas);
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, estado, numCuotas,
+                cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
         } catch (SQLException ex) {
