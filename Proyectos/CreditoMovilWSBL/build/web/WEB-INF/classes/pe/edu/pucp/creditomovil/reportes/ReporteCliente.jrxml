@@ -1,0 +1,189 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ReporteCliente" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b694287d-9ef7-49b8-8f15-237b1c80ae0c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdapterPUCP"/>
+	<parameter name="codCli" class="java.lang.Integer"/>
+	<parameter name="BordeSup" class="java.awt.Image"/>
+	<parameter name="logo" class="java.awt.Image"/>
+	<parameter name="rutaSubReporte" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[    SELECT 
+        u.usuario_id,
+        u.fecha,
+        u.nombre,
+        u.ap_paterno,
+        u.ap_materno,
+        u.contrasena,
+        u.fecha_venc,
+        u.tipo_doc,
+        u.documento,
+        u.activo,
+        u.ultimo_logeo,
+        c.codigo_cliente,
+        c.direccion,
+        c.telefono,
+        c.email,
+        c.tipo_cliente,
+        c.ranking
+    FROM usuario u
+    INNER JOIN cliente c ON u.usuario_id = c.usuario_usuario_id
+    WHERE c.codigo_cliente = $P{codCli}
+    ]]></query>
+	<field name="usuario_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="usuario_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="usuario_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="ap_paterno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ap_paterno"/>
+		<property name="com.jaspersoft.studio.field.label" value="ap_paterno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="ap_materno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ap_materno"/>
+		<property name="com.jaspersoft.studio.field.label" value="ap_materno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="contrasena" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="contrasena"/>
+		<property name="com.jaspersoft.studio.field.label" value="contrasena"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="fecha_venc" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_venc"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_venc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="tipo_doc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo_doc"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo_doc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="documento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="documento"/>
+		<property name="com.jaspersoft.studio.field.label" value="documento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="activo" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="activo"/>
+		<property name="com.jaspersoft.studio.field.label" value="activo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="ultimo_logeo" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="ultimo_logeo"/>
+		<property name="com.jaspersoft.studio.field.label" value="ultimo_logeo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="codigo_cliente" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo_cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo_cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="tipo_cliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo_cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo_cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="ranking" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="ranking"/>
+		<property name="com.jaspersoft.studio.field.label" value="ranking"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="350" splitType="Stretch">
+		<element kind="image" uuid="a79301d8-b46a-4902-8d3f-921e10cff231" x="-20" y="-20" width="595" height="370">
+			<expression><![CDATA[$P{BordeSup}]]></expression>
+		</element>
+		<element kind="staticText" uuid="855b1c48-1a9b-455e-a5fe-16e0bcfd87b1" x="120" y="100" width="310" height="30" fontName="Segoe UI Black" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reporte de Cliente de Crédito Movil]]></text>
+		</element>
+		<element kind="textField" uuid="3aa26bd5-6b66-4d97-9f8f-0701adeba4da" x="130" y="130" width="290" height="20" hTextAlign="Center">
+			<expression><![CDATA["Cliente Nro: " + $P{codCli}]]></expression>
+		</element>
+		<element kind="textField" uuid="f31f5e40-1d0f-494e-a4b0-e4f0533ba1e6" x="20" y="180" width="510" height="20">
+			<expression><![CDATA["Nombre Completo: " + $F{nombre} + " " + $F{ap_paterno} + " " + $F{ap_materno}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.75"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="d41c6b08-3096-4a24-b468-ae5e33064f13" x="20" y="210" width="250" height="20">
+			<expression><![CDATA["Tipo de Documento: " + $F{tipo_doc}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.75"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="d58ed1a9-78f7-4ca6-96a0-af0d69b75547" x="290" y="210" width="240" height="20">
+			<expression><![CDATA["Numero de Documento: " + $F{documento}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.75"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="50bd36cd-9747-47bf-9780-75e8a7a41675" x="20" y="240" width="300" height="20">
+			<expression><![CDATA["Email: " + $F{email}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.75"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="1efe59c0-2e85-46cb-9bb5-b71cee892cf0" x="330" y="240" width="200" height="20">
+			<expression><![CDATA["Teléfono: " + $F{telefono}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.75"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7d5429c3-70e4-4131-adf9-41a6f4f82da0" x="20" y="270" width="510" height="20">
+			<expression><![CDATA["Direccion: " + $F{direccion}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.75"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="4b46defe-8dc3-4c61-9e39-8ac6afb77116" x="20" y="310" width="270" height="30" fontName="Eras Bold ITC" fontSize="19.0">
+			<expression><![CDATA["Ranking: " +  $F{ranking}]]></expression>
+			<box padding="0">
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="image" uuid="cd161f1f-61e7-47f1-bada-b696feb79602" x="20" y="40" width="150" height="40">
+			<expression><![CDATA[$P{logo}]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="220" splitType="Stretch">
+		<element kind="subreport" uuid="70ededcd-d3e6-4892-be29-d76a6d34751d" x="0" y="10" width="560" height="200">
+			<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+			<expression><![CDATA[$P{rutaSubReporte}]]></expression>
+			<parameter name="codCli">
+				<expression><![CDATA[$P{codCli}]]></expression>
+			</parameter>
+		</element>
+	</summary>
+</jasperReport>

@@ -7,10 +7,27 @@ package pe.edu.pucp.creditomovil.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.awt.Image;
+import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.sql.Connection;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import pe.edu.pucp.creditomovil.conexion.DBManager;
 
 import pe.edu.pucp.creditomovil.getsclientes.dao.CreditoDAO;
 import pe.edu.pucp.creditomovil.getsclientes.mysql.CreditoMySQL;
@@ -109,5 +126,58 @@ public class CreditoWS {
         }
         return creditos;
     }
+
+    @WebMethod(operationName = "generarReporteCreditos")
+    public byte[] reporteCreditos(@WebParam (name = "fechainicio") Date fechaini,
+            @WebParam(name = "fechafin") Date fechafin) throws Exception{
+        try {
+            Map<String, Object> params = new HashMap<>();        
+            
+            java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
+            java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
+            
+            params.put("fechaini",fechainiSQL);
+            params.put("fechafin",fechafinSQL);
+            
+            URL rutalogo = CreditoWS.class.getResource("/pe/edu/pucp/creditomovil/img/logo.png");
+            String rutaArchivoLogo = URLDecoder.decode(rutalogo.getPath(), "UTF-8");
+            Image logo = (new ImageIcon(rutaArchivoLogo).getImage());
+            
+            params.put("logo", logo);
+            
+            //obtiene imagen desde pe.edu.pucp.creditomovil.img
+            URL rutaborde = CreditoWS.class.getResource("/pe/edu/pucp/creditomovil/img/bordesupp.png");
+            String rutaArchivoBorde = URLDecoder.decode(rutaborde.getPath(), "UTF-8");
+            Image borde = (new ImageIcon(rutaArchivoBorde).getImage());      
+            
+            params.put("BordeSup",borde);
+            
+            return generarBuffer(getFileResource("ReporteCreditos.jrxml"), params);
+            
+        } catch(Exception ex){
+            Logger.getLogger(CreditoWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
+    private String getFileResource(String fileName){ 
+        String filePath = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/reportes/"+fileName).getPath();
+        filePath = filePath.replace("%20", " ");
+        return filePath;
+    }
+    
+    public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
+        //Se compila una sola vez
+        String fileJasper = inFileXML +".jasper";
+        if(!new File(fileJasper).exists()){
+            //para compilar en GlassFish se requiere las librerias: jasperreports-jdt, ecj
+            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);         
+        }
+        //1- leer el archivo compilado
+        JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
+        //2- poblar el reporte
+        Connection conn = DBManager.getInstance().getConnection();
+        JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
+        return JasperExportManager.exportReportToPdf(jp);
+    }
 }

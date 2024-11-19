@@ -1,0 +1,161 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ReporteCreditos" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44c98360-4626-436a-b044-65022d0d7cf7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdapterPUCP"/>
+	<dataset name="Dataset Agrupado" uuid="ad7952f8-2c28-422c-900a-cb262800550c">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdapterPUCP"/>
+		<parameter name="fechaini" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{fechaini}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="fechafin" class="java.sql.Date">
+			<defaultValueExpression><![CDATA[$P{fechafin}]]></defaultValueExpression>
+		</parameter>
+		<query language="SQL"><![CDATA[SELECT count(*) as cuenta, estado
+ FROM  creditomovil.credito 
+WHERE fecha_otorgamiento >= $P{fechaini} AND fecha_otorgamiento <= $P{fechafin}
+GROUP BY estado]]></query>
+		<field name="cuenta" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="cuenta"/>
+			<property name="com.jaspersoft.studio.field.label" value="cuenta"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+		</field>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+		</field>
+	</dataset>
+	<parameter name="fechaini" class="java.util.Date"/>
+	<parameter name="fechafin" class="java.sql.Date"/>
+	<parameter name="logo" class="java.awt.Image"/>
+	<parameter name="BordeSup" class="java.awt.Image"/>
+	<query language="SQL"><![CDATA[SELECT *
+FROM  creditomovil.credito 
+WHERE fecha_otorgamiento >= $P{fechaini} AND fecha_otorgamiento <= $P{fechafin}]]></query>
+	<field name="num_credito" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="num_credito"/>
+		<property name="com.jaspersoft.studio.field.label" value="num_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="monto"/>
+		<property name="com.jaspersoft.studio.field.label" value="monto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="tasa_interes" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="tasa_interes"/>
+		<property name="com.jaspersoft.studio.field.label" value="tasa_interes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="fecha_otorgamiento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_otorgamiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_otorgamiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="num_cuotas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="num_cuotas"/>
+		<property name="com.jaspersoft.studio.field.label" value="num_cuotas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="452" splitType="Stretch">
+		<element kind="image" uuid="8b9e8e80-35ab-4f71-916a-61741e236868" x="-20" y="-20" width="595" height="352">
+			<expression><![CDATA[$P{BordeSup}]]></expression>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+		</element>
+		<element kind="staticText" uuid="b800dfc5-6848-4c04-a754-13f86a6df440" x="122" y="90" width="310" height="30" fontName="Segoe UI Black" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reporte de Créditos de Crédito Movil]]></text>
+		</element>
+		<element kind="textField" uuid="715d1953-9ccc-4fac-94db-e4b99d59eb2f" x="130" y="120" width="290" height="20" hTextAlign="Center">
+			<expression><![CDATA["Del " + $P{fechaini} + " al " + $P{fechafin}]]></expression>
+		</element>
+		<element kind="image" uuid="ba79946b-62ee-4ad9-bf71-a0f611464268" x="20" y="40" width="120" height="40">
+			<expression><![CDATA[$P{logo}]]></expression>
+		</element>
+		<element kind="staticText" uuid="7532f806-5ac7-47b7-bf81-9759f3ec6245" x="136" y="150" width="279" height="39" fontName="Serif" fontSize="12.0" hTextAlign="Center">
+			<text><![CDATA[Gráfico de Líneas de Montos Solicitados por Fecha de Otorgamiento]]></text>
+		</element>
+		<element kind="chart" chartType="line" uuid="0330b0d1-d17b-4ea3-beb2-3f2c9fb90e04" x="80" y="197" width="380" height="200" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{fecha_otorgamiento}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{monto}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000"/>
+		</element>
+		<element kind="staticText" uuid="07265082-8258-40af-950b-04e113317afb" x="0" y="420" width="279" height="30" fontName="Serif" fontSize="16.0" hTextAlign="Left">
+			<text><![CDATA[Listado de Créditos]]></text>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="31" splitType="Stretch">
+		<element kind="staticText" uuid="0dcda82e-b12f-4a23-a8ce-041713e57c54" mode="Opaque" x="10" y="0" width="60" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[id Credito]]></text>
+		</element>
+		<element kind="staticText" uuid="73b27667-3e92-4fb6-b03d-73734a27b5e1" mode="Opaque" x="70" y="0" width="90" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[monto]]></text>
+		</element>
+		<element kind="staticText" uuid="277c29dd-598e-435a-a76b-da1f00a6c442" mode="Opaque" x="160" y="0" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[tasa de interés]]></text>
+		</element>
+		<element kind="staticText" uuid="479fe222-bd09-4c6c-bae0-7e3415a3012e" mode="Opaque" x="240" y="0" width="98" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[numero de cuotas]]></text>
+		</element>
+		<element kind="staticText" uuid="bf0cf0de-b179-4c57-9eac-cf818d733969" mode="Opaque" x="338" y="0" width="112" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[fecha de otorgamiento]]></text>
+		</element>
+		<element kind="staticText" uuid="9d2815a3-14ad-4b73-a707-90c86b0fc22f" mode="Opaque" x="450" y="0" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[estado]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<element kind="textField" uuid="e0c335f3-98fa-4cf8-98e2-060dc887b675" x="10" y="0" width="60" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{num_credito}]]></expression>
+			</element>
+			<element kind="textField" uuid="09e36a51-7077-4b17-a403-3b6fbb9fdd6e" x="70" y="0" width="90" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{monto}]]></expression>
+			</element>
+			<element kind="textField" uuid="184264c7-29f0-414b-9ab9-ec1f0edfbb0b" x="160" y="0" width="79" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{tasa_interes}]]></expression>
+			</element>
+			<element kind="textField" uuid="85be8cdf-a7b5-4ade-9d56-8ccaa295009f" x="240" y="0" width="98" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{num_cuotas}]]></expression>
+			</element>
+			<element kind="textField" uuid="830c552a-18f9-4f66-af88-5e2efa348d1c" x="338" y="0" width="111" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{fecha_otorgamiento}]]></expression>
+			</element>
+			<element kind="textField" uuid="427f921c-de94-46f0-9485-336e56bfc532" x="450" y="0" width="79" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{estado}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="275" splitType="Stretch">
+		<element kind="staticText" uuid="11cd5c06-c706-4925-ab5b-fbc6b2755068" x="140" y="10" width="279" height="39" fontName="Serif" fontSize="12.0" hTextAlign="Center">
+			<text><![CDATA[Gráfico de Barras del máximo Monto Solicitado por Estado de Crédito]]></text>
+		</element>
+		<element kind="chart" chartType="stackedBar" uuid="d689649a-e1fb-4be3-af18-ed0d286582db" x="80" y="60" width="370" height="200" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{estado}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{monto}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+	</summary>
+</jasperReport>

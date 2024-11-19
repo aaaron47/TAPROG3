@@ -72,21 +72,19 @@ namespace CreditoMovilWA
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
         {
-            /*try
+            int id = (int)Session["IdCliente"];
+            Byte[] reporte = daoCliente.generarReporte(id);
+            if(reporte != null)
             {
-                // Aquí llamarías a tu método de generación de reportes con JasperReports.
-                // Puedes hacer esto a través de una API que se comunique con JasperReports.
-
-                string reportUrl = "http://tu_servidor_jasper/reports/creditos"; // Ejemplo de URL
-                
-
-                // Redirigir al usuario a la URL del reporte o descargarlo directamente
-                Response.Redirect(reportUrl + parameters);
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-length", reporte.Length.ToString());
+                Response.BinaryWrite(reporte);
             }
-            catch (Exception ex)
+            else
             {
-                lblError.Text = "Error al generar el reporte: " + ex.Message;
-            }*/
+                lblError.Text = "Error al generar el reporte.";
+            }
+
         }
 
     }

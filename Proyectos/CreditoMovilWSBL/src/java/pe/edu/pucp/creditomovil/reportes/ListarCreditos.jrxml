@@ -1,0 +1,102 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Subreporte" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f916dcee-78ab-41b3-b959-a957bd55999c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdapterPUCP"/>
+	<parameter name="codCli" class="java.lang.Integer"/>
+	<query language="SQL"><![CDATA[    SELECT 
+        c.num_credito,
+        c.monto,
+        c.tasa_interes,
+        c.fecha_otorgamiento,
+        c.estado,
+        c.num_cuotas
+    FROM credito AS c
+    INNER JOIN cliente_credito AS cc ON c.num_credito = cc.credito_num_credito
+    INNER JOIN cliente AS cli ON cli.codigo_cliente = $P{codCli}
+    INNER JOIN usuario AS u ON u.usuario_id = cli.usuario_usuario_id
+    WHERE cc.num_documento = u.documento 
+      AND cc.tipo_documento = u.tipo_doc]]></query>
+	<field name="num_credito" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="num_credito"/>
+		<property name="com.jaspersoft.studio.field.label" value="num_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="monto"/>
+		<property name="com.jaspersoft.studio.field.label" value="monto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="tasa_interes" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="tasa_interes"/>
+		<property name="com.jaspersoft.studio.field.label" value="tasa_interes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="fecha_otorgamiento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_otorgamiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_otorgamiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="num_cuotas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="num_cuotas"/>
+		<property name="com.jaspersoft.studio.field.label" value="num_cuotas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<variable name="Variable_1" calculation="Count" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title height="40" splitType="Stretch">
+		<element kind="staticText" uuid="633f63c4-f21c-4cdb-a51f-37d911410e11" x="0" y="10" width="310" height="30" fontName="Serif" fontSize="16.0" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Listado de Creditos]]></text>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="61" splitType="Stretch">
+		<element kind="staticText" uuid="a5715130-8bb2-4dad-9de6-1037626c517c" mode="Opaque" x="160" y="31" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[tasa de interés]]></text>
+		</element>
+		<element kind="staticText" uuid="733be092-734c-444d-b115-a7d81a71f519" mode="Opaque" x="240" y="31" width="98" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[numero de cuotas]]></text>
+		</element>
+		<element kind="staticText" uuid="7594225f-1614-4bbb-ad79-6b33690eee0b" mode="Opaque" x="70" y="31" width="90" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[monto]]></text>
+		</element>
+		<element kind="staticText" uuid="727e6033-02ec-458a-a57a-2ad72624fd83" mode="Opaque" x="10" y="31" width="60" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[id Credito]]></text>
+		</element>
+		<element kind="staticText" uuid="a37444f6-ad82-41b3-bd23-0dd41f557ab9" mode="Opaque" x="338" y="31" width="112" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[fecha de otorgamiento]]></text>
+		</element>
+		<element kind="staticText" uuid="933f8a95-34f0-474a-b222-725ec0568169" mode="Opaque" x="450" y="31" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[estado]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<element kind="textField" uuid="7f35cc4e-5ab5-464d-b61f-23b66868ece7" x="450" y="0" width="79" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{estado}]]></expression>
+			</element>
+			<element kind="textField" uuid="3283670f-703a-44d4-8043-47450e27c2ba" x="70" y="0" width="90" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{monto}]]></expression>
+			</element>
+			<element kind="textField" uuid="906181a9-0edc-4080-a082-a964a0b2d5eb" x="338" y="0" width="111" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{fecha_otorgamiento}]]></expression>
+			</element>
+			<element kind="textField" uuid="ad7820d4-2f17-49e3-801a-5e217552c0f5" x="10" y="0" width="60" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{num_credito}]]></expression>
+			</element>
+			<element kind="textField" uuid="864c9307-8dbb-4b4e-8bc0-fca7dcfb7193" x="240" y="0" width="98" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{num_cuotas}]]></expression>
+			</element>
+			<element kind="textField" uuid="c4e8c913-fc9c-4400-aad6-c0e03496f8c7" x="160" y="0" width="79" height="30" hTextAlign="Center">
+				<expression><![CDATA[$F{tasa_interes}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="2" splitType="Stretch"/>
+	<summary height="6" splitType="Stretch"/>
+</jasperReport>

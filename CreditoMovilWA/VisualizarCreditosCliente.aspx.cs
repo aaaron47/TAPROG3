@@ -116,7 +116,7 @@ namespace CreditoMovilWA
                     }
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 lblError.Text = "Error al cargar bancos: " + ex.Message;
             }
@@ -146,7 +146,7 @@ namespace CreditoMovilWA
                     System.Diagnostics.Debug.WriteLine("La lista de billeteras es nula.");
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 lblError.Text = "Error al cargar billeteras: " + ex.Message;
             }

@@ -72,21 +72,24 @@ namespace CreditoMovilWA
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
         {
-            /*try
+            DateTime fechaInicio, fechaFin;
+            bool isFechaInicio = DateTime.TryParse(txtFechaInicio.Text, out fechaInicio);
+            bool isFechaFin = DateTime.TryParse(txtFechaFin.Text, out fechaFin);
+
+            if(isFechaFin && isFechaInicio)
             {
-                // Aquí llamarías a tu método de generación de reportes con JasperReports.
-                // Puedes hacer esto a través de una API que se comunique con JasperReports.
-
-                string reportUrl = "http://tu_servidor_jasper/reports/creditos"; // Ejemplo de URL
-                string parameters = $"?fechaInicio={txtFechaInicio.Text}&fechaFin={txtFechaFin.Text}&estado={ddlEstado.SelectedValue}";
-
-                // Redirigir al usuario a la URL del reporte o descargarlo directamente
-                Response.Redirect(reportUrl + parameters);
+                Byte[] reporte = daoCredito.generarReporteCreditos(fechaInicio,fechaFin);
+                if (reporte != null)
+                {
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("content-length", reporte.Length.ToString());
+                    Response.BinaryWrite(reporte);
+                }
+                else
+                {
+                    lblError.Text = "Error al generar el reporte.";
+                }
             }
-            catch (Exception ex)
-            {
-                lblError.Text = "Error al generar el reporte: " + ex.Message;
-            }*/
         }
 
     }

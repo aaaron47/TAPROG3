@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="https://services.creditomovil.pucp.edu.pe" targetNamespace="https://services.creditomovil.pucp.edu.pe" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
   <xs:element name="eliminarCredito" type="tns:eliminarCredito" />
   <xs:element name="eliminarCreditoResponse" type="tns:eliminarCreditoResponse" />
+  <xs:element name="generarBuffer" type="tns:generarBuffer" />
+  <xs:element name="generarBufferResponse" type="tns:generarBufferResponse" />
+  <xs:element name="generarReporteCreditos" type="tns:generarReporteCreditos" />
+  <xs:element name="generarReporteCreditosResponse" type="tns:generarReporteCreditosResponse" />
   <xs:element name="insertarCredito" type="tns:insertarCredito" />
   <xs:element name="insertarCreditoResponse" type="tns:insertarCreditoResponse" />
   <xs:element name="listarCreditosCliente" type="tns:listarCreditosCliente" />
@@ -16,6 +21,46 @@
   <xs:element name="modificarCreditoResponse" type="tns:modificarCreditoResponse" />
   <xs:element name="obtenerPorIDCredito" type="tns:obtenerPorIDCredito" />
   <xs:element name="obtenerPorIDCreditoResponse" type="tns:obtenerPorIDCreditoResponse" />
+  <xs:complexType name="generarBuffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+      <xs:element name="arg1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string" />
+                  <xs:element minOccurs="0" name="value" type="xs:anyType" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarBufferResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarReporteCreditos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechainicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechafin" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarReporteCreditosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="obtenerPorIDCredito">
     <xs:sequence>
       <xs:element name="credito" type="xs:int" />
