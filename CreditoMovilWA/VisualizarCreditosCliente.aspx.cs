@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using System.Web.Services;
+using System.IO;
 
 namespace CreditoMovilWA
 {
@@ -97,6 +98,47 @@ namespace CreditoMovilWA
             ////la foto
             ////trans.metodoPago = ;
             //daoTransaccion.insertarTransaccion(trans);
+            transaccion trans = new transaccion();
+            trans.usuarioRegistrado = (usuario1)Session["Cliente"];
+            //deberia tener fecha pago
+            trans.fecha = DateTime.Now;
+            // el concepto deberia ser por la cant cuotas esto se saca del dao credito con su id
+            trans.concepto = "Nuevo Concepto";
+
+            credito cred = new credito();
+            int idCredito = int.Parse(Session["idCredito"].ToString());
+            cred = daoCredito.obtenerPorIDCredito(idCredito);
+
+            //cred.cuotasPagadas++;
+            if (cred.numCuotas == cred.cuotasPagadas) cred.estado = "Finalizado";
+            daoCredito.modificarCredito(cred);
+
+            trans.credito = cred;
+            if (fileUpload.HasFile)
+            {
+                int maxFileSize = 5 * 1024 * 1024; // 5 MB
+                if (fileUpload.PostedFile.ContentLength > maxFileSize)
+                {
+                    lblError.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+                    return;
+                }
+
+                string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
+                if (fileExtension != ".jpg" && fileExtension != ".jpeg"  && fileExtension != ".pdf")
+                {
+                    lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
+                    return;
+                }
+
+                // Leer el archivo y convertirlo en un arreglo de bytes
+                byte[] fileData = null;
+                using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
+                {
+                    fileData = br.ReadBytes(fileUpload.PostedFile.ContentLength);
+                }
+
+                trans.foto = fileData;
+            }
 
         }
 

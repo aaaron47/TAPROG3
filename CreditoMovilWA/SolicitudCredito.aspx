@@ -133,9 +133,9 @@
         <label>¿En cuántas cuotas lo desea?</label>
         <div>
             <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">1</button>
-            <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">2</button>
             <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">3</button>
-            <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">4</button>
+            <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">6</button>
+            <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">12</button>
 
             <asp:HiddenField ID ="selectedCuotas" runat="server" ClientIDMode="Static" />
         </div>
