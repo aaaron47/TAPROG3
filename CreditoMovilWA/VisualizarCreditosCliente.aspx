@@ -323,7 +323,7 @@
                     <p>Número de Billetera:</p>
                     <asp:TextBox ID="txtNumeroBilletera" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
                     <p>Nombre del Titular:</p>
-                    <asp:TextBox ID="txtTitularBilletera" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>>
+                    <asp:TextBox ID="txtTitularBilletera" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
                 </div>
             </div>
 
