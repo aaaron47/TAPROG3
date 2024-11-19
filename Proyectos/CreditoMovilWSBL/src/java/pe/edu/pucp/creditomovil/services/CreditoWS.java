@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -129,7 +130,8 @@ public class CreditoWS {
 
     @WebMethod(operationName = "generarReporteCreditos")
     public byte[] reporteCreditos(@WebParam (name = "fechainicio") Date fechaini,
-            @WebParam(name = "fechafin") Date fechafin) throws Exception{
+            @WebParam(name = "fechafin") Date fechafin,
+            @WebParam (name = "estadocred") String estado) throws Exception{
         try {
             Map<String, Object> params = new HashMap<>();        
             
@@ -139,19 +141,13 @@ public class CreditoWS {
             params.put("fechaini",fechainiSQL);
             params.put("fechafin",fechafinSQL);
             
-            URL rutalogo = CreditoWS.class.getResource("/pe/edu/pucp/creditomovil/img/logo.png");
-            String rutaArchivoLogo = URLDecoder.decode(rutalogo.getPath(), "UTF-8");
-            Image logo = (new ImageIcon(rutaArchivoLogo).getImage());
             
-            params.put("logo", logo);
+            params.put("logo", ImageIO.read(new File(getFileResource2("logo.png"))));
             
             //obtiene imagen desde pe.edu.pucp.creditomovil.img
-            URL rutaborde = CreditoWS.class.getResource("/pe/edu/pucp/creditomovil/img/bordesupp.png");
-            String rutaArchivoBorde = URLDecoder.decode(rutaborde.getPath(), "UTF-8");
-            Image borde = (new ImageIcon(rutaArchivoBorde).getImage());      
             
-            params.put("BordeSup",borde);
-            
+            params.put("BordeSup",ImageIO.read(new File(getFileResource2("bordesupp.png"))));
+            params.put("estado",estado);
             return generarBuffer(getFileResource("ReporteCreditos.jrxml"), params);
             
         } catch(Exception ex){
@@ -162,6 +158,12 @@ public class CreditoWS {
     
     private String getFileResource(String fileName){ 
         String filePath = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/reportes/"+fileName).getPath();
+        filePath = filePath.replace("%20", " ");
+        return filePath;
+    }
+    
+    private String getFileResource2(String fileName){ 
+        String filePath = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/img/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
         return filePath;
     }

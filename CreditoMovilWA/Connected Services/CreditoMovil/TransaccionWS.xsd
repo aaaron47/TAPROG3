@@ -38,6 +38,7 @@
   </xs:complexType>
   <xs:complexType name="credito">
     <xs:sequence>
+      <xs:element name="cantCuotasPagadas" type="xs:int" />
       <xs:element minOccurs="0" name="cliente" type="tns:usuario" />
       <xs:element minOccurs="0" name="estado" type="xs:string" />
       <xs:element minOccurs="0" name="fechaOtorgamiento" type="xs:dateTime" />

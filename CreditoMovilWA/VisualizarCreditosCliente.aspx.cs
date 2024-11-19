@@ -110,10 +110,10 @@ namespace CreditoMovilWA
             cred = daoCredito.obtenerPorIDCredito(idCredito);
 
             //cred.cuotasPagadas++;
-            if (cred.numCuotas == cred.cuotasPagadas) cred.estado = "Finalizado";
+            //if (cred.numCuotas == cred.cuotasPagadas) cred.estado = "Finalizado";
             daoCredito.modificarCredito(cred);
 
-            trans.credito = cred;
+            //trans.credito = cred;
             if (fileUpload.HasFile)
             {
                 int maxFileSize = 5 * 1024 * 1024; // 5 MB

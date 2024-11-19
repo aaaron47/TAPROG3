@@ -75,10 +75,13 @@ namespace CreditoMovilWA
             DateTime fechaInicio, fechaFin;
             bool isFechaInicio = DateTime.TryParse(txtFechaInicio.Text, out fechaInicio);
             bool isFechaFin = DateTime.TryParse(txtFechaFin.Text, out fechaFin);
+            string estado;
+            estado = ddlEstado.SelectedValue;
+            if (estado == "") estado = null;
 
-            if(isFechaFin && isFechaInicio)
+            if (isFechaFin && isFechaInicio)
             {
-                Byte[] reporte = daoCredito.generarReporteCreditos(fechaInicio,fechaFin);
+                Byte[] reporte = daoCredito.generarReporteCreditos(fechaInicio,fechaFin,estado);
                 if (reporte != null)
                 {
                     Response.ContentType = "application/pdf";

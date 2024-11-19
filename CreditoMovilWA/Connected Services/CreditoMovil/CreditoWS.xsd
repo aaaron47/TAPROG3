@@ -54,6 +54,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="fechainicio" type="xs:dateTime" />
       <xs:element minOccurs="0" name="fechafin" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="estadocred" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="generarReporteCreditosResponse">
@@ -73,6 +74,7 @@
   </xs:complexType>
   <xs:complexType name="credito">
     <xs:sequence>
+      <xs:element name="cantCuotasPagadas" type="xs:int" />
       <xs:element minOccurs="0" name="cliente" type="tns:usuario" />
       <xs:element minOccurs="0" name="estado" type="xs:string" />
       <xs:element minOccurs="0" name="fechaOtorgamiento" type="xs:dateTime" />

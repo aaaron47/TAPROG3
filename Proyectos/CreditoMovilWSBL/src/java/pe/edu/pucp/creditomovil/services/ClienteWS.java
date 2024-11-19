@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -124,23 +125,11 @@ public class ClienteWS {
             params.put("codCli", idcli);
             
             //obtiene imagen desde pe.edu.pucp.creditomovil.img
-            URL rutalogo = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/img/logo.png");
-            String rutaArchivoLogo = URLDecoder.decode(rutalogo.getPath(), "UTF-8");
-            Image logo = (new ImageIcon(rutaArchivoLogo).getImage());
-            
-            params.put("logo", logo);
+            params.put("logo", ImageIO.read(new File(getFileResource2("logo.png"))));
             
             //obtiene imagen desde pe.edu.pucp.creditomovil.img
-            URL rutaborde = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/img/bordesupp.png");
-            String rutaArchivoBorde = URLDecoder.decode(rutaborde.getPath(), "UTF-8");
-            Image borde = (new ImageIcon(rutaArchivoBorde).getImage());      
-            
-            params.put("BordeSup",borde);
-            
-//            Map<String, Object> params2 = new HashMap<>();
-//            params2.put("codCli",idcli);
-//            
-//            params.put("rutaSubReporte",creaSubReporte("ListarCreditos.jrxml",params2));
+
+            params.put("BordeSup",ImageIO.read(new File(getFileResource2("bordesupp.png"))));
             
             URL rutaSubReporte = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/reportes/ListarCreditos.jasper");
             String rutaArchivoSubReporte = URLDecoder.decode(rutaSubReporte.getPath(), "UTF-8");
@@ -157,6 +146,12 @@ public class ClienteWS {
     
     private String getFileResource(String fileName){ 
         String filePath = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/reportes/"+fileName).getPath();
+        filePath = filePath.replace("%20", " ");
+        return filePath;
+    }
+    
+    private String getFileResource2(String fileName){ 
+        String filePath = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/img/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
         return filePath;
     }

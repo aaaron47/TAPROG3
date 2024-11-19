@@ -124,38 +124,38 @@
 		<element kind="textField" uuid="3aa26bd5-6b66-4d97-9f8f-0701adeba4da" x="130" y="130" width="290" height="20" hTextAlign="Center">
 			<expression><![CDATA["Cliente Nro: " + $P{codCli}]]></expression>
 		</element>
-		<element kind="textField" uuid="f31f5e40-1d0f-494e-a4b0-e4f0533ba1e6" x="20" y="180" width="510" height="20">
-			<expression><![CDATA["Nombre Completo: " + $F{nombre} + " " + $F{ap_paterno} + " " + $F{ap_materno}]]></expression>
+		<element kind="textField" uuid="f31f5e40-1d0f-494e-a4b0-e4f0533ba1e6" x="20" y="180" width="510" height="20" vTextAlign="Middle">
+			<expression><![CDATA[" Nombre Completo: " + $F{nombre} + " " + $F{ap_paterno} + " " + $F{ap_materno}]]></expression>
 			<box padding="0">
 				<pen lineWidth="0.75"/>
 			</box>
 		</element>
-		<element kind="textField" uuid="d41c6b08-3096-4a24-b468-ae5e33064f13" x="20" y="210" width="250" height="20">
-			<expression><![CDATA["Tipo de Documento: " + $F{tipo_doc}]]></expression>
+		<element kind="textField" uuid="d41c6b08-3096-4a24-b468-ae5e33064f13" x="20" y="210" width="250" height="20" vTextAlign="Middle">
+			<expression><![CDATA[" Tipo de Documento: " + $F{tipo_doc}]]></expression>
 			<box padding="0">
 				<pen lineWidth="0.75"/>
 			</box>
 		</element>
-		<element kind="textField" uuid="d58ed1a9-78f7-4ca6-96a0-af0d69b75547" x="290" y="210" width="240" height="20">
-			<expression><![CDATA["Numero de Documento: " + $F{documento}]]></expression>
+		<element kind="textField" uuid="d58ed1a9-78f7-4ca6-96a0-af0d69b75547" x="290" y="210" width="240" height="20" vTextAlign="Middle">
+			<expression><![CDATA[" Numero de Documento: " + $F{documento}]]></expression>
 			<box padding="0">
 				<pen lineWidth="0.75"/>
 			</box>
 		</element>
-		<element kind="textField" uuid="50bd36cd-9747-47bf-9780-75e8a7a41675" x="20" y="240" width="300" height="20">
-			<expression><![CDATA["Email: " + $F{email}]]></expression>
+		<element kind="textField" uuid="50bd36cd-9747-47bf-9780-75e8a7a41675" x="20" y="240" width="300" height="20" vTextAlign="Middle">
+			<expression><![CDATA[" Email: " + $F{email}]]></expression>
 			<box padding="0">
 				<pen lineWidth="0.75"/>
 			</box>
 		</element>
-		<element kind="textField" uuid="1efe59c0-2e85-46cb-9bb5-b71cee892cf0" x="330" y="240" width="200" height="20">
-			<expression><![CDATA["Teléfono: " + $F{telefono}]]></expression>
+		<element kind="textField" uuid="1efe59c0-2e85-46cb-9bb5-b71cee892cf0" x="330" y="240" width="200" height="20" vTextAlign="Middle">
+			<expression><![CDATA[" Teléfono: " + $F{telefono}]]></expression>
 			<box padding="0">
 				<pen lineWidth="0.75"/>
 			</box>
 		</element>
-		<element kind="textField" uuid="7d5429c3-70e4-4131-adf9-41a6f4f82da0" x="20" y="270" width="510" height="20">
-			<expression><![CDATA["Direccion: " + $F{direccion}]]></expression>
+		<element kind="textField" uuid="7d5429c3-70e4-4131-adf9-41a6f4f82da0" x="20" y="270" width="510" height="20" vTextAlign="Middle">
+			<expression><![CDATA[" Direccion: " + $F{direccion}]]></expression>
 			<box padding="0">
 				<pen lineWidth="0.75"/>
 			</box>

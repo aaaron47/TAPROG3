@@ -30,9 +30,11 @@ GROUP BY estado]]></query>
 	<parameter name="fechafin" class="java.sql.Date"/>
 	<parameter name="logo" class="java.awt.Image"/>
 	<parameter name="BordeSup" class="java.awt.Image"/>
+	<parameter name="estado" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[SELECT *
 FROM  creditomovil.credito 
-WHERE fecha_otorgamiento >= $P{fechaini} AND fecha_otorgamiento <= $P{fechafin}]]></query>
+WHERE fecha_otorgamiento >= $P{fechaini} AND fecha_otorgamiento <= $P{fechafin}
+AND (estado = $P{estado} OR  $P{estado} IS NULL)]]></query>
 	<field name="num_credito" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="num_credito"/>
 		<property name="com.jaspersoft.studio.field.label" value="num_credito"/>
@@ -98,43 +100,43 @@ WHERE fecha_otorgamiento >= $P{fechaini} AND fecha_otorgamiento <= $P{fechafin}]
 	</title>
 	<pageHeader height="35" splitType="Stretch"/>
 	<columnHeader height="31" splitType="Stretch">
-		<element kind="staticText" uuid="0dcda82e-b12f-4a23-a8ce-041713e57c54" mode="Opaque" x="10" y="0" width="60" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="0dcda82e-b12f-4a23-a8ce-041713e57c54" mode="Opaque" x="10" y="0" width="60" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[id Credito]]></text>
 		</element>
-		<element kind="staticText" uuid="73b27667-3e92-4fb6-b03d-73734a27b5e1" mode="Opaque" x="70" y="0" width="90" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="73b27667-3e92-4fb6-b03d-73734a27b5e1" mode="Opaque" x="70" y="0" width="90" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[monto]]></text>
 		</element>
-		<element kind="staticText" uuid="277c29dd-598e-435a-a76b-da1f00a6c442" mode="Opaque" x="160" y="0" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="277c29dd-598e-435a-a76b-da1f00a6c442" mode="Opaque" x="160" y="0" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[tasa de interés]]></text>
 		</element>
-		<element kind="staticText" uuid="479fe222-bd09-4c6c-bae0-7e3415a3012e" mode="Opaque" x="240" y="0" width="98" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="479fe222-bd09-4c6c-bae0-7e3415a3012e" mode="Opaque" x="240" y="0" width="98" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[numero de cuotas]]></text>
 		</element>
-		<element kind="staticText" uuid="bf0cf0de-b179-4c57-9eac-cf818d733969" mode="Opaque" x="338" y="0" width="112" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="bf0cf0de-b179-4c57-9eac-cf818d733969" mode="Opaque" x="338" y="0" width="112" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[fecha de otorgamiento]]></text>
 		</element>
-		<element kind="staticText" uuid="9d2815a3-14ad-4b73-a707-90c86b0fc22f" mode="Opaque" x="450" y="0" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="9d2815a3-14ad-4b73-a707-90c86b0fc22f" mode="Opaque" x="450" y="0" width="80" height="30" backcolor="#7FDE7C" fontName="Serif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[estado]]></text>
 		</element>
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
-			<element kind="textField" uuid="e0c335f3-98fa-4cf8-98e2-060dc887b675" x="10" y="0" width="60" height="30" hTextAlign="Center">
+			<element kind="textField" uuid="e0c335f3-98fa-4cf8-98e2-060dc887b675" x="10" y="0" width="60" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{num_credito}]]></expression>
 			</element>
-			<element kind="textField" uuid="09e36a51-7077-4b17-a403-3b6fbb9fdd6e" x="70" y="0" width="90" height="30" hTextAlign="Center">
+			<element kind="textField" uuid="09e36a51-7077-4b17-a403-3b6fbb9fdd6e" x="70" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{monto}]]></expression>
 			</element>
-			<element kind="textField" uuid="184264c7-29f0-414b-9ab9-ec1f0edfbb0b" x="160" y="0" width="79" height="30" hTextAlign="Center">
+			<element kind="textField" uuid="184264c7-29f0-414b-9ab9-ec1f0edfbb0b" x="160" y="0" width="79" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{tasa_interes}]]></expression>
 			</element>
-			<element kind="textField" uuid="85be8cdf-a7b5-4ade-9d56-8ccaa295009f" x="240" y="0" width="98" height="30" hTextAlign="Center">
+			<element kind="textField" uuid="85be8cdf-a7b5-4ade-9d56-8ccaa295009f" x="240" y="0" width="98" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{num_cuotas}]]></expression>
 			</element>
-			<element kind="textField" uuid="830c552a-18f9-4f66-af88-5e2efa348d1c" x="338" y="0" width="111" height="30" hTextAlign="Center">
+			<element kind="textField" uuid="830c552a-18f9-4f66-af88-5e2efa348d1c" x="338" y="0" width="111" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{fecha_otorgamiento}]]></expression>
 			</element>
-			<element kind="textField" uuid="427f921c-de94-46f0-9485-336e56bfc532" x="450" y="0" width="79" height="30" hTextAlign="Center">
+			<element kind="textField" uuid="427f921c-de94-46f0-9485-336e56bfc532" x="450" y="0" width="79" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{estado}]]></expression>
 			</element>
 		</band>
