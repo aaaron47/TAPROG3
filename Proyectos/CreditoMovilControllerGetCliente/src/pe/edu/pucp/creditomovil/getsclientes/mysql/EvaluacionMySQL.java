@@ -34,7 +34,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
 
         try {
             conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL InsertarEvaluacion(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
+            String sql = "{ CALL InsertarEvaluacion(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
             cs = conn.prepareCall(sql);
 
             // Configura los parámetros
@@ -54,6 +54,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             cs.setBoolean(11, evaluacion.isActivo());
             cs.setDouble(12, evaluacion.getPuntaje());
             cs.setString(13, evaluacion.getObservaciones());
+            cs.setBytes(14, evaluacion.getFoto());
 
             // Ejecuta la consulta
             resultado = cs.executeUpdate() > 0;
@@ -78,7 +79,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
     @Override
     public void modificar(Evaluacion evaluacion) {
         CallableStatement cs;
-        String query = "{CALL ModificarEvaluacion(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL ModificarEvaluacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         int resultado = 0;
 
         try {
@@ -100,6 +101,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             cs.setBoolean(11, evaluacion.isActivo());
             cs.setDouble(12, evaluacion.getPuntaje());
             cs.setString(13, evaluacion.getObservaciones());
+            cs.setBytes(14, evaluacion.getFoto());
 
             resultado = cs.executeUpdate();
         } catch (SQLException e) {
@@ -155,6 +157,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
                 ev.setTelefonoNegocio(rs.getString("telefono_negocio"));
                 ev.setVentasDiarias(rs.getDouble("ventas_diarias"));
                 ev.setevaluador(null);
+                ev.setFoto(rs.getBytes("foto"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -192,10 +195,11 @@ public class EvaluacionMySQL implements EvaluacionDAO {
                 boolean activo = rs.getBoolean("activo");
                 double puntaje = rs.getDouble("puntaje");
                 String obser = rs.getString("observaciones");
+                byte[] foto = rs.getBytes("foto");
                         
                 Evaluacion eva = new Evaluacion(fechaReg, nombreNeg, dirNeg, telNeg,
                         null, cliente, ventasDia, inventario, costoVentas, 
-                        margenGan, numEva, activo, puntaje, obser);
+                        margenGan, numEva, activo, puntaje, obser,foto);
                 evaluaciones.add(eva);
             }
         } catch (SQLException e) {
@@ -246,10 +250,11 @@ public class EvaluacionMySQL implements EvaluacionDAO {
                 boolean activo = rs.getBoolean("activo");
                 double puntaje = rs.getDouble("puntaje");
                 String obser = rs.getString("observaciones");
+                byte[] foto = rs.getBytes("foto");
                         
                 Evaluacion eva = new Evaluacion(fechaReg, nombreNeg, dirNeg, telNeg,
                         null, cliente, ventasDia, inventario, costoVentas, 
-                        margenGan, numEva, activo, puntaje, obser);
+                        margenGan, numEva, activo, puntaje, obser,foto);
                 evaluaciones.add(eva);
             }
         } catch (SQLException e) {

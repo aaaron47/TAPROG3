@@ -86,7 +86,18 @@ namespace CreditoMovilWA
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
- 
+            //transaccion trans = new transaccion();
+            //trans.numOperacion = 0;
+            //trans.usuarioRegistrado = (usuario1) Session["Cliente"];
+            //trans.fecha = DateTime.Now;
+            //trans.concepto = "que ponemos xd";
+            //trans.monto = 1.0; //como seria esto? debe pagar la fraccion correspondiente a la cuota de la deuda total?
+            //trans.anulado = false;
+            //trans.agencia = "de donde sacamos esto";
+            ////la foto
+            ////trans.metodoPago = ;
+            //daoTransaccion.insertarTransaccion(trans);
+
         }
 
         protected void btnVerDetalles_Click(object sender, EventArgs e)

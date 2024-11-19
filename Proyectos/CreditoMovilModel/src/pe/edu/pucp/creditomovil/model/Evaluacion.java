@@ -22,13 +22,14 @@ public class Evaluacion {
     private boolean activo;
     private double puntaje;
     private String observaciones;
+    private byte[] foto;
 
     public Evaluacion(){}
     public Evaluacion(Date fechaRegistro, String nombreNegocio,
             String direccionNegocio, String telefonoNegocio,
             Usuario evaluador, Cliente clienteAsignado, double ventasDiarias,
             double inventario, double costoVentas, double margenGanancia,
-            int numeroEvaluacion, boolean activo, double puntaje, String observaciones) {
+            int numeroEvaluacion, boolean activo, double puntaje, String observaciones, byte[] foto) {
         this.fechaRegistro = fechaRegistro;
         this.nombreNegocio = nombreNegocio;
         this.direccionNegocio = direccionNegocio;
@@ -43,6 +44,7 @@ public class Evaluacion {
         this.activo = activo;
         this.puntaje = puntaje;
         this.observaciones = observaciones;
+        this.foto = foto;
     }
 
     public void registrarEvaluacion() {
@@ -171,5 +173,13 @@ public class Evaluacion {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+    
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }

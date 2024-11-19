@@ -24,6 +24,7 @@
       <xs:element name="costoVentas" type="xs:double" />
       <xs:element minOccurs="0" name="direccionNegocio" type="xs:string" />
       <xs:element minOccurs="0" name="fechaRegistro" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="foto" type="xs:base64Binary" />
       <xs:element name="inventario" type="xs:double" />
       <xs:element name="margenGanancia" type="xs:double" />
       <xs:element minOccurs="0" name="nombreNegocio" type="xs:string" />
