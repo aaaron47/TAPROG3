@@ -34,12 +34,10 @@ namespace CreditoMovilWA
         {
             if (!IsPostBack)
             { 
-
                 CargarBancos();
+                CargarBilleteras();
                 lblError.Text = "";
             }
-
-        
         }
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
@@ -117,12 +115,6 @@ namespace CreditoMovilWA
                         ddlBancoElegido.Items.Add(listItem);
                     }
                 }
-
-                // Serializar la lista de bancos en JSON
-                var bancosJson = JsonConvert.SerializeObject(bancos);
-                // Registrar la variable JavaScript con los datos
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "BancosData",
-                    $"var bancosData = {bancosJson};", true);
             }
             catch (Exception ex)
             {
@@ -130,33 +122,33 @@ namespace CreditoMovilWA
             }
         }
 
-        protected void ddlBancoElegido_SelectedIndexChanged(object sender, EventArgs e)
+        private void CargarBilleteras()
         {
-            string bancoSeleccionado = ddlBancoElegido.SelectedValue;
-
-            if (!string.IsNullOrEmpty(bancoSeleccionado))
+            try
             {
-                // Obtener la información del banco basado en el CCI o algún identificador único
-                var banco = daoBanco.obtenerPorNombreBanco(bancoSeleccionado); // Modifica según tu método de obtención
+                var billeteras = daoBilletera.listarTodosBilleteras();
+                ViewState["ListaBilleteras"] = billeteras;
 
-                if (banco != null)
+                ddlBilleteraElegida.Items.Clear();
+                ddlBilleteraElegida.Items.Add(new ListItem("Seleccione una billetera", ""));
+
+                if (billeteras != null)
                 {
-                    txtCCI.Text = banco.CCI;
-                    txtTitularBanco.Text = banco.nombreTitular;
-                    txtTipoCuenta.Text = banco.tipoCuenta;
-                    // Ejecutar la función JavaScript para mostrar detalles
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal(); mostrarDetallesBanco();", true);
+                    foreach (var billetera in billeteras)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Agregando billetera: " + billetera.nombreBilletera);
+                        ListItem listItem = new ListItem(billetera.nombreBilletera, billetera.nombreBilletera);
+                        ddlBilleteraElegida.Items.Add(listItem);
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("La lista de billeteras es nula.");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // Limpiar los campos si no hay banco seleccionado
-                txtCCI.Text = "";
-                txtTitularBanco.Text = "";
-                txtTipoCuenta.Text = "";
-
-                // Ejecutar la función JavaScript para ocultar detalles
-                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal(); ocultarDetallesBanco();", true);
+                lblError.Text = "Error al cargar billeteras: " + ex.Message;
             }
         }
 
@@ -166,6 +158,14 @@ namespace CreditoMovilWA
             BancoWSClient daoBanco = new BancoWSClient();
             var banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
             return banco;
+        }
+
+        [WebMethod]
+        public static billetera ObtenerDatosBilletera(string nombreBilletera)
+        {
+            BilleteraWSClient daoBilletera = new BilleteraWSClient();
+            var billetera = daoBilletera.obtenerPorNombreBilletera(nombreBilletera);
+            return billetera;
         }
     }
 }

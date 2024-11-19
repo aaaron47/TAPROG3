@@ -36,14 +36,17 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
         protected global::System.Web.UI.WebControls.DropDownList ddlMetodoPago;
         protected global::System.Web.UI.WebControls.DropDownList ddlBancoElegido;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBilleteraElegida;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl detallesBanco;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl detallesBilletera;
         protected global::System.Web.UI.WebControls.TextBox txtCCI;
         protected global::System.Web.UI.WebControls.TextBox txtTitularBanco;
         protected global::System.Web.UI.WebControls.TextBox txtTipoCuenta;
         protected global::System.Web.UI.HtmlControls.HtmlSelect metodoPago;
         protected global::System.Web.UI.HtmlControls.HtmlSelect bancoElegido;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect billeteraElegida;
         protected global::System.Web.UI.WebControls.TextBox txtTitularBilletera;
         protected global::System.Web.UI.WebControls.TextBox txtNumeroBilletera;
-
+ 
     }
 }

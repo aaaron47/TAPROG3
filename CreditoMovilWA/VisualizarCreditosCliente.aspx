@@ -193,6 +193,44 @@
             }
         }
 
+        function mostrarDetallesBilletera() {
+            var detallesBilletera = document.getElementById("<%= detallesBilletera.ClientID %>");
+            detallesBilletera.style.display = "block";
+        }
+
+        function ocultarDetallesBilletera() {
+            var detallesBilletera = document.getElementById("<%= detallesBilletera.ClientID %>");
+            detallesBilletera.style.display = "none";
+        }
+
+        function onBilleteraSeleccionada(nombreBilletera) {
+            if (nombreBilletera) {
+                fetch('VisualizarCreditosCliente.aspx/ObtenerDatosBilletera', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombreBilletera: nombreBilletera })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Respuesta del servidor:", data);
+                    var billetera = data.d; // 'd' es donde ASP.NET coloca los datos
+                    console.log("Datos de la billetera:", billetera);
+                    if (billetera) {
+                        document.getElementById("<%= txtNumeroBilletera.ClientID %>").value = billetera.numeroTelefono;
+                        document.getElementById("<%= txtTitularBilletera.ClientID %>").value = billetera.nombreTitular
+                        mostrarDetallesBilletera();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                document.getElementById("<%= txtNumeroBilletera.ClientID %>").value = "";
+                document.getElementById("<%= txtTitularBilletera.ClientID %>").value = "";
+                ocultarDetallesBilletera();
+            }
+        }
+
     </script>
 </asp:Content>
 
@@ -230,7 +268,8 @@
                     <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btnPagar" runat="server" Text="Pagar" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnPagar_Click" OnClientClick="openModal(); return false;" />
+                            <asp:Button ID="btnPagar" runat="server" Text="Pagar" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnPagar_Click" OnClientClick="openModal(); return false;" 
+                                Visible='<%# Eval("Estado").ToString() == "Activo" %>'    />
                             <asp:Button ID="btnVerDetalle" runat="server" Text="👁️" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnVerDetalles_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -258,17 +297,15 @@
             <div id="infoBanco" style="display: none; margin-top: 20px;">
                 <h3>Bancos Aceptados:</h3>
                 <img src="images/bancos.png" alt="Bancos Aceptados" style="width:100%; max-width:400px;">
-                    <label for="bancoElegido">Seleccione el banco</label>
-                    <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" onchange="onBancoSeleccionado(this.value);">
-                        <asp:ListItem Text="Seleccione un banco" Value="" />
-                    </asp:DropDownList>
+                <label for="bancoElegido">Seleccione el banco</label>
+                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" onchange="onBancoSeleccionado(this.value);">
+                    <asp:ListItem Text="Seleccione un banco" Value="" />
+                </asp:DropDownList>
                 <div id="detallesBanco" runat="server" style="margin-top: 20px; display: none;">
                     <p>CCI:</p>
                     <asp:TextBox ID="txtCCI" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
-
                     <p>Nombre del Titular:</p>
                     <asp:TextBox ID="txtTitularBanco" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
-
                     <p>Tipo de Cuenta:</p>
                     <asp:TextBox ID="txtTipoCuenta" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
                 </div>
@@ -278,10 +315,16 @@
             <div id="infoBilletera" style="display: none; margin-top: 20px;">
                 <h3>Billeteras Digitales Aceptadas:</h3>
                 <img src="images/billeteras.png" alt="Billeteras Aceptadas" style="width:100%; max-width:180px;">
-                <p>Número de Billetera:</p>
-                <asp:TextBox ID="txtNumeroBilletera" runat="server" CssClass="input-text" Text="987654321" ReadOnly="True" Enabled="False" />
-                <p>Nombre del Titular:</p>
-                <asp:TextBox ID="txtTitularBilletera" runat="server" CssClass="input-text" Text="Nombre del Titular de la Billetera" ReadOnly="True" Enabled="False" />
+                <label for="billeteraElegida">Seleccione la billetera</label>
+                <asp:DropDownList ID="ddlBilleteraElegida" runat="server" CssClass="select-dropdown" onchange="onBilleteraSeleccionada(this.value);">
+                    <asp:ListItem Text="Seleccione una billetera" Value="" />
+                </asp:DropDownList>
+                <div id="detallesBilletera" runat="server" style="margin-top: 20px; display: none;">
+                    <p>Número de Billetera:</p>
+                    <asp:TextBox ID="txtNumeroBilletera" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>
+                    <p>Nombre del Titular:</p>
+                    <asp:TextBox ID="txtTitularBilletera" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>>
+                </div>
             </div>
 
             <p>Inserte imagen jpeg o pdf:</p>

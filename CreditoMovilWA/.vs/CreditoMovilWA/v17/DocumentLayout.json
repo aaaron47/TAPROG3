@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\visualizarcreditoscliente.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,6 +43,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "VisualizarCreditosCliente.aspx.designer.cs",
+              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.designer.cs",
+              "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx.designer.cs",
+              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.designer.cs",
+              "RelativeToolTip": "VisualizarCreditosCliente.aspx.designer.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwC4AAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T04:01:31.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\Web.config",
               "RelativeDocumentMoniker": "Web.config",
@@ -57,7 +74,7 @@
               "RelativeDocumentMoniker": "Login.aspx.cs",
               "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
               "RelativeToolTip": "Login.aspx.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAYwCIAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAYwCIAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-19T00:45:07.592Z",
               "EditorCaption": ""
@@ -83,7 +100,7 @@
               "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx.cs",
               "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.cs",
               "RelativeToolTip": "VisualizarCreditosCliente.aspx.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAADwvwoAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAA1wIAAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T01:55:43.776Z",
               "EditorCaption": ""
