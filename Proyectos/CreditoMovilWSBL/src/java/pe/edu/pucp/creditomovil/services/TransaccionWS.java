@@ -20,10 +20,12 @@ public class TransaccionWS {
     private TransaccionDAO daoTransaccion = new TransaccionMySQL();
     
     @WebMethod(operationName = "insertarTransaccion")
-    public boolean insertarTransaccion(@WebParam(name = "transaccion") Transaccion transaccion) {
+    public boolean insertarTransaccion(@WebParam(name = "transaccion") Transaccion transaccion,
+            @WebParam(name = "idUsuario") int idUser, @WebParam(name = "idCredito") int idCred,
+            @WebParam(name = "idMetodo") int idMetodo) {
         boolean resultado = false;
         try{
-            resultado = daoTransaccion.insertar(transaccion);
+            resultado = daoTransaccion.insertar(transaccion,idUser,idCred,idMetodo);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }

@@ -90,6 +90,7 @@ namespace CreditoMovilWA
         {
             transaccion trans = new transaccion();
             trans.usuarioRegistrado = (usuario1)Session["Cliente"];
+            int idUsuario = trans.usuarioRegistrado.idUsuario;
             trans.fecha = DateTime.Now;
             int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());
             trans.metodoPago.idMetodoPago = idMetodoPago;
@@ -110,34 +111,36 @@ namespace CreditoMovilWA
 
             daoCredito.modificarCredito(cred);
 
-            trans.credito = cred;
-            if (fileUpload.HasFile)
-            {
-                int maxFileSize = 5 * 1024 * 1024; // 5 MB
-                if (fileUpload.PostedFile.ContentLength > maxFileSize)
-                {
-                    lblError.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
-                    return;
-                }
+            trans.credito.numCredito = idCredito;
 
-                string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
-                if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
-                {
-                    lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
-                    return;
-                }
+            daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago);
+            //if (fileUpload.HasFile)
+            //{
+            //    int maxFileSize = 5 * 1024 * 1024; // 5 MB
+            //    if (fileUpload.PostedFile.ContentLength > maxFileSize)
+            //    {
+            //        lblError.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+            //        return;
+            //    }
 
-                // Leer el archivo y convertirlo en un arreglo de bytes
-                byte[] fileData = null;
-                using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
-                {
-                    fileData = br.ReadBytes(fileUpload.PostedFile.ContentLength);
-                }
+            //    string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
+            //    if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
+            //    {
+            //        lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
+            //        return;
+            //    }
 
-                trans.foto = fileData;
+            //    // Leer el archivo y convertirlo en un arreglo de bytes
+            //    byte[] fileData = null;
+            //    using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
+            //    {
+            //        fileData = br.ReadBytes(fileUpload.PostedFile.ContentLength);
+            //    }
 
-                daoTransaccion.insertarTransaccion(trans);
-            }
+            //    trans.foto = fileData;
+
+            //    daoTransaccion.insertarTransaccion(trans,idUsuario,idCredito,idMetodoPago);
+            //}
         }
 
         protected void btnVerDetalles_Click(object sender, EventArgs e)

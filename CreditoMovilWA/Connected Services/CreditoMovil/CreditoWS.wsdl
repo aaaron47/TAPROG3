@@ -5,11 +5,35 @@
       <xsd:import schemaLocation="http://localhost:8080/CreditoMovilWSBL/CreditoWS?xsd=1" namespace="https://services.creditomovil.pucp.edu.pe" />
     </xsd:schema>
   </types>
-  <message name="insertarCredito">
-    <part name="parameters" element="tns:insertarCredito" />
+  <message name="listarCreditosFiltro">
+    <part name="parameters" element="tns:listarCreditosFiltro" />
   </message>
-  <message name="insertarCreditoResponse">
-    <part name="parameters" element="tns:insertarCreditoResponse" />
+  <message name="listarCreditosFiltroResponse">
+    <part name="parameters" element="tns:listarCreditosFiltroResponse" />
+  </message>
+  <message name="obtenerPorIDCredito">
+    <part name="parameters" element="tns:obtenerPorIDCredito" />
+  </message>
+  <message name="obtenerPorIDCreditoResponse">
+    <part name="parameters" element="tns:obtenerPorIDCreditoResponse" />
+  </message>
+  <message name="listarCreditosSinCliFiltro">
+    <part name="parameters" element="tns:listarCreditosSinCliFiltro" />
+  </message>
+  <message name="listarCreditosSinCliFiltroResponse">
+    <part name="parameters" element="tns:listarCreditosSinCliFiltroResponse" />
+  </message>
+  <message name="listarCreditosCliente">
+    <part name="parameters" element="tns:listarCreditosCliente" />
+  </message>
+  <message name="listarCreditosClienteResponse">
+    <part name="parameters" element="tns:listarCreditosClienteResponse" />
+  </message>
+  <message name="listarTodosCreditos">
+    <part name="parameters" element="tns:listarTodosCreditos" />
+  </message>
+  <message name="listarTodosCreditosResponse">
+    <part name="parameters" element="tns:listarTodosCreditosResponse" />
   </message>
   <message name="generarReporteCreditos">
     <part name="parameters" element="tns:generarReporteCreditos" />
@@ -32,46 +56,38 @@
   <message name="eliminarCreditoResponse">
     <part name="parameters" element="tns:eliminarCreditoResponse" />
   </message>
+  <message name="insertarCredito">
+    <part name="parameters" element="tns:insertarCredito" />
+  </message>
+  <message name="insertarCreditoResponse">
+    <part name="parameters" element="tns:insertarCreditoResponse" />
+  </message>
   <message name="generarBuffer">
     <part name="parameters" element="tns:generarBuffer" />
   </message>
   <message name="generarBufferResponse">
     <part name="parameters" element="tns:generarBufferResponse" />
   </message>
-  <message name="listarCreditosFiltro">
-    <part name="parameters" element="tns:listarCreditosFiltro" />
-  </message>
-  <message name="listarCreditosFiltroResponse">
-    <part name="parameters" element="tns:listarCreditosFiltroResponse" />
-  </message>
-  <message name="listarCreditosCliente">
-    <part name="parameters" element="tns:listarCreditosCliente" />
-  </message>
-  <message name="listarCreditosClienteResponse">
-    <part name="parameters" element="tns:listarCreditosClienteResponse" />
-  </message>
-  <message name="listarTodosCreditos">
-    <part name="parameters" element="tns:listarTodosCreditos" />
-  </message>
-  <message name="listarTodosCreditosResponse">
-    <part name="parameters" element="tns:listarTodosCreditosResponse" />
-  </message>
-  <message name="obtenerPorIDCredito">
-    <part name="parameters" element="tns:obtenerPorIDCredito" />
-  </message>
-  <message name="obtenerPorIDCreditoResponse">
-    <part name="parameters" element="tns:obtenerPorIDCreditoResponse" />
-  </message>
-  <message name="listarCreditosSinCliFiltro">
-    <part name="parameters" element="tns:listarCreditosSinCliFiltro" />
-  </message>
-  <message name="listarCreditosSinCliFiltroResponse">
-    <part name="parameters" element="tns:listarCreditosSinCliFiltroResponse" />
-  </message>
   <portType name="CreditoWS">
-    <operation name="insertarCredito">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/insertarCreditoRequest" message="tns:insertarCredito" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/insertarCreditoResponse" message="tns:insertarCreditoResponse" />
+    <operation name="listarCreditosFiltro">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosFiltroRequest" message="tns:listarCreditosFiltro" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosFiltroResponse" message="tns:listarCreditosFiltroResponse" />
+    </operation>
+    <operation name="obtenerPorIDCredito">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/obtenerPorIDCreditoRequest" message="tns:obtenerPorIDCredito" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/obtenerPorIDCreditoResponse" message="tns:obtenerPorIDCreditoResponse" />
+    </operation>
+    <operation name="listarCreditosSinCliFiltro">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosSinCliFiltroRequest" message="tns:listarCreditosSinCliFiltro" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosSinCliFiltroResponse" message="tns:listarCreditosSinCliFiltroResponse" />
+    </operation>
+    <operation name="listarCreditosCliente">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosClienteRequest" message="tns:listarCreditosCliente" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosClienteResponse" message="tns:listarCreditosClienteResponse" />
+    </operation>
+    <operation name="listarTodosCreditos">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarTodosCreditosRequest" message="tns:listarTodosCreditos" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarTodosCreditosResponse" message="tns:listarTodosCreditosResponse" />
     </operation>
     <operation name="generarReporteCreditos">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/generarReporteCreditosRequest" message="tns:generarReporteCreditos" />
@@ -86,35 +102,55 @@
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/eliminarCreditoRequest" message="tns:eliminarCredito" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/eliminarCreditoResponse" message="tns:eliminarCreditoResponse" />
     </operation>
+    <operation name="insertarCredito">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/insertarCreditoRequest" message="tns:insertarCredito" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/insertarCreditoResponse" message="tns:insertarCreditoResponse" />
+    </operation>
     <operation name="generarBuffer">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/generarBufferRequest" message="tns:generarBuffer" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/generarBufferResponse" message="tns:generarBufferResponse" />
       <fault wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/generarBuffer/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="listarCreditosFiltro">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosFiltroRequest" message="tns:listarCreditosFiltro" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosFiltroResponse" message="tns:listarCreditosFiltroResponse" />
-    </operation>
-    <operation name="listarCreditosCliente">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosClienteRequest" message="tns:listarCreditosCliente" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosClienteResponse" message="tns:listarCreditosClienteResponse" />
-    </operation>
-    <operation name="listarTodosCreditos">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarTodosCreditosRequest" message="tns:listarTodosCreditos" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarTodosCreditosResponse" message="tns:listarTodosCreditosResponse" />
-    </operation>
-    <operation name="obtenerPorIDCredito">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/obtenerPorIDCreditoRequest" message="tns:obtenerPorIDCredito" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/obtenerPorIDCreditoResponse" message="tns:obtenerPorIDCreditoResponse" />
-    </operation>
-    <operation name="listarCreditosSinCliFiltro">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosSinCliFiltroRequest" message="tns:listarCreditosSinCliFiltro" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/CreditoWS/listarCreditosSinCliFiltroResponse" message="tns:listarCreditosSinCliFiltroResponse" />
-    </operation>
   </portType>
   <binding name="CreditoWSPortBinding" type="tns:CreditoWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="insertarCredito">
+    <operation name="listarCreditosFiltro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerPorIDCredito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarCreditosSinCliFiltro">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarCreditosCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listarTodosCreditos">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -153,6 +189,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="insertarCredito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="generarBuffer">
       <soap:operation soapAction="" />
       <input>
@@ -164,51 +209,6 @@
       <fault name="Exception">
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
-    </operation>
-    <operation name="listarCreditosFiltro">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarCreditosCliente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarTodosCreditos">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="obtenerPorIDCredito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="listarCreditosSinCliFiltro">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
     </operation>
   </binding>
   <service name="CreditoWS">

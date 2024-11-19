@@ -25,7 +25,7 @@ public class TransaccionMySQL implements TransaccionDAO {
     private ResultSet rs = null;
 
     @Override
-    public boolean insertar(Transaccion transaccion) {
+    public boolean insertar(Transaccion transaccion, int idUsuario, int idCredito, int idMetodo) {
         Connection conn = null;
         CallableStatement cs = null;
         boolean resultado = false;
@@ -36,15 +36,15 @@ public class TransaccionMySQL implements TransaccionDAO {
             cs = conn.prepareCall(sql);
 
             // Configura los parámetros
-            cs.setInt(1, transaccion.getUsuarioRegistrado().getIdUsuario()); // Supone que usuarioRegistrado no es null
+            cs.setInt(1, idUsuario); 
             cs.setTimestamp(2, new java.sql.Timestamp(transaccion.getFecha().getTime()));
             cs.setString(3, transaccion.getConcepto());
             cs.setDouble(4, transaccion.getMonto());
             cs.setBoolean(5, transaccion.isAnulado());
             cs.setString(6, transaccion.getAgencia());
-            cs.setInt(7, transaccion.getCredito().getNumCredito()); // Supone que credito no es null
+            cs.setInt(7, idCredito);
             cs.setBytes(8, transaccion.getFoto());
-            cs.setInt(9, transaccion.getMetodoPago().getIdMetodoPago());
+            cs.setInt(9, idMetodo);
 
             // Ejecuta la consulta
             resultado = cs.executeUpdate() > 0;

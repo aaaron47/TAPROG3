@@ -12,7 +12,7 @@ import pe.edu.pucp.creditomovil.model.Transaccion;
  * @author diego
  */
 public interface TransaccionDAO {
-    boolean insertar(Transaccion transaccion);
+    boolean insertar(Transaccion transaccion, int idUsuario, int idCredito, int idMetodo);
     boolean modificar(Transaccion transaccion);
     boolean eliminar(int numOperacion);
     Transaccion obtenerPorId(int numOperacion);

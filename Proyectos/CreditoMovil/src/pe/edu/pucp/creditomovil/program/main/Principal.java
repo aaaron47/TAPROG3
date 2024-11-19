@@ -16,8 +16,10 @@ import pe.edu.pucp.creditomovil.getsclientes.dao.CreditoDAO;
 import pe.edu.pucp.creditomovil.getsclientes.dao.EvaluacionDAO;
 import pe.edu.pucp.creditomovil.getsclientes.mysql.CreditoMySQL;
 import pe.edu.pucp.creditomovil.getsclientes.mysql.EvaluacionMySQL;
+import pe.edu.pucp.creditomovil.getscredito.dao.BancoDAO;
 import pe.edu.pucp.creditomovil.getscredito.dao.BilleteraDAO;
 import pe.edu.pucp.creditomovil.getscredito.dao.TransaccionDAO;
+import pe.edu.pucp.creditomovil.getscredito.mysql.BancoMySQL;
 import pe.edu.pucp.creditomovil.getscredito.mysql.BilleteraMySQL;
 import pe.edu.pucp.creditomovil.model.Transaccion;
 import pe.edu.pucp.creditomovil.getscredito.mysql.TransaccionMySQL;
@@ -25,6 +27,7 @@ import pe.edu.pucp.creditomovil.rrhh.dao.AdministradorDAO;
 import pe.edu.pucp.creditomovil.rrhh.dao.SupervisorDAO;
 import pe.edu.pucp.creditomovil.rrhh.dao.UsuarioDAO;
 import pe.edu.pucp.creditomovil.model.Administrador;
+import pe.edu.pucp.creditomovil.model.Banco;
 import pe.edu.pucp.creditomovil.model.Billetera;
 import pe.edu.pucp.creditomovil.model.Supervisor;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
@@ -44,13 +47,30 @@ public class Principal {
      */
     public static void main(String[] args) {
         
-        BilleteraDAO billdao = new BilleteraMySQL();
-        List<Billetera> bills = billdao.listarTodos();
-        for(Billetera b : bills){
-            System.out.println("nombre de billetera: "+b.getNombreBilletera());
-            System.out.println("numero de telefono: "+b.getNumeroTelefono());
-            System.out.println("Id metodo de pago: "+b.getIdMetodoPago());
-            System.out.println("nombre del titular : "+b.getNombreTitular());
+        ClienteDAO clienteDAO = new ClienteMySQL();
+        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
+        int idCliente = cliente.getCodigoCliente();
+        CreditoDAO creditoDAO = new CreditoMySQL();
+        Credito cred = creditoDAO.obtenerPorId(1);
+        int idCred = cred.getNumCredito();
+        BancoDAO bankdao = new BancoMySQL();
+        Banco bank = bankdao.obtenerPorId(2);
+        int idMetodo = bank.getIdMetodoPago();
+        TransaccionDAO transdao = new TransaccionMySQL();
+        Transaccion transaccion = new Transaccion(
+                new Date(), // Fecha actual
+                "Pago mensual", // Concepto
+                100.0, // Monto
+                false, // Anulado
+                cliente, // Usuario registrado
+                "Agencia Central", // Agencia
+                0, // Número de operación
+                cred, // Crédito asociado
+                null
+        );
+
+        if(transdao.insertar(transaccion,idCliente,idCred,idMetodo)){
+            System.out.println("SI");
         }
         
 //        AdministradorDAO adminDao = new AdministradorMySQL();

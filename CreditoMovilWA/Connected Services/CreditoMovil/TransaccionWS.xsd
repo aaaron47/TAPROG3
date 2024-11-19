@@ -92,6 +92,9 @@
   <xs:complexType name="insertarTransaccion">
     <xs:sequence>
       <xs:element minOccurs="0" name="transaccion" type="tns:transaccion" />
+      <xs:element name="idUsuario" type="xs:int" />
+      <xs:element name="idCredito" type="xs:int" />
+      <xs:element name="idMetodo" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarTransaccionResponse">
