@@ -174,17 +174,17 @@
                     },
                     body: JSON.stringify({ nombreBanco: nombreBanco })
                 })
-                .then(response => response.json())
-                .then(data => {
-                    var banco = data.d; // 'd' es donde ASP.NET coloca los datos
-                    if (banco) {
-                        document.getElementById("<%= txtCCI.ClientID %>").value = banco.CCI;
+                    .then(response => response.json())
+                    .then(data => {
+                        var banco = data.d; // 'd' es donde ASP.NET coloca los datos
+                        if (banco) {
+                            document.getElementById("<%= txtCCI.ClientID %>").value = banco.CCI;
                         document.getElementById("<%= txtTitularBanco.ClientID %>").value = banco.nombreTitular;
                         document.getElementById("<%= txtTipoCuenta.ClientID %>").value = banco.tipoCuenta;
                         mostrarDetallesBanco();
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                    .catch(error => console.error('Error:', error));
             } else {
                 document.getElementById("<%= txtCCI.ClientID %>").value = "";
                 document.getElementById("<%= txtTitularBanco.ClientID %>").value = "";
@@ -332,7 +332,7 @@
             <br /><br />
 
             <!-- Botones de acción -->
-            <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" />
+            <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" OnClick="btnSave_Click" OnClientClick="closeModal(); return false;"/>
             <asp:Button ID="btnCancel" runat="server" Text="Cancelar" CssClass="cancel-btn" OnClientClick="closeModal(); return false;" />
         </div>
     </div>

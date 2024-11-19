@@ -11,6 +11,12 @@
   <message name="insertarTransaccionResponse">
     <part name="parameters" element="tns:insertarTransaccionResponse" />
   </message>
+  <message name="modificarTransaccion">
+    <part name="parameters" element="tns:modificarTransaccion" />
+  </message>
+  <message name="modificarTransaccionResponse">
+    <part name="parameters" element="tns:modificarTransaccionResponse" />
+  </message>
   <message name="obtenerPorIDTransaccion">
     <part name="parameters" element="tns:obtenerPorIDTransaccion" />
   </message>
@@ -29,12 +35,6 @@
   <message name="listarTransaccionCreditoResponse">
     <part name="parameters" element="tns:listarTransaccionCreditoResponse" />
   </message>
-  <message name="modificarTransaccion">
-    <part name="parameters" element="tns:modificarTransaccion" />
-  </message>
-  <message name="modificarTransaccionResponse">
-    <part name="parameters" element="tns:modificarTransaccionResponse" />
-  </message>
   <message name="eliminarTransaccion">
     <part name="parameters" element="tns:eliminarTransaccion" />
   </message>
@@ -45,6 +45,10 @@
     <operation name="insertarTransaccion">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/insertarTransaccionRequest" message="tns:insertarTransaccion" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/insertarTransaccionResponse" message="tns:insertarTransaccionResponse" />
+    </operation>
+    <operation name="modificarTransaccion">
+      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/modificarTransaccionRequest" message="tns:modificarTransaccion" />
+      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/modificarTransaccionResponse" message="tns:modificarTransaccionResponse" />
     </operation>
     <operation name="obtenerPorIDTransaccion">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/obtenerPorIDTransaccionRequest" message="tns:obtenerPorIDTransaccion" />
@@ -57,10 +61,6 @@
     <operation name="listarTransaccionCredito">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/listarTransaccionCreditoRequest" message="tns:listarTransaccionCredito" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/listarTransaccionCreditoResponse" message="tns:listarTransaccionCreditoResponse" />
-    </operation>
-    <operation name="modificarTransaccion">
-      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/modificarTransaccionRequest" message="tns:modificarTransaccion" />
-      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/modificarTransaccionResponse" message="tns:modificarTransaccionResponse" />
     </operation>
     <operation name="eliminarTransaccion">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/TransaccionWS/eliminarTransaccionRequest" message="tns:eliminarTransaccion" />
@@ -78,6 +78,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="modificarTransaccion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="obtenerPorIDTransaccion">
       <soap:operation soapAction="" />
       <input>
@@ -97,15 +106,6 @@
       </output>
     </operation>
     <operation name="listarTransaccionCredito">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="modificarTransaccion">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

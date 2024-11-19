@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using System.Web.Services;
 using System.IO;
+using System.Web;
 
 namespace CreditoMovilWA
 {
@@ -34,7 +35,7 @@ namespace CreditoMovilWA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            { 
+            {
                 CargarBancos();
                 CargarBilleteras();
                 lblError.Text = "";
@@ -43,8 +44,8 @@ namespace CreditoMovilWA
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            cliente cli = (cliente) Session["Cliente"];
-            
+            cliente cli = (cliente)Session["Cliente"];
+
             DateTime fechaInicio, fechaFin;
             bool isFechaInicio = DateTime.TryParse(txtFechaInicio.Text, out fechaInicio);
             bool isFechaFin = DateTime.TryParse(txtFechaFin.Text, out fechaFin);
@@ -55,7 +56,7 @@ namespace CreditoMovilWA
             if (isFechaInicio && isFechaFin)
             {
 
-                
+
                 //var resultados = ObtenerCreditosPorFecha(fechaInicio, fechaFin);
                 var resultados = daoCredito.listarCreditosFiltro(cli.codigoCliente, fechaInicio, fechaFin, estado);
 
@@ -87,33 +88,29 @@ namespace CreditoMovilWA
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //transaccion trans = new transaccion();
-            //trans.numOperacion = 0;
-            //trans.usuarioRegistrado = (usuario1) Session["Cliente"];
-            //trans.fecha = DateTime.Now;
-            //trans.concepto = "que ponemos xd";
-            //trans.monto = 1.0; //como seria esto? debe pagar la fraccion correspondiente a la cuota de la deuda total?
-            //trans.anulado = false;
-            //trans.agencia = "de donde sacamos esto";
-            ////la foto
-            ////trans.metodoPago = ;
-            //daoTransaccion.insertarTransaccion(trans);
             transaccion trans = new transaccion();
             trans.usuarioRegistrado = (usuario1)Session["Cliente"];
-            //deberia tener fecha pago
             trans.fecha = DateTime.Now;
-            // el concepto deberia ser por la cant cuotas esto se saca del dao credito con su id
-            trans.concepto = "Nuevo Concepto";
+            int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());
+            trans.metodoPago.idMetodoPago = idMetodoPago;
 
             credito cred = new credito();
             int idCredito = int.Parse(Session["idCredito"].ToString());
             cred = daoCredito.obtenerPorIDCredito(idCredito);
 
-            //cred.cuotasPagadas++;
-            //if (cred.numCuotas == cred.cuotasPagadas) cred.estado = "Finalizado";
+
+            cred.cantCuotasPagadas++;
+            trans.concepto = "Cuota numero " + cred.cantCuotasPagadas;
+
+            if (cred.numCuotas == cred.cantCuotasPagadas)
+                cred.estado = "Finalizado";
+
+            cred.cantCuotasPagadas++;
+            if (cred.numCuotas == cred.cantCuotasPagadas) cred.estado = "Finalizado";
+
             daoCredito.modificarCredito(cred);
 
-            //trans.credito = cred;
+            trans.credito = cred;
             if (fileUpload.HasFile)
             {
                 int maxFileSize = 5 * 1024 * 1024; // 5 MB
@@ -124,7 +121,7 @@ namespace CreditoMovilWA
                 }
 
                 string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
-                if (fileExtension != ".jpg" && fileExtension != ".jpeg"  && fileExtension != ".pdf")
+                if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
                 {
                     lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
                     return;
@@ -138,8 +135,9 @@ namespace CreditoMovilWA
                 }
 
                 trans.foto = fileData;
-            }
 
+                daoTransaccion.insertarTransaccion(trans);
+            }
         }
 
         protected void btnVerDetalles_Click(object sender, EventArgs e)
@@ -210,6 +208,7 @@ namespace CreditoMovilWA
         {
             BancoWSClient daoBanco = new BancoWSClient();
             var banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
+            HttpContext.Current.Session["MetodoPago"] = banco.idMetodoPago;
             return banco;
         }
 
@@ -218,6 +217,7 @@ namespace CreditoMovilWA
         {
             BilleteraWSClient daoBilletera = new BilleteraWSClient();
             var billetera = daoBilletera.obtenerPorNombreBilletera(nombreBilletera);
+            HttpContext.Current.Session["MetodoPago"] = billetera.idMetodoPago;
             return billetera;
         }
     }

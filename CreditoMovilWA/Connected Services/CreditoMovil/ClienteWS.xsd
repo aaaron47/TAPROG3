@@ -119,14 +119,6 @@
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="listarTodosClientes">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarTodosClientesResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="listarClientesPorRanking">
     <xs:sequence>
       <xs:element name="rankini" type="xs:double" />
@@ -134,6 +126,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarClientesPorRankingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarTodosClientes">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarTodosClientesResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
     </xs:sequence>
