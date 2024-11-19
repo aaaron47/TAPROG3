@@ -36,16 +36,15 @@ public class TransaccionMySQL implements TransaccionDAO {
             cs = conn.prepareCall(sql);
 
             // Configura los parámetros
-            cs.setInt(1, transaccion.getNumOperacion());
-            cs.setInt(2, transaccion.getUsuarioRegistrado().getIdUsuario()); // Supone que usuarioRegistrado no es null
-            cs.setTimestamp(3, new java.sql.Timestamp(transaccion.getFecha().getTime()));
-            cs.setString(4, transaccion.getConcepto());
-            cs.setDouble(5, transaccion.getMonto());
-            cs.setBoolean(6, transaccion.isAnulado());
-            cs.setString(7, transaccion.getAgencia());
-            cs.setInt(8, transaccion.getCredito().getNumCredito()); // Supone que credito no es null
-            cs.setBytes(9, transaccion.getFoto());
-            cs.setInt(10, transaccion.getMetodoPago().getIdMetodoPago());
+            cs.setInt(1, transaccion.getUsuarioRegistrado().getIdUsuario()); // Supone que usuarioRegistrado no es null
+            cs.setTimestamp(2, new java.sql.Timestamp(transaccion.getFecha().getTime()));
+            cs.setString(3, transaccion.getConcepto());
+            cs.setDouble(4, transaccion.getMonto());
+            cs.setBoolean(5, transaccion.isAnulado());
+            cs.setString(6, transaccion.getAgencia());
+            cs.setInt(7, transaccion.getCredito().getNumCredito()); // Supone que credito no es null
+            cs.setBytes(8, transaccion.getFoto());
+            cs.setInt(9, transaccion.getMetodoPago().getIdMetodoPago());
 
             // Ejecuta la consulta
             resultado = cs.executeUpdate() > 0;
