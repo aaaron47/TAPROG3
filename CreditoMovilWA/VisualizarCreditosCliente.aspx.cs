@@ -114,33 +114,33 @@ namespace CreditoMovilWA
             trans.credito.numCredito = idCredito;
 
             daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago);
-            //if (fileUpload.HasFile)
-            //{
-            //    int maxFileSize = 5 * 1024 * 1024; // 5 MB
-            //    if (fileUpload.PostedFile.ContentLength > maxFileSize)
-            //    {
-            //        lblError.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
-            //        return;
-            //    }
+            if (fileUpload.HasFile)
+            {
+                int maxFileSize = 5 * 1024 * 1024; // 5 MB
+                if (fileUpload.PostedFile.ContentLength > maxFileSize)
+                {
+                    lblError.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+                    return;
+                }
 
-            //    string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
-            //    if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
-            //    {
-            //        lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
-            //        return;
-            //    }
+                string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
+                if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
+                {
+                    lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
+                    return;
+                }
 
-            //    // Leer el archivo y convertirlo en un arreglo de bytes
-            //    byte[] fileData = null;
-            //    using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
-            //    {
-            //        fileData = br.ReadBytes(fileUpload.PostedFile.ContentLength);
-            //    }
+                // Leer el archivo y convertirlo en un arreglo de bytes
+                byte[] fileData = null;
+                using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
+                {
+                    fileData = br.ReadBytes(fileUpload.PostedFile.ContentLength);
+                }
 
-            //    trans.foto = fileData;
+                trans.foto = fileData;
 
-            //    daoTransaccion.insertarTransaccion(trans,idUsuario,idCredito,idMetodoPago);
-            //}
+                daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago);
+            }
         }
 
         protected void btnVerDetalles_Click(object sender, EventArgs e)
