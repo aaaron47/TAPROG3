@@ -132,17 +132,10 @@
         function openModal() {
             document.getElementById("PagoModal").style.display = "block";
         }
+
         function closeModal() {
             document.getElementById("PagoModal").style.display = "none";
         }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            if (typeof bancosData !== 'undefined') {
-                console.log("Bancos cargados:", bancosData);
-            } else {
-                console.error("No se pudo cargar la lista de bancos.");
-            }
-        });
 
         function mostrarCamposPago() {
             var metodo = document.getElementById("metodoPago").value;
@@ -162,54 +155,42 @@
             }
         }
 
-        function mostrarInformacionBanco() {
-            const bancoElegido = document.getElementById("bancoElegido").value;
-            const detallesBanco = document.getElementById("detallesBanco");
-            bancosInfo = {
-                "bcp": { cci: "12345678912345678901", titular: "Titular BCP", cuenta: "Cuenta en soles" },
-                "bbva": { cci: "23456789123456789012", titular: "Titular BBVA", cuenta: "Cuenta en dólares" },
-                "interbank": { cci: "34567891234567890123", titular: "Titular Interbank", cuenta: "Cuenta en soles" },
-                "scotiabank": { cci: "45678912345678901234", titular: "Titular Scotiabank", cuenta: "Cuenta en dólares" }
-            };
-
-            if (bancosInfo[bancoElegido]) {
-                detallesBanco.style.display = "block";
-                document.getElementById("txtCCI").value = bancosInfo[bancoElegido].cci;
-                document.getElementById("txtTitularBanco").value = bancosInfo[bancoElegido].titular;
-                document.getElementById("txtTipoCuenta").value = bancosInfo[bancoElegido].cuenta;
-            } else {
-                detallesBanco.style.display = "none";
-            }
-        }
-
         function mostrarDetallesBanco() {
-             document.getElementById("detallesBanco").style.display = "block";
+            var detallesBanco = document.getElementById("<%= detallesBanco.ClientID %>");
+            detallesBanco.style.display = "block";
         }
 
         function ocultarDetallesBanco() {
-            document.getElementById("detallesBanco").style.display = "none";
+            var detallesBanco = document.getElementById("<%= detallesBanco.ClientID %>");
+            detallesBanco.style.display = "none";
         }
 
-        function actualizarDetallesBanco() {
-            var ddlBanco = document.getElementById("<%= ddlBancoElegido.ClientID %>");
-                var bancoSeleccionado = ddlBanco.value;
-
-                if (bancoSeleccionado) {
-                    // Encuentra el banco seleccionado en bancosData
-                    var banco = bancosData.find(b => b.nombreBanco === bancoSeleccionado);
+        function onBancoSeleccionado(nombreBanco) {
+            if (nombreBanco) {
+                fetch('VisualizarCreditosCliente.aspx/ObtenerDatosBanco', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombreBanco: nombreBanco })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var banco = data.d; // 'd' es donde ASP.NET coloca los datos
                     if (banco) {
-                        document.getElementById("txtCCI").value = banco.CCI;
-                        document.getElementById("txtTitularBanco").value = banco.nombreTitular;
-                        document.getElementById("txtTipoCuenta").value = banco.tipoCuenta;
-                        document.getElementById("detallesBanco").style.display = "block";
+                        document.getElementById("<%= txtCCI.ClientID %>").value = banco.CCI;
+                        document.getElementById("<%= txtTitularBanco.ClientID %>").value = banco.nombreTitular;
+                        document.getElementById("<%= txtTipoCuenta.ClientID %>").value = banco.tipoCuenta;
+                        mostrarDetallesBanco();
                     }
-                } else {
-                    // Limpiar los campos si no hay banco seleccionado
-                    document.getElementById("txtCCI").value = "";
-                    document.getElementById("txtTitularBanco").value = "";
-                    document.getElementById("txtTipoCuenta").value = "";
-                    document.getElementById("detallesBanco").style.display = "none";
-                }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                document.getElementById("<%= txtCCI.ClientID %>").value = "";
+                document.getElementById("<%= txtTitularBanco.ClientID %>").value = "";
+                document.getElementById("<%= txtTipoCuenta.ClientID %>").value = "";
+                ocultarDetallesBanco();
+            }
         }
 
     </script>
@@ -249,7 +230,7 @@
                     <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btnPagar" runat="server" Text="Pagar" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnPagar_Click" />
+                            <asp:Button ID="btnPagar" runat="server" Text="Pagar" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnPagar_Click" OnClientClick="openModal(); return false;" />
                             <asp:Button ID="btnVerDetalle" runat="server" Text="👁️" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnVerDetalles_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -278,12 +259,9 @@
                 <h3>Bancos Aceptados:</h3>
                 <img src="images/bancos.png" alt="Bancos Aceptados" style="width:100%; max-width:400px;">
                     <label for="bancoElegido">Seleccione el banco</label>
-            <%--<asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="true" OnSelectedIndexChanged="ddlBancoElegido_SelectedIndexChanged">
-                    <asp:ListItem Text="Seleccione" Value="" />
-                </asp:DropDownList>--%>
-                <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" AutoPostBack="false" onchange="actualizarDetallesBanco()">
-                    <asp:ListItem Text="Seleccione" Value="" />
-                </asp:DropDownList> 
+                    <asp:DropDownList ID="ddlBancoElegido" runat="server" CssClass="select-dropdown" onchange="onBancoSeleccionado(this.value);">
+                        <asp:ListItem Text="Seleccione un banco" Value="" />
+                    </asp:DropDownList>
                 <div id="detallesBanco" runat="server" style="margin-top: 20px; display: none;">
                     <p>CCI:</p>
                     <asp:TextBox ID="txtCCI" runat="server" CssClass="input-text" ReadOnly="True"></asp:TextBox>

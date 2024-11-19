@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
+using System.Web.Services;
 
 namespace CreditoMovilWA
 {
@@ -87,61 +88,7 @@ namespace CreditoMovilWA
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-           /* transaccion trans = new transaccion();
-            if (fileUpload.HasFile)
-            {
-                // Guarda el archivo en Session para uso posterior
-                Session["ImagenPago"] = fileUpload.FileBytes;
-
-                string metodoP = metodoPago.Value;
-                if(metodoP == "banco")
-                {
-                    banco bank = new banco();
-                    bank.CCI = txtCCI.Text;
-                    bank.nombreTitular = txtTitularBanco.Text;
-                    bank.tipoCuenta = txtTipoCuenta.Text;
-                    bank.foto = (Byte[])Session["ImagenPago"];
-                    string banco1 = bancoElegido.Value;
-
-                    //daoBanco.insertarBanco(bank);
-
-                    trans.agencia = banco1;
-                    //trans.metodoPago = bank;
-
-                }
-                else if(metodoP == "billetera")
-                {
-                    billetera bill = new billetera();
-                    bill.nombreTitular = txtTitularBilletera.Text;
-                    bill.foto = (Byte[])Session["ImagenPago"];
-                    bill.numeroTelefono = txtNumeroBilletera.Text;
-
-                    //daoBilletera.insertarBilletera(bill);
-
-                    trans.agencia = metodoP;
-                }
-
-                trans.fecha = DateTime.Now;
-                trans.foto = (Byte[])Session["ImagenPago"];
-                trans.concepto = "Pago de Crédito";
-                trans.monto = 123; // FALTA EL MONTO
-                trans.anulado = false;
-                trans.credito = (credito1)Session["Credito"];
-                
-
-
-                lblError.Text = "Archivo subido correctamente y pago registrado.";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                lblError.Text = "Por favor, selecciona un archivo para subir.";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
-
-            // Cierra el modal después de grabar
-            ViewState["ModalAbierto"] = false;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "CloseModal", "closeModal();", true);*/
+ 
         }
 
         protected void btnVerDetalles_Click(object sender, EventArgs e)
@@ -156,41 +103,30 @@ namespace CreditoMovilWA
         {
             try
             {
-
                 var bancos = daoBanco.listarTodosBancos();
                 ViewState["ListaBancos"] = bancos;
 
-                // Limpiar el dropdown por si ya tiene datos
                 ddlBancoElegido.Items.Clear();
-                ddlBancoElegido.Items.Add(new ListItem("Seleccione un banco", "")); // Opción por defecto
+                ddlBancoElegido.Items.Add(new ListItem("Seleccione un banco", ""));
 
-                // Ahora puedes usar la lista de bancos en tu lógica ASP.NET
-                if (bancos!=null)
+                if (bancos != null)
                 {
                     foreach (var banco in bancos)
                     {
-                        ListItem listItem = new ListItem(banco.nombreBanco, banco.CCI); 
+                        ListItem listItem = new ListItem(banco.nombreBanco, banco.nombreBanco);
                         ddlBancoElegido.Items.Add(listItem);
                     }
                 }
+
+                // Serializar la lista de bancos en JSON
+                var bancosJson = JsonConvert.SerializeObject(bancos);
+                // Registrar la variable JavaScript con los datos
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "BancosData",
+                    $"var bancosData = {bancosJson};", true);
             }
             catch (Exception ex)
             {
-                // Manejo de errores
                 lblError.Text = "Error al cargar bancos: " + ex.Message;
-            }
-
-        }
-        // esta va xon lo comentado en el aspx
-        protected override void OnPreRender(EventArgs e)
-        {
-            base.OnPreRender(e);
-
-            var bancos = ViewState["ListaBancos"] as List<BancoWSClient>;
-            if (bancos != null)
-            {
-                var bancosJson = Newtonsoft.Json.JsonConvert.SerializeObject(bancos);
-                ClientScript.RegisterStartupScript(this.GetType(), "BancosData", $"var bancosData = {bancosJson};", true);
             }
         }
 
@@ -209,7 +145,7 @@ namespace CreditoMovilWA
                     txtTitularBanco.Text = banco.nombreTitular;
                     txtTipoCuenta.Text = banco.tipoCuenta;
                     // Ejecutar la función JavaScript para mostrar detalles
-                    ClientScript.RegisterStartupScript(this.GetType(), "mostrarDetallesBanco", "mostrarDetallesBanco();", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal(); mostrarDetallesBanco();", true);
                 }
             }
             else
@@ -220,8 +156,16 @@ namespace CreditoMovilWA
                 txtTipoCuenta.Text = "";
 
                 // Ejecutar la función JavaScript para ocultar detalles
-                ClientScript.RegisterStartupScript(this.GetType(), "ocultarDetallesBanco", "ocultarDetallesBanco();", true);
+                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal(); ocultarDetallesBanco();", true);
             }
+        }
+
+        [WebMethod]
+        public static banco ObtenerDatosBanco(string nombreBanco)
+        {
+            BancoWSClient daoBanco = new BancoWSClient();
+            var banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
+            return banco;
         }
     }
 }
