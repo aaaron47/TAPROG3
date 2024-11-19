@@ -260,7 +260,7 @@ public class BilleteraMySQL implements BilleteraDAO{
                         rs.getInt("idMetodoPago"),
                         rs.getBytes("foto"),
                         rs.getString("nombreTitular"),
-                        rs.getString("telefono"),
+                        rs.getString("numeroTelefono"),
                         rs.getString("nombreBilletera")
                         
                 );

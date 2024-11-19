@@ -24,8 +24,6 @@ public abstract class MetodoPago {
         this.nombreTitular = nombreTitular;
     }
 
-    ;
-
     public int getIdMetodoPago() {
         return idMetodoPago;
     }

@@ -22,8 +22,6 @@ public class Billetera extends MetodoPago {
         this.nombreBilletera = nombreBilletera;
     }
 
-    ;
-
     public String getNumeroTelefono() {
         return numeroTelefono;
     }

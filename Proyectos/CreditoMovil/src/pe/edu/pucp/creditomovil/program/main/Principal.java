@@ -16,13 +16,16 @@ import pe.edu.pucp.creditomovil.getsclientes.dao.CreditoDAO;
 import pe.edu.pucp.creditomovil.getsclientes.dao.EvaluacionDAO;
 import pe.edu.pucp.creditomovil.getsclientes.mysql.CreditoMySQL;
 import pe.edu.pucp.creditomovil.getsclientes.mysql.EvaluacionMySQL;
+import pe.edu.pucp.creditomovil.getscredito.dao.BilleteraDAO;
 import pe.edu.pucp.creditomovil.getscredito.dao.TransaccionDAO;
+import pe.edu.pucp.creditomovil.getscredito.mysql.BilleteraMySQL;
 import pe.edu.pucp.creditomovil.model.Transaccion;
 import pe.edu.pucp.creditomovil.getscredito.mysql.TransaccionMySQL;
 import pe.edu.pucp.creditomovil.rrhh.dao.AdministradorDAO;
 import pe.edu.pucp.creditomovil.rrhh.dao.SupervisorDAO;
 import pe.edu.pucp.creditomovil.rrhh.dao.UsuarioDAO;
 import pe.edu.pucp.creditomovil.model.Administrador;
+import pe.edu.pucp.creditomovil.model.Billetera;
 import pe.edu.pucp.creditomovil.model.Supervisor;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
 import pe.edu.pucp.creditomovil.model.Usuario;
@@ -40,6 +43,15 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        BilleteraDAO billdao = new BilleteraMySQL();
+        List<Billetera> bills = billdao.listarTodos();
+        for(Billetera b : bills){
+            System.out.println("nombre de billetera: "+b.getNombreBilletera());
+            System.out.println("numero de telefono: "+b.getNumeroTelefono());
+            System.out.println("Id metodo de pago: "+b.getIdMetodoPago());
+            System.out.println("nombre del titular : "+b.getNombreTitular());
+        }
         
 //        AdministradorDAO adminDao = new AdministradorMySQL();
 //        
