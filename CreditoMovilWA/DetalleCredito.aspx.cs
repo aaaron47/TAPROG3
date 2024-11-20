@@ -1,6 +1,7 @@
 ﻿using CreditoMovilWA.CreditoMovil;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -21,6 +22,7 @@ namespace CreditoMovilWA
             {
                 Response.Redirect("Login.aspx");
             }
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -29,8 +31,21 @@ namespace CreditoMovilWA
             {
                 CargarDetalleCredito();
                 CargarTransacciones();
+
+                if(Session["Rol"].ToString() == "ADMINISTRADOR")
+                {
+                    btnModificar.Visible = true;
+                }
+
             }
         }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            // Lógica para modificar el crédito
+
+        }
+
 
         private void CargarDetalleCredito()
         {
@@ -40,7 +55,7 @@ namespace CreditoMovilWA
 
             Session["Credito"] = cred;
             // Cargar datos de ejemplo para los detalles del crédito.
-            txtFechaOtorgamiento.Text = cred.fechaOtorgamiento.ToString();
+            txtFechaOtorgamiento.Text = cred.fechaOtorgamiento.ToString("dd/MM/yyyy");
             txtEstado.Text = cred.estado;
             txtMonto.Text = cred.monto.ToString();
             txtNumeroCuotas.Text = cred.numCuotas.ToString();

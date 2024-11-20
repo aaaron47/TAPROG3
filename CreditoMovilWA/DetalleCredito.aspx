@@ -72,6 +72,25 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
+            width: 45%;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 20px;
+        }
+
+        .modify-btn {
+            background-color: #2f7a44;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            width: 45%;
+            margin-right: 50px;
+            margin-left: 50px;
+            margin-bottom: 20px;
         }
     </style>
 </asp:Content>
@@ -116,6 +135,7 @@
 
         <div class="button-container">
             <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="back-btn" OnClick="btnBack_Click"/>
+             <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="modify-btn" OnClick="btnModificar_Click" Visible="false" />
         </div>
 
     </div>

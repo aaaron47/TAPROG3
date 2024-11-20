@@ -45,7 +45,18 @@
         
         
         
+<<<<<<< Updated upstream
         <group/>
+=======
+>>>>>>> Stashed changes
         <group/>
+        <group>
+            <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Credito.java</file>
+            <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Usuario2.java</file>
+            <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Billetera.java</file>
+            <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Transaccion.java</file>
+            <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Banco.java</file>
+            <file>file:/C:/Users/pdext/OneDrive/universidad/fci/7mo%20ciclo/prog3/proyecto/TAPROG3/Proyectos/CreditoMovilModel/src/pe/edu/pucp/creditomovil/model/Usuario.java</file>
+        </group>
     </open-files>
 </project-private>
