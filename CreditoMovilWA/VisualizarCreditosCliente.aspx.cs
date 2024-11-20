@@ -62,9 +62,31 @@ namespace CreditoMovilWA
 
                 if (resultados != null)
                 {
-                    gvCreditos.DataSource = resultados;
+                    var ordenPersonalizado = new Dictionary<string, int>
+                    {
+                        { "Retrasado", 1 },
+                        { "Activo", 2 },
+                        { "Solicitado", 3 },
+                        { "Finalizado", 4 }
+                    };
+
+                    var dataOrdenada = resultados.OrderBy(x => ordenPersonalizado[x.estado]).ToList();
+
+                    var cred1 = resultados[0];
+                    if(cred1.estado == "Retrasado")
+                    {
+                        lblRetrasado.Text = "Usted tiene créditos atrasados";
+                    }
+                    else
+                    {
+                        lblRetrasado.Text = "";
+                    }
+
+                    gvCreditos.DataSource = dataOrdenada;
                     gvCreditos.DataBind();
                     lblError.Text = "";
+
+
                 }
                 else
                 {

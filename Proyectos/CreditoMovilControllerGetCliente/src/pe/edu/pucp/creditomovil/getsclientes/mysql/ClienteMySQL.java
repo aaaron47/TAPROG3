@@ -183,6 +183,24 @@ public class ClienteMySQL implements ClienteDAO {
             }
         }
     }
+    
+    @Override
+    public boolean validarEmail(String email){
+        Connection conn = null;
+        CallableStatement cs = null;
+        try{
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ObtenerClientePorEmail(?) }";
+            cs = conn.prepareCall(sql);
+            cs.setString(1, email);
+            
+            int resultado = cs.executeUpdate();
+            return resultado != 0;
+        }catch (SQLException ex) {
+                ex.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public Cliente obtenerPorId(int id) {

@@ -258,6 +258,7 @@
 
         <!-- Tabla de créditos -->
         <div class="table-container">
+            <asp:Label ID="lblRetrasado" runat="server" CssClass="error-message"></asp:Label>
             <asp:GridView ID="gvCreditos" runat="server" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField DataField="numCredito" HeaderText="ID_CRÉDITO" />

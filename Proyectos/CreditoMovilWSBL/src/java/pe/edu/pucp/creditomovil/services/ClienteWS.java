@@ -95,6 +95,17 @@ public class ClienteWS {
         return cliente;
     }
     
+    @WebMethod(operationName = "validarEmail")
+    public boolean validarCorreo(@WebParam (name = "correo") String email){
+        boolean resultado = false;
+        try{
+            resultado = daoCliente.validarEmail(email);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return resultado;
+    }
+    
     @WebMethod(operationName = "listarClientesPorRanking")
     public List<Cliente> listarClientesPorRanking(@WebParam(name = "rankini") double rankini,
                                                 @WebParam(name = "rankfin") double rankfin) {
@@ -155,16 +166,6 @@ public class ClienteWS {
         filePath = filePath.replace("%20", " ");
         return filePath;
     }
-    
-//    public String creaSubReporte(String inFileXML, Map<String, Object> params) throws Exception{
-//        String fileJasper = inFileXML + ".jasper";
-//        if(!new File(fileJasper).exists()){
-//            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);
-//        }
-//        URL rutasubreporte = ClienteWS.class.getResource(fileJasper);
-//        String rutaArchivoSubreporte = URLDecoder.decode(rutasubreporte.getPath(), "UTF-8");
-//        return rutaArchivoSubreporte;
-//    }
     
     public byte[] generarBuffer(String inFileXML, Map<String, Object> params) throws Exception{
         //Se compila una sola vez

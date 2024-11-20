@@ -19,6 +19,8 @@
   <xs:element name="obtenerPorDocIdenClienteResponse" type="tns:obtenerPorDocIdenClienteResponse" />
   <xs:element name="obtenerPorIDCliente" type="tns:obtenerPorIDCliente" />
   <xs:element name="obtenerPorIDClienteResponse" type="tns:obtenerPorIDClienteResponse" />
+  <xs:element name="validarEmail" type="tns:validarEmail" />
+  <xs:element name="validarEmailResponse" type="tns:validarEmailResponse" />
   <xs:complexType name="obtenerPorIDCliente">
     <xs:sequence>
       <xs:element name="idcliente" type="xs:int" />
@@ -57,6 +59,16 @@
       <xs:element minOccurs="0" name="rol" type="tns:rol" />
       <xs:element minOccurs="0" name="tipoDocumento" type="tns:tipoDocumento" />
       <xs:element minOccurs="0" name="ultimoLogueo" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="validarEmail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="correo" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="validarEmailResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerPorDocIdenCliente">
