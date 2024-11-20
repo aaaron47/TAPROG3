@@ -41,6 +41,9 @@ namespace CreditoMovilWATesterC_
                 Console.WriteLine("Apellido:" + supevisor.apPaterno);
             }
             Console.ReadLine();
+
+
+
         }
     }
 }

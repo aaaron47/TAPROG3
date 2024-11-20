@@ -249,6 +249,7 @@
         <asp:DropDownList ID="ddlEstado" runat="server" CssClass="select-dropdown">
             <asp:ListItem Value="" Text="Seleccionar Estado" />
             <asp:ListItem Value="Activo" Text="Activo" />
+             <asp:ListItem Value="Desembolsado" Text="Desembolsado" />
             <asp:ListItem Value="Inactivo" Text="Inactivo" />
             <asp:ListItem Value="Pendiente" Text="Pendiente" />
             <asp:ListItem Value="Finalizado" Text="Finalizado" />
