@@ -48,31 +48,32 @@ public class Principal {
     public static void main(String[] args) {
         
         ClienteDAO clienteDAO = new ClienteMySQL();
-        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
-        int idCliente = cliente.getCodigoCliente();
-        CreditoDAO creditoDAO = new CreditoMySQL();
-        Credito cred = creditoDAO.obtenerPorId(1);
-        int idCred = cred.getNumCredito();
-        BancoDAO bankdao = new BancoMySQL();
-        Banco bank = bankdao.obtenerPorId(2);
-        int idMetodo = bank.getIdMetodoPago();
-        TransaccionDAO transdao = new TransaccionMySQL();
-        Transaccion transaccion = new Transaccion(
-                new Date(), // Fecha actual
-                "Pago mensual", // Concepto
-                100.0, // Monto
-                false, // Anulado
-                cliente, // Usuario registrado
-                "Agencia Central", // Agencia
-                0, // Número de operación
-                cred, // Crédito asociado
-                null
-        );
-
-        if(transdao.insertar(transaccion,idCliente,idCred,idMetodo)){
-            System.out.println("SI");
-        }
-        
+        System.out.println(clienteDAO.validarEmail("a20220361@pucp.edu.pe"));
+//        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
+//        int idCliente = cliente.getCodigoCliente();
+//        CreditoDAO creditoDAO = new CreditoMySQL();
+//        Credito cred = creditoDAO.obtenerPorId(1);
+//        int idCred = cred.getNumCredito();
+//        BancoDAO bankdao = new BancoMySQL();
+//        Banco bank = bankdao.obtenerPorId(2);
+//        int idMetodo = bank.getIdMetodoPago();
+//        TransaccionDAO transdao = new TransaccionMySQL();
+//        Transaccion transaccion = new Transaccion(
+//                new Date(), // Fecha actual
+//                "Pago mensual", // Concepto
+//                100.0, // Monto
+//                false, // Anulado
+//                cliente, // Usuario registrado
+//                "Agencia Central", // Agencia
+//                0, // Número de operación
+//                cred, // Crédito asociado
+//                null
+//        );
+//
+//        if(transdao.insertar(transaccion,idCliente,idCred,idMetodo)){
+//            System.out.println("SI");
+//        }
+//        
 //        AdministradorDAO adminDao = new AdministradorMySQL();
 //        
 //        Administrador admin = adminDao.obtenerPorDocIdentidad("24422124", "DNI");

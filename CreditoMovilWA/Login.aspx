@@ -85,6 +85,12 @@
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" placeholder="Contraseña"></asp:TextBox>
         </div>
 
+        <div class="form-group">
+            <asp:LinkButton ID="NoContra" runat="server" OnClick="LinkButton1_Click">
+                <asp:Label ID="lblrecuperar" runat="server" Text="¿Haz olvidado tu contraseña?"></asp:Label>
+            </asp:LinkButton>
+        </div>
+
         <asp:Label ID="lblError" runat="server" CssClass="error-message" EnableViewState="false"></asp:Label>
         
         <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn-login" OnClick="btnIngresar_Click" />

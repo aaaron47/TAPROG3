@@ -185,14 +185,37 @@ public class ClienteMySQL implements ClienteDAO {
     }
     
     @Override
-    public boolean validarEmail(String email){
+    public int validarEmail(String email){
         Connection conn = null;
         CallableStatement cs = null;
+        ResultSet rs = null;
         try{
             conn = DBManager.getInstance().getConnection();
             String sql = "{ CALL ObtenerClientePorEmail(?) }";
             cs = conn.prepareCall(sql);
             cs.setString(1, email);
+            rs = cs.executeQuery();
+            if(rs.next()){
+                int resultado = rs.getInt("codigo_cliente");
+                return resultado;
+            }
+        }catch (SQLException ex) {
+                ex.printStackTrace();
+        }
+        return -1;
+    }
+    
+    
+    @Override
+    public boolean cambiarContra(int codcli, String contra){
+        Connection conn = null;
+        CallableStatement cs = null;
+        try{
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL CambiarContra(?,?) }";
+            cs = conn.prepareCall(sql);
+            cs.setInt(1, codcli);
+            cs.setString(2,contra);
             
             int resultado = cs.executeUpdate();
             return resultado != 0;
@@ -201,6 +224,7 @@ public class ClienteMySQL implements ClienteDAO {
         }
         return false;
     }
+    
 
     @Override
     public Cliente obtenerPorId(int id) {

@@ -130,6 +130,11 @@ namespace CreditoMovilWA
             }
         }
 
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ValidarEmail.aspx");
+        }
+
         private bool VerificarContraseña(string contraseñaIngresada, string salAlmacenada, string contraseñaHashAlmacenada)
         {
             // Convertir la sal y la contraseña hasheada almacenadas de Base64 a bytes

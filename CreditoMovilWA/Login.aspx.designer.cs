@@ -27,5 +27,7 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.Button btnIngresar;
         protected global::System.Web.UI.WebControls.Button lblError;
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
+        protected global::System.Web.UI.WebControls.LinkButton NoContra;
+        protected global::System.Web.UI.WebControls.Label lblrecuperar;
     }
 }

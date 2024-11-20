@@ -96,10 +96,22 @@ public class ClienteWS {
     }
     
     @WebMethod(operationName = "validarEmail")
-    public boolean validarCorreo(@WebParam (name = "correo") String email){
-        boolean resultado = false;
+    public int validarCorreo(@WebParam (name = "correo") String email){
+        int resultado = -1;
         try{
             resultado = daoCliente.validarEmail(email);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return resultado;
+    }
+    
+    @WebMethod(operationName = "cambiarContra")
+    public boolean cambiarContra(@WebParam (name = "codigocli") int codCli,
+            @WebParam (name = "contra") String contra){
+        boolean resultado = false;
+        try{
+            resultado = daoCliente.cambiarContra(codCli, contra);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }

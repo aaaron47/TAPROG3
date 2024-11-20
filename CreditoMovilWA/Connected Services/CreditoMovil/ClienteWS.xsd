@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="https://services.creditomovil.pucp.edu.pe" targetNamespace="https://services.creditomovil.pucp.edu.pe" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="Exception" type="tns:Exception" />
+  <xs:element name="cambiarContra" type="tns:cambiarContra" />
+  <xs:element name="cambiarContraResponse" type="tns:cambiarContraResponse" />
   <xs:element name="eliminarCliente" type="tns:eliminarCliente" />
   <xs:element name="eliminarClienteResponse" type="tns:eliminarClienteResponse" />
   <xs:element name="generarBuffer" type="tns:generarBuffer" />
@@ -68,7 +70,7 @@
   </xs:complexType>
   <xs:complexType name="validarEmailResponse">
     <xs:sequence>
-      <xs:element name="return" type="xs:boolean" />
+      <xs:element name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerPorDocIdenCliente">
@@ -80,6 +82,17 @@
   <xs:complexType name="obtenerPorDocIdenClienteResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarContra">
+    <xs:sequence>
+      <xs:element name="codigocli" type="xs:int" />
+      <xs:element minOccurs="0" name="contra" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarContraResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminarCliente">
