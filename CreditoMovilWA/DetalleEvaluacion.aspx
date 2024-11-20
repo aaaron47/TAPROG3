@@ -133,11 +133,13 @@
         <label>Observaciones</label>
         <asp:TextBox ID="txtObservaciones" runat="server" CssClass="input-text" TextMode="MultiLine" Rows="3" ReadOnly="true" />
 
+        <label>Puntaje</label>
+        <asp:TextBox ID="txtPuntaje" runat="server" CssClass="input-text" TextMode="MultiLine" Rows="3" ReadOnly="true" />
+
         <!-- Puntaje y botón modificar -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
             <asp:Button ID="btnModificar" runat="server" Text="MODIFICAR" CssClass="modify-btn" OnClick="btnModificar_Click" />
             <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="back-btn" OnClick="btnBack_Click" />
-            <div class="puntaje">PUNTAJE: <asp:Label ID="lblPuntaje" runat="server" Text="98"></asp:Label></div>
         </div>
     </div>
 </asp:Content>

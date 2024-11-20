@@ -143,7 +143,7 @@
                     <asp:BoundField DataField="Monto" HeaderText="MONTO" />
                     <asp:BoundField DataField="NumCuotas" HeaderText="NUM. CUOTAS" />
                     <asp:BoundField DataField="TasaInteres" HeaderText="TASA INTERÉS" />
-                    <asp:BoundField DataField="FechaOtorgamiento" HeaderText="FECHA OTORGAMIENTO""/>
+                    <asp:BoundField DataField="FechaOtorgamiento" HeaderText="FECHA OTORGAMIENTO"/>
                     <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
                     <asp:TemplateField>
                         <ItemTemplate>

@@ -4,7 +4,7 @@
  */
 package pe.edu.pucp.creditomovil.getsclientes.dao;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import pe.edu.pucp.creditomovil.model.Evaluacion;
 

@@ -22,7 +22,6 @@ namespace CreditoMovilWA
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
         protected global::System.Web.UI.WebControls.Button btnLogout;
         protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;

@@ -39,7 +39,7 @@ namespace CreditoMovilWA
         protected void btnVisualizarEvaluaciones_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("TotalTransacciones.aspx");
+            Response.Redirect("TotalEvaluaciones.aspx");
         }
     }
 }

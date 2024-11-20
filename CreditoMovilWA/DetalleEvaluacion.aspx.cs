@@ -54,7 +54,7 @@ namespace CreditoMovilWA
             txtCostoVentas.Text = ev.costoVentas.ToString();
             txtEstado.Text = ev.activo ? "Activo" : "Inactivo";
             txtObservaciones.Text = ev.observaciones.ToString();
-            lblPuntaje.Text = ev.puntaje.ToString();
+            txtPuntaje.Text = ev.puntaje.ToString();
 
             Session["evaluacion"] = ev;
         }
@@ -62,18 +62,18 @@ namespace CreditoMovilWA
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             // alternar 
-            modoEdicion = ! modoEdicion;
+            modoEdicion = !modoEdicion;
 
             if (btnModificar.Text == "MODIFICAR")
             {
                 HabilitarCampos();
-                btnModificar.Text = "GUARDAR"; 
+                btnModificar.Text = "GUARDAR";
             }
             else
             {
                 GuardarDatosEvaluacion();
                 DeshabilitarCampos();
-                btnModificar.Text = "MODIFICAR"; 
+                btnModificar.Text = "MODIFICAR";
             }
         }
 
@@ -90,6 +90,7 @@ namespace CreditoMovilWA
             txtCostoVentas.ReadOnly = false;
             txtEstado.ReadOnly = false;
             txtObservaciones.ReadOnly = false;
+            txtPuntaje.ReadOnly = false;
         }
 
         private void DeshabilitarCampos()
@@ -103,6 +104,7 @@ namespace CreditoMovilWA
             txtVentasDiarias.ReadOnly = true;
             txtInventario.ReadOnly = true;
             txtCostoVentas.ReadOnly = true;
+            txtPuntaje.ReadOnly = true;
             txtEstado.ReadOnly = true;
             txtObservaciones.ReadOnly = true;
         }
@@ -121,8 +123,9 @@ namespace CreditoMovilWA
             ev.ventasDiarias = Double.Parse(txtVentasDiarias.Text);
             ev.inventario = Double.Parse(txtInventario.Text);
             ev.costoVentas = Double.Parse(txtCostoVentas.Text);
-            ev.activo = txtEstado.Text=="Activo" ? true : false;
+            ev.activo = txtEstado.Text == "Activo" ? true : false;
             ev.observaciones = txtObservaciones.Text;
+            ev.puntaje = Double.Parse(txtPuntaje.Text);
 
             // aca pa actualizar base de dates
             daoEvaluacion.modificarEvaluacion(ev);

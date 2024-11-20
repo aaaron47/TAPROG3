@@ -5,7 +5,7 @@
 package pe.edu.pucp.creditomovil.getsclientes.mysql;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

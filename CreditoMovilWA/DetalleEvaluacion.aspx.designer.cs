@@ -34,7 +34,8 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.TextBox txtCostoVentas;
         protected global::System.Web.UI.WebControls.TextBox txtEstado;
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
-        protected global::System.Web.UI.WebControls.Label lblPuntaje;
+        protected global::System.Web.UI.WebControls.TextBox txtPuntaje;
+
         protected global::System.Web.UI.WebControls.Button btnModificar;
         protected global::System.Web.UI.WebControls.Button btnRegresar;
     }

@@ -7,7 +7,7 @@ package pe.edu.pucp.creditomovil.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
-import java.sql.Date;
+import java.util.Date;
 
 import java.util.List;
 

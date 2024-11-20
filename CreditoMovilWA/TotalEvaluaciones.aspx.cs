@@ -68,6 +68,11 @@ namespace CreditoMovilWA
             Response.Redirect("DetalleEvaluacion.aspx");
         }
 
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
         // falta agregar para agregar evaluacion xd que seria no se una pantalla para agregar evaluacion no se guardaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa supongo que te guias de detalleEvaluacion
     }
 }
