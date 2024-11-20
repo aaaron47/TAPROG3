@@ -63,8 +63,8 @@ namespace CreditoMovilWA
         protected void btnVerDetalles_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            int idCredito = int.Parse(btn.CommandArgument);
-            Session["idCredito"] = idCredito;
+            String idEvaluacion = btn.CommandArgument;
+            Session["idEvaluacion"] = idEvaluacion;
             Response.Redirect("DetalleEvaluacion.aspx");
         }
 

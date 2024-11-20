@@ -17,7 +17,7 @@ namespace CreditoMovilWA
             modoEdicion = false;
             btnModificar.Text = "MODIFICAR";
 
-            supervisor sup = (supervisor)Session["supervisor"];
+            supervisor sup = (supervisor)Session["Supervisor"];
             administrador admin = (administrador)Session["Administrador"];
             if (sup == null && admin == null)
             {
@@ -133,7 +133,8 @@ namespace CreditoMovilWA
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MainSupervisor.aspx");
+            if ((supervisor)Session["Supervisor"] != null) Response.Redirect("MainSupervisor.aspx");
+            Response.Redirect("TotalEvaluaciones.aspx");
         }
     }
 }

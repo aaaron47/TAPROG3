@@ -66,7 +66,19 @@
         .table-container {
             margin-top: 20px;
         }
-
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #2f7a44;
+            color: #fff;
+        }
         .styled-table {
             width: 100%;
             border-collapse: collapse;
@@ -139,12 +151,12 @@
             <asp:Label ID="lblRetrasado" runat="server" CssClass="error-message"></asp:Label>
             <asp:GridView ID="gvCreditos" runat="server" AutoGenerateColumns="false">
                 <Columns>
-                    <asp:BoundField DataField="numCredito" HeaderText="ID_CRÉDITO" />
-                    <asp:BoundField DataField="Monto" HeaderText="MONTO" />
-                    <asp:BoundField DataField="NumCuotas" HeaderText="NUM. CUOTAS" />
-                    <asp:BoundField DataField="TasaInteres" HeaderText="TASA INTERÉS" />
-                    <asp:BoundField DataField="FechaOtorgamiento" HeaderText="FECHA OTORGAMIENTO"/>
-                    <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
+                    <asp:BoundField DataField="numeroEvaluacion" HeaderText="ID_EVALUACION" />
+                    <asp:BoundField DataField="costoVentas" HeaderText="COSTO DE VENTAS" />
+                    <asp:BoundField DataField="inventario" HeaderText="INVENTARIO" />
+                    <asp:BoundField DataField="ventasDiarias" HeaderText="VENTAS DIARIAS" />
+                    <asp:BoundField DataField="margenGanancia" HeaderText="MARGEN GANANCIA"/>
+                    <asp:BoundField DataField="puntaje" HeaderText="PUNTAJE" />
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:Button ID="btnVerDetalle" runat="server" Text="👁️" CssClass="pay-btn" CommandArgument='<%# Eval("numeroEvaluacion") %>' OnClick="btnVerDetalles_Click" />

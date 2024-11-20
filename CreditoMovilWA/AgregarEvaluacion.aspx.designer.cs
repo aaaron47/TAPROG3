@@ -22,19 +22,14 @@ namespace CreditoMovilWA
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        protected global::System.Web.UI.WebControls.TextBox txtNombreNegocio;
-        protected global::System.Web.UI.WebControls.TextBox txtFechaRegistro;
-        protected global::System.Web.UI.WebControls.TextBox txtDireccionNegocio;
-        protected global::System.Web.UI.WebControls.TextBox txtTelefonoNegocio;
-        protected global::System.Web.UI.WebControls.TextBox txtClienteAsignado;
-        protected global::System.Web.UI.WebControls.TextBox txtMargenGanancia;
-        protected global::System.Web.UI.WebControls.TextBox txtVentasDiarias;
-        protected global::System.Web.UI.WebControls.TextBox txtInventario;
-        protected global::System.Web.UI.WebControls.TextBox txtCostoVentas;
-        protected global::System.Web.UI.WebControls.TextBox txtEstado;
-        protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
-        protected global::System.Web.UI.WebControls.Label lblPuntaje;
+        
         protected global::System.Web.UI.WebControls.Button btnModificar;
         protected global::System.Web.UI.WebControls.Button btnRegresar;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumento;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocSup;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumentoSup;
     }
 }

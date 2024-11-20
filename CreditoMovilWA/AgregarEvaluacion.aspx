@@ -96,42 +96,30 @@
         <h2>Insertar Evaluacion </h2>
 
         <div class="form-group">
-            <label>Nombre del Negocio</label>
-            <asp:TextBox ID="txtNombreNegocio" runat="server" CssClass="input-text" />
-            <label>Fecha de Registro</label>
-            <asp:TextBox ID="txtFechaRegistro" runat="server" CssClass="input-text" />
+            <label>Cliente Asignado</label>
+            <label for="tipo-documento">Tipo de Documento</label>
+            <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="form-control">
+                <asp:ListItem Text="Selecciona una opción" Value="" />
+                <asp:ListItem Text="DNI" Value="DNI" />
+                <asp:ListItem Text="Pasaporte" Value="Pasaporte" />
+                <asp:ListItem Text="Carnet de Extranjeria" Value="Carnet_Extranjeria" />
+            </asp:DropDownList>
+            <label>Documento</label>
+            <asp:TextBox ID="txtDocumento" runat="server" CssClass="input-text" ReadOnly="false"/>
         </div>
         
         <div class="form-group">
-            <label>Dirección del Negocio</label>
-            <asp:TextBox ID="txtDireccionNegocio" runat="server" CssClass="input-text" />
-            <label>Teléfono del Negocio</label>
-            <asp:TextBox ID="txtTelefonoNegocio" runat="server" CssClass="input-text" />
+            <label>Supervisor Asignado</label>
+            <label for="tipo-documento">Tipo de Documento</label>
+            <asp:DropDownList ID="ddlTipoDocSup" runat="server" CssClass="form-control">
+                <asp:ListItem Text="Selecciona una opción" Value="" />
+                <asp:ListItem Text="DNI" Value="DNI" />
+                <asp:ListItem Text="Pasaporte" Value="Pasaporte" />
+                <asp:ListItem Text="Carnet de Extranjeria" Value="Carnet_Extranjeria" />
+            </asp:DropDownList>
+            <label>Documento</label>
+            <asp:TextBox ID="txtDocumentoSup" runat="server" CssClass="input-text" ReadOnly="false"/>
         </div>
-
-        <div class="form-group">
-            <label>Nombre del Cliente Asignado</label>
-            <asp:TextBox ID="txtClienteAsignado" runat="server" CssClass="input-text" />
-            <label>Margen de Ganancia</label>
-            <asp:TextBox ID="txtMargenGanancia" runat="server" CssClass="input-text" />
-        </div>
-        
-        <div class="form-group">
-            <label>Ventas Diarias</label>
-            <asp:TextBox ID="txtVentasDiarias" runat="server" CssClass="input-text" />
-            <label>Inventario</label>
-            <asp:TextBox ID="txtInventario" runat="server" CssClass="input-text" />
-        </div>
-
-        <div class="form-group">
-            <label>Costo de Ventas</label>
-            <asp:TextBox ID="txtCostoVentas" runat="server" CssClass="input-text" />
-            <label>Estado</label>
-            <asp:TextBox ID="txtEstado" runat="server" CssClass="input-text" />
-        </div>
-
-        <label>Observaciones</label>
-        <asp:TextBox ID="txtObservaciones" runat="server" CssClass="input-text" TextMode="MultiLine" Rows="3" />
 
         <!-- Puntaje y botones -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
