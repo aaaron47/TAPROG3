@@ -40,9 +40,11 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             // Configura los parámetros
             cs.setInt(1, evaluacion.getNumeroEvaluacion());
             Cliente cli = (Cliente) evaluacion.getClienteAsignado();
-            if(cli.getCodigoCliente()!=0)
+            if (cli.getCodigoCliente() != 0) {
                 cs.setInt(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
-            else cs.setString(2, " ");
+            } else {
+                cs.setString(2, " ");
+            }
             cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
             cs.setString(4, evaluacion.getNombreNegocio());
             cs.setString(5, evaluacion.getDireccionNegocio());
@@ -87,9 +89,11 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             cs = conexion.prepareCall(query);
             cs.setInt(1, evaluacion.getNumeroEvaluacion());
             Cliente cli = (Cliente) evaluacion.getClienteAsignado();
-            if(cli.getCodigoCliente()!=0)
+            if (cli.getCodigoCliente() != 0) {
                 cs.setInt(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
-            else cs.setString(2, " ");
+            } else {
+                cs.setString(2, " ");
+            }
             cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
             cs.setString(4, evaluacion.getNombreNegocio());
             cs.setString(5, evaluacion.getDireccionNegocio());
@@ -140,8 +144,8 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             cs.setInt(1, idEvaluacion);
 
             rs = cs.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 ev.setActivo(true);
                 Cliente cli = daoCliente.obtenerPorId(rs.getInt("cliente_codigo_cliente"));
                 ev.setClienteAsignado(cli);
@@ -164,26 +168,26 @@ public class EvaluacionMySQL implements EvaluacionDAO {
         }
         return ev; //por ahora es null, necesito ver qué añadirle
     }
-    
+
     @Override
-    public List<Evaluacion> listarPorSupervisor(String codSup){
+    public List<Evaluacion> listarPorSupervisor(String codSup) {
         List<Evaluacion> evaluaciones = new ArrayList<>();
         CallableStatement cs = null;
         String query = "{CALL ListarEvaluacionesPorSupervisor(?)}";
         CallableStatement stmtCliente = null;
-        
+
         ClienteDAO clienteDAO = new ClienteMySQL();
         try {
             conexion = DBManager.getInstance().getConnection();
             cs = conexion.prepareCall(query);
             cs.setString(1, codSup);
-            
+
             rs = cs.executeQuery();
             while (rs.next()) {
                 int numEva = rs.getInt("num_evaluacion");
                 int codClien = rs.getInt("cliente_codigo_cliente");
                 Cliente cliente = clienteDAO.obtenerPorId(codClien);
-                
+
                 Date fechaReg = rs.getDate("fecha_registro");
                 String nombreNeg = rs.getString("nombre_negocio");
                 String dirNeg = rs.getString("direccion_negocio");
@@ -196,10 +200,10 @@ public class EvaluacionMySQL implements EvaluacionDAO {
                 double puntaje = rs.getDouble("puntaje");
                 String obser = rs.getString("observaciones");
                 byte[] foto = rs.getBytes("foto");
-                        
+
                 Evaluacion eva = new Evaluacion(fechaReg, nombreNeg, dirNeg, telNeg,
-                        null, cliente, ventasDia, inventario, costoVentas, 
-                        margenGan, numEva, activo, puntaje, obser,foto);
+                        null, cliente, ventasDia, inventario, costoVentas,
+                        margenGan, numEva, activo, puntaje, obser, foto);
                 evaluaciones.add(eva);
             }
         } catch (SQLException e) {
@@ -228,7 +232,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
         CallableStatement cs = null;
         String query = "{CALL ListarEvaluaciones()}";
         CallableStatement stmtCliente = null;
-        
+
         ClienteDAO clienteDAO = new ClienteMySQL();
         try {
             conexion = DBManager.getInstance().getConnection();
@@ -238,7 +242,7 @@ public class EvaluacionMySQL implements EvaluacionDAO {
                 int numEva = rs.getInt("num_evaluacion");
                 int codClien = rs.getInt("cliente_codigo_cliente");
                 Cliente cliente = clienteDAO.obtenerPorId(codClien);
-                
+
                 Date fechaReg = rs.getDate("fecha_registro");
                 String nombreNeg = rs.getString("nombre_negocio");
                 String dirNeg = rs.getString("direccion_negocio");
@@ -251,10 +255,86 @@ public class EvaluacionMySQL implements EvaluacionDAO {
                 double puntaje = rs.getDouble("puntaje");
                 String obser = rs.getString("observaciones");
                 byte[] foto = rs.getBytes("foto");
-                        
+
                 Evaluacion eva = new Evaluacion(fechaReg, nombreNeg, dirNeg, telNeg,
-                        null, cliente, ventasDia, inventario, costoVentas, 
-                        margenGan, numEva, activo, puntaje, obser,foto);
+                        null, cliente, ventasDia, inventario, costoVentas,
+                        margenGan, numEva, activo, puntaje, obser, foto);
+                evaluaciones.add(eva);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return evaluaciones;
+    }
+
+    @Override
+    public List<Evaluacion> listarPorFechas(Date fechaini, Date fechafin) {
+        List<Evaluacion> evaluaciones = new ArrayList<>();
+        CallableStatement cs = null;
+        String query = "{CALL ListarEvaluacionesPorRangoFechas(?, ?)}";
+
+        ClienteDAO clienteDAO = new ClienteMySQL();
+        java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
+        java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
+
+        try {
+            conexion = DBManager.getInstance().getConnection();
+            cs = conexion.prepareCall(query);
+            cs.setDate(1, fechainiSQL);
+            cs.setDate(2, fechafinSQL);
+
+            rs = cs.executeQuery();
+
+            while (rs.next()) {
+                int numEva = rs.getInt("num_evaluacion");
+                int codClien = rs.getInt("cliente_codigo_cliente");
+                Cliente cliente = clienteDAO.obtenerPorId(codClien);
+
+                Date fechaReg = rs.getDate("fecha_registro");
+                String nombreNeg = rs.getString("nombre_negocio");
+                String dirNeg = rs.getString("direccion_negocio");
+                String telNeg = rs.getString("telefono_negocio");
+                double ventasDia = rs.getDouble("ventas_diarias");
+                double inventario = rs.getDouble("inventario");
+                double costoVentas = rs.getDouble("costo_ventas");
+                double margenGan = rs.getDouble("margen_ganancia");
+                boolean activo = rs.getBoolean("activo");
+                double puntaje = rs.getDouble("puntaje");
+                String obser = rs.getString("observaciones");
+                byte[] foto = rs.getBytes("foto");
+
+                // Crear el objeto Evaluacion
+                Evaluacion eva = new Evaluacion(
+                        fechaReg,
+                        nombreNeg,
+                        dirNeg,
+                        telNeg,
+                        null,
+                        cliente,
+                        ventasDia,
+                        inventario,
+                        costoVentas,
+                        margenGan,
+                        numEva,
+                        activo,
+                        puntaje,
+                        obser,
+                        foto
+                );
                 evaluaciones.add(eva);
             }
         } catch (SQLException e) {

@@ -7,6 +7,7 @@ package pe.edu.pucp.creditomovil.services;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import java.sql.Date;
 
 import java.util.List;
 
@@ -81,5 +82,15 @@ public class EvaluacionWS {
         return evaluacions;
     }
     
-    
+    @WebMethod(operationName = "listarEvaluacionesFecha")
+    public List<Evaluacion> listarEvaluacionesFechas(@WebParam(name = "fechaini") Date fechaini, 
+            @WebParam(name = "fechafin") Date fechafin) {
+        List<Evaluacion> evaluacions = null;
+        try{
+            evaluacions = daoEvaluacion.listarPorFechas(fechaini,fechafin);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return evaluacions;
+    }
 }

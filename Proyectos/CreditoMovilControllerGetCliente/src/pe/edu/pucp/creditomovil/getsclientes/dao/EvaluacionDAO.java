@@ -4,6 +4,7 @@
  */
 package pe.edu.pucp.creditomovil.getsclientes.dao;
 
+import java.sql.Date;
 import java.util.List;
 import pe.edu.pucp.creditomovil.model.Evaluacion;
 
@@ -18,4 +19,5 @@ public interface EvaluacionDAO {
     Evaluacion obtenerPorId(int idEvaluacion);
     List<Evaluacion>listarPorSupervisor(String codSup);
     List<Evaluacion> listarTodos();
+    public List<Evaluacion> listarPorFechas(Date fechaini, Date fechafin);
 }
