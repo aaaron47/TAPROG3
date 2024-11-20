@@ -94,6 +94,7 @@
     <None Include="Connected Services\CreditoMovil\ClienteWS.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="AgregarEvaluacion.aspx" />
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.administrador.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -366,6 +367,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarEvaluacion.aspx.cs">
+      <DependentUpon>AgregarEvaluacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarEvaluacion.aspx.designer.cs">
+      <DependentUpon>AgregarEvaluacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\CreditoMovil\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
