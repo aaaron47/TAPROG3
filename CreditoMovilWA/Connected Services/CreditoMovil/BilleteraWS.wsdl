@@ -23,17 +23,17 @@
   <message name="obtenerPorNombreBilleteraResponse">
     <part name="parameters" element="tns:obtenerPorNombreBilleteraResponse" />
   </message>
-  <message name="modificarBilletera">
-    <part name="parameters" element="tns:modificarBilletera" />
-  </message>
-  <message name="modificarBilleteraResponse">
-    <part name="parameters" element="tns:modificarBilleteraResponse" />
-  </message>
   <message name="eliminarBilletera">
     <part name="parameters" element="tns:eliminarBilletera" />
   </message>
   <message name="eliminarBilleteraResponse">
     <part name="parameters" element="tns:eliminarBilleteraResponse" />
+  </message>
+  <message name="modificarBilletera">
+    <part name="parameters" element="tns:modificarBilletera" />
+  </message>
+  <message name="modificarBilleteraResponse">
+    <part name="parameters" element="tns:modificarBilleteraResponse" />
   </message>
   <message name="insertarBilletera">
     <part name="parameters" element="tns:insertarBilletera" />
@@ -54,13 +54,13 @@
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/obtenerPorNombreBilleteraRequest" message="tns:obtenerPorNombreBilletera" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/obtenerPorNombreBilleteraResponse" message="tns:obtenerPorNombreBilleteraResponse" />
     </operation>
-    <operation name="modificarBilletera">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/modificarBilleteraRequest" message="tns:modificarBilletera" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/modificarBilleteraResponse" message="tns:modificarBilleteraResponse" />
-    </operation>
     <operation name="eliminarBilletera">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/eliminarBilleteraRequest" message="tns:eliminarBilletera" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/eliminarBilleteraResponse" message="tns:eliminarBilleteraResponse" />
+    </operation>
+    <operation name="modificarBilletera">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/modificarBilleteraRequest" message="tns:modificarBilletera" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/modificarBilleteraResponse" message="tns:modificarBilleteraResponse" />
     </operation>
     <operation name="insertarBilletera">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BilleteraWS/insertarBilleteraRequest" message="tns:insertarBilletera" />
@@ -96,7 +96,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="modificarBilletera">
+    <operation name="eliminarBilletera">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -105,7 +105,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="eliminarBilletera">
+    <operation name="modificarBilletera">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

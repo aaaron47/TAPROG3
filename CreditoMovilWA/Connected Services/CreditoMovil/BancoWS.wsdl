@@ -11,11 +11,11 @@
   <message name="obtenerPorNombreBancoResponse">
     <part name="parameters" element="tns:obtenerPorNombreBancoResponse" />
   </message>
-  <message name="modificarBanco">
-    <part name="parameters" element="tns:modificarBanco" />
+  <message name="insertarBanco">
+    <part name="parameters" element="tns:insertarBanco" />
   </message>
-  <message name="modificarBancoResponse">
-    <part name="parameters" element="tns:modificarBancoResponse" />
+  <message name="insertarBancoResponse">
+    <part name="parameters" element="tns:insertarBancoResponse" />
   </message>
   <message name="obtenerPorIDBanco">
     <part name="parameters" element="tns:obtenerPorIDBanco" />
@@ -29,26 +29,26 @@
   <message name="listarTodosBancosResponse">
     <part name="parameters" element="tns:listarTodosBancosResponse" />
   </message>
+  <message name="modificarBanco">
+    <part name="parameters" element="tns:modificarBanco" />
+  </message>
+  <message name="modificarBancoResponse">
+    <part name="parameters" element="tns:modificarBancoResponse" />
+  </message>
   <message name="eliminarBanco">
     <part name="parameters" element="tns:eliminarBanco" />
   </message>
   <message name="eliminarBancoResponse">
     <part name="parameters" element="tns:eliminarBancoResponse" />
   </message>
-  <message name="insertarBanco">
-    <part name="parameters" element="tns:insertarBanco" />
-  </message>
-  <message name="insertarBancoResponse">
-    <part name="parameters" element="tns:insertarBancoResponse" />
-  </message>
   <portType name="BancoWS">
     <operation name="obtenerPorNombreBanco">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/obtenerPorNombreBancoRequest" message="tns:obtenerPorNombreBanco" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/obtenerPorNombreBancoResponse" message="tns:obtenerPorNombreBancoResponse" />
     </operation>
-    <operation name="modificarBanco">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/modificarBancoRequest" message="tns:modificarBanco" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/modificarBancoResponse" message="tns:modificarBancoResponse" />
+    <operation name="insertarBanco">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/insertarBancoRequest" message="tns:insertarBanco" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/insertarBancoResponse" message="tns:insertarBancoResponse" />
     </operation>
     <operation name="obtenerPorIDBanco">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/obtenerPorIDBancoRequest" message="tns:obtenerPorIDBanco" />
@@ -58,13 +58,13 @@
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/listarTodosBancosRequest" message="tns:listarTodosBancos" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/listarTodosBancosResponse" message="tns:listarTodosBancosResponse" />
     </operation>
+    <operation name="modificarBanco">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/modificarBancoRequest" message="tns:modificarBanco" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/modificarBancoResponse" message="tns:modificarBancoResponse" />
+    </operation>
     <operation name="eliminarBanco">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/eliminarBancoRequest" message="tns:eliminarBanco" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/eliminarBancoResponse" message="tns:eliminarBancoResponse" />
-    </operation>
-    <operation name="insertarBanco">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/insertarBancoRequest" message="tns:insertarBanco" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/BancoWS/insertarBancoResponse" message="tns:insertarBancoResponse" />
     </operation>
   </portType>
   <binding name="BancoWSPortBinding" type="tns:BancoWS">
@@ -78,7 +78,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="modificarBanco">
+    <operation name="insertarBanco">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -105,7 +105,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="eliminarBanco">
+    <operation name="modificarBanco">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -114,7 +114,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="insertarBanco">
+    <operation name="eliminarBanco">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

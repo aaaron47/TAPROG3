@@ -34,11 +34,6 @@ namespace CreditoMovilWA
             }
         }
 
-        private void CargarEvaluacionesFecha()
-        {
-            var evaluaciones = daoEvaluacion.
-        }
-
         private void CargarDatosEvaluacion()
         {
 
