@@ -30,12 +30,13 @@ namespace CreditoMovilWA
         protected void btnVerificar_Click(object sender, EventArgs e)
         {
             String email = txtEmail.Text;
-            if(email != "")
+            if (email != "")
             {
                 int codCli = daoCliente.validarEmail(email);
                 if (codCli != -1)
                 {
-                    enviarCorreo(txtEmail.Text, codCli);
+                    //enviarCorreo(txtEmail.Text, codCli);
+                    Response.Redirect("RecuperarContrasena.aspx?token=" + codCli.ToString());
                 }
                 lblVerificar.Text = "En caso el cliente exista, se ha enviado un correo para poder restablecer la contraseña.";
             }

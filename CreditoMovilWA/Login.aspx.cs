@@ -48,7 +48,7 @@ namespace CreditoMovilWA
             string tipoDocumento = ddlTipoDocumento.SelectedValue;
             string numDocumentoIdentidad = txtDocumento.Text.Trim();
             string password = txtPassword.Text;
-            if (totalIntentos < maxIntentos && Bloqueo<=DateTime.Now)
+            if (totalIntentos < maxIntentos && Bloqueo <= DateTime.Now)
             {
                 if (tipoDocumento != null && numDocumentoIdentidad != null && password != null)
                 {

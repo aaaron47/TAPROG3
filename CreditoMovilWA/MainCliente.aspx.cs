@@ -18,6 +18,16 @@ namespace CreditoMovilWA
                 Response.Redirect("Login.aspx");
             }
             hola.InnerText += " " + cli.nombre + "!";
+            String noti = (String)Session["Notificacion"];
+            if (noti != null)
+            {
+                lblNotificacion.Text = "Uno o más creditos han sido " + noti; //la idea es que noti peuda guardar si se desembolsaron o aprobaron
+                Session["Notificacion"] = null; //vacias el session
+            }
+            else
+            {
+                lblNotificacion.Text = "";
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -31,11 +41,11 @@ namespace CreditoMovilWA
                 lblRanking.Text = ranking + "%";
 
                 //Cambia el color del medidor basado en el puntaje (esto se puede personalizar)
-                if (ranking < 25) 
+                if (ranking < 25)
                     lblRanking.ForeColor = System.Drawing.Color.Red;
-                else if (ranking < 50) 
+                else if (ranking < 50)
                     lblRanking.ForeColor = System.Drawing.Color.Orange;
-                else if (ranking<75)
+                else if (ranking < 75)
                     lblRanking.ForeColor = System.Drawing.Color.Yellow;
                 else
                     lblRanking.ForeColor = System.Drawing.Color.Green;
@@ -50,7 +60,7 @@ namespace CreditoMovilWA
 
         protected void btnSolicitarCredito_Click(object sender, EventArgs e)
         {
-         
+
             Response.Redirect("SolicitudCredito.aspx");
         }
 

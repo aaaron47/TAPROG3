@@ -46,6 +46,11 @@
             max-width: 380px;
             margin: auto;
         }
+        .form-group label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
     </style>
     <script>
         function renderApexGauge(ranking) {
@@ -119,7 +124,9 @@
     <div>
         <h1 id="hola" runat="server">¡Hola, </h1>
         <p>Actualmente tu ranking crediticio es:</p>
+        <asp:Label ID="lblNotificacion" runat="server" CssClass="error-message" EnableViewState="false"></asp:Label>
         <asp:Label ID="lblRanking" runat="server" CssClass="ranking-label" Font-Size="0px"></asp:Label>
+        
 
         <!-- Contenedor del medidor con ApexCharts -->
         <div id="apexGauge"></div>
