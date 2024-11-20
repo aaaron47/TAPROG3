@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using CreditoMovilWA.CreditoMovil;
 using System.Web.Security;
 using System.Web;
+using System.CodeDom;
 
 namespace CreditoMovilWA
 {
@@ -19,77 +20,113 @@ namespace CreditoMovilWA
         private AdministradorWSClient daoAdmin = new AdministradorWSClient();
         protected static cliente[] todoClientes = null;
 
+        private DateTime BloqueoHasta = DateTime.MinValue;
+        private int maxIntentos = 3;
+        private double minutosAñadir = 0.5;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Master is Usuario masterPage)
             {
                 masterPage.MostrarHeader = false; // Oculta el header en esta página
             }
+
+            if (!IsPostBack)
+            {
+                Session["totalIntentos"] = 0;
+                Session["Bloqueo"] = BloqueoHasta;
+                Session["minutos"] = minutosAñadir;
+            }
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
+            DateTime Bloqueo = (DateTime)Session["Bloqueo"];
+            int totalIntentos = (int)Session["totalIntentos"];
+            double minutos = (double)Session["minutos"];
 
             string tipoDocumento = ddlTipoDocumento.SelectedValue;
             string numDocumentoIdentidad = txtDocumento.Text.Trim();
             string password = txtPassword.Text;
-
-            if (tipoDocumento != null && numDocumentoIdentidad != null && password != null)
+            if (totalIntentos < maxIntentos && Bloqueo<=DateTime.Now)
             {
-                usuario2 user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
-
-                Session["Cliente"] = null;
-                Session["Supervisor"] = null;
-                Session["Administrador"] = null;
-
-                if (user != null && password == user.contrasenha)
+                if (tipoDocumento != null && numDocumentoIdentidad != null && password != null)
                 {
+                    usuario2 user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
 
-                    Session["Rol"] = user.rol.ToString();
+                    Session["Cliente"] = null;
+                    Session["Supervisor"] = null;
+                    Session["Administrador"] = null;
 
-                    FormsAuthenticationTicket tkt;
-                    string cookiestr;
-                    HttpCookie ck;
-                    tkt = new FormsAuthenticationTicket(1, user.idUsuario.ToString(), DateTime.Now,
-                    DateTime.Now.AddMinutes(30), true, user.nombre + " " + user.apPaterno + " " + user.apMaterno);
-                    cookiestr = FormsAuthentication.Encrypt(tkt);
-                    ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-                    ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
-                    ck.Path = FormsAuthentication.FormsCookiePath;
-                    Response.Cookies.Add(ck);
-
-                    string strRedirect = Request["ReturnUrl"];
-
-                    switch (user.rol)
+                    if (user != null && password == user.contrasenha)
                     {
-                        case rol1.CLIENTE:
-                            cliente cli = daoCliente.obtenerPorDocIdenCliente(user.documento, user.tipoDocumento.ToString());
-                            Session["Cliente"] = cli;
+                        totalIntentos = 0;
 
-                            if (strRedirect == null)
-                                strRedirect = "MainCliente.aspx";
-                            break;
-                        case rol1.SUPERVISOR:
-                            supervisor sup = daoSupervisor.obtenerPorDocIdenSup(user.documento, user.tipoDocumento.ToString());
-                            Session["Supervisor"] = sup;
+                        Session["Rol"] = user.rol.ToString();
 
-                            if (strRedirect == null)
-                                strRedirect = "MainSupervisor.aspx";
-                            break;
-                        case rol1.ADMINISTRADOR:
-                            administrador admin = daoAdmin.obtenerPorDocIdenAdmin(user.documento, user.tipoDocumento.ToString());
-                            Session["Administrador"] = admin;
+                        FormsAuthenticationTicket tkt;
+                        string cookiestr;
+                        HttpCookie ck;
+                        tkt = new FormsAuthenticationTicket(1, user.idUsuario.ToString(), DateTime.Now,
+                        DateTime.Now.AddMinutes(30), true, user.nombre + " " + user.apPaterno + " " + user.apMaterno);
+                        cookiestr = FormsAuthentication.Encrypt(tkt);
+                        ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
+                        ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
+                        ck.Path = FormsAuthentication.FormsCookiePath;
+                        Response.Cookies.Add(ck);
 
-                            if (strRedirect == null)
-                                strRedirect = "MainAdmin.aspx";
-                            break;
+                        string strRedirect = Request["ReturnUrl"];
+
+                        switch (user.rol)
+                        {
+                            case rol1.CLIENTE:
+                                cliente cli = daoCliente.obtenerPorDocIdenCliente(user.documento, user.tipoDocumento.ToString());
+                                Session["Cliente"] = cli;
+
+                                if (strRedirect == null)
+                                    strRedirect = "MainCliente.aspx";
+                                break;
+                            case rol1.SUPERVISOR:
+                                supervisor sup = daoSupervisor.obtenerPorDocIdenSup(user.documento, user.tipoDocumento.ToString());
+                                Session["Supervisor"] = sup;
+
+                                if (strRedirect == null)
+                                    strRedirect = "MainSupervisor.aspx";
+                                break;
+                            case rol1.ADMINISTRADOR:
+                                administrador admin = daoAdmin.obtenerPorDocIdenAdmin(user.documento, user.tipoDocumento.ToString());
+                                Session["Administrador"] = admin;
+
+                                if (strRedirect == null)
+                                    strRedirect = "MainAdmin.aspx";
+                                break;
+                        }
+                        Response.Redirect(strRedirect, true);
                     }
-                    Response.Redirect(strRedirect, true);
+                    else
+                    {
+                        totalIntentos++;
+                        Session["totalIntentos"] = totalIntentos;
+                        lblError.Text = "Usuario o contraseña incorrectos.";
+                    }
                 }
                 else
                 {
-                    lblError.Text = "Usuario o contraseña incorrectos.";
+                    lblError.Text = "Por favor, ingrese todos los datos.";
                 }
+            }
+            else
+            {
+                if (totalIntentos >= maxIntentos)
+                {
+                    Bloqueo = DateTime.Now.AddMinutes(minutos);
+                    totalIntentos = 0;
+                    minutos += minutosAñadir;
+                    Session["minutos"] = minutos;
+                    Session["totalIntentos"] = totalIntentos;
+                    Session["Bloqueo"] = Bloqueo;
+                }
+                lblError.Text = $"Usuario bloqueado debido a múltiples intentos. Intente nuevamente después del {Bloqueo}";
             }
         }
 

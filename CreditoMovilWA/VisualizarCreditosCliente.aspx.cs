@@ -113,7 +113,6 @@ namespace CreditoMovilWA
 
             trans.credito.numCredito = idCredito;
 
-            daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago);
             if (fileUpload.HasFile)
             {
                 int maxFileSize = 5 * 1024 * 1024; // 5 MB
@@ -139,7 +138,11 @@ namespace CreditoMovilWA
 
                 trans.foto = fileData;
 
-                daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago);
+                if(!daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago))
+                {
+                    lblError.Text = "Error en insertar la transacción.";
+                    return;
+                }
             }
         }
 
