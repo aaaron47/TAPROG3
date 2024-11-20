@@ -4,6 +4,8 @@
   <xs:element name="eliminarEvaluacionResponse" type="tns:eliminarEvaluacionResponse" />
   <xs:element name="insertarEvaluacion" type="tns:insertarEvaluacion" />
   <xs:element name="insertarEvaluacionResponse" type="tns:insertarEvaluacionResponse" />
+  <xs:element name="listarEvaluacionesFecha" type="tns:listarEvaluacionesFecha" />
+  <xs:element name="listarEvaluacionesFechaResponse" type="tns:listarEvaluacionesFechaResponse" />
   <xs:element name="listarEvaluacionesSupervisor" type="tns:listarEvaluacionesSupervisor" />
   <xs:element name="listarEvaluacionesSupervisorResponse" type="tns:listarEvaluacionesSupervisorResponse" />
   <xs:element name="listarTodosEvaluacions" type="tns:listarTodosEvaluacions" />
@@ -68,6 +70,20 @@
   </xs:complexType>
   <xs:complexType name="modificarEvaluacionResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarEvaluacionesFecha">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaini" type="tns:date" />
+      <xs:element minOccurs="0" name="fechafin" type="tns:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarEvaluacionesFechaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:evaluacion" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarEvaluacion">
     <xs:sequence>
