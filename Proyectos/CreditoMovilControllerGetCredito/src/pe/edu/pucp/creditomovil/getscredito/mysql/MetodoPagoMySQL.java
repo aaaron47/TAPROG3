@@ -10,6 +10,7 @@ import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.getscredito.dao.MetodoPagoDAO;
 import pe.edu.pucp.creditomovil.model.MetodoPago;
+import pe.edu.pucp.creditomovil.model.MetodoPago2;
 
 public class MetodoPagoMySQL implements MetodoPagoDAO {
 
@@ -78,26 +79,54 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
     }
 
     @Override
-    public MetodoPago obtenerPorId(int idMetodoPago) {
-        CallableStatement cs;
-        String query = "{CALL ObtenerMetodoPago(?)}";
-        int  resultado = 0;
+    public MetodoPago2 obtenerPorId(int idMetodoPago) {
         
+        MetodoPago2 metodoPago = null;
+        Connection conn = null;
+        CallableStatement cs = null;
+        ResultSet rs = null;
+
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ObtenerMetodoPagoPorId(?) }";
+            cs = conn.prepareCall(sql);
             cs.setInt(1, idMetodoPago);
+            rs = cs.executeQuery();
             
-            resultado = cs.executeUpdate();
+            
+            if(rs.next()){
+                metodoPago = new MetodoPago2(
+                    rs.getInt("idMetodoPago"),
+                    rs.getBytes("foto"),
+                    rs.getString("nombreTitular")
+                );
+            }else{
+                System.out.println("No se encontró el cliente");
+                return null;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-        return null;
+        return metodoPago;
     }
 
     @Override
-    public List<MetodoPago> listarTodos() {
-        List<MetodoPago> metodos = new ArrayList<>();
+    public List<MetodoPago2> listarTodos() {
+        List<MetodoPago2> metodosPago = new ArrayList<>();
         CallableStatement cs = null;
         String query = "{CALL ListarMetodosPago()}";
         rs = null;
@@ -107,11 +136,16 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
             cs = conexion.prepareCall(query);            
             rs = cs.executeQuery();
             
-//            while(rs.next()){
-//                MetodoPago metodo = new MetodoPago(
-//                Es abstracta aaaaaaaaaaaaaaaaaaaaaaaa
-//                );
-//            }
+            while(rs.next()){
+                MetodoPago2 metodo = new MetodoPago2(
+                        
+                        rs.getInt("idMetodoPago"),
+                        rs.getBytes("foto"),
+                        rs.getString("nombreTitular")
+                        
+                );
+                metodosPago.add(metodo);
+            }
             
         } catch (SQLException e){
             e.printStackTrace();
@@ -124,7 +158,7 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
                 e.printStackTrace();
             }
         }
-        return null; // Parece que no usaremos este listar (?
+        return metodosPago;
     }
 
 }

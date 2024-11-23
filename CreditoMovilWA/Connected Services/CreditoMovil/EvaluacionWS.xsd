@@ -14,15 +14,9 @@
   <xs:element name="modificarEvaluacionResponse" type="tns:modificarEvaluacionResponse" />
   <xs:element name="obtenerPorIDEvaluacion" type="tns:obtenerPorIDEvaluacion" />
   <xs:element name="obtenerPorIDEvaluacionResponse" type="tns:obtenerPorIDEvaluacionResponse" />
-  <xs:complexType name="listarEvaluacionesFecha">
+  <xs:complexType name="modificarEvaluacion">
     <xs:sequence>
-      <xs:element minOccurs="0" name="fechaini" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="fechafin" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarEvaluacionesFechaResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:evaluacion" />
+      <xs:element minOccurs="0" name="evaluacion" type="tns:evaluacion" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="evaluacion">
@@ -85,13 +79,19 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="modificarEvaluacion">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="evaluacion" type="tns:evaluacion" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="modificarEvaluacionResponse">
     <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarEvaluacionesFecha">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaini" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechafin" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarEvaluacionesFechaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:evaluacion" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarEvaluacion">
     <xs:sequence>
