@@ -20,6 +20,7 @@ public abstract class Usuario {
     private TipoDocumento tipoDocumento;
     private String documento;
     private Rol rol;
+    private String notificacion;
     
     public Usuario(){}
     public Usuario(int idUsuario, Date fecha, String nombre, String apPaterno,
@@ -153,5 +154,13 @@ public abstract class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+    
+    public void setNotificacion(String notificacion) {
+        this.notificacion = notificacion;
+    }
+
+    public String getNotificacion() {
+        return notificacion;
     }
 }

@@ -38,11 +38,17 @@
   <message name="Exception">
     <part name="fault" element="tns:Exception" />
   </message>
-  <message name="cambiarContra">
-    <part name="parameters" element="tns:cambiarContra" />
+  <message name="modificarCliente">
+    <part name="parameters" element="tns:modificarCliente" />
   </message>
-  <message name="cambiarContraResponse">
-    <part name="parameters" element="tns:cambiarContraResponse" />
+  <message name="modificarClienteResponse">
+    <part name="parameters" element="tns:modificarClienteResponse" />
+  </message>
+  <message name="eliminarCliente">
+    <part name="parameters" element="tns:eliminarCliente" />
+  </message>
+  <message name="eliminarClienteResponse">
+    <part name="parameters" element="tns:eliminarClienteResponse" />
   </message>
   <message name="generarReporte">
     <part name="parameters" element="tns:generarReporte" />
@@ -50,17 +56,11 @@
   <message name="generarReporteResponse">
     <part name="parameters" element="tns:generarReporteResponse" />
   </message>
-  <message name="validarEmail">
-    <part name="parameters" element="tns:validarEmail" />
+  <message name="cambiarContra">
+    <part name="parameters" element="tns:cambiarContra" />
   </message>
-  <message name="validarEmailResponse">
-    <part name="parameters" element="tns:validarEmailResponse" />
-  </message>
-  <message name="modificarCliente">
-    <part name="parameters" element="tns:modificarCliente" />
-  </message>
-  <message name="modificarClienteResponse">
-    <part name="parameters" element="tns:modificarClienteResponse" />
+  <message name="cambiarContraResponse">
+    <part name="parameters" element="tns:cambiarContraResponse" />
   </message>
   <message name="insertarCliente">
     <part name="parameters" element="tns:insertarCliente" />
@@ -68,11 +68,11 @@
   <message name="insertarClienteResponse">
     <part name="parameters" element="tns:insertarClienteResponse" />
   </message>
-  <message name="eliminarCliente">
-    <part name="parameters" element="tns:eliminarCliente" />
+  <message name="validarEmail">
+    <part name="parameters" element="tns:validarEmail" />
   </message>
-  <message name="eliminarClienteResponse">
-    <part name="parameters" element="tns:eliminarClienteResponse" />
+  <message name="validarEmailResponse">
+    <part name="parameters" element="tns:validarEmailResponse" />
   </message>
   <portType name="ClienteWS">
     <operation name="listarTodosClientes">
@@ -96,30 +96,30 @@
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/generarBufferResponse" message="tns:generarBufferResponse" />
       <fault wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/generarBuffer/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="cambiarContra">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/cambiarContraRequest" message="tns:cambiarContra" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/cambiarContraResponse" message="tns:cambiarContraResponse" />
+    <operation name="modificarCliente">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteRequest" message="tns:modificarCliente" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteResponse" message="tns:modificarClienteResponse" />
+    </operation>
+    <operation name="eliminarCliente">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
     </operation>
     <operation name="generarReporte">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/generarReporteRequest" message="tns:generarReporte" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/generarReporteResponse" message="tns:generarReporteResponse" />
       <fault wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/generarReporte/Fault/Exception" name="Exception" message="tns:Exception" />
     </operation>
-    <operation name="validarEmail">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/validarEmailRequest" message="tns:validarEmail" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/validarEmailResponse" message="tns:validarEmailResponse" />
-    </operation>
-    <operation name="modificarCliente">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteRequest" message="tns:modificarCliente" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/modificarClienteResponse" message="tns:modificarClienteResponse" />
+    <operation name="cambiarContra">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/cambiarContraRequest" message="tns:cambiarContra" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/cambiarContraResponse" message="tns:cambiarContraResponse" />
     </operation>
     <operation name="insertarCliente">
       <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/insertarClienteRequest" message="tns:insertarCliente" />
       <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/insertarClienteResponse" message="tns:insertarClienteResponse" />
     </operation>
-    <operation name="eliminarCliente">
-      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteRequest" message="tns:eliminarCliente" />
-      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/eliminarClienteResponse" message="tns:eliminarClienteResponse" />
+    <operation name="validarEmail">
+      <input wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/validarEmailRequest" message="tns:validarEmail" />
+      <output wsam:Action="https://services.creditomovil.pucp.edu.pe/ClienteWS/validarEmailResponse" message="tns:validarEmailResponse" />
     </operation>
   </portType>
   <binding name="ClienteWSPortBinding" type="tns:ClienteWS">
@@ -172,7 +172,16 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="cambiarContra">
+    <operation name="modificarCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="eliminarCliente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -193,16 +202,7 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </fault>
     </operation>
-    <operation name="validarEmail">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="modificarCliente">
+    <operation name="cambiarContra">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -220,7 +220,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="eliminarCliente">
+    <operation name="validarEmail">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
