@@ -2,6 +2,10 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
+
+        .container{
+            max-width: 1200px;
+        }
         label {
             display: block;
             font-size: 18px;
@@ -85,8 +89,8 @@
             margin: 20% auto;
             padding: 20px 20px;
             border: 1px solid #888;
-            width: 90%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 800px;
             text-align: left;
             border-radius: 10px;
             position: relative;
@@ -127,7 +131,45 @@
         }
 
         function closeModal() {
-            document.getElementById("PagoModal").style.display = "none";
+            // Reinicia el selector de método de pago
+            const metodoPago = document.getElementById("metodoPago");
+            if (metodoPago) metodoPago.value = ''; // Regresa a "Seleccione"
+
+            // Oculta las secciones de banco y billetera
+            const infoBanco = document.getElementById("infoBanco");
+            const infoBilletera = document.getElementById("infoBilletera");
+            if (infoBanco) infoBanco.style.display = 'none';
+            if (infoBilletera) infoBilletera.style.display = 'none';
+
+            // Reinicia el selector de banco
+            const bancoElegido = document.getElementById("ddlBancoElegido");
+            if (bancoElegido) bancoElegido.value = ''; // Regresa a "Seleccione un banco"
+
+            // Reinicia el selector de billetera
+            const billeteraElegida = document.getElementById("ddlBilleteraElegida");
+            if (billeteraElegida) billeteraElegida.value = ''; // Regresa a "Seleccione una billetera"
+
+            // Limpia los campos de texto relacionados con banco
+            const txtCCI = document.getElementById("txtCCI");
+            const txtTitularBanco = document.getElementById("txtTitularBanco");
+            const txtTipoCuenta = document.getElementById("txtTipoCuenta");
+            if (txtCCI) txtCCI.value = '';
+            if (txtTitularBanco) txtTitularBanco.value = '';
+            if (txtTipoCuenta) txtTipoCuenta.value = '';
+
+            // Limpia los campos de texto relacionados con billetera
+            const txtNumeroBilletera = document.getElementById("txtNumeroBilletera");
+            const txtTitularBilletera = document.getElementById("txtTitularBilletera");
+            if (txtNumeroBilletera) txtNumeroBilletera.value = '';
+            if (txtTitularBilletera) txtTitularBilletera.value = '';
+
+            // Limpia el campo de archivo subido
+            const fileUpload = document.getElementById("fileUpload");
+            if (fileUpload) fileUpload.value = '';
+
+            // Finalmente, cierra el modal
+            const modal = document.getElementById("PagoModal");
+            if (modal) modal.style.display = "none";
         }
 
         function mostrarCamposPago() {
@@ -224,26 +266,6 @@
             }
         }
 
-        // Evento para limpiar el modal al cerrarlo
-        document.getElementById('PagoModal').addEventListener('hidden.bs.modal', function () {
-            // Resetea el selector de método de pago
-            document.getElementById('metodoPago').value = '';
-            // Oculta las secciones de banco y billetera
-            document.getElementById('infoBanco').style.display = 'none';
-            document.getElementById('infoBilletera').style.display = 'none';
-            // Limpia los detalles de banco
-            document.getElementById('ddlBancoElegido').value = '';
-            document.getElementById('txtCCI').value = '';
-            document.getElementById('txtTitularBanco').value = '';
-            document.getElementById('txtTipoCuenta').value = '';
-            // Limpia los detalles de billetera
-            document.getElementById('ddlBilleteraElegida').value = '';
-            document.getElementById('txtNumeroBilletera').value = '';
-            document.getElementById('txtTitularBilletera').value = '';
-            // Limpia el archivo subido
-            document.getElementById('<%= fileUpload.ClientID %>').value = '';
-         });
-
     </script>
 </asp:Content>
 
@@ -283,8 +305,8 @@
                     <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btnPagar" runat="server" Text="Pagar" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnPagar_Click" OnClientClick="openModal(); return false;" 
-                                Visible='<%# Eval("Estado").ToString() == "Activo" %>'    />
+                            <asp:Button ID="btnPagar" runat="server" Text="Pagar" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnPagar_Click"
+                                Visible='<%# Eval("Estado").ToString() == "Activo" || Eval("Estado").ToString() == "Retrasado" %>'    />
                             <asp:Button ID="btnVerDetalle" runat="server" Text="👁️" CssClass="pay-btn" CommandArgument='<%# Eval("numCredito") %>' OnClick="btnVerDetalles_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -347,9 +369,12 @@
             <p>Inserte imagen jpeg o pdf:</p>
             <asp:FileUpload ID="fileUpload" runat="server" />
 
+            <!-- Mensaje de error en el modal -->
+            <asp:Label ID="lblErrorModal" runat="server" CssClass="text-danger" />
+            <br />
             <!-- Botón de acción centrado -->
             <div class="text-center mt-4">
-                <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" OnClick="btnSave_Click" OnClientClick="closeModal(); return false;" />
+                <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" OnClick="btnSave_Click" />
             </div>
         </div>
     </div>

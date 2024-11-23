@@ -7,7 +7,6 @@
             display: flex;
             gap: 10px;
         }
-
         .header .buttons button {
             padding: 10px 20px;
             border: none;
@@ -17,7 +16,6 @@
             color: #fff;
             font-weight: 700;
         }
-
         .header .open-account {
             background-color: #2f7a44;
             padding: 10px 20px;
@@ -29,7 +27,6 @@
             font-weight: 700;
             font-family: 'Poppins', sans-serif; 
         }
-
         .header .sign-in {
             background-color: #002e6e;
             padding: 10px 20px;
@@ -41,21 +38,18 @@
             font-weight: 700;
             font-family: 'Poppins', sans-serif; 
         }
-
         /* Sección Principal */
         .main-banner {
             background-color: #d1e7c0;
             padding: 50px 20px;
             text-align: center;
         }
-
         .main-banner p {
             font-size: 24px;
             color: #265f21;
             margin: 0;
             font-weight: 400;
         }
-
         .main-banner h1 {
             font-size: 48px;
             color: #265f21;
@@ -63,20 +57,17 @@
             font-weight: 700;
             line-height: 1.2;
         }
-
         /* Beneficios */
         .benefits {
             padding: 40px 20px;
             background-color: #f7f5fb;
             text-align: center;
         }
-
         .benefits h2 {
             font-size: 28px;
             color: #002e6e;
             font-weight: 700;
         }
-
         .benefits-container {
             display: flex;
             justify-content: center;
@@ -84,25 +75,85 @@
             gap: 40px;
             margin-top: 30px;
         }
-
         .benefit-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             max-width: 200px;
         }
-
         .benefit-item img {
             width: 50px;
             height: 50px;
             margin-bottom: 15px;
         }
-
         .benefit-item p {
             color: #265f21;
             text-align: center;
             font-size: 16px;
             font-weight: 400;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .header .buttons {
+                flex-direction: row;
+                gap: 10px; /* Espaciado mayor para columnas */
+            }
+            .header .open-account,
+            .header .sign-in {
+                font-size: 8px;
+                padding: 8px 15px; /* Reducir padding */
+            }
+            .main-banner {
+                padding: 30px 15px;
+            }
+            .main-banner p {
+                font-size: 16px; /* Ajustar tamaño de fuente */
+            }
+            .main-banner h1 {
+                font-size: 32px; /* Reducir tamaño del título */
+            }
+            .benefits h2 {
+                font-size: 20px; /* Reducir tamaño del encabezado */
+            }
+            .benefits-container {
+                gap: 20px; /* Reducir espacio entre elementos */
+            }
+            .benefit-item {
+                max-width: 150px; /* Reducir el ancho máximo */
+            }
+            .benefit-item img {
+                width: 40px;
+                height: 40px; /* Ajustar tamaño de imágenes */
+            }
+            .benefit-item p {
+                font-size: 10px; /* Reducir tamaño de fuente */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-banner {
+                padding: 20px 10px;
+            }
+            .main-banner p {
+                font-size: 14px;
+            }
+            .main-banner h1 {
+                font-size: 24px;
+            }
+            .benefits-container {
+                gap: 15px;
+            }
+            .benefit-item {
+                max-width: 120px;
+            }
+            .benefit-item img {
+                width: 35px;
+                height: 35px;
+            }
+            .benefit-item p {
+                font-size: 8px;
+            }
         }
     </style>
 </asp:Content>

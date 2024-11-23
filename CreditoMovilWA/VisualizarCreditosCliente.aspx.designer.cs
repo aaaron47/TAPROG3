@@ -30,6 +30,7 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.Button btnFiltrar;
         protected global::System.Web.UI.WebControls.GridView gvCreditos;
         protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Label lblErrorModal;
         protected global::System.Web.UI.WebControls.Label lblRetrasado;
         protected global::System.Web.UI.WebControls.Button btnPagar;
         protected global::System.Web.UI.WebControls.Button btnVerDetalle;

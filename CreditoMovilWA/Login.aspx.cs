@@ -36,6 +36,14 @@ namespace CreditoMovilWA
                 Session["totalIntentos"] = 0;
                 Session["Bloqueo"] = BloqueoHasta;
                 Session["minutos"] = minutosAñadir;
+                if (Session["AuthExpiration"] != null)
+                {
+                    DateTime expirationTime = (DateTime)Session["AuthExpiration"];
+                    long expirationTimestamp = (long)(expirationTime.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalMilliseconds;
+                    string script = $"var authExpiration = {expirationTimestamp};";
+                    ClientScript.RegisterStartupScript(this.GetType(), "AuthExpirationScript", script, true);
+                }
+
             }
         }
 
@@ -75,6 +83,10 @@ namespace CreditoMovilWA
                         ck.Expires = tkt.Expiration; //esto genera que la cookie se quede guardada
                         ck.Path = FormsAuthentication.FormsCookiePath;
                         Response.Cookies.Add(ck);
+
+                        // Pasar la fecha de expiración al cliente
+                        DateTime expirationTime = tkt.Expiration;
+                        Session["AuthExpiration"] = expirationTime;
 
                         string strRedirect = Request["ReturnUrl"];
 

@@ -89,6 +89,30 @@
             top: 2px; /* Ajusta posición vertical */
             right: 2px; /* Ajusta posición horizontal */
         }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 15px;
+            }
+            .header img {
+                width: 120px;
+            }
+            .logout-btn {
+                font-size: 8px;
+                padding: 8px 15px;
+            }
+            .notification-btn {
+                font-size: 10px;
+            }
+            .container {
+                width: 100%; /* Adaptar contenedor al ancho de pantalla */
+                margin: 10px auto;
+                padding: 15px 20px; /* Reducir padding en pantallas pequeñas */
+            }
+            .error-message {
+                font-size: 10px; /* Reducir tamaño del mensaje de error */
+            }
+        }
     </style>
     <script>
         function OcultarPuntoRojo() {

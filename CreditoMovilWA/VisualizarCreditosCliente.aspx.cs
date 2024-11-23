@@ -39,6 +39,7 @@ namespace CreditoMovilWA
                 CargarBancos();
                 CargarBilleteras();
                 lblError.Text = "";
+                lblErrorModal.Text = "";
             }
         }
 
@@ -104,35 +105,58 @@ namespace CreditoMovilWA
         protected void btnPagar_Click(object sender, EventArgs e)
         {
             string idCredito = (sender as Button).CommandArgument;
+            Session["idCredito"] = idCredito;
             ViewState["ModalAbierto"] = true; // Almacena el estado del modal en ViewState
             ClientScript.RegisterStartupScript(this.GetType(), "OpenModal", "openModal();", true);
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (Session["Usuario"] == null)
+            {
+                lblErrorModal.Text = "Su sesión ha expirado.";
+                // Mantener el modal abierto
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
+                return;
+            }
+
+            if (Session["MetodoPago"] == null)
+            {
+                lblErrorModal.Text = "Método de pago no seleccionado.";
+                // Mantener el modal abierto
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
+                return;
+            }
+
+            if (Session["idCredito"] == null)
+            {
+                lblErrorModal.Text = "No se encuentra el credito.";
+                // Mantener el modal abierto
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
+                return;
+            }
+
+            // Continuar con la lógica de negocio
             transaccion trans = new transaccion();
-            trans.usuarioRegistrado = (usuario1)Session["Cliente"];
+            trans.usuarioRegistrado = (usuario2)Session["Usuario"];
             int idUsuario = trans.usuarioRegistrado.idUsuario;
             trans.fecha = DateTime.Now;
             int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());
+            //trans.metodoPago = new metodoPago();
             trans.metodoPago.idMetodoPago = idMetodoPago;
 
-            credito cred = new credito();
-            int idCredito = int.Parse(Session["idCredito"].ToString());
-            cred = daoCredito.obtenerPorIDCredito(idCredito);
-
+            int idCredito = int.Parse((string)Session["idCredito"]);
+            credito cred = daoCredito.obtenerPorIDCredito(idCredito);
 
             cred.cantCuotasPagadas++;
-            trans.concepto = "Cuota numero " + cred.cantCuotasPagadas;
+            trans.concepto = "Cuota número " + cred.cantCuotasPagadas;
 
             if (cred.numCuotas == cred.cantCuotasPagadas)
                 cred.estado = "Finalizado";
 
-            cred.cantCuotasPagadas++;
-            if (cred.numCuotas == cred.cantCuotasPagadas) cred.estado = "Finalizado";
-
             daoCredito.modificarCredito(cred);
 
+            //trans.credito = new credito(); 
             trans.credito.numCredito = idCredito;
 
             if (fileUpload.HasFile)
@@ -140,31 +164,48 @@ namespace CreditoMovilWA
                 int maxFileSize = 5 * 1024 * 1024; // 5 MB
                 if (fileUpload.PostedFile.ContentLength > maxFileSize)
                 {
-                    lblError.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+                    lblErrorModal.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+                    // Mantener el modal abierto
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                     return;
                 }
 
                 string fileExtension = Path.GetExtension(fileUpload.FileName).ToLower();
                 if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
                 {
-                    lblError.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
+                    lblErrorModal.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
+                    // Mantener el modal abierto
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                     return;
                 }
 
                 // Leer el archivo y convertirlo en un arreglo de bytes
-                byte[] fileData = null;
                 using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
                 {
-                    fileData = br.ReadBytes(fileUpload.PostedFile.ContentLength);
+                    trans.foto = br.ReadBytes(fileUpload.PostedFile.ContentLength);
                 }
 
-                trans.foto = fileData;
-
-                if(!daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago))
+                // Intentar insertar la transacción
+                if (!daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago))
                 {
-                    lblError.Text = "Error en insertar la transacción.";
-                    return;
+                    lblErrorModal.Text = "Error al insertar la transacción.";
+                    // Mantener el modal abierto
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                 }
+                else
+                {
+                    // Transacción exitosa, cerrar el modal
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "CloseModal", "closeModal();", true);
+                    lblErrorModal.Text = "";
+                }
+            }
+            else
+            {
+                // No se ha subido ningún archivo
+                lblErrorModal.Text = "Por favor, suba un archivo de comprobante.";
+                // Mantener el modal abierto
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
+                return;
             }
         }
 

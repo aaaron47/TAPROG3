@@ -49,6 +49,59 @@
             font-size: 16px;
             color: #333;
         }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px; /* Reducir tamaño del título */
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            p {
+                font-size: 14px; /* Reducir tamaño del párrafo */
+            }
+            .btn {
+                width: 180px; /* Reducir ancho del botón */
+                padding: 10px; /* Reducir padding */
+                font-size: 10px; /* Reducir tamaño del texto */
+            }
+            .ranking-label {
+                font-size: 20px; /* Reducir tamaño de la etiqueta */
+                padding: 5px 30px; /* Ajustar padding */
+            }
+            #apexGauge {
+                max-width: 280px; /* Reducir tamaño del gráfico */
+            }
+            .form-group label {
+                font-size: 10px; /* Reducir tamaño de las etiquetas del formulario */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px; /* Reducir aún más el tamaño del título */
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 12px; /* Ajustar el tamaño del párrafo */
+            }
+            .btn {
+                width: 150px; /* Reducir más el ancho del botón */
+                padding: 8px; /* Reducir padding del botón */
+                font-size: 8px; /* Ajustar tamaño de fuente */
+            }
+            .ranking-label {
+                font-size: 16px; /* Reducir aún más el tamaño de la etiqueta */
+                padding: 5px 20px; /* Ajustar padding */
+            }
+            #apexGauge {
+                max-width: 240px; /* Reducir tamaño del gráfico */
+            }
+            .form-group label {
+                font-size: 8px; /* Ajustar tamaño de las etiquetas del formulario */
+            }
+        }
     </style>
     <script>
         function renderApexGauge(ranking) {
@@ -104,13 +157,50 @@
                 fill: {
                     colors: [color] // Color asignado según el valor del ranking
                 },
-                labels: ['Puntaje']
+                labels: ['Puntaje'],
+                responsive: [
+                    {
+                        breakpoint: 768, // Para pantallas menores a 768px
+                        options: {
+                            chart: {
+                                height: 300 // Ajustar altura del gráfico
+                            },
+                            plotOptions: {
+                                radialBar: {
+                                    dataLabels: {
+                                        value: {
+                                            fontSize: '40px', // Reducir tamaño de fuente
+                                            offsetY: -5 // Ajustar posición vertical
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        breakpoint: 480, // Para pantallas menores a 480px
+                        options: {
+                            chart: {
+                                height: 250 // Ajustar altura del gráfico
+                            },
+                            plotOptions: {
+                                radialBar: {
+                                    dataLabels: {
+                                        value: {
+                                            fontSize: '30px', // Reducir aún más el tamaño
+                                            offsetY: 0 // Centrar la posición vertical
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
             };
 
             var chart = new ApexCharts(document.querySelector("#apexGauge"), options);
             chart.render();
         }
-
         // Llama a la función con el puntaje desde el servidor
         document.addEventListener("DOMContentLoaded", function () {
             renderApexGauge(<%= ObtenerRankingSinPorcentaje() %>);
