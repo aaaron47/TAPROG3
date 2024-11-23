@@ -485,12 +485,12 @@
     <Compile Include="TotalEvaluaciones.aspx.designer.cs">
       <DependentUpon>TotalEvaluaciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.master.cs">
-      <DependentUpon>Usuario.master</DependentUpon>
+    <Compile Include="Main.master.cs">
+      <DependentUpon>Main.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuario.master.designer.cs">
-      <DependentUpon>Usuario.master</DependentUpon>
+    <Compile Include="Main.master.designer.cs">
+      <DependentUpon>Main.master</DependentUpon>
     </Compile>
     <Compile Include="ValidarEmail.aspx.cs">
       <DependentUpon>ValidarEmail.aspx</DependentUpon>
@@ -510,7 +510,7 @@
   <ItemGroup>
     <Content Include="Handlers\MostrarImagen.ashx" />
     <None Include="packages.config" />
-    <Content Include="Usuario.master" />
+    <Content Include="Main.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

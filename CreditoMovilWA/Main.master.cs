@@ -1,37 +1,49 @@
-﻿using System;
+﻿using CreditoMovilWA.CreditoMovil;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
 
 namespace CreditoMovilWA
 {
-    public partial class Usuario : System.Web.UI.MasterPage
+    public partial class Main : System.Web.UI.MasterPage
     {
-        // PUSE ESTO EN APPLICATION xd
-        /*protected void Page_Load(object sender, EventArgs e)
+        private UsuarioWSClient daoUsuario = new UsuarioWSClient();
+
+        private static List<string> notificaciones = new List<string>();
+
+        protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Incrementa el contador de visitas
-                if (Application["Visitas"] == null)
-                {
-                    Application["Visitas"] = 1;
-                }
-                else
-                {
-                    Application["Visitas"] = (int)Application["Visitas"] + 1;
-                }
-
-
+                ActualizarNotificaciones();
             }
-        }*/
+        }
+
+        // Método para agregar una nueva notificación
+        public void AgregarNotificacion (string mensaje)
+        {
+            notificaciones.Add(mensaje);
+        }
+
+        // Método para actualizar el modal de notificaciones y el indicador
+        private void ActualizarNotificaciones()
+        {
+            rptNotifications.DataSource = notificaciones;
+            rptNotifications.DataBind();
+
+            // Mostrar o ocultar el punto indicador de nuevas notificaciones
+            lblNotificationDot.Visible = notificaciones.Count > 0;
+        }
 
         public bool MostrarHeader
         {
             get { return headerDiv.Visible; }
             set { headerDiv.Visible = value; }
         }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             // Lógica de cierre de sesión, por ejemplo:

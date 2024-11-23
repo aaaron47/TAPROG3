@@ -1,0 +1,152 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="CreditoMovilWA.Main" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cuenta Iniciada - Crédito Móvil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Bootstrap JS (para funcionalidades como modal o toasts) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f5fb;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            border-bottom: 1px solid #ddd;
+        }
+        .header img {
+            width: 150px;
+        }
+        .logout-btn {
+            background-color: #002e6e;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif; 
+            display: inline-flex;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #faf8fc;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+        .header .d-flex {
+            gap: 10px; /* Espacio entre la campanita y el botón de cerrar sesión */
+        }
+        /* Botón de notificaciones */
+        .notification-btn {
+            background-color: transparent; /* Fondo transparente */
+            color: #000; /* Ícono en negro */
+            padding: 5px 10px;
+            border-radius: 50%; /* Redondeado */
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-btn:hover {
+            background-color: #6090be; /* Fondo gris claro al pasar el mouse */
+        }
+
+        /* Punto rojo para notificaciones */
+        .notification-dot {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 90%;
+            position: absolute;
+            top: 2px; /* Ajusta posición vertical */
+            right: 2px; /* Ajusta posición horizontal */
+        }
+    </style>
+    <script>
+        function OcultarPuntoRojo() {
+            const notificationDot = document.querySelector('.notification-dot');
+            if (notificationDot) {
+                notificationDot.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <form runat="server">
+        <!-- Encabezado común -->
+        <div class="header d-flex justify-content-between align-items-center" runat="server" id="headerDiv">
+            <img src="images/credit2.png" alt="Logo Crédito Móvil"/>
+            <div class="d-flex align-items-center">
+                <!-- Botón de notificaciones -->
+                <asp:Panel ID="pnlNotificaciones" runat="server" Visible='<%# Session["Usuario"] != null %>' CssClass="me-3">
+                    <div class="dropdown position-relative">
+                        <button class="notification-btn" type="button" id="notificationsButton" data-bs-toggle="modal" data-bs-target="#notificationsModal" onclick="OcultarPuntoRojo();">
+                            <i class="fas fa-bell"></i>
+                            <asp:Label ID="lblNotificationDot" runat="server" Visible="false">
+                                <span class="notification-dot"></span>
+                            </asp:Label>
+                        </button>
+                    </div>
+                </asp:Panel>
+                <!-- Botón de cerrar sesión -->
+                <asp:Button ID="btnLogout" runat="server" Text="Cerrar Sesión"  CssClass="logout-btn ms-2" OnClick="btnLogout_Click" />
+            </div>
+        </div>
+
+         <!-- Modal de Notificaciones -->
+        <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationsModalLabel">Notificaciones</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <asp:Repeater ID="rptNotifications" runat="server">
+                            <ItemTemplate>
+                                <li class="list-group-item">
+                                    <%# Container.DataItem %>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+        <!-- ContentPlaceHolder para el contenido específico de cada página -->
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </form>
+</body>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Usuario.master" CodeFile="RecuperarContrasena.aspx.cs" Inherits="CreditoMovilWA.RecuperarContrasena" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="RecuperarContrasena.aspx.cs" Inherits="CreditoMovilWA.RecuperarContrasena" %>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>

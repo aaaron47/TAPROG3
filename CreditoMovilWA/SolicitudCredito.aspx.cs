@@ -73,6 +73,9 @@ namespace CreditoMovilWA
             cred.fechaOtorgamientoSpecified = true;
 
             daoCredito.insertarCredito(cred,cli.documento,cli.tipoDocumento.ToString());
+            
+            Main masterPage = (Main)this.Master;
+            masterPage.AgregarNotificacion($"Crédito solicitado por el cliente {cli.nombre} por un monto de S/. {monto}.");
 
             Response.Redirect("MainCliente.aspx");
         }

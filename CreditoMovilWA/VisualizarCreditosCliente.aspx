@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Usuario.master" CodeFile="VisualizarCreditosCliente.aspx.cs" Inherits="CreditoMovilWA.VisualizarCreditos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="VisualizarCreditosCliente.aspx.cs" Inherits="CreditoMovilWA.VisualizarCreditos" %>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
@@ -85,18 +85,22 @@
             margin: 20% auto;
             padding: 20px 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 90%;
             max-width: 600px;
             text-align: left;
             border-radius: 10px;
+            position: relative;
         }
+
         .close-btn {
+            background: none;
+            border: none;
             color: #aaa;
-            float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
         }
+
         .close-btn:hover, .close-btn:focus {
             color: #000;
             text-decoration: none;
@@ -104,7 +108,7 @@
         }
 
         .save-btn {
-            width: 48%; /* Ajusta el ancho para que ambos botones ocupen el mismo espacio */
+            width: 50%; /* Ajusta el ancho para que ambos botones ocupen el mismo espacio */
             background-color: #2f7a44;
             color: #fff;
             border: none;
@@ -114,17 +118,6 @@
             cursor: pointer;
             margin-top: 20px;
             margin-bottom: 30px;
-        }
-
-        .cancel-btn {
-            width: 48%; /* Ajusta el ancho para que ambos botones ocupen el mismo espacio */
-            background-color: #002e6e;
-            color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
         }
     </style>
 
@@ -231,6 +224,26 @@
             }
         }
 
+        // Evento para limpiar el modal al cerrarlo
+        document.getElementById('PagoModal').addEventListener('hidden.bs.modal', function () {
+            // Resetea el selector de método de pago
+            document.getElementById('metodoPago').value = '';
+            // Oculta las secciones de banco y billetera
+            document.getElementById('infoBanco').style.display = 'none';
+            document.getElementById('infoBilletera').style.display = 'none';
+            // Limpia los detalles de banco
+            document.getElementById('ddlBancoElegido').value = '';
+            document.getElementById('txtCCI').value = '';
+            document.getElementById('txtTitularBanco').value = '';
+            document.getElementById('txtTipoCuenta').value = '';
+            // Limpia los detalles de billetera
+            document.getElementById('ddlBilleteraElegida').value = '';
+            document.getElementById('txtNumeroBilletera').value = '';
+            document.getElementById('txtTitularBilletera').value = '';
+            // Limpia el archivo subido
+            document.getElementById('<%= fileUpload.ClientID %>').value = '';
+         });
+
     </script>
 </asp:Content>
 
@@ -281,15 +294,17 @@
         <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
     </div>
 
-
-   <div id="PagoModal" class="modal">
+    <div id="PagoModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>Métodos de Pago:</h2>
+            <!-- Encabezado del modal con botón de cerrar -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Métodos de Pago:</h2>
+                <button type="button" class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
 
             <!-- Selector de método de pago -->
             <label for="metodoPago">Seleccione el método de pago:</label>
-            <select id="metodoPago" onchange="mostrarCamposPago()">
+            <select id="metodoPago" onchange="mostrarCamposPago()" class="select-dropdown">
                 <option value="">Seleccione</option>
                 <option value="banco">Banco</option>
                 <option value="billetera">Billetera Digital</option>
@@ -331,11 +346,11 @@
 
             <p>Inserte imagen jpeg o pdf:</p>
             <asp:FileUpload ID="fileUpload" runat="server" />
-            <br /><br />
 
-            <!-- Botones de acción -->
-            <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" OnClick="btnSave_Click" OnClientClick="closeModal(); return false;"/>
-            <asp:Button ID="btnCancel" runat="server" Text="Cancelar" CssClass="cancel-btn" OnClientClick="closeModal(); return false;" />
+            <!-- Botón de acción centrado -->
+            <div class="text-center mt-4">
+                <asp:Button ID="btnSave" runat="server" Text="Grabar" CssClass="save-btn" OnClick="btnSave_Click" OnClientClick="closeModal(); return false;" />
+            </div>
         </div>
     </div>
 </asp:Content>

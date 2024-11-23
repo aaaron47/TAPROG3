@@ -16,7 +16,7 @@ namespace CreditoMovilWA
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Master is Usuario masterPage)
+            if (Master is Main masterPage)
             {
                 masterPage.MostrarHeader = false; // Oculta el header en esta página
             }

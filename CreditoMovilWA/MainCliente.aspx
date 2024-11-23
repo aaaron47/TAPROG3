@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Usuario.master" CodeFile="MainCliente.aspx.cs" Inherits="CreditoMovilWA.MainCliente" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="MainCliente.aspx.cs" Inherits="CreditoMovilWA.MainCliente" %>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/raphael@2.2.8/raphael.min.js"></script> <!-- Dependencia de JustGage -->
@@ -19,7 +19,7 @@
         }
         .btn {
             display: inline-block;
-            width: 200px;
+            width: 205px;
             padding: 12px;
             font-size: 16px;
             font-weight: 700;
@@ -28,7 +28,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 20px;
+             margin: 10px;
         }
         .btn:hover {
             background-color: #265f21;
@@ -39,7 +39,6 @@
             background-color: rgba(0, 0, 0, 0);
             padding: 5px 50px;
             border-radius: 5px;
-            margin-bottom: 10px;
             display: inline-block;
         }
         #apexGauge {
@@ -49,7 +48,6 @@
         .form-group label {
             font-size: 16px;
             color: #333;
-            margin-bottom: 5px;
         }
     </style>
     <script>

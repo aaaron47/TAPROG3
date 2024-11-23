@@ -72,7 +72,7 @@ namespace CreditoMovilWA
 
                     var dataOrdenada = resultados.OrderBy(x => ordenPersonalizado[x.estado]).ToList();
 
-                    var cred1 = resultados[0];
+                    var cred1 = dataOrdenada[0];
                     if(cred1.estado == "Retrasado")
                     {
                         lblRetrasado.Text = "Usted tiene créditos atrasados";

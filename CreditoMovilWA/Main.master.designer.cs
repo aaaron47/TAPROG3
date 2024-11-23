@@ -11,7 +11,7 @@ namespace CreditoMovilWA
 {
 
 
-    public partial class Usuario
+    public partial class Main
     {
 
         /// <summary>
@@ -24,6 +24,24 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerDiv;
 
         /// <summary>
+        /// Control pnlNotificaciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNotificaciones;
+
+        /// <summary>
+        /// Control lblNotificationDot.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNotificationDot;
+
+        /// <summary>
         /// Control btnLogout.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,15 @@ namespace CreditoMovilWA
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLogout;
+
+        /// <summary>
+        /// Control rptNotifications.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptNotifications;
 
         /// <summary>
         /// Control HeadContent.

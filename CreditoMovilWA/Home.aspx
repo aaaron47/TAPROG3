@@ -1,5 +1,5 @@
 ﻿
-<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Usuario.master" CodeFile="Home.aspx.cs" Inherits="CreditoMovilWA.Home" %>
+<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="Home.aspx.cs" Inherits="CreditoMovilWA.Home" %>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
