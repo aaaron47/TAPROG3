@@ -71,10 +71,10 @@ namespace CreditoMovilWA
                         { "Finalizado", 4 }
                     };
 
-                    var dataOrdenada = resultados.OrderBy(x => ordenPersonalizado[x.estado]).ToList();
+                    var dataOrdenada = resultados.OrderBy(x => ordenPersonalizado[x.estado.ToString()]).ToList();
 
                     var cred1 = dataOrdenada[0];
-                    if(cred1.estado == "Retrasado")
+                    if(cred1.estado == CreditoMovil.estado.Retrasado)
                     {
                         lblRetrasado.Text = "Usted tiene créditos atrasados";
                     }
@@ -152,7 +152,7 @@ namespace CreditoMovilWA
             trans.concepto = "Cuota número " + cred.cantCuotasPagadas;
 
             if (cred.numCuotas == cred.cantCuotasPagadas)
-                cred.estado = "Finalizado";
+                cred.estado = estado.Cancelado;
 
             daoCredito.modificarCredito(cred);
 

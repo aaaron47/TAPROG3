@@ -64,7 +64,7 @@ namespace CreditoMovilWA
 
             credito cred = new credito();
             cred.cliente = null; //no es necesario ya que se guarda desde el insertarcredito del dao.
-            cred.estado = "Solicitado";
+            cred.estado = estado.Solicitado;
             cred.tasaInteres = double.Parse(tasaInteres.Value)*100;
             cred.fechaOtorgamiento = DateTime.Now;
             cred.monto = monto;

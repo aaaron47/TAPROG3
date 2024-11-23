@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pe.edu.pucp.creditomovil.model.Credito;
+import pe.edu.pucp.creditomovil.model.Estado;
 
 /**
  *
@@ -41,7 +42,7 @@ public class CreditoMySQL implements CreditoDAO {
             csCredito.setDouble(2, credito.getMonto());
             csCredito.setDouble(3, credito.getTasaInteres());
             csCredito.setDate(4, new java.sql.Date(credito.getFechaOtorgamiento().getTime()));
-            csCredito.setString(5, credito.getEstado());
+            csCredito.setString(5, credito.getEstado().name());
             csCredito.setInt(6, credito.getNumCuotas());
             csCredito.execute();
 
@@ -98,7 +99,7 @@ public class CreditoMySQL implements CreditoDAO {
             cs.setDouble(2, credito.getMonto());
             cs.setDouble(3, credito.getTasaInteres());
             cs.setDate(4, new java.sql.Date(credito.getFechaOtorgamiento().getTime()));
-            cs.setString(5, credito.getEstado());
+            cs.setString(5, credito.getEstado().name());
             cs.setInt(6, credito.getNumCuotas());
             cs.setInt(7, credito.getCantCuotasPagadas());
 
@@ -160,7 +161,7 @@ public class CreditoMySQL implements CreditoDAO {
 
             rs = cs.executeQuery();
             if (rs.next()) {
-                cred.setEstado(rs.getString("estado"));
+                cred.setEstado(Estado.valueOf(rs.getString("estado")));
                 cred.setFechaOtorgamiento(rs.getDate("fecha_otorgamiento"));
                 cred.setMonto(rs.getDouble("monto"));
                 cred.setNumCredito(rs.getInt("num_credito"));
@@ -200,7 +201,7 @@ public class CreditoMySQL implements CreditoDAO {
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
-                String est = rs.getString("estado");
+                Estado est = Estado.valueOf(rs.getString("estado"));
                 int numCuotas = rs.getInt("num_cuotas");
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
 
@@ -254,7 +255,7 @@ public class CreditoMySQL implements CreditoDAO {
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
-                String est = rs.getString("estado");
+                Estado est = Estado.valueOf(rs.getString("estado"));
                 int numCuotas = rs.getInt("num_cuotas");
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
@@ -302,7 +303,7 @@ public class CreditoMySQL implements CreditoDAO {
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
-                String est = rs.getString("estado");
+                Estado est = Estado.valueOf(rs.getString("estado"));
                 int numCuotas = rs.getInt("num_cuotas");
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
@@ -348,11 +349,11 @@ public class CreditoMySQL implements CreditoDAO {
                 double monto = rs.getDouble("monto");
                 double tasaInteres = rs.getDouble("tasa_interes");
                 Date fechaOtorgamiento = rs.getDate("fecha_otorgamiento");
-                String estado = rs.getString("estado");
+                Estado est = Estado.valueOf(rs.getString("estado"));
                 int numCuotas = rs.getInt("num_cuotas");
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
-                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, estado, numCuotas,
+                Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
                 cantCuotasPagadas);
                 listaCreditos.add(credito);
             }

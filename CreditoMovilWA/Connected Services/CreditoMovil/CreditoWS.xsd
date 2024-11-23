@@ -76,7 +76,7 @@
     <xs:sequence>
       <xs:element name="cantCuotasPagadas" type="xs:int" />
       <xs:element minOccurs="0" name="cliente" type="tns:usuario" />
-      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="tns:estado" />
       <xs:element minOccurs="0" name="fechaOtorgamiento" type="xs:dateTime" />
       <xs:element name="monto" type="xs:double" />
       <xs:element name="numCredito" type="xs:int" />
@@ -181,6 +181,17 @@
       <xs:enumeration value="DNI" />
       <xs:enumeration value="CARNET_EXTRANJERIA" />
       <xs:enumeration value="PASAPORTE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estado">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Solicitado" />
+      <xs:enumeration value="Activo" />
+      <xs:enumeration value="Aprobado" />
+      <xs:enumeration value="Desembolsado" />
+      <xs:enumeration value="Cancelado" />
+      <xs:enumeration value="Anulado" />
+      <xs:enumeration value="Retrasado" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

@@ -56,7 +56,7 @@ namespace CreditoMovilWA
             Session["Credito"] = cred;
             // Cargar datos de ejemplo para los detalles del crédito.
             txtFechaOtorgamiento.Text = cred.fechaOtorgamiento.ToString("dd/MM/yyyy");
-            txtEstado.Text = cred.estado;
+            txtEstado.Text = cred.estado.ToString();
             txtMonto.Text = cred.monto.ToString();
             txtNumeroCuotas.Text = cred.numCuotas.ToString();
             txtTasaInteres.Text = cred.tasaInteres.ToString()+"%";

@@ -14,14 +14,14 @@ public class Credito {
     private double tasaInteres;
     private Date fechaOtorgamiento;
     private Usuario cliente;
-    private String estado;
+    private Estado estado;
     private int numCuotas;
     private ArrayList<Transaccion> transacciones;
     private int cantCuotasPagadas;
     
     public Credito(){}
     public Credito(int numCredito, double monto, double tasaInteres,
-            Date fechaOtorgamiento, Usuario cliente, String estado,
+            Date fechaOtorgamiento, Usuario cliente, Estado estado,
             int numCuotas, int cantCuotasPagadas){
                 this.numCredito = numCredito;
                 this.monto = monto;
@@ -98,11 +98,11 @@ public class Credito {
         this.cliente = cliente;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
