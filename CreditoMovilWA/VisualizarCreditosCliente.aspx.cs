@@ -142,7 +142,7 @@ namespace CreditoMovilWA
             int idUsuario = trans.usuarioRegistrado.idUsuario;
             trans.fecha = DateTime.Now;
             int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());
-            //trans.metodoPago = new metodoPago();
+            trans.metodoPago = new metodoPago2();
             trans.metodoPago.idMetodoPago = idMetodoPago;
 
             int idCredito = int.Parse((string)Session["idCredito"]);
@@ -156,7 +156,7 @@ namespace CreditoMovilWA
 
             daoCredito.modificarCredito(cred);
 
-            //trans.credito = new credito(); 
+            trans.credito = new credito1(); 
             trans.credito.numCredito = idCredito;
 
             if (fileUpload.HasFile)
