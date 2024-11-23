@@ -96,6 +96,8 @@
   <xs:complexType name="insertarEvaluacion">
     <xs:sequence>
       <xs:element minOccurs="0" name="evaluacion" type="tns:evaluacion" />
+      <xs:element minOccurs="0" name="codSupervisor" type="xs:string" />
+      <xs:element name="codCliente" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarEvaluacionResponse">

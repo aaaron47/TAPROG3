@@ -21,10 +21,11 @@ public class EvaluacionWS {
     private EvaluacionDAO daoEvaluacion = new EvaluacionMySQL();
     
     @WebMethod(operationName = "insertarEvaluacion")
-    public boolean insertarEvaluacion(@WebParam(name = "evaluacion") Evaluacion evaluacion) {
+    public boolean insertarEvaluacion(@WebParam(name = "evaluacion") Evaluacion evaluacion,
+            @WebParam(name = "codSupervisor") String codSupervisor, @WebParam(name = "codCliente") int codigoCliente) {
         boolean resultado = false;
         try{
-            resultado = daoEvaluacion.insertar(evaluacion);
+            resultado = daoEvaluacion.insertar(evaluacion,codSupervisor,codigoCliente);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }

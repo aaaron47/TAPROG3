@@ -27,9 +27,10 @@ public class EvaluacionMySQL implements EvaluacionDAO {
     private ResultSet rs = null;
 
     @Override
-    public boolean insertar(Evaluacion evaluacion) {
+    public boolean insertar(Evaluacion evaluacion, String codigoSupervisor, int codigoCliente) {
         Connection conn = null;
         CallableStatement cs = null;
+        CallableStatement csAsociar = null;
         boolean resultado = false;
 
         try {
@@ -38,13 +39,8 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             cs = conn.prepareCall(sql);
 
             // Configura los parámetros
-            cs.setInt(1, evaluacion.getNumeroEvaluacion());
-            Cliente cli = (Cliente) evaluacion.getClienteAsignado();
-            if (cli.getCodigoCliente() != 0) {
-                cs.setInt(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
-            } else {
-                cs.setString(2, " ");
-            }
+            cs.registerOutParameter(1, java.sql.Types.INTEGER);
+            cs.setInt(2, codigoCliente);
             cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
             cs.setString(4, evaluacion.getNombreNegocio());
             cs.setString(5, evaluacion.getDireccionNegocio());
@@ -60,6 +56,16 @@ public class EvaluacionMySQL implements EvaluacionDAO {
 
             // Ejecuta la consulta
             resultado = cs.executeUpdate() > 0;
+            
+            int numEvaluacionGenerado = cs.getInt(1);
+            evaluacion.setNumeroEvaluacion(numEvaluacionGenerado);
+            
+            String sqlAsociar = "{ CALL AsociarEvaluacionASupervisor(?, ?) }";
+            csAsociar = conn.prepareCall(sqlAsociar);
+            csAsociar.setString(1, codigoSupervisor);
+            csAsociar.setInt(2, numEvaluacionGenerado);
+            csAsociar.execute();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {

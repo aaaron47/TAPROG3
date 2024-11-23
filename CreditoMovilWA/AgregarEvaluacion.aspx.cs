@@ -78,7 +78,7 @@ namespace CreditoMovilWA
             ev.evaluador = sup;
             
             // aca pa actualizar base de dates
-            daoEvaluacion.insertarEvaluacion(ev);
+            daoEvaluacion.insertarEvaluacion(ev,sup.codigoEv,cli.codigoCliente);
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
