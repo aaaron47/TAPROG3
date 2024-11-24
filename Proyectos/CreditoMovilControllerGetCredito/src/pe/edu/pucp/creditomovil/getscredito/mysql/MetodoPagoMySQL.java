@@ -10,7 +10,7 @@ import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.getscredito.dao.MetodoPagoDAO;
 import pe.edu.pucp.creditomovil.model.MetodoPago;
-import pe.edu.pucp.creditomovil.model.MetodoPago2;
+import pe.edu.pucp.creditomovil.model.MetodoPagoInstancia;
 
 public class MetodoPagoMySQL implements MetodoPagoDAO {
 
@@ -79,9 +79,9 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
     }
 
     @Override
-    public MetodoPago2 obtenerPorId(int idMetodoPago) {
+    public MetodoPagoInstancia obtenerPorId(int idMetodoPago) {
         
-        MetodoPago2 metodoPago = null;
+        MetodoPagoInstancia metodoPago = null;
         Connection conn = null;
         CallableStatement cs = null;
         ResultSet rs = null;
@@ -95,7 +95,7 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
             
             
             if(rs.next()){
-                metodoPago = new MetodoPago2(
+                metodoPago = new MetodoPagoInstancia(
                     rs.getInt("idMetodoPago"),
                     rs.getBytes("foto"),
                     rs.getString("nombreTitular")
@@ -125,8 +125,8 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
     }
 
     @Override
-    public List<MetodoPago2> listarTodos() {
-        List<MetodoPago2> metodosPago = new ArrayList<>();
+    public List<MetodoPagoInstancia> listarTodos() {
+        List<MetodoPagoInstancia> metodosPago = new ArrayList<>();
         CallableStatement cs = null;
         String query = "{CALL ListarMetodosPago()}";
         rs = null;
@@ -137,7 +137,7 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
             rs = cs.executeQuery();
             
             while(rs.next()){
-                MetodoPago2 metodo = new MetodoPago2(
+                MetodoPagoInstancia metodo = new MetodoPagoInstancia(
                         
                         rs.getInt("idMetodoPago"),
                         rs.getBytes("foto"),

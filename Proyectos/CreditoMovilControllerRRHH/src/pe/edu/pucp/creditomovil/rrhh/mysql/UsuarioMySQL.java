@@ -17,7 +17,7 @@ import pe.edu.pucp.creditomovil.rrhh.dao.UsuarioDAO;
 import pe.edu.pucp.creditomovil.model.Supervisor;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
 import pe.edu.pucp.creditomovil.model.Usuario;
-import pe.edu.pucp.creditomovil.model.Usuario2;
+import pe.edu.pucp.creditomovil.model.UsuarioInstancia;
 /**
  *
  * @author diego
@@ -119,8 +119,8 @@ public class UsuarioMySQL implements UsuarioDAO{
     }
     
     @Override
-    public Usuario2 obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
-        Usuario2 user = null;
+    public UsuarioInstancia obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
+        UsuarioInstancia user = null;
         Connection conn = null;
         CallableStatement cs = null;
         ResultSet rs = null;
@@ -150,7 +150,7 @@ public class UsuarioMySQL implements UsuarioDAO{
                 } catch (IllegalArgumentException e) {
                     System.out.println("Error: " + e);
                 }
-                user = new Usuario2(
+                user = new UsuarioInstancia(
                         rs.getInt("usuario_id"),
                         rs.getDate("fecha"),
                         rs.getString("nombre"),

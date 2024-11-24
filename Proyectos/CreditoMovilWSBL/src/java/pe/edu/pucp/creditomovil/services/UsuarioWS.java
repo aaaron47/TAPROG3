@@ -9,7 +9,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 
 import java.util.List;
-import pe.edu.pucp.creditomovil.model.Usuario2;
+import pe.edu.pucp.creditomovil.model.UsuarioInstancia;
 
 import pe.edu.pucp.creditomovil.rrhh.dao.UsuarioDAO;
 import pe.edu.pucp.creditomovil.rrhh.mysql.UsuarioMySQL;
@@ -20,9 +20,9 @@ public class UsuarioWS {
     private UsuarioDAO daoUsuario = new UsuarioMySQL();
     
     @WebMethod(operationName = "obtenerPorDocIdenUsuario")
-    public Usuario2 obtenerPorDocIdenUsuario(@WebParam(name = "docIdentidad") String docIdentidad,
+    public UsuarioInstancia obtenerPorDocIdenUsuario(@WebParam(name = "docIdentidad") String docIdentidad,
                                                 @WebParam(name = "tipoDocumento")String tipoDocumento) {
-        Usuario2 user = null;
+        UsuarioInstancia user = null;
         try{
             user = daoUsuario.obtenerPorDocIdentidad(docIdentidad, tipoDocumento);
         }catch(Exception ex){

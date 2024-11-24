@@ -10,10 +10,10 @@ import java.util.Date;
  *
  * @author aaron
  */
-public class Usuario2 extends Usuario {
+public class UsuarioInstancia extends Usuario {
 
-    public Usuario2(){}
-    public Usuario2(int idUsuario, Date fecha, String nombre, String apPaterno,
+    public UsuarioInstancia(){}
+    public UsuarioInstancia(int idUsuario, Date fecha, String nombre, String apPaterno,
             String apMaterno, String contrasenha, Date fechaVencimiento,
             boolean activo, TipoDocumento tipoDocumento, String documento, Rol rol) {
         super(idUsuario, fecha, nombre, apPaterno, apMaterno, contrasenha, fechaVencimiento, activo, tipoDocumento, 

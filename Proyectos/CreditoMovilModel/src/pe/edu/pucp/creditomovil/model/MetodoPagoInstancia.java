@@ -8,9 +8,9 @@ package pe.edu.pucp.creditomovil.model;
  *
  * @author aaron
  */
-public class MetodoPago2 extends MetodoPago{
-    public MetodoPago2(){};
-    public MetodoPago2(int idMetodoPago, byte[] foto,
+public class MetodoPagoInstancia extends MetodoPago{
+    public MetodoPagoInstancia(){};
+    public MetodoPagoInstancia(int idMetodoPago, byte[] foto,
             String nombreTitular){
         super(idMetodoPago,foto,nombreTitular);
     }

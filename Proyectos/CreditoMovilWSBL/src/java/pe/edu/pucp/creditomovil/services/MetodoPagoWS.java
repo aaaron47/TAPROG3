@@ -14,7 +14,7 @@ import java.util.List;
 import pe.edu.pucp.creditomovil.getscredito.dao.MetodoPagoDAO;
 import pe.edu.pucp.creditomovil.getscredito.mysql.MetodoPagoMySQL;
 import pe.edu.pucp.creditomovil.model.MetodoPago;
-import pe.edu.pucp.creditomovil.model.MetodoPago2;
+import pe.edu.pucp.creditomovil.model.MetodoPagoInstancia;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
 
 /**
@@ -62,8 +62,8 @@ public class MetodoPagoWS {
     }
     
     @WebMethod(operationName = "obtenerPorIDMetodoPago")
-    public MetodoPago2 obtenerPorIDMetodoPago(@WebParam(name = "idmetodoPago") int id) {
-        MetodoPago2 metodoPago = null;
+    public MetodoPagoInstancia obtenerPorIDMetodoPago(@WebParam(name = "idmetodoPago") int id) {
+        MetodoPagoInstancia metodoPago = null;
         try{
             metodoPago = daoMetodoPago.obtenerPorId(id);
         }catch(Exception ex){
@@ -73,8 +73,8 @@ public class MetodoPagoWS {
     }
     
     @WebMethod(operationName = "listarTodosMetodoPagos")
-    public List<MetodoPago2> listarTodosMetodoPagos() {
-        List<MetodoPago2> metodoPagos = null;
+    public List<MetodoPagoInstancia> listarTodosMetodoPagos() {
+        List<MetodoPagoInstancia> metodoPagos = null;
         try{
             metodoPagos = daoMetodoPago.listarTodos();
         }catch(Exception ex){
