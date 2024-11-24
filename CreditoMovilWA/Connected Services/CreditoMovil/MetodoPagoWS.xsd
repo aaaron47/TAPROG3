@@ -34,10 +34,10 @@
   </xs:complexType>
   <xs:complexType name="obtenerPorIDMetodoPagoResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:metodoPago2" />
+      <xs:element minOccurs="0" name="return" type="tns:metodoPagoInstancia" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="metodoPago2">
+  <xs:complexType name="metodoPagoInstancia">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:metodoPago">
         <xs:sequence />
@@ -49,7 +49,7 @@
   </xs:complexType>
   <xs:complexType name="listarTodosMetodoPagosResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:metodoPago2" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:metodoPagoInstancia" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarMetodoPago">

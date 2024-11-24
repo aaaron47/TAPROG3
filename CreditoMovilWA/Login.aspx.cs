@@ -60,7 +60,7 @@ namespace CreditoMovilWA
             {
                 if (tipoDocumento != null && numDocumentoIdentidad != null && password != null)
                 {
-                    usuario2 user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
+                    usuarioInstancia user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
 
                     Session["Usuario"] = user;
                     Session["Cliente"] = null;

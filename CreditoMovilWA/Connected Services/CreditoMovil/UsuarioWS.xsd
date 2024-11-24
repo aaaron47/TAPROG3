@@ -10,10 +10,10 @@
   </xs:complexType>
   <xs:complexType name="obtenerPorDocIdenUsuarioResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:usuario2" />
+      <xs:element minOccurs="0" name="return" type="tns:usuarioInstancia" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="usuario2">
+  <xs:complexType name="usuarioInstancia">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:usuario">
         <xs:sequence />
