@@ -76,9 +76,12 @@ namespace CreditoMovilWA
 
             ev.clienteAsignado = cli2;
             ev.evaluador = sup;
-            
+
             // aca pa actualizar base de dates
-            daoEvaluacion.insertarEvaluacion(ev,sup.codigoEv,cli.codigoCliente);
+            if (daoEvaluacion.insertarEvaluacion(ev, sup.codigoEv, cli.codigoCliente))
+            {
+                lblError.Text = "Evaluación agregada satisfactoriamente.";
+            }
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
