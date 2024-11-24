@@ -43,7 +43,7 @@ namespace CreditoMovilWA
 
             // ejemplo pa probart
             txtNombreNegocio.Text = ev.nombreNegocio;
-            txtFechaRegistro.Text = ev.fechaRegistro.ToString();
+            txtFechaRegistro.Text = ev.fechaRegistro.ToString("dd/MM/yyyy");
             txtDireccionNegocio.Text = ev.direccionNegocio;
             txtTelefonoNegocio.Text = ev.telefonoNegocio;
             txtClienteAsignado.Text = ev.clienteAsignado.nombre + " " + ev.clienteAsignado.apPaterno + " " + ev.clienteAsignado.apMaterno;
@@ -55,6 +55,9 @@ namespace CreditoMovilWA
             txtEstado.Text = ev.activo ? "Activo" : "Inactivo";
             txtObservaciones.Text = ev.observaciones.ToString();
             txtPuntaje.Text = ev.puntaje.ToString();
+
+            // Actualizar el color del puntaje
+            ActualizarColorPuntaje();
 
             Session["evaluacion"] = ev;
         }
@@ -74,6 +77,8 @@ namespace CreditoMovilWA
                 GuardarDatosEvaluacion();
                 DeshabilitarCampos();
                 btnModificar.Text = "MODIFICAR";
+                // Recargar el color del puntaje después de guardar los cambios
+                ActualizarColorPuntaje();
             }
         }
 
@@ -135,6 +140,23 @@ namespace CreditoMovilWA
         {
             if ((supervisor)Session["Supervisor"] != null) Response.Redirect("MainSupervisor.aspx");
             Response.Redirect("TotalEvaluaciones.aspx");
+        }
+
+        private void ActualizarColorPuntaje()
+        {
+            // Obtener el puntaje actual
+            int puntaje = int.TryParse(txtPuntaje.Text, out int resultado) ? resultado : 0;
+
+            // Determinar el color según el puntaje
+            string color = "#000000"; // Color por defecto (negro)
+            if (puntaje >= 0 && puntaje < 20) color = "#ff0000"; // Rojo
+            else if (puntaje >= 20 && puntaje < 40) color = "#ff8c00"; // Naranja
+            else if (puntaje >= 40 && puntaje < 60) color = "#ffd700"; // Amarillo
+            else if (puntaje >= 60 && puntaje < 80) color = "#7fff00"; // Verde claro
+            else if (puntaje >= 80 && puntaje <= 100) color = "#006400"; // Verde oscuro
+
+            // Aplicar el estilo en línea al TextBox
+            txtPuntaje.Attributes.Add("style", $"color: {color}; font-weight: bold;");
         }
     }
 }

@@ -105,7 +105,7 @@
             const interes = parseFloat(document.getElementById("<%= tasaInteres.ClientID %>").value);
             const minInterest = (amount * interes).toFixed(2); // interes mínimo
             const maxInterest = (amount * (interes+0.05)).toFixed(2); // interes máximo
-            document.getElementById("interestDisplay").innerText = `Interés aproximado: S/. ${minInterest} - S/. ${maxInterest}   (10% - 15%)`;
+            document.getElementById("interestDisplay").innerText = `Interés aproximado: S/. ${minInterest} - S/. ${maxInterest}`;
         }
     </script>
 </asp:Content>

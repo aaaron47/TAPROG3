@@ -45,7 +45,7 @@ namespace CreditoMovilWA
             transaccion trans = daoTransaccion.obtenerPorIDTransaccion(Int32.Parse(idTransaccion));
             txtAgencia.Text = trans.agencia;
             txtIdTransaccion.Text = trans.numOperacion.ToString();
-            txtFechaTransaccion.Text = trans.fecha.ToString();
+            txtFechaTransaccion.Text = trans.fecha.ToString("dd/MM/yyyy");
             txtMonto.Text = trans.monto.ToString();
             if (trans.foto != null)
             {
