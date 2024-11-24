@@ -7,16 +7,24 @@
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\main.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:main.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\pdext\\onedrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\taprog3\\creditomovilwa\\agregarevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:agregarevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:visualizarcreditoscliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\totalevaluaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:totalevaluaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\main.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:main.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\totalcreditos.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 202,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,13 +66,39 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
+              "RelativeDocumentMoniker": "Login.aspx.cs",
+              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
+              "RelativeToolTip": "Login.aspx.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAhwG0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-24T21:24:37.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "AgregarEvaluacion.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\AgregarEvaluacion.aspx.cs",
+              "RelativeDocumentMoniker": "AgregarEvaluacion.aspx.cs",
+              "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\AgregarEvaluacion.aspx.cs",
+              "RelativeToolTip": "AgregarEvaluacion.aspx.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAhwEYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-24T21:23:51.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Main.master.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\Main.master.cs",
               "RelativeDocumentMoniker": "Main.master.cs",
               "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\Main.master.cs",
               "RelativeToolTip": "Main.master.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAowDwAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAawCAAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-24T20:30:55.658Z",
               "EditorCaption": ""
@@ -77,14 +111,14 @@
               "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx.cs",
               "ToolTip": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx.cs",
               "RelativeToolTip": "VisualizarCreditosCliente.aspx.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAcwHIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALAAAAAAAAAAAAAhwJYAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-24T20:28:34.713Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "VisualizarCreditosCliente.aspx",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\VisualizarCreditosCliente.aspx",
               "RelativeDocumentMoniker": "VisualizarCreditosCliente.aspx",
@@ -92,12 +126,11 @@
               "RelativeToolTip": "VisualizarCreditosCliente.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-24T20:28:34.762Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T20:28:34.762Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "TotalEvaluaciones.aspx.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalEvaluaciones.aspx.cs",
               "RelativeDocumentMoniker": "TotalEvaluaciones.aspx.cs",
@@ -105,12 +138,11 @@
               "RelativeToolTip": "TotalEvaluaciones.aspx.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T20:28:03.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T20:28:03.541Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "TotalCreditos.aspx.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalCreditos.aspx.cs",
               "RelativeDocumentMoniker": "TotalCreditos.aspx.cs",
@@ -122,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "TotalClientes.aspx.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\TotalClientes.aspx.cs",
               "RelativeDocumentMoniker": "TotalClientes.aspx.cs",
@@ -134,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "DetalleEvaluacion.aspx.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\DetalleEvaluacion.aspx.cs",
               "RelativeDocumentMoniker": "DetalleEvaluacion.aspx.cs",
@@ -146,7 +178,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "DetalleCredito.aspx.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\DetalleCredito.aspx.cs",
               "RelativeDocumentMoniker": "DetalleCredito.aspx.cs",
@@ -158,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "DetalleCliente.aspx.cs",
               "DocumentMoniker": "C:\\Users\\pdext\\OneDrive\\universidad\\fci\\7mo ciclo\\prog3\\proyecto\\TAPROG3\\CreditoMovilWA\\DetalleCliente.aspx.cs",
               "RelativeDocumentMoniker": "DetalleCliente.aspx.cs",

@@ -68,7 +68,7 @@ namespace CreditoMovilWA
 
             cliente cli = daoCliente.obtenerPorDocIdenCliente(txtDocumento.Text, ddlTipoDocumento.SelectedValue.ToString());
 
-            supervisor sup = daoSupervisor.obtenerPorDocIdenSup(txtDocumentoSup.Text, ddlTipoDocSup.SelectedValue.ToString());
+            supervisor1 sup = daoSupervisor.obtenerPorDocIdenSup(txtDocumentoSup.Text, ddlTipoDocSup.SelectedValue.ToString());
 
             cliente1 cli2 = new cliente1();
             cli2.activo = cli.activo;

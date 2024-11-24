@@ -148,7 +148,7 @@ namespace CreditoMovilWA
 
             // Continuar con la lógica de negocio
             transaccion trans = new transaccion();
-            trans.usuarioRegistrado = (usuarioInstancia)Session["Usuario"];
+            trans.usuarioRegistrado = (usuarioInstancia1)Session["Usuario"];
             int idUsuario = trans.usuarioRegistrado.idUsuario;
             trans.fecha = DateTime.Now;
             int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());

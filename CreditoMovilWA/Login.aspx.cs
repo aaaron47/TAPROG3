@@ -60,7 +60,7 @@ namespace CreditoMovilWA
             {
                 if (tipoDocumento != null && numDocumentoIdentidad != null && password != null)
                 {
-                    usuarioInstancia user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
+                    usuarioInstancia1 user = daoUsuario.obtenerPorDocIdenUsuario(numDocumentoIdentidad, tipoDocumento);
 
                     Session["Usuario"] = user;
                     Session["Cliente"] = null;
@@ -100,14 +100,14 @@ namespace CreditoMovilWA
                                     strRedirect = "MainCliente.aspx";
                                 break;
                             case rol1.SUPERVISOR:
-                                supervisor sup = daoSupervisor.obtenerPorDocIdenSup(user.documento, user.tipoDocumento.ToString());
+                                supervisor1 sup = daoSupervisor.obtenerPorDocIdenSup(user.documento, user.tipoDocumento.ToString());
                                 Session["Supervisor"] = sup;
 
                                 if (strRedirect == null)
                                     strRedirect = "MainSupervisor.aspx";
                                 break;
                             case rol1.ADMINISTRADOR:
-                                administrador admin = daoAdmin.obtenerPorDocIdenAdmin(user.documento, user.tipoDocumento.ToString());
+                                administrador1 admin = daoAdmin.obtenerPorDocIdenAdmin(user.documento, user.tipoDocumento.ToString());
                                 Session["Administrador"] = admin;
 
                                 if (strRedirect == null)

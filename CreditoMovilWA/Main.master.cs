@@ -30,7 +30,7 @@ namespace CreditoMovilWA
         // Método para agregar una nueva notificación
         public void AgregarNotificacion (string mensaje)
         {
-            usuarioInstancia user = (usuarioInstancia)Session["Usuario"];
+            usuarioInstancia1 user = (usuarioInstancia1)Session["Usuario"];
             notificacion noti = new notificacion();
             noti.mensaje = mensaje;
             noti.id_usuario = user.idUsuario;
@@ -41,7 +41,7 @@ namespace CreditoMovilWA
         // Método para actualizar el modal de notificaciones y el indicador
         private void ActualizarNotificaciones()
         {
-            usuarioInstancia user = (usuarioInstancia)Session["Usuario"];
+            usuarioInstancia1 user = (usuarioInstancia1)Session["Usuario"];
             notificacion[] notificaciones = daoNotificacion.listarPorUsuario(user.idUsuario);
             // Si no hay notificaciones, limpiar el DataSource y ocultar el indicador
             foreach (notificacion notificacion in notificaciones)

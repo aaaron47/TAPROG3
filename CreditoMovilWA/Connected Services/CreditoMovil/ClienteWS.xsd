@@ -65,6 +65,34 @@
       <xs:element minOccurs="0" name="ultimoLogueo" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="supervisor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:usuario">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agenciaAsignacion" type="xs:string" />
+          <xs:element name="codigoCargo" type="xs:int" />
+          <xs:element minOccurs="0" name="codigoEv" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="administrador">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:usuario">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigoAdm" type="xs:string" />
+          <xs:element name="codigoCargo" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="usuarioInstancia">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:usuario">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="validarEmail">
     <xs:sequence>
       <xs:element minOccurs="0" name="correo" type="xs:string" />
@@ -146,14 +174,6 @@
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="listarTodosClientes">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="listarTodosClientesResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="listarClientesPorRanking">
     <xs:sequence>
       <xs:element name="rankini" type="xs:double" />
@@ -161,6 +181,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarClientesPorRankingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarTodosClientes">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarTodosClientesResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:cliente" />
     </xs:sequence>

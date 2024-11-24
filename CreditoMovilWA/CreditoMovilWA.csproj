@@ -95,9 +95,6 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="AgregarEvaluacion.aspx" />
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.administrador.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.evaluacion.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -128,9 +125,6 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarTransaccionCreditoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.supervisor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.transaccion.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -153,9 +147,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.metodoPagoInstancia.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.usuarioInstancia.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.eliminarAdministradorResponse.datasource">
@@ -327,6 +318,15 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.billetera1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.administrador1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.supervisor1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.usuarioInstancia1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\CreditoMovil\CreditoWS.wsdl" />

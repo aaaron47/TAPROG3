@@ -65,16 +65,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="obtenerPorIDBanco">
-    <xs:sequence>
-      <xs:element name="idbanco" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIDBancoResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:banco" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="modificarBanco">
     <xs:sequence>
       <xs:element minOccurs="0" name="banco" type="tns:banco" />
@@ -83,6 +73,16 @@
   <xs:complexType name="modificarBancoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIDBanco">
+    <xs:sequence>
+      <xs:element name="idbanco" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIDBancoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:banco" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertarBanco">
