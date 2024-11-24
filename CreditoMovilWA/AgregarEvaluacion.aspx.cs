@@ -1,6 +1,7 @@
 ﻿using CreditoMovilWA.CreditoMovil;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -78,7 +79,8 @@ namespace CreditoMovilWA
             ev.evaluador = sup;
             
             // aca pa actualizar base de dates
-            daoEvaluacion.insertarEvaluacion(ev,sup.codigoEv,cli.codigoCliente);
+            if(daoEvaluacion.insertarEvaluacion(ev,sup.codigoEv,cli.codigoCliente))
+                lblError.Text = "Evaluación ingresada exitosamente.";
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
