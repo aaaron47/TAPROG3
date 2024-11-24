@@ -143,13 +143,7 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarEvaluacionesFechaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.cliente.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.credito.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarClientesPorRankingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarCreditosClienteResponse.datasource">
@@ -161,13 +155,19 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarCreditosSinCliFiltroResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarTodosClientesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarTodosCreditosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.metodoPagoInstancia.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.usuarioInstancia.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.cambiarContraResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.cliente.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.eliminarAdministradorResponse1.datasource">
@@ -198,6 +198,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.generarBufferResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.generarDesembolsoResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.generarReporteCreditosResponse1.datasource">
@@ -233,7 +236,10 @@
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.insertarTransaccionResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.metodoPagoInstancia.datasource">
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarClientesPorRankingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.listarTodosClientesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.modificarAdministradorResponse1.datasource">
@@ -306,9 +312,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.obtenerPorNombreBilleteraResponse1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.usuarioInstancia.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\CreditoMovil\CreditoMovilWA.CreditoMovil.validarEmailResponse1.datasource">
