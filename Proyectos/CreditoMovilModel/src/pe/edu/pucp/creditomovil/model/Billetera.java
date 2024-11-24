@@ -3,11 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pe.edu.pucp.creditomovil.model;
-
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 /**
  *
  * @author USER
  */
+@XmlType
 public class Billetera extends MetodoPago {
 
     private String numeroTelefono;

@@ -5,7 +5,10 @@
 package pe.edu.pucp.creditomovil.model;
 
 import java.util.Date;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
 
+@XmlRootElement
 public class Transaccion {
 
     private Date fecha;
@@ -48,7 +51,7 @@ public class Transaccion {
     public void imprimirVoucher() {
 
     }
-
+@XmlElement
     public Date getFecha() {
         return fecha;
     }
@@ -56,7 +59,7 @@ public class Transaccion {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
+@XmlElement
     public String getConcepto() {
         return concepto;
     }
@@ -64,7 +67,7 @@ public class Transaccion {
     public void setConcepto(String concepto) {
         this.concepto = concepto;
     }
-
+@XmlElement
     public double getMonto() {
         return monto;
     }
@@ -72,7 +75,7 @@ public class Transaccion {
     public void setMonto(double monto) {
         this.monto = monto;
     }
-
+@XmlElement
     public boolean isAnulado() {
         return anulado;
     }
@@ -80,7 +83,7 @@ public class Transaccion {
     public void setAnulado(boolean anulado) {
         this.anulado = anulado;
     }
-
+@XmlElement
     public Usuario getUsuarioRegistrado() {
         return usuarioRegistrado;
     }
@@ -88,7 +91,7 @@ public class Transaccion {
     public void setUsuarioRegistrado(Usuario usuarioRegistrado) {
         this.usuarioRegistrado = usuarioRegistrado;
     }
-
+@XmlElement
     public String getAgencia() {
         return agencia;
     }
@@ -96,7 +99,7 @@ public class Transaccion {
     public void setAgencia(String agencia) {
         this.agencia = agencia;
     }
-
+@XmlElement
     public int getNumOperacion() {
         return numOperacion;
     }
@@ -104,7 +107,7 @@ public class Transaccion {
     public void setNumOperacion(int numOperacion) {
         this.numOperacion = numOperacion;
     }
-
+@XmlElement
     public Credito getCredito() {
         return credito;
     }
@@ -112,7 +115,7 @@ public class Transaccion {
     public void setCredito(Credito credito) {
         this.credito = credito;
     }
-
+@XmlElement
     public byte[] getFoto() {
         return foto;
     }
@@ -120,7 +123,7 @@ public class Transaccion {
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }
-
+@XmlElement
     public MetodoPago getMetodoPago() {
         return metodoPago;
     }
