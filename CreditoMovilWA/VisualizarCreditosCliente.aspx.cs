@@ -148,8 +148,10 @@ namespace CreditoMovilWA
             int idUsuario = trans.usuarioRegistrado.idUsuario;
             trans.fecha = DateTime.Now;
             int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());
-            trans.metodoPago = new metodoPagoInstancia();
-            trans.metodoPago.idMetodoPago = idMetodoPago;
+            //trans.metodoPago = new metodoPagoInstancia();
+            //trans.metodoPago.idMetodoPago = idMetodoPago;
+
+            trans.metodoPago = null;
 
             int idCredito = int.Parse((string)Session["idCredito"]);
             credito cred = daoCredito.obtenerPorIDCredito(idCredito);
