@@ -7,41 +7,34 @@
             color: #2f7a44;
             text-align: center;
         }
-        .puntaje {
-            font-size: 36px;
-            color: #2f7a44;
+        .section-title {
+            font-size: 20px;
             font-weight: bold;
-            text-align: right;
-            margin-right: 20px;
+            color: #2f7a44;
+            margin-bottom: 10px;
         }
         .form-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .form-group label {
+            display: block;
             font-size: 16px;
             color: #333;
-            flex: 1;
+            margin-bottom: 5px;
         }
-        .form-group input {
-            flex: 2;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #e4e4e4;
-            margin-left: 10px;
-        }
-        .form-group textarea {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #e4e4e4;
-            margin-top: 10px;
-            resize: none;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
         }
         .modify-btn {
             padding: 10px 20px;
@@ -52,80 +45,62 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: block;
-            width: 150px;
             text-align: center;
-            margin: 20px auto;
         }
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-        .label-group {
-            flex: 1;
-            margin-right: 15px; /* Añade espacio entre columnas */
-        }
-        label {
-             font-size: 16px;
-             color: #333;
-         }
-        .input-text{
-            width:100%;
-        }
-        .back-btn{
+        .back-btn {
             background-color: #002e6e;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 16px;
             border-radius: 5px;
             color: #fff;
             font-weight: 700;
             font-family: 'Poppins', sans-serif; 
-            margin-right: 100px;
-            margin-top:20px;
-            margin-bottom: 20px;
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Contenedor principal -->
     <div class="container">
-        <h2>Insertar Evaluacion </h2>
+        <h2>Insertar Evaluación</h2>
 
+        <!-- Cliente Asignado -->
         <div class="form-group">
-            <label>Cliente Asignado</label>
-            <label for="tipo-documento">Tipo de Documento</label>
-            <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="form-control">
+            <div class="section-title">Cliente Asignado</div>
+            <label for="ddlTipoDocumento">Tipo de Documento</label>
+            <asp:DropDownList ID="ddlTipoDocumento" runat="server">
                 <asp:ListItem Text="Selecciona una opción" Value="" />
                 <asp:ListItem Text="DNI" Value="DNI" />
                 <asp:ListItem Text="Pasaporte" Value="Pasaporte" />
-                <asp:ListItem Text="Carnet de Extranjeria" Value="Carnet_Extranjeria" />
+                <asp:ListItem Text="Carnet de Extranjería" Value="Carnet_Extranjeria" />
             </asp:DropDownList>
-            <label>Documento</label>
-            <asp:TextBox ID="txtDocumento" runat="server" CssClass="input-text" ReadOnly="false"/>
+
+            <label for="txtDocumento">Documento</label>
+            <asp:TextBox ID="txtDocumento" runat="server" />
         </div>
-        
+
+        <!-- Supervisor Asignado -->
         <div class="form-group">
-            <label>Supervisor Asignado</label>
-            <label for="tipo-documento">Tipo de Documento</label>
-            <asp:DropDownList ID="ddlTipoDocSup" runat="server" CssClass="form-control">
+            <div class="section-title">Supervisor Asignado</div>
+            <label for="ddlTipoDocSup">Tipo de Documento</label>
+            <asp:DropDownList ID="ddlTipoDocSup" runat="server">
                 <asp:ListItem Text="Selecciona una opción" Value="" />
                 <asp:ListItem Text="DNI" Value="DNI" />
                 <asp:ListItem Text="Pasaporte" Value="Pasaporte" />
-                <asp:ListItem Text="Carnet de Extranjeria" Value="Carnet_Extranjeria" />
+                <asp:ListItem Text="Carnet de Extranjería" Value="Carnet_Extranjeria" />
             </asp:DropDownList>
-            <label>Documento</label>
-            <asp:TextBox ID="txtDocumentoSup" runat="server" CssClass="input-text" ReadOnly="false"/>
+
+            <label for="txtDocumentoSup">Documento</label>
+            <asp:TextBox ID="txtDocumentoSup" runat="server" />
         </div>
 
-        <!-- Puntaje y botones -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <!-- Botones -->
+        <div class="btn-group">
             <asp:Button ID="btnAgregar" runat="server" Text="AGREGAR" CssClass="modify-btn" OnClick="btnAgregar_Click" />
             <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="back-btn" OnClick="btnBack_Click" />
         </div>
-        <asp:Label ID="lblError" runat="server" CssClass="error-message" EnableViewState="false"></asp:Label>
+
+        <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
     </div>
 </asp:Content>
