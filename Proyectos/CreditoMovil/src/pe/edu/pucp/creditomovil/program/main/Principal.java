@@ -29,10 +29,13 @@ import pe.edu.pucp.creditomovil.rrhh.dao.UsuarioDAO;
 import pe.edu.pucp.creditomovil.model.Administrador;
 import pe.edu.pucp.creditomovil.model.Banco;
 import pe.edu.pucp.creditomovil.model.Billetera;
+import pe.edu.pucp.creditomovil.model.Notificacion;
 import pe.edu.pucp.creditomovil.model.Supervisor;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
 import pe.edu.pucp.creditomovil.model.Usuario;
+import pe.edu.pucp.creditomovil.rrhh.dao.NotificacionDAO;
 import pe.edu.pucp.creditomovil.rrhh.mysql.AdministradorMySQL;
+import pe.edu.pucp.creditomovil.rrhh.mysql.NotificacionMySQL;
 import pe.edu.pucp.creditomovil.rrhh.mysql.SupervisorMySQL;
 import pe.edu.pucp.creditomovil.rrhh.mysql.UsuarioMySQL;
 
@@ -47,8 +50,11 @@ public class Principal {
      */
     public static void main(String[] args) {
         
-        ClienteDAO clienteDAO = new ClienteMySQL();
-        System.out.println(clienteDAO.validarEmail("a20220361@pucp.edu.pe"));
+        NotificacionDAO notidao = new NotificacionMySQL();
+        List<Notificacion> notis = notidao.listarPorUsuario(1);
+        for(Notificacion not : notis){
+            System.out.println("Mensaje: "+not.getMensaje());
+        }
 //        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
 //        int idCliente = cliente.getCodigoCliente();
 //        CreditoDAO creditoDAO = new CreditoMySQL();
