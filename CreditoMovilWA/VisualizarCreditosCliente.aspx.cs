@@ -129,7 +129,6 @@ namespace CreditoMovilWA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                 return;
             }
-
             if (Session["MetodoPago"] == null)
             {
                 lblErrorModal.Text = "Método de pago no seleccionado.";
@@ -137,7 +136,6 @@ namespace CreditoMovilWA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                 return;
             }
-
             if (Session["idCredito"] == null)
             {
                 lblErrorModal.Text = "No se encuentra el credito.";
@@ -146,30 +144,27 @@ namespace CreditoMovilWA
                 return;
             }
 
-            // Continuar con la lógica de negocio
             transaccion trans = new transaccion();
             trans.usuarioRegistrado = (usuarioInstancia1)Session["Usuario"];
             int idUsuario = trans.usuarioRegistrado.idUsuario;
+            System.Diagnostics.Debug.WriteLine(idUsuario);
             trans.fecha = DateTime.Now;
-            int idMetodoPago = int.Parse(Session["MetodoPago"].ToString());
-            //trans.metodoPago = new metodoPagoInstancia();
-            //trans.metodoPago.idMetodoPago = idMetodoPago;
+            trans.fechaSpecified = true;
+            int idMetodoPago = Int32.Parse(Session["MetodoPago"].ToString());
 
             trans.metodoPago = null;
 
-            int idCredito = int.Parse((string)Session["idCredito"]);
+            int idCredito = Int32.Parse((string)Session["idCredito"]);
             credito cred = daoCredito.obtenerPorIDCredito(idCredito);
 
+            trans.monto = cred.monto/cred.numCuotas;
             cred.cantCuotasPagadas++;
             trans.concepto = "Cuota número " + cred.cantCuotasPagadas;
+            trans.anulado = false;
+            trans.agencia = "";
 
             if (cred.numCuotas == cred.cantCuotasPagadas)
                 cred.estado = estado.Cancelado;
-
-            daoCredito.modificarCredito(cred);
-
-            trans.credito = new credito1(); 
-            trans.credito.numCredito = idCredito;
 
             if (fileUpload.HasFile)
             {
@@ -177,7 +172,6 @@ namespace CreditoMovilWA
                 if (fileUpload.PostedFile.ContentLength > maxFileSize)
                 {
                     lblErrorModal.Text = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
-                    // Mantener el modal abierto
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                     return;
                 }
@@ -186,36 +180,29 @@ namespace CreditoMovilWA
                 if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png" && fileExtension != ".pdf")
                 {
                     lblErrorModal.Text = "Solo se permiten archivos de tipo JPG, JPEG, PNG o PDF.";
-                    // Mantener el modal abierto
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                     return;
                 }
 
                 // Leer el archivo y convertirlo en un arreglo de bytes
                 using (BinaryReader br = new BinaryReader(fileUpload.PostedFile.InputStream))
-                {
                     trans.foto = br.ReadBytes(fileUpload.PostedFile.ContentLength);
-                }
 
-                // Intentar insertar la transacción
                 if (!daoTransaccion.insertarTransaccion(trans, idUsuario, idCredito, idMetodoPago))
                 {
                     lblErrorModal.Text = "Error al insertar la transacción.";
-                    // Mantener el modal abierto
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                 }
                 else
                 {
-                    // Transacción exitosa, cerrar el modal
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "CloseModal", "closeModal();", true);
+                    daoCredito.modificarCredito(cred);
                     lblErrorModal.Text = "";
                 }
             }
             else
             {
-                // No se ha subido ningún archivo
                 lblErrorModal.Text = "Por favor, suba un archivo de comprobante.";
-                // Mantener el modal abierto
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenModal", "openModal();", true);
                 return;
             }
