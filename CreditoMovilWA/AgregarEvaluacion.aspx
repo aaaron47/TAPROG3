@@ -126,6 +126,5 @@
             <asp:Button ID="btnAgregar" runat="server" Text="AGREGAR" CssClass="modify-btn" OnClick="btnAgregar_Click" />
             <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="back-btn" OnClick="btnBack_Click" />
         </div>
-        <asp:Label ID="lblError" runat="server" CssClass="error-message" EnableViewState="false"></asp:Label>
     </div>
 </asp:Content>

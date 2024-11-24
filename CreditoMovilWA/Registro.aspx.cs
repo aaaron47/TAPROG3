@@ -62,12 +62,6 @@ namespace CreditoMovilWA
                 return;
             }
 
-            if(contrasena.Length < 8 || !contieneNumero(contrasena))
-            {
-                lblError.Text = "La contraseña debe tener al menos 8 caracteres y mínimo un número.";
-                return;
-            }
-
             // Aquí puedes agregar lógica para guardar los datos en la base de datos
             // Asegúrate de hashear la contraseña antes de almacenarla
             string hashedPassword = HashPassword(contrasena);
@@ -104,15 +98,6 @@ namespace CreditoMovilWA
                 byte[] hash = sha256.ComputeHash(bytes);
                 return Convert.ToBase64String(hash);
             }
-        }
-
-        private bool contieneNumero(string password)
-        {
-            for(int i=0;i<password.Length; i++)
-            {
-                if (password[i] >= '0' && password[i] <= '9') return true;
-            }
-            return false;
         }
     }
 }
