@@ -50,11 +50,27 @@ public class Principal {
      */
     public static void main(String[] args) {
         
-        NotificacionDAO notidao = new NotificacionMySQL();
-        List<Notificacion> notis = notidao.listarPorUsuario(1);
-        for(Notificacion not : notis){
-            System.out.println("Mensaje: "+not.getMensaje());
+        TransaccionDAO transaccionDAO = new TransaccionMySQL();
+        //Insertar
+        Transaccion transaccion = new Transaccion();
+        transaccion.setFecha(new Date());
+        transaccion.setConcepto("concept");
+        transaccion.setMonto(100.00);
+        transaccion.setAnulado(false);
+        transaccion.setAgencia("agencia");
+        transaccion.setFoto(null);
+        boolean exito = transaccionDAO.insertar(transaccion,7,1,2);
+
+        if (exito) {
+            System.out.println("Transaccion insertada con exito.");
+        } else {
+            System.out.println("Error al insertar la transaccion.");
         }
+//        NotificacionDAO notidao = new NotificacionMySQL();
+//        List<Notificacion> notis = notidao.listarPorUsuario(1);
+//        for(Notificacion not : notis){
+//            System.out.println("Mensaje: "+not.getMensaje());
+//        }
 //        Cliente cliente = clienteDAO.obtenerPorDocIdentidad("10551128", "DNI");
 //        int idCliente = cliente.getCodigoCliente();
 //        CreditoDAO creditoDAO = new CreditoMySQL();
@@ -318,11 +334,11 @@ public class Principal {
         //seguir similar a Usuario
         
         //EVALUACION
-        EvaluacionDAO daoEv = new EvaluacionMySQL();
-        Evaluacion ev = daoEv.obtenerPorId(14);
-        
-        System.out.println(ev.getClienteAsignado().getNombre() + " " +
-                ev.getClienteAsignado().getApPaterno() + " "+ev.getClienteAsignado().getApMaterno());
+//        EvaluacionDAO daoEv = new EvaluacionMySQL();
+//        Evaluacion ev = daoEv.obtenerPorId(14);
+//        
+//        System.out.println(ev.getClienteAsignado().getNombre() + " " +
+//                ev.getClienteAsignado().getApPaterno() + " "+ev.getClienteAsignado().getApMaterno());
         //INSERTAR
         
     }
