@@ -36,7 +36,7 @@ namespace CreditoMovilWA
 
             if (isFechaInicio && isFechaFin)
             {
-                var resultados = daoEvaluacion.listarEvaluacionesFecha(fechaInicio, fechaFin);
+                evaluacion[] resultados = daoEvaluacion.listarEvaluacionesFecha(fechaInicio, fechaFin);
 
                 if (resultados != null)
                 {

@@ -44,7 +44,7 @@ namespace CreditoMovilWA
             usuarioInstancia user = (usuarioInstancia)Session["Usuario"];
             notificacion[] notificaciones = daoNotificacion.listarPorUsuario(user.idUsuario);
             // Si no hay notificaciones, limpiar el DataSource y ocultar el indicador
-            foreach (var notificacion in notificaciones)
+            foreach (notificacion notificacion in notificaciones)
             {
                 System.Diagnostics.Debug.WriteLine($"ID: {notificacion.id_usuario}, Mensaje: {notificacion.mensaje}");
             }
@@ -64,7 +64,7 @@ namespace CreditoMovilWA
                     .Select(n => n.mensaje) // Obtener solo el campo 'mensaje'
                     .ToList();
 
-                foreach (var mensaje in mensajes)
+                foreach (string mensaje in mensajes)
                 {
                     System.Diagnostics.Debug.WriteLine(mensaje);
                 }

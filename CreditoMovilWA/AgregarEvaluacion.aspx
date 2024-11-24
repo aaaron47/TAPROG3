@@ -102,5 +102,6 @@
         </div>
 
         <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
+        <asp:Label ID="lblSuccess" runat="server" CssClass="error-message"></asp:Label>
     </div>
 </asp:Content>

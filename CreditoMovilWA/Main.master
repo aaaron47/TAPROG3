@@ -58,6 +58,10 @@
             color: red;
             margin-bottom: 15px;
         }
+        .success-message {
+            color: green;
+            margin-bottom: 15px;
+        }
         .header .d-flex {
             gap: 10px; /* Espacio entre la campanita y el botón de cerrar sesión */
         }
@@ -119,6 +123,9 @@
             .error-message {
                 font-size: 12px; /* Reducir tamaño del mensaje de error */
             }
+            .success-message {
+                 font-size: 12px
+            }
             .notification-text{
                 font-size: 0.9rem; /* Reducir el tamaño de la fuente en dispositivos medianos */
             }
@@ -151,6 +158,9 @@
             }
             .error-message {
                 font-size: 10px; /* Reducir tamaño del mensaje de error */
+            }
+            .success-message {
+                 font-size: 12px
             }
             .notification-text {
                 font-size: 0.8rem; /* Reducir el tamaño de la fuente en dispositivos medianos */

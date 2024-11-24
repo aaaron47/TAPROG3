@@ -16,8 +16,7 @@ namespace CreditoMovilWA
         private SupervisorWSClient daoSupervisor = new SupervisorWSClient();
 
         protected void Page_Init(object sender, EventArgs e)
-        {
-            
+        { 
             administrador admin = (administrador)Session["Administrador"];
             if (admin == null)
             {
@@ -30,12 +29,27 @@ namespace CreditoMovilWA
         {
             if (!IsPostBack)
             {
-
+                lblError.Text = "";
+                lblSuccess.Text = "";
             }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+
+            // Validación de los campos requeridos
+            if (string.IsNullOrWhiteSpace(txtDocumento.Text) || string.IsNullOrWhiteSpace(ddlTipoDocumento.SelectedValue))
+            {
+                lblError.Text = "Debe especificar tanto el tipo de documento como el número de documento del cliente.";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDocumentoSup.Text) || string.IsNullOrWhiteSpace(ddlTipoDocSup.SelectedValue))
+            {
+                lblError.Text = "Debe especificar tanto el tipo de documento como el número de documento del supervisor.";
+                return;
+            }
+
             evaluacion ev = new evaluacion();
             ev.nombreNegocio = "";
             ev.puntaje = 0;
@@ -80,7 +94,7 @@ namespace CreditoMovilWA
             
             // aca pa actualizar base de dates
             if(daoEvaluacion.insertarEvaluacion(ev,sup.codigoEv,cli.codigoCliente))
-                lblError.Text = "Evaluación ingresada exitosamente.";
+                lblSuccess.Text = "Evaluación ingresada exitosamente.";
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

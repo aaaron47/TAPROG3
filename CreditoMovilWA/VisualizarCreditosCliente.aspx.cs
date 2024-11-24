@@ -54,19 +54,20 @@ namespace CreditoMovilWA
 
             if (isFechaInicio && isFechaFin)
             {
-                var resultados = daoCredito.listarCreditosFiltro(cli.codigoCliente, fechaInicio, fechaFin, estado);
+                credito[] resultados = daoCredito.listarCreditosFiltro(cli.codigoCliente, fechaInicio, fechaFin, estado);
 
                 if (resultados != null)
                 {
-                    var ordenPersonalizado = new Dictionary<string, int>
+                    Dictionary<string, int> ordenPersonalizado = new Dictionary<string, int>
                     {
                         { "Retrasado", 1 },
                         { "Activo", 2 },
-                        { "Solicitado", 3 },
-                        { "Finalizado", 4 }
+                        { "Desembolsado", 3 },
+                        { "Solicitado", 4 },
+                        { "Finalizado", 5 }
                     };
 
-                    var dataOrdenada = resultados
+                    List<object> dataOrdenada = resultados
                      .OrderBy(x => ordenPersonalizado[x.estado.ToString()]) // Ordenar por el estado personalizado
                      .Select(x => new
                      {
@@ -78,9 +79,10 @@ namespace CreditoMovilWA
                          Estado = x.estado.ToString(),
                          EstadoOriginal = x.estado // Incluye el estado original
                      })
+                     .Cast<object>()
                      .ToList();
 
-                    var cred1 = dataOrdenada[0];
+                    dynamic cred1 = dataOrdenada[0];
                     if(cred1.EstadoOriginal == CreditoMovil.estado.Retrasado)
                     {
                         lblRetrasado.Text = "Usted tiene créditos atrasados";
@@ -229,7 +231,7 @@ namespace CreditoMovilWA
         {
             try
             {
-                var bancos = daoBanco.listarTodosBancos();
+                banco[] bancos = daoBanco.listarTodosBancos();
                 ViewState["ListaBancos"] = bancos;
 
                 ddlBancoElegido.Items.Clear();
@@ -237,7 +239,7 @@ namespace CreditoMovilWA
 
                 if (bancos != null)
                 {
-                    foreach (var banco in bancos)
+                    foreach (banco banco in bancos)
                     {
                         ListItem listItem = new ListItem(banco.nombreBanco, banco.nombreBanco);
                         ddlBancoElegido.Items.Add(listItem);
@@ -254,7 +256,7 @@ namespace CreditoMovilWA
         {
             try
             {
-                var billeteras = daoBilletera.listarTodosBilleteras();
+                billetera[] billeteras = daoBilletera.listarTodosBilleteras();
                 ViewState["ListaBilleteras"] = billeteras;
 
                 ddlBilleteraElegida.Items.Clear();
@@ -262,7 +264,7 @@ namespace CreditoMovilWA
 
                 if (billeteras != null)
                 {
-                    foreach (var billetera in billeteras)
+                    foreach (billetera billetera in billeteras)
                     {
                         System.Diagnostics.Debug.WriteLine("Agregando billetera: " + billetera.nombreBilletera);
                         ListItem listItem = new ListItem(billetera.nombreBilletera, billetera.nombreBilletera);
@@ -284,7 +286,7 @@ namespace CreditoMovilWA
         public static banco ObtenerDatosBanco(string nombreBanco)
         {
             BancoWSClient daoBanco = new BancoWSClient();
-            var banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
+            banco banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
             HttpContext.Current.Session["MetodoPago"] = banco.idMetodoPago;
             return banco;
         }
@@ -293,7 +295,7 @@ namespace CreditoMovilWA
         public static billetera ObtenerDatosBilletera(string nombreBilletera)
         {
             BilleteraWSClient daoBilletera = new BilleteraWSClient();
-            var billetera = daoBilletera.obtenerPorNombreBilletera(nombreBilletera);
+            billetera billetera = daoBilletera.obtenerPorNombreBilletera(nombreBilletera);
             HttpContext.Current.Session["MetodoPago"] = billetera.idMetodoPago;
             return billetera;
         }

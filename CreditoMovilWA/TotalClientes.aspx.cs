@@ -31,7 +31,7 @@ namespace CreditoMovilWA
             int puntajeMin = int.Parse(txtPuntajeMin.Text);
             int puntajeMax = int.Parse(txtPuntajeMax.Text);
 
-            var clientes = daoCliente.listarClientesPorRanking(puntajeMin,puntajeMax);
+            cliente[] clientes = daoCliente.listarClientesPorRanking(puntajeMin,puntajeMax);
 
             if(clientes != null)
             {

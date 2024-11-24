@@ -32,5 +32,6 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocSup;
         protected global::System.Web.UI.WebControls.TextBox txtDocumentoSup;
         protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Label lblSuccess;
     }
 }
