@@ -1,0 +1,90 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="OrdenDesembolso" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6fbbeb0b-891c-4189-b15f-7fc8c292c632">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdapterPUCP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="logo" class="java.awt.Image"/>
+	<parameter name="BordeSup" class="java.awt.Image"/>
+	<parameter name="codCli" class="java.lang.Integer"/>
+	<parameter name="codCred" class="java.lang.Integer"/>
+	<query language="sql"><![CDATA[    SELECT 
+        u.nombre,
+        u.ap_paterno,
+        u.ap_materno,
+        u.contrasena,
+        c.direccion,
+        
+        cr.monto,
+        cr.num_credito,
+        cr.tasa_interes
+
+    FROM creditomovil.usuario u,  creditomovil.credito cr,  creditomovil.cliente_credito crcl, cliente c
+    WHERE u.usuario_id = c.usuario_usuario_id and c.codigo_cliente = $P{codCli} and cr.num_credito = $P{codCred} 
+    and crcl.credito_num_credito = cr.num_credito 
+    and u.documento = crcl.num_documento and u.tipo_doc = crcl.tipo_documento]]></query>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="ap_paterno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ap_paterno"/>
+		<property name="com.jaspersoft.studio.field.label" value="ap_paterno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="ap_materno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ap_materno"/>
+		<property name="com.jaspersoft.studio.field.label" value="ap_materno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="contrasena" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="contrasena"/>
+		<property name="com.jaspersoft.studio.field.label" value="contrasena"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="monto"/>
+		<property name="com.jaspersoft.studio.field.label" value="monto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="num_credito" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="num_credito"/>
+		<property name="com.jaspersoft.studio.field.label" value="num_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<field name="tasa_interes" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="tasa_interes"/>
+		<property name="com.jaspersoft.studio.field.label" value="tasa_interes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="credito"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="440" splitType="Stretch">
+		<element kind="image" uuid="59d7414c-47de-4b25-81bf-b4685d392fe8" x="-20" y="-20" width="595" height="370">
+			<expression><![CDATA[$P{BordeSup}]]></expression>
+		</element>
+		<element kind="staticText" uuid="1d1c3878-fda8-4cce-8cd2-d10cb9dd85a9" x="120" y="100" width="310" height="30" fontName="Segoe UI Black" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[ORDEN DE DESEMBOLSO]]></text>
+		</element>
+		<element kind="image" uuid="7dec2fa4-8e7f-4c0d-bc87-26844d2c32bb" x="20" y="40" width="150" height="40">
+			<expression><![CDATA[$P{logo}]]></expression>
+		</element>
+		<element kind="textField" uuid="26977512-c5a6-4784-8737-f78b83eb2196" x="130" y="130" width="290" height="20" hTextAlign="Center">
+			<expression><![CDATA["Cliente Nro: " + $P{codCli}]]></expression>
+		</element>
+		<element kind="textField" uuid="a57cca05-1a92-4689-8102-b695388cd4ee" x="10" y="190" width="530" height="250">
+			<expression><![CDATA["Señores: \n" + $F{nombre} + " " + $F{ap_paterno} + " " + $F{ap_materno} + "\n " + $F{direccion} + "\n\n Asunto: Orden de desembolso \n\n Cordial Saludo: \n\n Por medio del presente comunicado me permito entregar a ustedes el desembolso correspondiente al crédito " + $F{num_credito} + ", por el valor de " + $F{monto} + " soles, con una tasa de interés del " + $F{tasa_interes} + "%.\n\n Saludos Cordiales, \n\n CREDITO MOVIL"]]></expression>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary splitType="Stretch"/>
+</jasperReport>
