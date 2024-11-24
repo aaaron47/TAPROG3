@@ -113,14 +113,6 @@
         .view-btn:hover {
             background-color: #138496;
         }
-
-        /* Mensajes de error */
-        .error-message {
-            color: red;
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
     </style>
 
     <script type="text/javascript">

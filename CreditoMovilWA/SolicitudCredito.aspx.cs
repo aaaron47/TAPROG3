@@ -24,29 +24,22 @@ namespace CreditoMovilWA
             minHiddenField.Value = (1000 * cli.ranking / 100).ToString();
             maxHiddenField.Value = (5000 * cli.ranking / 100).ToString();
 
-            if(cli.ranking > 80)
-            {
-                tasaInteres.Value = "0.05";
-            }else if(cli.ranking > 50)
-            {
-                tasaInteres.Value = "0.8";
-            }else if(cli.ranking > 30)
-            {
-                tasaInteres.Value = "0.1";
-            }
-            else if(cli.ranking > 10)
-            {
-                tasaInteres.Value = "0.12";
-            }
-            else
-            {
-                tasaInteres.Value = "0.15";
-            }
+            if(cli.ranking > 80) tasaInteres.Value = "0.05";
+            else if(cli.ranking > 50) tasaInteres.Value = "0.8";
+            else if(cli.ranking > 30) tasaInteres.Value = "0.1";
+            else if(cli.ranking > 10) tasaInteres.Value = "0.12";
+            else tasaInteres.Value = "0.15";
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                for (int i = 1; i <= 18; i++)
+                {
+                    ddlCuotas.Items.Add(new ListItem($"{i} mes(es)", i.ToString()));
+                }
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

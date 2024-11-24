@@ -2,7 +2,6 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-
         .container{
             max-width: 1200px;
         }
@@ -95,7 +94,6 @@
             border-radius: 10px;
             position: relative;
         }
-
         .close-btn {
             background: none;
             border: none;
@@ -104,13 +102,11 @@
             font-weight: bold;
             cursor: pointer;
         }
-
         .close-btn:hover, .close-btn:focus {
             color: #000;
             text-decoration: none;
             cursor: pointer;
         }
-
         .save-btn {
             width: 50%; /* Ajusta el ancho para que ambos botones ocupen el mismo espacio */
             background-color: #2f7a44;

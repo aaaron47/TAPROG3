@@ -61,6 +61,81 @@
             text-align: left;
         }
 
+        /* Responsividad */
+    @media (max-width: 768px) {
+        #min-value,
+        #max-value {
+            font-size: 12px; /* Reducir tamaño del texto */
+        }
+        h1 {
+            font-size: 24px; /* Reducir tamaño del título */
+        }
+        label {
+            font-size: 12px; /* Reducir tamaño del label */
+        }
+        .slider-container {
+            align-items: flex-start;
+        }
+        .slider {
+            width: 90%; 
+            margin: 10px 0; /* Ajustar márgenes */
+        }
+        .amount-display {
+            font-size: 16px; /* Reducir tamaño de la cantidad mostrada */
+            text-align: center; /* Centrar el texto */
+        }
+        .btn-option {
+            font-size: 10px; /* Reducir tamaño del texto del botón */
+            padding: 8px 15px; /* Ajustar padding */
+        }
+        .submit-btn {
+            font-size: 12px; /* Reducir tamaño del botón */
+            padding: 12px; /* Ajustar padding */
+            margin-top: 30px; /* Reducir margen superior */
+        }
+        .interest-display {
+            font-size: 10px; /* Reducir tamaño del texto */
+        }
+    }
+
+    @media (max-width: 480px) {
+        #min-value,
+        #max-value {
+            font-size: 10px; /* Reducir tamaño del texto */
+        }
+        
+        h1 {
+            font-size: 20px; /* Reducir aún más el tamaño del título */
+            text-align: center; /* Centrar el texto */
+        }
+        label {
+            font-size: 10px; /* Reducir tamaño del label */
+        }
+        .slider-container {
+            align-items: center; /* Centrar contenido */
+        }
+        .slider {
+            width: 90%; /* Ajustar ancho completo */
+            margin: 5px 0; /* Reducir margen */
+        }
+        .amount-display {
+            font-size: 14px; /* Reducir aún más el tamaño de la cantidad mostrada */
+        }
+        .btn-option {
+            font-size: 8px; /* Ajustar tamaño del texto del botón */
+            padding: 6px 10px; /* Reducir padding */
+            margin: 5px; /* Mantener márgenes pequeños */
+        }
+        .submit-btn {
+            font-size: 10px; /* Reducir tamaño del texto del botón */
+            padding: 10px; /* Reducir padding */
+            margin-top: 20px; /* Ajustar margen superior */
+        }
+        .interest-display {
+            font-size: 8px; /* Reducir tamaño del texto */
+            text-align: center; /* Centrar texto */
+        }
+    }
     </style>
     <script>
 
@@ -138,14 +213,6 @@
             <button type="button" class="btn-option" data-group="cuotas" onclick="selectOption(this, 'cuotas')">12</button>
 
             <asp:HiddenField ID ="selectedCuotas" runat="server" ClientIDMode="Static" />
-        </div>
-
-        <label>¿Cuándo desea realizar el primer pago?</label>
-        <div>
-            <button type="button" class="btn-option" data-group="primerPago" onclick="selectOption2(this, 'primerPago')">Quincena de mes</button>
-            <button type="button" class="btn-option" data-group="primerPago" onclick="selectOption2(this, 'primerPago')">Inicio de mes</button>
-
-            <asp:HiddenField ID ="selectedPrimerPago" runat="server" ClientIDMode="Static" />
         </div>
 
         <!-- Interés aproximado -->
