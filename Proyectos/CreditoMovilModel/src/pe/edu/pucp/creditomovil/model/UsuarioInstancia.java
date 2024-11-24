@@ -10,6 +10,13 @@ import java.util.Date;
  *
  * @author aaron
  */
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+/**
+ *
+ * @author USER
+ */
+@XmlType
 public class UsuarioInstancia extends Usuario {
 
     public UsuarioInstancia(){}

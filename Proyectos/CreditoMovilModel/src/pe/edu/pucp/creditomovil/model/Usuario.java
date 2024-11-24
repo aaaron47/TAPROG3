@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pe.edu.pucp.creditomovil.model;
-
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import java.util.Date;
 
+@XmlSeeAlso({Cliente.class, Supervisor.class,Administrador.class, UsuarioInstancia.class})
+@XmlType
 public abstract class Usuario {
 
     private int idUsuario;

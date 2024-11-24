@@ -5,7 +5,13 @@
 package pe.edu.pucp.creditomovil.model;
 
 import java.util.Date;
-
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+/**
+ *
+ * @author USER
+ */
+@XmlType
 public class Administrador extends Usuario {
 
     private String codigoAdm;

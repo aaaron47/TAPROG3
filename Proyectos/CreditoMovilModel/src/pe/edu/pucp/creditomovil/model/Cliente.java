@@ -6,7 +6,13 @@ package pe.edu.pucp.creditomovil.model;
 
 import java.util.Date;
 import java.util.ArrayList;
-
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+/**
+ *
+ * @author USER
+ */
+@XmlType
 public class Cliente extends Usuario{
 
     private int codigoCliente;
