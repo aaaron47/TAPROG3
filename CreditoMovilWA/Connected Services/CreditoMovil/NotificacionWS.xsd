@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.creditomovil.pucp.edu.pe/" targetNamespace="http://services.creditomovil.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="insertarNotificacion" type="tns:insertarNotificacion" />
+  <xs:element name="insertarNotificacionResponse" type="tns:insertarNotificacionResponse" />
+  <xs:element name="listarPorUsuario" type="tns:listarPorUsuario" />
+  <xs:element name="listarPorUsuarioResponse" type="tns:listarPorUsuarioResponse" />
+  <xs:element name="modificarNotificacion" type="tns:modificarNotificacion" />
+  <xs:element name="modificarNotificacionResponse" type="tns:modificarNotificacionResponse" />
+  <xs:complexType name="modificarNotificacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="notificacion" type="tns:notificacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="notificacion">
+    <xs:sequence>
+      <xs:element name="activo" type="xs:int" />
+      <xs:element name="id_notificacion" type="xs:int" />
+      <xs:element name="id_usuario" type="xs:int" />
+      <xs:element minOccurs="0" name="mensaje" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarNotificacionResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarPorUsuario">
+    <xs:sequence>
+      <xs:element name="idUsuario" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarPorUsuarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:notificacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarNotificacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="notificacion" type="tns:notificacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarNotificacionResponse">
+    <xs:sequence />
+  </xs:complexType>
+</xs:schema>
