@@ -1,6 +1,8 @@
 ﻿using CreditoMovilWA.CreditoMovil;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -32,6 +34,8 @@ namespace CreditoMovilWA
                 CargarDatosEvaluacion();
                 DeshabilitarCampos(); //inicialmente inhabilitad
             }
+
+            Cargar_Foto(sender, e);
         }
 
         private void CargarDatosEvaluacion()
@@ -47,6 +51,13 @@ namespace CreditoMovilWA
             txtDireccionNegocio.Text = ev.direccionNegocio;
             txtTelefonoNegocio.Text = ev.telefonoNegocio;
             txtClienteAsignado.Text = ev.clienteAsignado.nombre + " " + ev.clienteAsignado.apPaterno + " " + ev.clienteAsignado.apMaterno;
+
+            if (ev.foto != null)
+            {
+                string base64String = Convert.ToBase64String(ev.foto);
+                string imageUrl = "data:image/jpeg;base64," + base64String;
+                imgEvaluacionFoto.ImageUrl = imageUrl;
+            }
 
             txtMargenGanancia.Text = ev.margenGanancia.ToString();
             txtVentasDiarias.Text = ev.ventasDiarias.ToString();
@@ -74,7 +85,7 @@ namespace CreditoMovilWA
             }
             else
             {
-                GuardarDatosEvaluacion();
+                GuardarDatosEvaluacion(sender, e);
                 DeshabilitarCampos();
                 btnModificar.Text = "MODIFICAR";
                 // Recargar el color del puntaje después de guardar los cambios
@@ -96,6 +107,7 @@ namespace CreditoMovilWA
             txtEstado.ReadOnly = false;
             txtObservaciones.ReadOnly = false;
             txtPuntaje.ReadOnly = false;
+            fileUploadEvaluacionFoto.Enabled = false;
         }
 
         private void DeshabilitarCampos()
@@ -112,13 +124,13 @@ namespace CreditoMovilWA
             txtPuntaje.ReadOnly = true;
             txtEstado.ReadOnly = true;
             txtObservaciones.ReadOnly = true;
+            fileUploadEvaluacionFoto.Enabled = true;
         }
 
-        private void GuardarDatosEvaluacion()
+        private void GuardarDatosEvaluacion(object sender, EventArgs e)
         {
             evaluacion ev = (evaluacion)Session["evaluacion"];
             ev.nombreNegocio = txtNombreNegocio.Text;
-            ev.fechaRegistro = DateTime.Parse(txtFechaRegistro.Text);
             ev.direccionNegocio = txtDireccionNegocio.Text;
             ev.telefonoNegocio = txtTelefonoNegocio.Text;
             //logica para el cliente asignado
@@ -131,6 +143,9 @@ namespace CreditoMovilWA
             ev.activo = txtEstado.Text == "Activo" ? true : false;
             ev.observaciones = txtObservaciones.Text;
             ev.puntaje = Double.Parse(txtPuntaje.Text);
+
+            ev.foto = (byte[])Session["foto"];
+
 
             // aca pa actualizar base de dates
             daoEvaluacion.modificarEvaluacion(ev);
@@ -157,6 +172,30 @@ namespace CreditoMovilWA
 
             // Aplicar el estilo en línea al TextBox
             txtPuntaje.Attributes.Add("style", $"color: {color}; font-weight: bold;");
+        }
+
+        protected void Cargar_Foto(object sender, EventArgs e)
+        {
+            if (IsPostBack && fileUploadEvaluacionFoto.PostedFile != null && fileUploadEvaluacionFoto.HasFile)
+            {
+                string extension = System.IO.Path.GetExtension(fileUploadEvaluacionFoto.FileName);
+                if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png" || extension.ToLower() == ".gif")
+                {
+                    string filename = Guid.NewGuid().ToString() + extension;
+                    string filePath = Server.MapPath("~/Uploads/") + filename;
+                    fileUploadEvaluacionFoto.SaveAs(Server.MapPath("~/Uploads/") + filename);
+                    imgEvaluacionFoto.ImageUrl = "~/Uploads/" + filename;
+                    imgEvaluacionFoto.Visible = true;
+                    FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    Session["foto"] = br.ReadBytes((int)fs.Length);
+                    fs.Close();
+                }
+                else
+                {
+                    Response.Write("Por favor, selecciona un archivo de imagen válido.");
+                }
+            }
         }
     }
 }

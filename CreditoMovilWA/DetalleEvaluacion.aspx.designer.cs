@@ -38,5 +38,8 @@ namespace CreditoMovilWA
 
         protected global::System.Web.UI.WebControls.Button btnModificar;
         protected global::System.Web.UI.WebControls.Button btnRegresar;
+
+        protected global::System.Web.UI.WebControls.Image imgEvaluacionFoto;
+        protected global::System.Web.UI.WebControls.FileUpload fileUploadEvaluacionFoto;
     }
 }

@@ -159,6 +159,10 @@
         <label style="margin-top: 20px;" class="label">Puntaje</label>
         <asp:TextBox ID="txtPuntaje" runat="server" CssClass="puntaje-display" ReadOnly="true" />
 
+        <label style="margin-top: 20px;" class="label">Foto</label>
+        <asp:Image ID="imgEvaluacionFoto" runat="server" CssClass="img-fluid img-thumbnail" ImageUrl="/Images/placeholder.jpg" Height="235" Width="720" />
+        <asp:FileUpload ID="fileUploadEvaluacionFoto" CssClass="form-control mb-2" runat="server" onchange="this.form.submit()" ClientIDMode="Static" />
+
         <!-- Puntaje y botón modificar -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
             <asp:Button ID="btnModificar" runat="server" Text="MODIFICAR" CssClass="modify-btn" OnClick="btnModificar_Click" />
