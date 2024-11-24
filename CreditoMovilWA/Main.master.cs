@@ -11,11 +11,16 @@ namespace CreditoMovilWA
     public partial class Main : System.Web.UI.MasterPage
     {
         private UsuarioWSClient daoUsuario = new UsuarioWSClient();
+        private NotificacionWSClient daoNotificacion = new NotificacionWSClient();
 
-        private static List<string> notificaciones = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["Usuario"] == null)
+            {
+                return;
+            }
             if (!IsPostBack)
             {
                 ActualizarNotificaciones();
@@ -25,14 +30,25 @@ namespace CreditoMovilWA
         // Método para agregar una nueva notificación
         public void AgregarNotificacion (string mensaje)
         {
-            notificaciones.Add(mensaje);
+            usuarioInstancia user = (usuarioInstancia)Session["Usuario"];
+            notificacion noti = new notificacion();
+            noti.mensaje = mensaje;
+            noti.id_usuario = user.idUsuario;
+            noti.activo = 1;
+            daoNotificacion.insertarNotificacion(noti);
         }
 
         // Método para actualizar el modal de notificaciones y el indicador
         private void ActualizarNotificaciones()
         {
+            usuarioInstancia user = (usuarioInstancia)Session["Usuario"];
+            notificacion[] notificaciones = daoNotificacion.listarPorUsuario(user.idUsuario);
             // Si no hay notificaciones, limpiar el DataSource y ocultar el indicador
-            if (notificaciones.Count == 0)
+            foreach (var notificacion in notificaciones)
+            {
+                System.Diagnostics.Debug.WriteLine($"ID: {notificacion.id_usuario}, Mensaje: {notificacion.mensaje}");
+            }
+            if (notificaciones == null || notificaciones.Length == 0)
             {
                 rptNotifications.DataSource = new List<string> { "No hay notificaciones disponibles." };
                 rptNotifications.DataBind();
@@ -41,12 +57,22 @@ namespace CreditoMovilWA
             }
             else
             {
-                // Asignar las notificaciones al repeater y mostrar el indicador
-                rptNotifications.DataSource = notificaciones;
-                rptNotifications.DataBind();
-                lblNotificationDot.Visible = true;
+                // Crear lista de mensajes con las primeras 10 notificaciones en orden invertido
+                List<string> mensajes = notificaciones
+                    .Reverse() // Invertir el orden
+                    .Take(10) // Tomar las primeras 10
+                    .Select(n => n.mensaje) // Obtener solo el campo 'mensaje'
+                    .ToList();
 
-   
+                foreach (var mensaje in mensajes)
+                {
+                    System.Diagnostics.Debug.WriteLine(mensaje);
+                }
+
+                // Asignar la lista de mensajes al Repeater
+                rptNotifications.DataSource = mensajes;
+                rptNotifications.DataBind();
+                lblNotificationDot.Visible = true; // Mostrar el indicador
             }
         }
 
