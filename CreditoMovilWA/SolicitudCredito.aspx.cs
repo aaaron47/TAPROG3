@@ -37,16 +37,25 @@ namespace CreditoMovilWA
             {
                 for (int i = 1; i <= 18; i++)
                 {
-                    ddlCuotas.Items.Add(new ListItem($"{i} mes(es)", i.ToString()));
+                     ddlCuotas.Items.Add(new ListItem($"{i} mes(es)", i.ToString()));
                 }
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrEmpty(ddlCuotas.SelectedValue))
+            {
+                lblError.Text = "Debe seleccionar el número de cuotas.";
+                lblError.Visible = true;
+                return;
+            }
+
             cliente cli = (cliente)Session["Cliente"];
             // Obtener el monto del HiddenField
             int monto = int.Parse(hfMonto.Value);
+            int cuotas = int.Parse(ddlCuotas.SelectedValue);
 
             // Calcular el rango de interés (5% - 15%)
             double minInteres = monto * 0.05;
@@ -59,11 +68,10 @@ namespace CreditoMovilWA
             cred.cliente = null; //no es necesario ya que se guarda desde el insertarcredito del dao.
             cred.estado = estado.Solicitado;
             cred.tasaInteres = double.Parse(tasaInteres.Value)*100;
-            cred.fechaOtorgamiento = DateTime.Now;
             cred.monto = monto;
-            cred.numCuotas = Int32.Parse(selectedCuotas.Value); // no sé cómo colocar esto btw, creo que es así, vamos a ver
+            cred.numCuotas = cuotas; // no sé cómo colocar esto btw, creo que es así, vamos a ver
             cred.numCredito = 0;//se autogenera
-            cred.fechaOtorgamientoSpecified = true;
+            cred.fechaOtorgamientoSpecified = false;  // Indica que no se envía la fecha de otorgamiento
 
             daoCredito.insertarCredito(cred,cli.documento,cli.tipoDocumento.ToString());
             

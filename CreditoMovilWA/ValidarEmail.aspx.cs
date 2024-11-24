@@ -35,8 +35,8 @@ namespace CreditoMovilWA
                 int codCli = daoCliente.validarEmail(email);
                 if (codCli != -1)
                 {
-                    //enviarCorreo(txtEmail.Text, codCli);
-                    Response.Redirect("RecuperarContrasena.aspx?token=" + codCli.ToString());
+                    enviarCorreo(txtEmail.Text, codCli);
+                    //Response.Redirect("RecuperarContrasena.aspx?token=" + codCli.ToString());
                 }
                 lblVerificar.Text = "En caso el cliente exista, se ha enviado un correo para poder restablecer la contraseña.";
             }
@@ -51,7 +51,7 @@ namespace CreditoMovilWA
             string enlaceRecuperacion = "https://localhost:44333/RecuperarContrasena.aspx?token=" + token;
 
             MailMessage mensaje = new MailMessage();
-            mensaje.From = new MailAddress("taprog3credmov@outlook.com");
+            mensaje.From = new MailAddress("taprog3credmov@gmail.com");
             mensaje.To.Add(email);
             mensaje.Subject = "Recuperación de Contraseña - CreditoMovil";
             mensaje.Body = @"
@@ -84,10 +84,12 @@ namespace CreditoMovilWA
                 </div>
             </body>
             </html>";
+            mensaje.Body = mensaje.Body.Replace("{enlaceRecuperacion}", enlaceRecuperacion);
+
             mensaje.IsBodyHtml = true;
 
-            SmtpClient clienteSmtp = new SmtpClient("smtp.office365.com", 587); // Servidor SMTP
-            clienteSmtp.Credentials = new NetworkCredential("taprog3credmov@outlook.com", "creditomovil1");
+            SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com", 587); // Servidor SMTP
+            clienteSmtp.Credentials = new NetworkCredential("taprog3credmov@gmail.com", "creditomovil");
             clienteSmtp.EnableSsl = true;
 
             try

@@ -22,7 +22,6 @@ namespace CreditoMovilWA
         private BancoWSClient daoBanco = new BancoWSClient();
         private BilleteraWSClient daoBilletera = new BilleteraWSClient();
 
-
         protected void Page_Init(object sender, EventArgs e)
         {
             cliente cli = (cliente)Session["Cliente"];
@@ -42,7 +41,6 @@ namespace CreditoMovilWA
                 lblErrorModal.Text = "";
             }
         }
-
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
             cliente cli = (cliente)Session["Cliente"];
@@ -56,9 +54,6 @@ namespace CreditoMovilWA
 
             if (isFechaInicio && isFechaFin)
             {
-
-
-                //var resultados = ObtenerCreditosPorFecha(fechaInicio, fechaFin);
                 var resultados = daoCredito.listarCreditosFiltro(cli.codigoCliente, fechaInicio, fechaFin, estado);
 
                 if (resultados != null)
@@ -71,10 +66,22 @@ namespace CreditoMovilWA
                         { "Finalizado", 4 }
                     };
 
-                    var dataOrdenada = resultados.OrderBy(x => ordenPersonalizado[x.estado.ToString()]).ToList();
+                    var dataOrdenada = resultados
+                     .OrderBy(x => ordenPersonalizado[x.estado.ToString()]) // Ordenar por el estado personalizado
+                     .Select(x => new
+                     {
+                         numCredito = x.numCredito,
+                         Monto = x.monto,
+                         NumCuotas = x.numCuotas,
+                         TasaInteres = x.tasaInteres,
+                         FechaOtorgamiento = x.fechaOtorgamientoSpecified ? x.fechaOtorgamiento : (DateTime?)null,
+                         Estado = x.estado.ToString(),
+                         EstadoOriginal = x.estado // Incluye el estado original
+                     })
+                     .ToList();
 
                     var cred1 = dataOrdenada[0];
-                    if(cred1.estado == CreditoMovil.estado.Retrasado)
+                    if(cred1.EstadoOriginal == CreditoMovil.estado.Retrasado)
                     {
                         lblRetrasado.Text = "Usted tiene créditos atrasados";
                     }
@@ -86,7 +93,6 @@ namespace CreditoMovilWA
                     gvCreditos.DataSource = dataOrdenada;
                     gvCreditos.DataBind();
                     lblError.Text = "";
-
 
                 }
                 else

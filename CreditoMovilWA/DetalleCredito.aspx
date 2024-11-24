@@ -115,6 +115,10 @@
         <label>Tasa de Interés</label>
         <asp:TextBox ID="txtTasaInteres" runat="server" CssClass="input-text" ReadOnly="true"></asp:TextBox>
 
+        <asp:Button ID="btnDesembolso" runat="server" CssClass="back-btn" OnClick="btnDesembolso_Click"></asp:Button>
+
+        
+
         <div class="section-title">LISTADO DE TRANSACCIONES</div>
         <div class="table-container">
             <asp:GridView ID="gvTransacciones" runat="server" AutoGenerateColumns="false">

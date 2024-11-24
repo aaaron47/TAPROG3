@@ -11,6 +11,7 @@ namespace CreditoMovilWA
 {
     public partial class DetalleCredito : System.Web.UI.Page
     {
+        private ClienteWSClient daoCliente = new ClienteWSClient();
         private CreditoWSClient daoCredito = new CreditoWSClient();
         private TransaccionWSClient daoTransaccion = new TransaccionWSClient();
 
@@ -18,11 +19,11 @@ namespace CreditoMovilWA
         {
             cliente cli = (cliente)Session["Cliente"];
             administrador admin = (administrador)Session["Administrador"];
-            if (cli == null && admin==null)
+            if (cli == null && admin == null)
             {
                 Response.Redirect("Login.aspx");
             }
-
+            btnDesembolso.Visible = false;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace CreditoMovilWA
                 CargarDetalleCredito();
                 CargarTransacciones();
 
-                if(Session["Rol"].ToString() == "ADMINISTRADOR")
+                if (Session["Rol"].ToString() == "ADMINISTRADOR")
                 {
                     btnModificar.Visible = true;
                 }
@@ -42,8 +43,30 @@ namespace CreditoMovilWA
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            // Lógica para modificar el crédito
+            credito cred = (credito)Session["Credito"];
 
+            switch (txtEstado.Text)
+            {
+                case "Solicitado":
+                    cred.estado = estado.Solicitado;
+                    break;
+                case "Cancelado":
+                    cred.estado = estado.Cancelado;
+                    break;
+                case "Anulado": 
+                    cred.estado = estado.Anulado;
+                    break;
+                case "Retrasado":
+                    cred.estado = estado.Retrasado;
+                    break;
+                case "Aprobado":
+                    cred.estado = estado.Aprobado;
+                    break;
+            }
+
+            cred.tasaInteres = Double.Parse(txtTasaInteres.Text);
+            
+            daoCredito.modificarCredito(cred);
         }
 
 
@@ -59,7 +82,12 @@ namespace CreditoMovilWA
             txtEstado.Text = cred.estado.ToString();
             txtMonto.Text = cred.monto.ToString();
             txtNumeroCuotas.Text = cred.numCuotas.ToString();
-            txtTasaInteres.Text = cred.tasaInteres.ToString()+"%";
+            txtTasaInteres.Text = cred.tasaInteres.ToString() + "%";
+
+            if (cred.estado.ToString() == "DESEMBOLSADO")
+            {
+                btnDesembolso.Visible = true;
+            }
 
             idCredito.InnerText += " " + cred.numCredito;
         }
@@ -87,6 +115,14 @@ namespace CreditoMovilWA
             if (rol == "CLIENTE")
                 Response.Redirect("VisualizarCreditosCliente.aspx");
             else Response.Redirect("DetalleCliente.aspx");
+        }
+
+        protected void btnDesembolso_Click(object sender, EventArgs e)
+        {
+            cliente cli = (cliente)Session["Cliente"];
+            int id = (int)Session["idCredito"];
+
+            Byte[] reporte = daoCliente.generarDesembolso(cli.codigoCliente, id);
         }
     }
 }
