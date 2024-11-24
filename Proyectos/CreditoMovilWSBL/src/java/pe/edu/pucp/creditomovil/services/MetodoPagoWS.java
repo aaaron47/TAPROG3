@@ -11,8 +11,8 @@ import java.util.Date;
 
 import java.util.List;
 
-import pe.edu.pucp.creditomovil.getscredito.dao.MetodoPagoDAO;
-import pe.edu.pucp.creditomovil.getscredito.mysql.MetodoPagoMySQL;
+import pe.edu.pucp.creditomovil.gestcredito.dao.MetodoPagoDAO;
+import pe.edu.pucp.creditomovil.gestcredito.mysql.MetodoPagoMySQL;
 import pe.edu.pucp.creditomovil.model.MetodoPago;
 import pe.edu.pucp.creditomovil.model.MetodoPagoInstancia;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;

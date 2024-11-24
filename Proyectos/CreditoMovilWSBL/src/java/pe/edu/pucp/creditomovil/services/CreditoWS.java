@@ -30,8 +30,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 
-import pe.edu.pucp.creditomovil.getsclientes.dao.CreditoDAO;
-import pe.edu.pucp.creditomovil.getsclientes.mysql.CreditoMySQL;
+import pe.edu.pucp.creditomovil.gestclientes.dao.CreditoDAO;
+import pe.edu.pucp.creditomovil.gestclientes.mysql.CreditoMySQL;
 import pe.edu.pucp.creditomovil.model.Credito;
 
 @WebService(serviceName = "CreditoWS", targetNamespace

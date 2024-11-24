@@ -10,8 +10,8 @@ import jakarta.jws.WebParam;
 
 import java.util.List;
 
-import pe.edu.pucp.creditomovil.getscredito.dao.TransaccionDAO;
-import pe.edu.pucp.creditomovil.getscredito.mysql.TransaccionMySQL;
+import pe.edu.pucp.creditomovil.gestcredito.dao.TransaccionDAO;
+import pe.edu.pucp.creditomovil.gestcredito.mysql.TransaccionMySQL;
 import pe.edu.pucp.creditomovil.model.Transaccion;
 
 @WebService(serviceName = "TransaccionWS")

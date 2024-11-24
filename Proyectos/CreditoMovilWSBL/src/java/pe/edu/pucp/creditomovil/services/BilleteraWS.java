@@ -11,8 +11,8 @@ import java.util.Date;
 
 import java.util.List;
 
-import pe.edu.pucp.creditomovil.getscredito.dao.BilleteraDAO;
-import pe.edu.pucp.creditomovil.getscredito.mysql.BilleteraMySQL;
+import pe.edu.pucp.creditomovil.gestcredito.dao.BilleteraDAO;
+import pe.edu.pucp.creditomovil.gestcredito.mysql.BilleteraMySQL;
 import pe.edu.pucp.creditomovil.model.Billetera;
 
 @WebService(serviceName = "BilleteraWS", targetNamespace

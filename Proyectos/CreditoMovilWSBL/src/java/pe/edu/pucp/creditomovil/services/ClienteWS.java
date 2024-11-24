@@ -28,8 +28,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 
-import pe.edu.pucp.creditomovil.getsclientes.dao.ClienteDAO;
-import pe.edu.pucp.creditomovil.getsclientes.mysql.ClienteMySQL;
+import pe.edu.pucp.creditomovil.gestclientes.dao.ClienteDAO;
+import pe.edu.pucp.creditomovil.gestclientes.mysql.ClienteMySQL;
 import pe.edu.pucp.creditomovil.model.Cliente;
 
 @WebService(serviceName = "ClienteWS", targetNamespace

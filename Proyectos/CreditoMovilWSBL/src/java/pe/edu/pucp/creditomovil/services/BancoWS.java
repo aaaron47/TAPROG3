@@ -11,8 +11,8 @@ import java.util.Date;
 
 import java.util.List;
 
-import pe.edu.pucp.creditomovil.getscredito.dao.BancoDAO;
-import pe.edu.pucp.creditomovil.getscredito.mysql.BancoMySQL;
+import pe.edu.pucp.creditomovil.gestcredito.dao.BancoDAO;
+import pe.edu.pucp.creditomovil.gestcredito.mysql.BancoMySQL;
 import pe.edu.pucp.creditomovil.model.Banco;
 import pe.edu.pucp.creditomovil.model.TipoDocumento;
 

@@ -11,8 +11,8 @@ import java.util.Date;
 
 import java.util.List;
 
-import pe.edu.pucp.creditomovil.getsclientes.dao.EvaluacionDAO;
-import pe.edu.pucp.creditomovil.getsclientes.mysql.EvaluacionMySQL;
+import pe.edu.pucp.creditomovil.gestclientes.dao.EvaluacionDAO;
+import pe.edu.pucp.creditomovil.gestclientes.mysql.EvaluacionMySQL;
 import pe.edu.pucp.creditomovil.model.Evaluacion;
 
 @WebService(serviceName = "EvaluacionWS")
