@@ -62,9 +62,11 @@ namespace CreditoMovilWA
                     {
                         { "Retrasado", 1 },
                         { "Activo", 2 },
-                        { "Desembolsado", 3 },
-                        { "Solicitado", 4 },
-                        { "Finalizado", 5 }
+                        { "Aprobado", 3 },
+                        { "Desembolsado", 4 },
+                        { "Solicitado", 5 },
+                        { "Cancelado", 6 },
+                        { "Anulado", 7 }
                     };
 
                     List<object> dataOrdenada = resultados
@@ -231,7 +233,7 @@ namespace CreditoMovilWA
         {
             try
             {
-                banco[] bancos = daoBanco.listarTodosBancos();
+                banco1 [] bancos = daoBanco.listarTodosBancos();
                 ViewState["ListaBancos"] = bancos;
 
                 ddlBancoElegido.Items.Clear();
@@ -239,7 +241,7 @@ namespace CreditoMovilWA
 
                 if (bancos != null)
                 {
-                    foreach (banco banco in bancos)
+                    foreach (banco1 banco in bancos)
                     {
                         ListItem listItem = new ListItem(banco.nombreBanco, banco.nombreBanco);
                         ddlBancoElegido.Items.Add(listItem);
@@ -256,7 +258,7 @@ namespace CreditoMovilWA
         {
             try
             {
-                billetera[] billeteras = daoBilletera.listarTodosBilleteras();
+                billetera1[] billeteras = daoBilletera.listarTodosBilleteras();
                 ViewState["ListaBilleteras"] = billeteras;
 
                 ddlBilleteraElegida.Items.Clear();
@@ -264,7 +266,7 @@ namespace CreditoMovilWA
 
                 if (billeteras != null)
                 {
-                    foreach (billetera billetera in billeteras)
+                    foreach (var billetera in billeteras)
                     {
                         System.Diagnostics.Debug.WriteLine("Agregando billetera: " + billetera.nombreBilletera);
                         ListItem listItem = new ListItem(billetera.nombreBilletera, billetera.nombreBilletera);
@@ -283,19 +285,19 @@ namespace CreditoMovilWA
         }
 
         [WebMethod]
-        public static banco ObtenerDatosBanco(string nombreBanco)
+        public static banco1 ObtenerDatosBanco(string nombreBanco)
         {
             BancoWSClient daoBanco = new BancoWSClient();
-            banco banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
+            banco1 banco = daoBanco.obtenerPorNombreBanco(nombreBanco);
             HttpContext.Current.Session["MetodoPago"] = banco.idMetodoPago;
             return banco;
         }
 
         [WebMethod]
-        public static billetera ObtenerDatosBilletera(string nombreBilletera)
+        public static billetera1 ObtenerDatosBilletera(string nombreBilletera)
         {
             BilleteraWSClient daoBilletera = new BilleteraWSClient();
-            billetera billetera = daoBilletera.obtenerPorNombreBilletera(nombreBilletera);
+            billetera1 billetera = daoBilletera.obtenerPorNombreBilletera(nombreBilletera);
             HttpContext.Current.Session["MetodoPago"] = billetera.idMetodoPago;
             return billetera;
         }

@@ -22,6 +22,34 @@
       <xs:element minOccurs="0" name="nombreTitular" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="banco">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:metodoPago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CCI" type="xs:string" />
+          <xs:element minOccurs="0" name="nombreBanco" type="xs:string" />
+          <xs:element minOccurs="0" name="tipoCuenta" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="billetera">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:metodoPago">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nombreBilletera" type="xs:string" />
+          <xs:element minOccurs="0" name="numeroTelefono" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="metodoPagoInstancia">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:metodoPago">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="modificarMetodoPagoResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean" />
@@ -36,13 +64,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:metodoPagoInstancia" />
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="metodoPagoInstancia">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:metodoPago">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="listarTodosMetodoPagos">
     <xs:sequence />

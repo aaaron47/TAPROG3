@@ -279,11 +279,13 @@
         <label>Estado del crédito</label>
         <asp:DropDownList ID="ddlEstado" runat="server" CssClass="select-dropdown">
             <asp:ListItem Value="" Text="Seleccionar Estado" />
+            <asp:ListItem Value="Retrasado" Text="Retrasado" />
             <asp:ListItem Value="Activo" Text="Activo" />
-             <asp:ListItem Value="Desembolsado" Text="Desembolsado" />
-            <asp:ListItem Value="Inactivo" Text="Inactivo" />
-            <asp:ListItem Value="Pendiente" Text="Pendiente" />
-            <asp:ListItem Value="Finalizado" Text="Finalizado" />
+            <asp:ListItem Value="Aprobado" Text="Aprobado" />
+            <asp:ListItem Value="Desembolsado" Text="Desembolsado" />
+            <asp:ListItem Value="Solicitado" Text="Solicitado" />
+            <asp:ListItem Value="Cancelado" Text="Cancelado" />
+            <asp:ListItem Value="Anulado" Text="Anulado" />
         </asp:DropDownList>
 
         <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" CssClass="filter-btn" OnClick="btnFiltrar_Click" />
