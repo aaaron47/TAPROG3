@@ -111,7 +111,7 @@ public class NotificacionMySQL implements NotificacionDAO{
             cs.setInt(1, idUsuario);
 
             rs = cs.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Notificacion not = new Notificacion();
                 not.setId_notificacion(rs.getInt("id_notificacion"));
                 not.setMensaje(rs.getString("mensaje"));

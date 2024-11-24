@@ -3,11 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pe.edu.pucp.creditomovil.model;
-
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 /**
  *
  * @author USER
  */
+@XmlSeeAlso({Banco.class, Billetera.class,MetodoPagoInstancia.class})
+@XmlType
 public abstract class MetodoPago {
 
     private int idMetodoPago;
