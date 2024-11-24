@@ -31,11 +31,23 @@ namespace CreditoMovilWA
         // Método para actualizar el modal de notificaciones y el indicador
         private void ActualizarNotificaciones()
         {
-            rptNotifications.DataSource = notificaciones;
-            rptNotifications.DataBind();
+            // Si no hay notificaciones, limpiar el DataSource y ocultar el indicador
+            if (notificaciones.Count == 0)
+            {
+                rptNotifications.DataSource = new List<string> { "No hay notificaciones disponibles." };
+                rptNotifications.DataBind();
+                lblNotificationDot.Visible = false;
 
-            // Mostrar o ocultar el punto indicador de nuevas notificaciones
-            lblNotificationDot.Visible = notificaciones.Count > 0;
+            }
+            else
+            {
+                // Asignar las notificaciones al repeater y mostrar el indicador
+                rptNotifications.DataSource = notificaciones;
+                rptNotifications.DataBind();
+                lblNotificationDot.Visible = true;
+
+   
+            }
         }
 
         public bool MostrarHeader
