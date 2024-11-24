@@ -167,6 +167,30 @@ public class ClienteWS {
         return null;
     }
     
+    @WebMethod(operationName = "generarDesembolso")
+    public byte [] reporteDesembolso(@WebParam (name = "idcliente") int idcli, 
+            @WebParam (name = "idcredito") int idcred) throws Exception{
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("codCli", idcli);
+            params.put("codCred", idcred);
+            
+            //obtiene imagen desde pe.edu.pucp.creditomovil.img
+            params.put("logo", ImageIO.read(new File(getFileResource2("logo.png"))));
+            
+            //obtiene imagen desde pe.edu.pucp.creditomovil.img
+
+            params.put("BordeSup",ImageIO.read(new File(getFileResource2("bordesupp.png"))));
+            
+            return generarBuffer(getFileResource("OrdenDesembolso.jrxml"), params);
+            
+            
+        } catch (Exception ex){
+            Logger.getLogger(ClienteWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     private String getFileResource(String fileName){ 
         String filePath = ClienteWS.class.getResource("/pe/edu/pucp/creditomovil/reportes/"+fileName).getPath();
         filePath = filePath.replace("%20", " ");
