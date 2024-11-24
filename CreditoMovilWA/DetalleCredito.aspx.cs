@@ -62,6 +62,10 @@ namespace CreditoMovilWA
                 case "Aprobado":
                     cred.estado = estado.Aprobado;
                     break;
+                case "Desembolsado":
+                    cred.fechaOtorgamiento = DateTime.Now;
+                    cred.fechaOtorgamientoSpecified = true;
+                    break;
             }
 
             cred.tasaInteres = Double.Parse(txtTasaInteres.Text);

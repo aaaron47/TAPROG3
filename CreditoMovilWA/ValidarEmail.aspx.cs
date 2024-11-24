@@ -1,5 +1,6 @@
 ﻿using CreditoMovilWA.CreditoMovil;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -51,7 +52,7 @@ namespace CreditoMovilWA
             string enlaceRecuperacion = "https://localhost:44333/RecuperarContrasena.aspx?token=" + token;
 
             MailMessage mensaje = new MailMessage();
-            mensaje.From = new MailAddress("taprog3credmov@gmail.com");
+            mensaje.From = new MailAddress(ConfigurationManager.AppSettings["Email"]);
             mensaje.To.Add(email);
             mensaje.Subject = "Recuperación de Contraseña - CreditoMovil";
             mensaje.Body = @"
@@ -88,8 +89,8 @@ namespace CreditoMovilWA
 
             mensaje.IsBodyHtml = true;
 
-            SmtpClient clienteSmtp = new SmtpClient("smtp.gmail.com", 587); // Servidor SMTP
-            clienteSmtp.Credentials = new NetworkCredential("taprog3credmov@gmail.com", "creditomovil");
+            SmtpClient clienteSmtp = new SmtpClient(ConfigurationManager.AppSettings["SmtpHost"], int.Parse(ConfigurationManager.AppSettings["SmtpPort"])); // Servidor SMTP
+            clienteSmtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["Email"], ConfigurationManager.AppSettings["EmailPassword"]);
             clienteSmtp.EnableSsl = true;
 
             try
