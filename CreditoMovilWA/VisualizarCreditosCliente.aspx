@@ -297,7 +297,13 @@
                     <asp:BoundField DataField="Monto" HeaderText="MONTO" />
                     <asp:BoundField DataField="NumCuotas" HeaderText="NUM. CUOTAS" />
                     <asp:BoundField DataField="TasaInteres" HeaderText="TASA INTERÉS" />
-                    <asp:BoundField DataField="FechaOtorgamiento" HeaderText="FECHA OTORGAMIENTO" DataFormatString="{0:dd/MM/yyyy}"/>
+                    <asp:TemplateField HeaderText="FECHA OTORGAMIENTO">
+                        <ItemTemplate>
+                            <%# Eval("FechaOtorgamiento") != null && Eval("FechaOtorgamiento") != DBNull.Value
+                                ? Convert.ToDateTime(Eval("FechaOtorgamiento")).ToString("dd/MM/yyyy")
+                                : "No asignada" %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="Estado" HeaderText="ESTADO" />
                     <asp:TemplateField>
                         <ItemTemplate>

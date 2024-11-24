@@ -29,10 +29,11 @@ namespace CreditoMovilWA
         protected global::System.Web.UI.WebControls.HiddenField selectedPrimerPago;
         protected global::System.Web.UI.WebControls.Button btnSubmit;
         protected global::System.Web.UI.WebControls.Label lblInteres;
+        protected global::System.Web.UI.WebControls.Label lblError;
         protected global::System.Web.UI.WebControls.HiddenField hfMonto;
         protected global::System.Web.UI.WebControls.HiddenField minHiddenField;
         protected global::System.Web.UI.WebControls.HiddenField maxHiddenField;
         protected global::System.Web.UI.WebControls.HiddenField tasaInteres;
-
+        protected global::System.Web.UI.WebControls.DropDownList ddlCuotas;
     }
 }

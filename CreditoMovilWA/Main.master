@@ -74,11 +74,9 @@
             position: relative;
             cursor: pointer;
         }
-
         .notification-btn:hover {
             background-color: #6090be; /* Fondo gris claro al pasar el mouse */
         }
-
         /* Punto rojo para notificaciones */
         .notification-dot {
             width: 10px;
@@ -88,6 +86,15 @@
             position: absolute;
             top: 2px; /* Ajusta posición vertical */
             right: 2px; /* Ajusta posición horizontal */
+        }
+        .notification-text{
+            font-size: 1rem; /* Tamaño base */
+        }
+        .modal-title-sm {
+            font-size: 1rem; /* Reducir el tamaño de la palabra "Notificaciones" */
+        }
+        .btn-sm {
+            font-size: 0.9rem; /* Reducir el tamaño de la palabra "Cerrar" */
         }
 
         @media (max-width: 768px) {
@@ -111,6 +118,15 @@
             }
             .error-message {
                 font-size: 12px; /* Reducir tamaño del mensaje de error */
+            }
+            .notification-text{
+                font-size: 0.9rem; /* Reducir el tamaño de la fuente en dispositivos medianos */
+            }
+            .modal-title-sm {
+                font-size: 0.9rem; /* Reducir título en dispositivos medianos */
+            }
+            .btn-sm {
+                font-size: 0.8rem; /* Reducir botón en dispositivos medianos */
             }
         }
 
@@ -136,7 +152,17 @@
             .error-message {
                 font-size: 10px; /* Reducir tamaño del mensaje de error */
             }
+            .notification-text {
+                font-size: 0.8rem; /* Reducir el tamaño de la fuente en dispositivos medianos */
+            }
+            .modal-title-sm {
+                font-size: 0.8rem; /* Reducir título en dispositivos pequeños */
+            }
+            .btn-sm {
+                font-size: 0.7rem; /* Reducir botón en dispositivos pequeños */
+            }
         }
+
     </style>
     <script>
         function OcultarPuntoRojo() {
@@ -169,25 +195,25 @@
             </div>
         </div>
 
-         <!-- Modal de Notificaciones -->
+        <!-- Modal de Notificaciones -->
         <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="notificationsModalLabel">Notificaciones</h5>
+                        <h5 class="modal-title modal-title-sm" id="notificationsModalLabel">Notificaciones</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
                         <asp:Repeater ID="rptNotifications" runat="server">
                             <ItemTemplate>
                                 <li class="list-group-item">
-                                    <%# Container.DataItem %>
+                                    <span class="notification-text"><%# Container.DataItem %></span>
                                 </li>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
