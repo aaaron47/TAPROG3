@@ -350,10 +350,11 @@ public class CreditoMySQL implements CreditoDAO {
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("id_cliente", 2);
+        parametrosSalida.put("id_cliente", Types.INTEGER);
         
         String query = "{CALL ObtenerIdClientePorCredito(?, ?)}";
-        idCliente = DBManager.getInstance().ejecutarProcedimiento("ObtenerIdClientePorCredito", parametrosEntrada, parametrosSalida);
+        int res = DBManager.getInstance().ejecutarProcedimiento("ObtenerIdClientePorCredito", parametrosEntrada, parametrosSalida);
+        idCliente = (int) parametrosSalida.get("id_cliente");
         return idCliente;
     }
 }

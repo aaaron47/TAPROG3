@@ -163,19 +163,19 @@
         <h1 id="idCredito" runat="server">Crédito Nro </h1>
 
         <label>Fecha de Otorgamiento</label>
-        <asp:TextBox ID="txtFechaOtorgamiento" runat="server" CssClass="input-text" ReadOnly="true"></asp:TextBox>
+        <asp:TextBox ID="txtFechaOtorgamiento" runat="server" CssClass="input-text"></asp:TextBox>
 
         <label>Estado</label>
-        <asp:TextBox ID="txtEstado" runat="server" CssClass="input-text" ReadOnly="true"></asp:TextBox>
+        <asp:TextBox ID="txtEstado" runat="server" CssClass="input-text"></asp:TextBox>
 
         <label>Monto</label>
-        <asp:TextBox ID="txtMonto" runat="server" CssClass="input-text" ReadOnly="true"></asp:TextBox>
+        <asp:TextBox ID="txtMonto" runat="server" CssClass="input-text"></asp:TextBox>
 
         <label>Número de Cuotas</label>
-        <asp:TextBox ID="txtNumeroCuotas" runat="server" CssClass="input-text" ReadOnly="true"></asp:TextBox>
+        <asp:TextBox ID="txtNumeroCuotas" runat="server" CssClass="input-text"></asp:TextBox>
 
-        <label>Tasa de Interés</label>
-        <asp:TextBox ID="txtTasaInteres" runat="server" CssClass="input-text" ReadOnly="true"></asp:TextBox>
+        <label>Tasa de Interés (%)</label>
+        <asp:TextBox ID="txtTasaInteres" runat="server" CssClass="input-text"></asp:TextBox>
 
         <asp:Button ID="btnDesembolso" runat="server" CssClass="back-btn" OnClick="btnDesembolso_Click"></asp:Button>
 

@@ -22,8 +22,12 @@ namespace CreditoMovilWA
             if (cli == null && admin == null)
             {
                 Response.Redirect("Login.aspx");
+            }else if (cli != null)
+            {
+                DeshabilitarCampos();
             }
             btnDesembolso.Visible = false;
+            btnModificar.Text = "MODIFICAR";
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -42,34 +46,68 @@ namespace CreditoMovilWA
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            credito cred = (credito)Session["Credito"];
-
-            switch (txtEstado.Text)
+            if (btnModificar.Text == "MODIFICAR")
             {
-                case "Solicitado":
-                    cred.estado = estado.Solicitado;
-                    break;
-                case "Cancelado":
-                    cred.estado = estado.Cancelado;
-                    break;
-                case "Anulado": 
-                    cred.estado = estado.Anulado;
-                    break;
-                case "Retrasado":
-                    cred.estado = estado.Retrasado;
-                    break;
-                case "Aprobado":
-                    cred.estado = estado.Aprobado;
-                    break;
-                case "Desembolsado":
-                    cred.fechaOtorgamiento = DateTime.Now;
-                    cred.fechaOtorgamientoSpecified = true;
-                    break;
+                btnModificar.Text = "GUARDAR";
+                HabilitarCampos();
+            }
+            else
+            {
+
+                credito cred = (credito)Session["Credito"];
+
+                switch (txtEstado.Text)
+                {
+                    case "Solicitado":
+                        cred.estado = estado.Solicitado;
+                        break;
+                    case "Cancelado":
+                        cred.estado = estado.Cancelado;
+                        break;
+                    case "Anulado":
+                        cred.estado = estado.Anulado;
+                        break;
+                    case "Retrasado":
+                        cred.estado = estado.Retrasado;
+                        break;
+                    case "Aprobado":
+                        cred.estado = estado.Aprobado;
+                        break;
+                    case "Desembolsado":
+                        cred.fechaOtorgamiento = DateTime.Now;
+                        cred.fechaOtorgamientoSpecified = true;
+                        break;
+                }
+                string tasa = txtTasaInteres.Text;
+                string tasa2 = "";
+                int tam = tasa.Length;
+                for (int i = 0; i < tam; i++) tasa2 += tasa[i];
+                cred.tasaInteres = Double.Parse(tasa2);
+
+                daoCredito.modificarCredito(cred);
+                DeshabilitarCampos();
+                btnModificar.Text = "MODIFICAR";
+                
             }
 
-            cred.tasaInteres = Double.Parse(txtTasaInteres.Text);
-            
-            daoCredito.modificarCredito(cred);
+
+        }
+
+        private void DeshabilitarCampos()
+        {
+
+            txtEstado.ReadOnly = true;
+            txtMonto.ReadOnly = true;
+            txtTasaInteres.ReadOnly = true;
+            txtNumeroCuotas.ReadOnly = true;
+        }
+
+        private void HabilitarCampos()
+        {
+            txtEstado.ReadOnly = false;
+            txtMonto.ReadOnly = false;
+            txtTasaInteres.ReadOnly = false;
+            txtNumeroCuotas.ReadOnly = false;
         }
 
         private void CargarDetalleCredito()
@@ -84,7 +122,7 @@ namespace CreditoMovilWA
             txtEstado.Text = cred.estado.ToString();
             txtMonto.Text = cred.monto.ToString();
             txtNumeroCuotas.Text = cred.numCuotas.ToString();
-            txtTasaInteres.Text = cred.tasaInteres.ToString() + "%";
+            txtTasaInteres.Text = cred.tasaInteres.ToString();
 
             if (cred.estado.ToString() == "DESEMBOLSADO")
             {
