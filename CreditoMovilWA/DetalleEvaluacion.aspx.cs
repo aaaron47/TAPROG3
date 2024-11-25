@@ -107,7 +107,7 @@ namespace CreditoMovilWA
             txtEstado.ReadOnly = false;
             txtObservaciones.ReadOnly = false;
             txtPuntaje.ReadOnly = false;
-            fileUploadEvaluacionFoto.Enabled = false;
+            fileUploadEvaluacionFoto.Enabled = true;
         }
 
         private void DeshabilitarCampos()
@@ -124,7 +124,7 @@ namespace CreditoMovilWA
             txtPuntaje.ReadOnly = true;
             txtEstado.ReadOnly = true;
             txtObservaciones.ReadOnly = true;
-            fileUploadEvaluacionFoto.Enabled = true;
+            fileUploadEvaluacionFoto.Enabled = false;
         }
 
         private void GuardarDatosEvaluacion(object sender, EventArgs e)
@@ -156,7 +156,7 @@ namespace CreditoMovilWA
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            if ((supervisor)Session["Supervisor"] != null) Response.Redirect("MainSupervisor.aspx");
+            if ((supervisor1)Session["Supervisor"] != null) Response.Redirect("MainSupervisor.aspx");
             Response.Redirect("TotalEvaluaciones.aspx");
         }
 

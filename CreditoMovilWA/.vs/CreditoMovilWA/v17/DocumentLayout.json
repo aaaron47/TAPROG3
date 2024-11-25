@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\agregarevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:agregarevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\bleak\\onedrive\\documentos\\taprog3\\creditomovilwa\\totalevaluaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:totalevaluaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\bleak\\onedrive\\documentos\\taprog3\\creditomovilwa\\detalleevaluacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:detalleevaluacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\bleak\\onedrive\\documentos\\taprog3\\creditomovilwa\\detallecredito.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:detallecredito.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\detallecredito.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:detallecredito.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\detalleevaluacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:detalleevaluacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\bleak\\onedrive\\documentos\\taprog3\\creditomovilwa\\detalleevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:detalleevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\bleak\\onedrive\\documentos\\taprog3\\creditomovilwa\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|c:\\users\\bleak\\onedrive\\documentos\\taprog3\\creditomovilwa\\agregarevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:agregarevaluacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\totalevaluaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|solutionrelative:totalevaluaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F3301FE0-2CF8-4D30-A344-FBEA6B765887}|CreditoMovilWA.csproj|C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\detallecliente.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -46,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 190,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,7 +66,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "DetalleCredito.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleCredito.aspx.cs",
+              "RelativeDocumentMoniker": "DetalleCredito.aspx.cs",
+              "ToolTip": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleCredito.aspx.cs",
+              "RelativeToolTip": "DetalleCredito.aspx.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAjwBoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T04:07:52.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DetalleEvaluacion.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleEvaluacion.aspx.cs",
+              "RelativeDocumentMoniker": "DetalleEvaluacion.aspx.cs",
+              "ToolTip": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleEvaluacion.aspx.cs",
+              "RelativeToolTip": "DetalleEvaluacion.aspx.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAjwGsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T03:55:00.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
+              "RelativeDocumentMoniker": "Login.aspx.cs",
+              "ToolTip": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\Login.aspx.cs",
+              "RelativeToolTip": "Login.aspx.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwGYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T03:55:42.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "TotalEvaluaciones.aspx.cs",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\TotalEvaluaciones.aspx.cs",
               "RelativeDocumentMoniker": "TotalEvaluaciones.aspx.cs",
@@ -62,8 +113,7 @@
               "RelativeToolTip": "TotalEvaluaciones.aspx.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T03:08:08.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T03:08:08.101Z"
             },
             {
               "$type": "Document",
@@ -80,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "DetalleCredito.aspx",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleCredito.aspx",
               "RelativeDocumentMoniker": "DetalleCredito.aspx",
@@ -88,11 +138,12 @@
               "RelativeToolTip": "DetalleCredito.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-11-25T02:11:37.591Z"
+              "WhenOpened": "2024-11-25T02:11:37.591Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "DetalleCliente.aspx",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleCliente.aspx",
               "RelativeDocumentMoniker": "DetalleCliente.aspx",
@@ -104,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "DetalleCliente.aspx.cs",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\DetalleCliente.aspx.cs",
               "RelativeDocumentMoniker": "DetalleCliente.aspx.cs",
@@ -116,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Registro.aspx",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\Registro.aspx",
               "RelativeDocumentMoniker": "Registro.aspx",
@@ -128,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "AgregarEvaluacion.aspx.cs",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\AgregarEvaluacion.aspx.cs",
               "RelativeDocumentMoniker": "AgregarEvaluacion.aspx.cs",
@@ -141,7 +192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Main.master",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\Main.master",
               "RelativeDocumentMoniker": "Main.master",
@@ -154,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "Main.master.cs",
               "DocumentMoniker": "C:\\Users\\Bleak\\OneDrive\\Documentos\\TAPROG3\\CreditoMovilWA\\Main.master.cs",
               "RelativeDocumentMoniker": "Main.master.cs",
