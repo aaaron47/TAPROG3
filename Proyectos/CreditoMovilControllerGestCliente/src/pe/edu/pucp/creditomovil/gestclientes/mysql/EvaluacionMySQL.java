@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,9 +48,10 @@ public class EvaluacionMySQL implements EvaluacionDAO {
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_num_evaluacion", 14);
+        parametrosSalida.put("p_num_evaluacion", Types.INTEGER);
         
-        int numEv = DBManager.getInstance().ejecutarProcedimiento("InsertarEvaluacion", parametrosEntrada, parametrosSalida);
+        int resu = DBManager.getInstance().ejecutarProcedimiento("InsertarEvaluacion", parametrosEntrada, parametrosSalida);
+        int numEv = (int) parametrosSalida.get("p_num_evaluacion");
         evaluacion.setNumeroEvaluacion(numEv);
         
         parametrosEntrada = new HashMap<>();

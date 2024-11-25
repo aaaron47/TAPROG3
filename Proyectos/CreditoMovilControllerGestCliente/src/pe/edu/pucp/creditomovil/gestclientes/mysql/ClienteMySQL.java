@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Types;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.gestclientes.dao.ClienteDAO;
 import pe.edu.pucp.creditomovil.model.Cliente;
@@ -36,14 +37,14 @@ public class ClienteMySQL implements ClienteDAO {
         parametrosEntrada.put("p_contrasena", cliente.getContrasenha());
         parametrosEntrada.put("p_fecha_venc", new java.sql.Date(cliente.getFechaVencimiento().getTime()));
         parametrosEntrada.put("p_activo", true);
-        parametrosEntrada.put("p_ultimo_logeo", cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : null);
+        parametrosEntrada.put("p_ultimo_logeo", cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : new java.sql.Date(new java.util.Date().getTime()));
         parametrosEntrada.put("p_tipo_doc", cliente.getTipoDocumento().name());
         parametrosEntrada.put("p_documento", cliente.getDocumento());
         parametrosEntrada.put("p_rol", cliente.getRol().name());
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_idUsuario", 12);
+        parametrosSalida.put("p_idUsuario",Types.INTEGER);
         
         int usuarioId = DBManager.getInstance().ejecutarProcedimiento("InsertarUsuario", parametrosEntrada, parametrosSalida);
         cliente.setIdUsuario(usuarioId); // Asignar el ID al objeto cliente
@@ -59,7 +60,7 @@ public class ClienteMySQL implements ClienteDAO {
         
         parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_codigo_cliente",7);
+        parametrosSalida.put("p_codigo_cliente",Types.INTEGER);
         
         int clienteId = DBManager.getInstance().ejecutarProcedimiento("InsertarCliente", parametrosEntrada, parametrosSalida);
         cliente.setCodigoCliente(clienteId);

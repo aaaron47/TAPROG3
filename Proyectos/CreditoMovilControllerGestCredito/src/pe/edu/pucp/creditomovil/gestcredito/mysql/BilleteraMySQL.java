@@ -27,9 +27,10 @@ public class BilleteraMySQL implements BilleteraDAO{
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_idMetodoPago", 3);
+        parametrosSalida.put("p_idMetodoPago", Types.INTEGER);
 
-        int metodoPagoId = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
+        int res = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
+        int metodoPagoId = (int) parametrosSalida.get("p_idMetodoPago");
         billetera.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
         
         parametrosEntrada = new HashMap<>();

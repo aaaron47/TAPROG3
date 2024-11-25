@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class UsuarioMySQL implements UsuarioDAO{
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_idUsuario", 12);
+        parametrosSalida.put("p_idUsuario", Types.INTEGER);
         
         int resultado = DBManager.getInstance().ejecutarProcedimiento("InsertarUsuario", parametrosEntrada, parametrosSalida);
     }

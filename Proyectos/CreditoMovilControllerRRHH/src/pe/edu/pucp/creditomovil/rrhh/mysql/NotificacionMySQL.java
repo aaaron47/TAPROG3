@@ -14,6 +14,7 @@ import pe.edu.pucp.creditomovil.conexion.DBManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.sql.Types;
 /**
  *
  * @author aaron
@@ -32,7 +33,7 @@ public class NotificacionMySQL implements NotificacionDAO{
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
 
-        parametrosSalida.put("p_id_notificacion", 1);
+        parametrosSalida.put("p_id_notificacion", Types.INTEGER);
         
         int numNotificacionGenerado = DBManager.getInstance().ejecutarProcedimiento("InsertarNotificacion", parametrosEntrada, parametrosSalida);
         notificacion.setId_notificacion(numNotificacionGenerado);

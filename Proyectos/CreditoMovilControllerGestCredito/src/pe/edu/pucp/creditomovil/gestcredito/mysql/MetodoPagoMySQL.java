@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.sql.Types;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.gestcredito.dao.MetodoPagoDAO;
 import pe.edu.pucp.creditomovil.model.MetodoPago;
@@ -27,7 +28,7 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_idMetodoPago", 3);
+        parametrosSalida.put("p_idMetodoPago", Types.INTEGER);
 
         int metodoPagoId = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
         return metodoPagoId > 0;

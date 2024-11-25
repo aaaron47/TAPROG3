@@ -9,6 +9,7 @@ import pe.edu.pucp.creditomovil.gestclientes.dao.CreditoDAO;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.CallableStatement;
+import java.sql.Types;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,9 +39,10 @@ public class CreditoMySQL implements CreditoDAO {
         
         HashMap<String, Object> parametrosSalida = new HashMap<>();
         
-        parametrosSalida.put("p_num_credito", 6);
+        parametrosSalida.put("p_num_credito", Types.INTEGER);
         
-        int numCredito = DBManager.getInstance().ejecutarProcedimiento("InsertarCredito", parametrosEntrada, parametrosSalida);
+        int res = DBManager.getInstance().ejecutarProcedimiento("InsertarCredito", parametrosEntrada, parametrosSalida);
+        int numCredito = (int) parametrosSalida.get("p_num_credito");
         credito.setNumCredito(numCredito);
 
         parametrosEntrada = new HashMap<>();
