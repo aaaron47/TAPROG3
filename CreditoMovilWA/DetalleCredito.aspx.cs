@@ -14,9 +14,11 @@ namespace CreditoMovilWA
         private ClienteWSClient daoCliente = new ClienteWSClient();
         private CreditoWSClient daoCredito = new CreditoWSClient();
         private TransaccionWSClient daoTransaccion = new TransaccionWSClient();
-
+        private bool modoEdicion;
         protected void Page_Init(object sender, EventArgs e)
         {
+            modoEdicion = false;
+            btnModificar.Text = "MODIFICAR";
             cliente cli = (cliente)Session["Cliente"];
             administrador1 admin = (administrador1)Session["Administrador"];
             if (cli == null && admin == null)
@@ -36,6 +38,7 @@ namespace CreditoMovilWA
             {
                 CargarDetalleCredito();
                 CargarTransacciones();
+                DeshabilitarCampos(); //inicialmente inhabilitad
 
                 if (Session["Rol"].ToString() == "ADMINISTRADOR")
                 {
@@ -46,6 +49,7 @@ namespace CreditoMovilWA
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            modoEdicion = !modoEdicion;
             if (btnModificar.Text == "MODIFICAR")
             {
                 btnModificar.Text = "GUARDAR";
@@ -124,7 +128,7 @@ namespace CreditoMovilWA
             txtNumeroCuotas.Text = cred.numCuotas.ToString();
             txtTasaInteres.Text = cred.tasaInteres.ToString();
 
-            if (cred.estado.ToString() == "DESEMBOLSADO")
+            if (cred.estado.ToString() == "APROBADO")
             {
                 btnDesembolso.Visible = true;
             }
@@ -153,7 +157,7 @@ namespace CreditoMovilWA
             string rol = (string)Session["Rol"];
             if (rol == "CLIENTE")
                 Response.Redirect("VisualizarCreditosCliente.aspx");
-            else Response.Redirect("DetalleCliente.aspx");
+            else Response.Redirect("TotalCreditos.aspx");
         }
         protected void btnDesembolso_Click(object sender, EventArgs e)
         {
