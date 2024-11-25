@@ -182,4 +182,15 @@ public class CreditoWS {
         JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
         return JasperExportManager.exportReportToPdf(jp);
     }
+    
+    @WebMethod(operationName = "obtenerIdClientePorCredito")
+    public int obtenerIdClientePorCredito(@WebParam(name = "idCredito") int idCredito) {
+        int idCliente = -1;
+        try{
+            idCliente = daoCredito.obtenerIdClientePorCredito(idCredito);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return idCliente;
+    }
 }

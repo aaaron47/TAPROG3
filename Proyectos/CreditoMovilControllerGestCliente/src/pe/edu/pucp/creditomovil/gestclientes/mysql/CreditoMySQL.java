@@ -207,7 +207,7 @@ public class CreditoMySQL implements CreditoDAO {
 
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
-                cantCuotasPagadas);
+                        cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
 
@@ -260,7 +260,7 @@ public class CreditoMySQL implements CreditoDAO {
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
-                cantCuotasPagadas);
+                        cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
 
@@ -283,7 +283,7 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return listaCreditos;
     }
-    
+
     @Override
     public List<Credito> listarCreditosPorCliente(int cli) {
         List<Credito> listaCreditos = new ArrayList<>();
@@ -308,7 +308,7 @@ public class CreditoMySQL implements CreditoDAO {
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
-                cantCuotasPagadas);
+                        cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
 
@@ -331,7 +331,8 @@ public class CreditoMySQL implements CreditoDAO {
         }
         return listaCreditos;
     }
-
+    
+     @Override
     public List<Credito> listarTodos() {
         List<Credito> listaCreditos = new ArrayList<>();
         Connection conn = null;
@@ -354,7 +355,7 @@ public class CreditoMySQL implements CreditoDAO {
                 int cantCuotasPagadas = rs.getInt("cant_cuotas_pagadas");
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
-                cantCuotasPagadas);
+                        cantCuotasPagadas);
                 listaCreditos.add(credito);
             }
         } catch (SQLException ex) {
@@ -376,5 +377,44 @@ public class CreditoMySQL implements CreditoDAO {
         }
 
         return listaCreditos;
+    }
+
+     @Override
+    public int obtenerIdClientePorCredito(int numCredito) {
+        int idCliente = -1; // Valor predeterminado en caso de no encontrar un cliente
+        CallableStatement cs;
+        String query = "{CALL ObtenerIdClientePorCredito(?, ?)}";
+
+        try {
+            // Obtener la conexión desde el administrador
+            conexion = DBManager.getInstance().getConnection();
+            cs = conexion.prepareCall(query);
+
+            // Configurar los parámetros de entrada y salida
+            cs.setInt(1, numCredito);            // Parámetro de entrada
+            cs.registerOutParameter(2, java.sql.Types.INTEGER); // Parámetro de salida
+
+            // Ejecutar el procedimiento almacenado
+            cs.execute();
+
+            // Recuperar el valor del parámetro de salida
+            idCliente = cs.getInt(2);
+
+            // Verificar si no se encontró un cliente
+            if (cs.wasNull()) {
+                idCliente = -1; // -1 indica que no se encontró un cliente
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return idCliente;
     }
 }
