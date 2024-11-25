@@ -19,7 +19,6 @@
             justify-content: center;
             gap: 20px;
         }
-
         .button {
             background-color: #2f7a44;
             color: #ffffff;
@@ -33,9 +32,52 @@
             min-width: 150px;
             margin-top: 40px;
         }
-
         .button:hover {
             background-color: #357D3C;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px; /* Reducir tamaño del título */
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            p {
+                font-size: 14px; /* Reducir tamaño de fuente del párrafo */
+            }
+            .button {
+                padding: 12px 16px; /* Reducir padding */
+                font-size: 0.75em; /* Reducir tamaño de fuente */
+                min-width: 130px; /* Reducir ancho mínimo del botón */
+            }
+            .button-container {
+                gap: 15px; /* Reducir el espacio entre botones */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px; /* Reducir más el tamaño del título */
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 12px; /* Ajustar tamaño de fuente del párrafo */
+            }
+            .button {
+                padding: 8px 10px; /* Reducir padding aún más */
+                font-size: 0.6em; /* Reducir tamaño de fuente */
+                min-width: 110px; /* Ajustar ancho mínimo */
+                width: 80%;
+                align-content: center;
+                margin: 5px auto;
+                
+            }
+            .button-container {
+                gap: 10px; /* Reducir espacio entre botones */
+                flex-direction: column; /* Cambiar los botones a disposición vertical */
+            }
         }
     </style>
 </asp:Content>

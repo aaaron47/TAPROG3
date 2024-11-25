@@ -9,19 +9,16 @@
             text-align: center;
             margin-bottom: 20px;
         }
-
         .form-group {
             display: flex;
             flex-direction: column;
             margin-bottom: 15px;
         }
-
         .form-group label {
             font-size: 16px;
             color: #333;
             margin-bottom: 5px;
         }
-
         .form-group input, .form-group select {
             padding: 10px;
             font-size: 16px;
@@ -31,17 +28,14 @@
             width: 100%;
             box-sizing: border-box;
         }
-
         .form-row {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
         }
-
         .form-row .form-group {
             flex: 1;
         }
-
         /* Estilos para el botón de guardar */
         .btn-save {
             width: 100%;
@@ -56,9 +50,48 @@
             margin-top: 30px;
             margin-bottom: 30px;
         }
-
         .btn-save:hover {
             background-color: #265f21;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .container h1 {
+                font-size: 22px; /* Reducir tamaño del título */
+                margin-bottom: 10px; /* Ajustar margen inferior */
+            }
+            .form-group label {
+                font-size: 10px; /* Reducir tamaño del texto del label */
+            }
+            .form-group input, .form-group select {
+                font-size: 10px; /* Reducir tamaño del texto del input/select */
+                padding: 6px; /* Reducir padding */
+            }
+            .form-row {
+                flex-direction: column; /* Cambiar a disposición vertical */
+                gap: 10px; /* Ajustar espacio entre elementos */
+            }
+            .btn-save {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 8px; /* Reducir padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container h1 {
+                font-size: 18px; /* Reducir más el tamaño del título */
+            }
+            .form-group label {
+                font-size: 8px; /* Ajustar tamaño del texto */
+            }
+            .form-group input, .form-group select {
+                font-size: 8px; /* Ajustar tamaño del texto */
+                padding: 4px; /* Reducir padding */
+            }
+            .btn-save {
+                font-size: 8px; /* Ajustar tamaño del texto */
+                padding: 6px; /* Reducir padding */
+            }
         }
 
     </style>

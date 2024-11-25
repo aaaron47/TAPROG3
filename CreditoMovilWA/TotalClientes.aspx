@@ -2,11 +2,13 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-       .header h2 {
-            font-size: 24px;
-            color: #2f7a44;
+        .header h2 {
+                font-size: 24px;
+                color: #2f7a44;
         }
-
+        .container{
+            width: 1000px;
+        }
         .filter-container {
             margin: 20px 0;
         }
@@ -56,6 +58,57 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .header h2 {
+                font-size: 16px; /* Reducir tamaño del título */
+            }
+            .filter-container {
+                flex-direction: column; /* Cambiar disposición a columna */
+                gap: 15px;
+            }
+            .filter-container label {
+                font-size: 12px; /* Reducir tamaño del texto */
+            }
+            .input-text {
+                width: calc(100% - 10px); /* Ajustar ancho del input */
+                margin-bottom: 10px; /* Agregar espacio entre campos */
+                font-size: 12px;
+            }
+            .filter-btn {
+                width: 100%; /* Botón ocupa todo el ancho */
+                padding: 10px; /* Ajustar padding */
+                font-size: 10px; /* Reducir tamaño de texto */
+            }
+            .client-table th, .client-table td {
+                font-size: 10px; /* Reducir tamaño de texto */
+                padding: 8px; /* Ajustar padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h2 {
+                font-size: 14px; /* Reducir más el tamaño del título */
+            }
+            .filter-container label {
+                font-size: 10px; /* Reducir tamaño del texto */
+            }
+            .input-text {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 8px; /* Ajustar padding */
+            }
+            .filter-btn {
+                font-size: 8px; /* Reducir tamaño del texto */
+                padding: 8px; /* Reducir padding */
+            }
+            .client-table th, .client-table td {
+                font-size: 8px; /* Reducir tamaño de texto */
+                padding: 6px; /* Reducir padding */
+            }
+            .view-btn {
+                font-size: 12px; /* Ajustar tamaño del botón */
+            }
         }
     </style>
 

@@ -28,8 +28,30 @@ namespace CreditoMovilWA
 
         protected void FiltrarClientes_Click(object sender, EventArgs e)
         {
-            int puntajeMin = int.Parse(txtPuntajeMin.Text);
-            int puntajeMax = int.Parse(txtPuntajeMax.Text);
+            if (string.IsNullOrWhiteSpace(txtPuntajeMin.Text) || string.IsNullOrWhiteSpace(txtPuntajeMax.Text))
+            {
+                lblError.Text = "Debe ingresar valores en ambos campos.";
+                return;
+            }
+
+            int puntajeMin, puntajeMax;
+            if (!int.TryParse(txtPuntajeMin.Text, out puntajeMin) || !int.TryParse(txtPuntajeMax.Text, out puntajeMax))
+            {
+                lblError.Text = "Debe ingresar valores numéricos válidos.";
+                return;
+            }
+
+            if (puntajeMin<0 || puntajeMin > 100 || puntajeMax < 0 || puntajeMax > 100)
+            {
+                lblError.Text = "Los valores deben estar entre 0 y 100.";
+                return;
+            }
+
+            if (puntajeMin > puntajeMax)
+            {
+                lblError.Text = "El mínimo debe ser menor al máximo.";
+                return;
+            }
 
             cliente[] clientes = daoCliente.listarClientesPorRanking(puntajeMin,puntajeMax);
 

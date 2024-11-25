@@ -68,10 +68,6 @@
             flex: 1;
             margin-right: 15px; /* Añade espacio entre columnas */
         }
-        label {
-             font-size: 16px;
-             color: #333;
-         }
         .input-text{
             width:100%;
         }
@@ -104,11 +100,71 @@
             font-weight: bold;
             display: block; /* Asegura que el margen superior se aplique correctamente */
             font-size: 16px; /* Tamaño del texto (opcional) */
-            color: #fff; /* Color del texto (opcional) */
+            color: #000000; /* Color del texto (opcional) */
             font-family: 'Poppins', sans-serif; /* Fuente elegante (opcional) */
         }
         .container {
             max-width: 1000px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 24px;
+            }
+            .form-group {
+                flex-direction: column; /* Colocar elementos en columna */
+                align-items: flex-start;
+            }
+            .form-group label {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+            .form-group input, .form-group textarea {
+                width: 100%; /* Usar todo el ancho disponible */
+                margin-left: 0; /* Quitar margen izquierdo */
+            }
+            .modify-btn, .back-btn {
+                font-size: 14px;
+                padding: 8px 15px;
+                width: 100%; /* Usar todo el ancho */
+                max-width: none;
+            }
+            .puntaje-display {
+                font-size: 28px;
+            }
+            label,.input-text, .form-control{
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 20px;
+            }
+            .puntaje {
+                font-size: 24px;
+            }
+            .form-group label {
+                font-size: 12px;
+            }
+            .form-group input, .form-group textarea {
+                font-size: 12px;
+                padding: 6px;
+            }
+            .modify-btn, .back-btn {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            .puntaje-display {
+                font-size: 20px;
+            }
+            .img-fluid {
+                max-width: 100%; /* Asegurar que la imagen ocupe el ancho del contenedor */
+            }
+            label, .input-text, .form-control{
+                font-size: 10px;
+            }
         }
     </style>
 </asp:Content>

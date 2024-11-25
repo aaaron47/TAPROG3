@@ -17,20 +17,17 @@
             background-color: #e4e4e4;
             margin-bottom: 15px;
         }
-        
         .filter-section {
             display: flex;
             gap: 20px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
         .form-group {
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-
         /* Botones */
         .button-group {
             display: flex;
@@ -38,7 +35,6 @@
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .filter-btn,
         .add-btn {
             padding: 10px 20px;
@@ -48,20 +44,16 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .filter-btn {
             background-color: #28a745; /* Verde */
         }
-
         .add-btn {
             background-color: #007bff; /* Azul */
         }
-
         .filter-btn:hover,
         .add-btn:hover {
             opacity: 0.9;
         }
-
         /* Tabla */
         .table-container {
             margin-top: 20px;
@@ -83,23 +75,19 @@
             width: 100%;
             border-collapse: collapse;
         }
-
         .styled-table th,
         .styled-table td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
         }
-
         .styled-table th {
             background-color: #003366;
             color: white;
         }
-
         .styled-table tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
         /* Botón de ver detalles */
         .view-btn {
             padding: 5px 10px;
@@ -109,9 +97,74 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .view-btn:hover {
             background-color: #138496;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            label {
+                font-size: 12px; /* Reducir tamaño del texto */
+            }
+            .filter-section {
+                flex-direction: column; /* Cambiar a disposición en columna */
+                gap: 15px; /* Reducir espacio entre elementos */
+            }
+            .form-group {
+                width: 100%; /* Asegurar que los inputs ocupen todo el ancho */
+            }
+            .input-text {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 8px; /* Reducir padding */
+            }
+            .button-group {
+                flex-direction: column; /* Disposición vertical para botones */
+                gap: 10px;
+            }
+            .filter-btn,
+            .add-btn {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 8px 15px; /* Reducir padding */
+            }
+            th, td {
+                font-size: 10px; /* Reducir tamaño del texto en tablas */
+                padding: 8px; /* Reducir padding */
+            }
+            .view-btn {
+                font-size: 10px; /* Ajustar tamaño del botón */
+            }
+            h2 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            label {
+                font-size: 10px; /* Reducir más el tamaño del texto */
+            }
+            .filter-section {
+                gap: 10px; /* Reducir espacio entre elementos */
+            }
+            .input-text {
+                font-size: 8px; /* Reducir tamaño del texto */
+                padding: 6px; /* Ajustar padding */
+            }
+            .filter-btn,
+            .add-btn {
+                font-size: 8px; /* Ajustar tamaño del texto */
+                padding: 6px 10px; /* Reducir padding */
+            }
+            th, td {
+                font-size: 8px; /* Reducir tamaño del texto en tablas */
+                padding: 6px; /* Reducir padding */
+            }
+            .view-btn {
+                font-size: 8px; /* Ajustar tamaño del botón */
+                padding: 5px 8px; /* Reducir padding */
+            }
+            h2 {
+                font-size: 18px;
+            }
         }
     </style>
 

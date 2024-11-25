@@ -77,7 +77,6 @@
             margin-right: 50px;
             margin-bottom: 20px;
         }
-
         .modify-btn {
             background-color: #2f7a44;
             color: white;
@@ -91,6 +90,69 @@
             margin-right: 50px;
             margin-left: 50px;
             margin-bottom: 20px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            label {
+                font-size: 12px; /* Reducir tamaño del texto */
+            }
+            .input-text {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 6px; /* Ajustar padding */
+            }
+            .button {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 4px 9px; /* Ajustar padding */
+                margin-top: 9px; /* Reducir margen superior */
+            }
+            th, td {
+                font-size: 10px; /* Reducir tamaño del texto en tablas */
+                padding: 6px; /* Ajustar padding */
+            }
+            .section-title {
+                font-size: 16px;
+            }
+            h1{
+                font-size: 20px;
+            }
+            .back-btn {
+                font-size: 12px;
+            }
+            .modify-btn {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            label {
+                font-size: 10px; /* Reducir más el tamaño del texto */
+            }
+            .input-text {
+                font-size: 8px; /* Reducir tamaño del texto */
+                padding: 4px; /* Reducir padding */
+            }
+            .button {
+                font-size: 8px; /* Reducir tamaño del texto */
+                padding: 4px 8px; /* Reducir padding */
+                margin-top: 8px; /* Ajustar margen superior */
+            }
+            th, td {
+                font-size: 8px; /* Reducir tamaño del texto en tablas */
+                padding: 4px; /* Reducir padding */
+            }
+            .section-title {
+                font-size: 12px;
+            }
+            h1{
+                font-size: 16px;
+            }
+            .back-btn {
+                font-size: 10px;
+            }
+            .modify-btn {
+                font-size: 10px;
+            }
         }
     </style>
 </asp:Content>

@@ -32,6 +32,57 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            label {
+                font-size: 12px; /* Reducir tamaño del texto */
+            }
+            .input-text {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 6px; /* Ajustar padding */
+            }
+            .button {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 6px 13px; /* Ajustar padding */
+                margin-top: 10px; /* Reducir margen superior */
+            }
+            th, td {
+                font-size: 10px; /* Reducir tamaño del texto en tablas */
+                padding: 6px; /* Ajustar padding */
+            }
+            h2{
+                font-size: 20px;
+            }
+            p{
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            label {
+                font-size: 10px; /* Reducir más el tamaño del texto */
+            }
+            .input-text {
+                font-size: 8px; /* Reducir tamaño del texto */
+                padding: 4px; /* Reducir padding */
+            }
+            .button {
+                font-size: 8px; /* Reducir tamaño del texto */
+                padding: 4px 8px; /* Reducir padding */
+                margin-top: 8px; /* Ajustar margen superior */
+            }
+            th, td {
+                font-size: 8px; /* Reducir tamaño del texto en tablas */
+                padding: 4px; /* Reducir padding */
+            }
+            h2{
+                font-size: 16px;
+            }
+            p{
+                font-size: 12px;
+            }
+        }
     </style>
 </asp:Content>
 

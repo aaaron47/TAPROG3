@@ -58,6 +58,50 @@
             font-weight: 700;
             font-family: 'Poppins', sans-serif; 
         }
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 20px; /* Reducir tamaño del título */
+            }
+            .section-title {
+                font-size: 14px; /* Reducir tamaño del subtítulo */
+            }
+            .form-group label {
+                font-size: 10px; /* Reducir tamaño del label */
+            }
+            .form-group input, .form-group select {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 6px; /* Reducir padding */
+            }
+            .btn-group {
+                gap: 10px; /* Espacio entre botones en columna */
+            }
+            .modify-btn, .back-btn {
+                font-size: 10px; /* Reducir tamaño del texto */
+                padding: 6px 10px; /* Ajustar padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 16px; /* Reducir más el tamaño del título */
+            }
+            .section-title {
+                font-size: 12px; /* Reducir más el tamaño del subtítulo */
+            }
+            .form-group label {
+                font-size: 8px; /* Reducir más el tamaño del label */
+            }
+            .form-group input, .form-group select {
+                font-size: 8px; /* Reducir más el tamaño del texto */
+                padding: 4px; /* Reducir más el padding */
+            }
+            .modify-btn, .back-btn {
+                font-size: 8px; /* Reducir más el tamaño del texto */
+                padding: 4px 8px; /* Reducir más el padding */
+            }
+        }
+
     </style>
 </asp:Content>
 
