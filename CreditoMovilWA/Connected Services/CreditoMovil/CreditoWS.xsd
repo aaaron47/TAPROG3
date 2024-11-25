@@ -19,6 +19,8 @@
   <xs:element name="listarTodosCreditosResponse" type="tns:listarTodosCreditosResponse" />
   <xs:element name="modificarCredito" type="tns:modificarCredito" />
   <xs:element name="modificarCreditoResponse" type="tns:modificarCreditoResponse" />
+  <xs:element name="obtenerIdClientePorCredito" type="tns:obtenerIdClientePorCredito" />
+  <xs:element name="obtenerIdClientePorCreditoResponse" type="tns:obtenerIdClientePorCreditoResponse" />
   <xs:element name="obtenerPorIDCredito" type="tns:obtenerPorIDCredito" />
   <xs:element name="obtenerPorIDCreditoResponse" type="tns:obtenerPorIDCreditoResponse" />
   <xs:complexType name="generarBuffer">
@@ -163,6 +165,16 @@
   <xs:complexType name="listarCreditosFiltroResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:credito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerIdClientePorCredito">
+    <xs:sequence>
+      <xs:element name="idCredito" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerIdClientePorCreditoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listarCreditosSinCliFiltro">
