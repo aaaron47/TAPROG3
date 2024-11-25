@@ -18,7 +18,7 @@ namespace CreditoMovilWA
         protected void Page_Init(object sender, EventArgs e)
         {
             cliente cli = (cliente)Session["Cliente"];
-            administrador admin = (administrador)Session["Administrador"];
+            administrador1 admin = (administrador1)Session["Administrador"];
             if (cli == null && admin == null)
             {
                 Response.Redirect("Login.aspx");
@@ -37,7 +37,6 @@ namespace CreditoMovilWA
                 {
                     btnModificar.Visible = true;
                 }
-
             }
         }
 
@@ -73,7 +72,6 @@ namespace CreditoMovilWA
             daoCredito.modificarCredito(cred);
         }
 
-
         private void CargarDetalleCredito()
         {
             int id = (int)Session["idCredito"];
@@ -99,7 +97,6 @@ namespace CreditoMovilWA
         private void CargarTransacciones()
         {
             credito cred = (credito)Session["Credito"];
-
             // Cargar datos de ejemplo o conectar a la base de datos para obtener transacciones.
             gvTransacciones.DataSource = daoTransaccion.listarTransaccionCredito(cred.numCredito); // falta el metodo que sea listar por credito :p
             gvTransacciones.DataBind();
@@ -120,7 +117,6 @@ namespace CreditoMovilWA
                 Response.Redirect("VisualizarCreditosCliente.aspx");
             else Response.Redirect("DetalleCliente.aspx");
         }
-
         protected void btnDesembolso_Click(object sender, EventArgs e)
         {
             cliente cli = (cliente)Session["Cliente"];

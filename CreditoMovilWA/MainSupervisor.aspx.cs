@@ -15,7 +15,7 @@ namespace CreditoMovilWA
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            supervisor sup = (supervisor)Session["Supervisor"];
+            supervisor1 sup = (supervisor1)Session["Supervisor"];
             if (sup == null)
             {
                 Response.Redirect("Login.aspx");
@@ -34,7 +34,7 @@ namespace CreditoMovilWA
 
         private void CargarEvaluaciones()
         {
-            supervisor sup = (supervisor)Session["Supervisor"];
+            supervisor1 sup = (supervisor1)Session["Supervisor"];
 
 
             // Ejemplo de carga de datos, reemplaza con tu lógica real

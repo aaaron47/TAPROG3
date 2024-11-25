@@ -44,16 +44,11 @@ namespace CreditoMovilWA
             usuarioInstancia1 user = (usuarioInstancia1)Session["Usuario"];
             notificacion[] notificaciones = daoNotificacion.listarPorUsuario(user.idUsuario);
             // Si no hay notificaciones, limpiar el DataSource y ocultar el indicador
-            foreach (notificacion notificacion in notificaciones)
-            {
-                System.Diagnostics.Debug.WriteLine($"ID: {notificacion.id_usuario}, Mensaje: {notificacion.mensaje}");
-            }
             if (notificaciones == null || notificaciones.Length == 0)
             {
                 rptNotifications.DataSource = new List<string> { "No hay notificaciones disponibles." };
                 rptNotifications.DataBind();
                 lblNotificationDot.Visible = false;
-
             }
             else
             {
@@ -63,11 +58,6 @@ namespace CreditoMovilWA
                     .Take(10) // Tomar las primeras 10
                     .Select(n => n.mensaje) // Obtener solo el campo 'mensaje'
                     .ToList();
-
-                foreach (string mensaje in mensajes)
-                {
-                    System.Diagnostics.Debug.WriteLine(mensaje);
-                }
 
                 // Asignar la lista de mensajes al Repeater
                 rptNotifications.DataSource = mensajes;

@@ -12,7 +12,7 @@ namespace CreditoMovilWA
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            administrador admin = (administrador)Session["Administrador"];
+            administrador1 admin = (administrador1)Session["Administrador"];
             if (admin == null)
             {
                 Response.Redirect("Login.aspx");

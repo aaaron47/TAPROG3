@@ -19,8 +19,8 @@ namespace CreditoMovilWA
             modoEdicion = false;
             btnModificar.Text = "MODIFICAR";
 
-            supervisor sup = (supervisor)Session["Supervisor"];
-            administrador admin = (administrador)Session["Administrador"];
+            supervisor1 sup = (supervisor1)Session["Supervisor"];
+            administrador1 admin = (administrador1)Session["Administrador"];
             if (sup == null && admin == null)
             {
                 Response.Redirect("Login.aspx");

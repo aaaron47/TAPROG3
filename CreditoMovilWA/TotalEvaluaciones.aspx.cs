@@ -29,7 +29,6 @@ namespace CreditoMovilWA
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-
             DateTime fechaInicio, fechaFin;
             bool isFechaInicio = DateTime.TryParse(txtFechaInicio.Text, out fechaInicio);
             bool isFechaFin = DateTime.TryParse(txtFechaFin.Text, out fechaFin);
@@ -37,15 +36,11 @@ namespace CreditoMovilWA
             if (isFechaInicio && isFechaFin)
             {
                 evaluacion[] resultados = daoEvaluacion.listarEvaluacionesFecha(fechaInicio, fechaFin);
-
                 if (resultados != null)
                 {
-
                     gvCreditos.DataSource = resultados;
                     gvCreditos.DataBind();
                     lblError.Text = "";
-
-
                 }
                 else
                 {
