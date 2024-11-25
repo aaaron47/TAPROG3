@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import pe.edu.pucp.creditomovil.gestclientes.dao.ClienteDAO;
+import pe.edu.pucp.creditomovil.model.Cliente;
 import pe.edu.pucp.creditomovil.model.Credito;
 import pe.edu.pucp.creditomovil.model.Estado;
 
@@ -218,6 +220,8 @@ public class CreditoMySQL implements CreditoDAO {
 
     @Override
     public List<Credito> listarTodosSinCliFiltros(Date fechaini, Date fechafin, String estado) {
+        ClienteDAO clidao = new ClienteMySQL();
+        CreditoDAO credidao = new CreditoMySQL();
         List<Credito> listaCreditos = new ArrayList<>();
         Connection conn = null;
         CallableStatement cs = null;
@@ -246,6 +250,9 @@ public class CreditoMySQL implements CreditoDAO {
                 // Crear el objeto Credito. Nota que el cliente es null por simplicidad
                 Credito credito = new Credito(numCredito, monto, tasaInteres, fechaOtorgamiento, null, est, numCuotas,
                         cantCuotasPagadas);
+                int idCliente = credidao.obtenerIdClientePorCredito(numCredito);
+                Cliente cli = clidao.obtenerPorId(idCliente);
+                credito.setCliente(cli);
                 listaCreditos.add(credito);
             }
 

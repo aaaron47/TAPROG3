@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/CreditoMovilWSBL/NotificacionWS?xsd=1" namespace="http://services.creditomovil.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listarPorUsuario">
-    <part name="parameters" element="tns:listarPorUsuario" />
+  <message name="modificarNotificacion">
+    <part name="parameters" element="tns:modificarNotificacion" />
   </message>
-  <message name="listarPorUsuarioResponse">
-    <part name="parameters" element="tns:listarPorUsuarioResponse" />
+  <message name="modificarNotificacionResponse">
+    <part name="parameters" element="tns:modificarNotificacionResponse" />
   </message>
   <message name="insertarNotificacion">
     <part name="parameters" element="tns:insertarNotificacion" />
@@ -17,29 +17,29 @@
   <message name="insertarNotificacionResponse">
     <part name="parameters" element="tns:insertarNotificacionResponse" />
   </message>
-  <message name="modificarNotificacion">
-    <part name="parameters" element="tns:modificarNotificacion" />
+  <message name="listarPorUsuario">
+    <part name="parameters" element="tns:listarPorUsuario" />
   </message>
-  <message name="modificarNotificacionResponse">
-    <part name="parameters" element="tns:modificarNotificacionResponse" />
+  <message name="listarPorUsuarioResponse">
+    <part name="parameters" element="tns:listarPorUsuarioResponse" />
   </message>
   <portType name="NotificacionWS">
-    <operation name="listarPorUsuario">
-      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/listarPorUsuarioRequest" message="tns:listarPorUsuario" />
-      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/listarPorUsuarioResponse" message="tns:listarPorUsuarioResponse" />
+    <operation name="modificarNotificacion">
+      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/modificarNotificacionRequest" message="tns:modificarNotificacion" />
+      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/modificarNotificacionResponse" message="tns:modificarNotificacionResponse" />
     </operation>
     <operation name="insertarNotificacion">
       <input wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/insertarNotificacionRequest" message="tns:insertarNotificacion" />
       <output wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/insertarNotificacionResponse" message="tns:insertarNotificacionResponse" />
     </operation>
-    <operation name="modificarNotificacion">
-      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/modificarNotificacionRequest" message="tns:modificarNotificacion" />
-      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/modificarNotificacionResponse" message="tns:modificarNotificacionResponse" />
+    <operation name="listarPorUsuario">
+      <input wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/listarPorUsuarioRequest" message="tns:listarPorUsuario" />
+      <output wsam:Action="http://services.creditomovil.pucp.edu.pe/NotificacionWS/listarPorUsuarioResponse" message="tns:listarPorUsuarioResponse" />
     </operation>
   </portType>
   <binding name="NotificacionWSPortBinding" type="tns:NotificacionWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listarPorUsuario">
+    <operation name="modificarNotificacion">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -57,7 +57,7 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="modificarNotificacion">
+    <operation name="listarPorUsuario">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
