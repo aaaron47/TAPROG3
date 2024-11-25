@@ -19,49 +19,103 @@ public class BancoMySQL implements BancoDAO{
 
     @Override
     public boolean insertar(Banco banco) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_foto", banco.getFoto());
-        parametrosEntrada.put("p_nombreTitular", banco.getNombreTitular());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
-        
-        parametrosSalida.put("p_idMetodoPago", Types.INTEGER);
+        Connection conn = null;
+        CallableStatement stmtMetodoPago = null;
+        CallableStatement stmtBanco = null;
 
-        int res = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
-        int metodoPagoId = (int) parametrosSalida.get("p_idMetodoPago");
-        banco.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
-        
-        parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_idMetodoPago", metodoPagoId);
-        parametrosEntrada.put("p_CCI", banco.getCCI());
-        parametrosEntrada.put("p_tipoCuenta", banco.getTipoCuenta());
-        parametrosEntrada.put("p_nombreBanco", banco.getNombreBanco());
-        
-        parametrosSalida = new HashMap<>();
-        
-        int result = DBManager.getInstance().ejecutarProcedimiento("InsertarBanco", parametrosEntrada, parametrosSalida);
-        
-        return (metodoPagoId != -1 && result != 0);
+        try {
+            conn = DBManager.getInstance().getConnection();
+            conn.setAutoCommit(false); // Inicia una transacción
+
+            // Llamada al procedimiento InsertarCliente
+            String sqlInsertarMetodoPago = "{ CALL InsertarMetodoPago(?, ?, ?) }";
+            stmtMetodoPago = conn.prepareCall(sqlInsertarMetodoPago);
+            stmtMetodoPago.setBytes(1, banco.getFoto());
+            stmtMetodoPago.setString(2, banco.getNombreTitular());
+            stmtMetodoPago.registerOutParameter(3, Types.INTEGER); // Para capturar el ID generado
+            stmtMetodoPago.executeUpdate();
+            // Obtener el ID generado
+            int metodoPagoId = stmtMetodoPago.getInt(3);
+            banco.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
+            
+            // Llamada al procedimiento metodo
+            String sqlInsertarBanco = "{ CALL InsertarBanco(?, ?, ?, ?) }";
+            stmtBanco = conn.prepareCall(sqlInsertarBanco);
+            stmtBanco.setInt(1, banco.getIdMetodoPago());
+            stmtBanco.setString(2, banco.getCCI());
+            stmtBanco.setString(3, banco.getTipoCuenta());
+            stmtBanco.setString(4, banco.getNombreBanco());//ACA NUEVO//ACA NUEVO//ACA NUEVO
+            stmtBanco.executeUpdate();            
+
+            stmtBanco.executeUpdate();
+
+            conn.commit(); // Confirma la transacción
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                if (conn != null) {
+                    conn.rollback(); // Deshace la transacción en caso de error
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        } finally {
+            try {
+                if (stmtBanco != null) {
+                    stmtBanco.close();
+                }
+                if(stmtMetodoPago != null){
+                    stmtMetodoPago.close();
+                }
+                if (stmtMetodoPago != null) {
+                    stmtMetodoPago.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public boolean modificar(Banco banco) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        Connection conn = null;
+        CallableStatement cs = null;
         
-        parametrosEntrada.put("p_idMetodoPago", banco.getIdMetodoPago());
-        parametrosEntrada.put("p_foto", banco.getFoto());
-        parametrosEntrada.put("p_nombreTitular", banco.getNombreTitular());
-        parametrosEntrada.put("p_CCI", banco.getCCI());
-        parametrosEntrada.put("p_tipoCuenta", banco.getTipoCuenta());
-        parametrosEntrada.put("p_nombreCuenta", banco.getNombreBanco());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
-        
-        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarBanco", parametrosEntrada, parametrosSalida);
-        
-        return resultado>0;
+        try {
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ModificarCliente(?, ?, ?, ?, ?, ?) }";
+            cs = conexion.prepareCall(sql);
+            
+            cs.setInt(1, banco.getIdMetodoPago());
+            cs.setBytes(2, banco.getFoto());
+            cs.setString(3, banco.getNombreTitular());
+            cs.setString(4, banco.getCCI());
+            cs.setString(5, banco.getTipoCuenta());
+            cs.setString(6, banco.getNombreBanco());//ACA NUEVO//ACA NUEVO//ACA NUEVO
+            
+            int filasAfectadas = cs.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

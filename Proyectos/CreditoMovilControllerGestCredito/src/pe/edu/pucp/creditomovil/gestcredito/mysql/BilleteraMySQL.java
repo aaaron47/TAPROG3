@@ -20,45 +20,100 @@ public class BilleteraMySQL implements BilleteraDAO{
     
     @Override
     public boolean insertar(Billetera billetera) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_foto", billetera.getFoto());
-        parametrosEntrada.put("p_nombreTitular", billetera.getNombreTitular());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
-        
-        parametrosSalida.put("p_idMetodoPago", Types.INTEGER);
+        Connection conn = null;
+        CallableStatement stmtMetodoPago = null;
+        CallableStatement stmtBilletera = null;
 
-        int res = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
-        int metodoPagoId = (int) parametrosSalida.get("p_idMetodoPago");
-        billetera.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
-        
-        parametrosEntrada = new HashMap<>();
-        parametrosSalida = new HashMap<>();
+        try {
+            conn = DBManager.getInstance().getConnection();
+            conn.setAutoCommit(false); // Inicia una transacción
 
-        parametrosEntrada.put("p_idMetodoPago", metodoPagoId);
-        parametrosEntrada.put("p_numeroTelefono", billetera.getNumeroTelefono());
-        parametrosEntrada.put("p_nombreBilletera", billetera.getNombreBilletera());
-        
-        int result = DBManager.getInstance().ejecutarProcedimiento("InsertarBilletera", parametrosEntrada, parametrosSalida);
-        
-        return result > 0;
+            // Llamada al procedimiento `InsertarMetodoPago`
+            String sqlInsertarMetodoPago = "{ CALL InsertarMetodoPago(?, ?, ?) }";
+            stmtMetodoPago = conn.prepareCall(sqlInsertarMetodoPago);
+            stmtMetodoPago.setBytes(1, billetera.getFoto());
+            stmtMetodoPago.setString(2, billetera.getNombreTitular());
+            stmtMetodoPago.registerOutParameter(3, Types.INTEGER); // Para capturar el ID generado
+            stmtMetodoPago.executeUpdate();
+
+            // Obtener el ID generado
+            int metodoPagoId = stmtMetodoPago.getInt(3);
+            billetera.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
+
+            // Llamada al procedimiento `InsertarCliente`
+            String sqlInsertarBilletera = "{ CALL InsertarBilletera(?, ?, ?) }";
+            stmtBilletera = conn.prepareCall(sqlInsertarBilletera);
+            stmtBilletera.setInt(1, metodoPagoId);
+            stmtBilletera.setString(2, billetera.getNumeroTelefono());
+            stmtBilletera.setString(3, billetera.getNombreBilletera());
+
+            stmtBilletera.executeUpdate();
+
+            conn.commit(); // Confirma la transacción
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                if (conn != null) {
+                    conn.rollback(); // Deshace la transacción en caso de error
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        } finally {
+            try {
+                if (stmtBilletera != null) {
+                    stmtBilletera.close();
+                }
+                if (stmtMetodoPago != null) {
+                    stmtMetodoPago.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public boolean modificar(Billetera billetera) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_idMetodoPago", billetera.getIdMetodoPago());
-        parametrosEntrada.put("p_foto", billetera.getFoto());
-        parametrosEntrada.put("p_nombreTitular", billetera.getNombreTitular());
-        parametrosEntrada.put("p_numeroTelefono", billetera.getNumeroTelefono());
-        parametrosEntrada.put("p_nombreBilletera", billetera.getNombreBilletera());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        Connection conn = null;
+        CallableStatement cs = null;
 
-        int result = DBManager.getInstance().ejecutarProcedimiento("ModificarBilletera", parametrosEntrada, parametrosSalida);
-        return result>0;
+        try {
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ModificarBilletera(?, ?, ?, ?, ?) }";
+            cs = conn.prepareCall(sql);
+
+            // Parámetros para la tabla usuario
+            cs.setInt(1, billetera.getIdMetodoPago());
+            cs.setBytes(2, billetera.getFoto());
+            cs.setString(3, billetera.getNombreTitular());
+            cs.setString(4, billetera.getNumeroTelefono());
+            cs.setString(5, billetera.getNombreBilletera());
+
+            int filasAfectadas = cs.executeUpdate();
+            return filasAfectadas > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
     
     @Override

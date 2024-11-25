@@ -21,32 +21,45 @@ public class MetodoPagoMySQL implements MetodoPagoDAO {
 
     @Override
     public boolean insertar(MetodoPago metodoPago) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_foto", metodoPago.getFoto());
-        parametrosEntrada.put("p_nombreTitular", metodoPago.getNombreTitular());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
-        
-        parametrosSalida.put("p_idMetodoPago", Types.INTEGER);
 
-        int metodoPagoId = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
-        return metodoPagoId > 0;
+        CallableStatement cs;
+        String query = "{CALL InsertarMetodoPago(?,?,?)}";
+        boolean resultado = false;
+
+        try {
+            conexion = DBManager.getInstance().getConnection();
+            cs = conexion.prepareCall(query);
+
+            cs.setInt(1, metodoPago.getIdMetodoPago());
+            cs.setString(2, metodoPago.getNombreTitular());
+            cs.setBytes(3, metodoPago.getFoto());
+
+            resultado = cs.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override
     public boolean modificar(MetodoPago metodoPago) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        CallableStatement cs;
+        String query = "{CALL ModificarMetodoPago(?,?,?)}";
+        boolean resultado = false;
         
-        parametrosEntrada.put("p_idMetodoPago", metodoPago.getIdMetodoPago());
-        parametrosEntrada.put("p_foto", metodoPago.getFoto());
-        parametrosEntrada.put("p_nombreTitular", metodoPago.getNombreTitular());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
-        
-        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarMetodoPago", parametrosEntrada, parametrosSalida);
-        
-        return resultado > 0;
+        try {
+            
+            conexion = DBManager.getInstance().getConnection();
+            cs = conexion.prepareCall(query);
+            cs.setInt(1, metodoPago.getIdMetodoPago());
+            cs.setBytes(2, metodoPago.getFoto());
+            cs.setString(3, metodoPago.getNombreTitular());
+            
+            resultado = cs.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultado;
     }
 
     @Override

@@ -4,6 +4,7 @@
  */
 package pe.edu.pucp.creditomovil.gestclientes.mysql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,20 +115,21 @@ public class ClienteMySQL implements ClienteDAO {
     
     @Override
     public int validarEmail(String email){
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-            parametrosEntrada.put("p_email", email);
-        
+        Connection conn = null;
+        CallableStatement cs = null;
         ResultSet rs = null;
-        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerClientePorEmail", parametrosEntrada);
-        
-        try {
+        try{
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ObtenerClientePorEmail(?) }";
+            cs = conn.prepareCall(sql);
+            cs.setString(1, email);
+            rs = cs.executeQuery();
             if(rs.next()){
                 int resultado = rs.getInt("codigo_cliente");
                 return resultado;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException ex) {
+                ex.printStackTrace();
         }
         return -1;
     }

@@ -13,8 +13,6 @@ import java.sql.CallableStatement;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.sql.Types;
 /**
  *
  * @author aaron
@@ -25,46 +23,95 @@ public class NotificacionMySQL implements NotificacionDAO{
 
     @Override
     public void insertar(Notificacion notificacion) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_mensaje", notificacion.getMensaje());
-        parametrosEntrada.put("p_id_usuario", notificacion.getId_usuario());
-        parametrosEntrada.put("p_activo", notificacion.getActivo());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        Connection conn = null;
+        CallableStatement csNotificacion = null;
 
-        parametrosSalida.put("p_id_notificacion", Types.INTEGER);
-        
-        int numNotificacionGenerado = DBManager.getInstance().ejecutarProcedimiento("InsertarNotificacion", parametrosEntrada, parametrosSalida);
-        notificacion.setId_notificacion(numNotificacionGenerado);
+        try {
+            conn = DBManager.getInstance().getConnection();
+            conn.setAutoCommit(false); // Inicia una transacción
+
+            // Insertar en la tabla credito
+            String sqlNotificacion = "{ CALL InsertarNotificacion(?, ?, ?, ?) }";
+            csNotificacion = conn.prepareCall(sqlNotificacion);
+            csNotificacion.registerOutParameter(1, java.sql.Types.INTEGER); // Parámetro de salida para el ID
+            csNotificacion.setString(2, notificacion.getMensaje());
+            csNotificacion.setInt(3, notificacion.getId_usuario());
+            csNotificacion.setInt(4, notificacion.getActivo());
+            csNotificacion.execute();
+
+            // Obtener el ID generado¿
+            int numNotificacionGenerado = csNotificacion.getInt(1);
+            notificacion.setId_notificacion(numNotificacionGenerado);
+
+            conn.commit(); // Confirma la transacción
+        } catch (SQLException ex) {
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Revierte la transacción en caso de error
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (csNotificacion != null) {
+                    csNotificacion.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void modificar(Notificacion notificacion) {
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("p_id_notificacion", notificacion.getId_notificacion());
-        parametrosEntrada.put("p_mensaje", notificacion.getMensaje());
-        parametrosEntrada.put("p_id_usuario", notificacion.getId_usuario());
-        parametrosEntrada.put("p_activo", notificacion.getActivo());
-        
-        HashMap<String, Object> parametrosSalida = new HashMap<>();
-        
-        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarNotificacion", parametrosEntrada, parametrosSalida);
+        Connection conn = null;
+        CallableStatement cs = null;
 
+        try {
+            conn = DBManager.getInstance().getConnection();
+            String sql = "{ CALL ModificarNotificacion(?, ?, ?, ?) }";
+            cs = conn.prepareCall(sql);
+
+            cs.setInt(1, notificacion.getId_notificacion());
+            cs.setString(2, notificacion.getMensaje());
+            cs.setInt(3, notificacion.getId_usuario());
+            cs.setInt(4, notificacion.getActivo());
+
+            cs.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (cs != null) {
+                    cs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public List<Notificacion> listarPorUsuario(int idUsuario) {
         List<Notificacion> notis = new ArrayList<>();
-        HashMap<String, Object> parametrosEntrada = new HashMap<>();
-        
-        parametrosEntrada.put("idUsuario", idUsuario);
-        
-        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarNotificacionPorUsuario", parametrosEntrada);
-        
+        CallableStatement cs;
+        String query = "{CALL ListarNotificacionPorUsuario(?)}";
+
         try {
-            if (rs.next()) {
+            conexion = DBManager.getInstance().getConnection();
+            cs = conexion.prepareCall(query);
+            cs.setInt(1, idUsuario);
+
+            rs = cs.executeQuery();
+            while (rs.next()) {
                 Notificacion not = new Notificacion();
                 not.setId_notificacion(rs.getInt("id_notificacion"));
                 not.setMensaje(rs.getString("mensaje"));
