@@ -4,12 +4,12 @@
  */
 package pe.edu.pucp.creditomovil.rrhh.mysql;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.model.Rol;
@@ -28,111 +28,72 @@ public class UsuarioMySQL implements UsuarioDAO{
 
     @Override
     public void insertar(Usuario usuario) {
-        CallableStatement cs;
-        String query = "{CALL InsertarUsuario(?,?,?,?,?,?,?,?,?,?,?)}";
-        int resultado = 0;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
         
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setDate(1, new Date(usuario.getFecha().getTime()));
-            cs.setString(2, usuario.getNombre());
-            cs.setString(3,usuario.getApPaterno());
-            cs.setString(4,usuario.getApMaterno());
-            cs.setString(5, usuario.getContrasenha());
-            cs.setDate(6, new Date(usuario.getFechaVencimiento().getTime()));
-            if(usuario.getActivo()) cs.setString(7,"S");
-            else cs.setString(7,"N");
-            cs.setDate(8, usuario.getUltimoLogueo() != null ? new Date(usuario.getUltimoLogueo().getTime()) : new Date(System.currentTimeMillis()));
-            cs.setString(9, usuario.getTipoDocumento().name());
-            cs.setString(10, usuario.getDocumento());
-            cs.setBoolean(11,false);
-            
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        parametrosEntrada.put("p_fecha", new Date(usuario.getFecha().getTime()));
+        parametrosEntrada.put("p_nombre", usuario.getNombre());
+        parametrosEntrada.put("p_ap_paterno", usuario.getApPaterno());
+        parametrosEntrada.put("p_ap_materno", usuario.getApMaterno());
+        parametrosEntrada.put("p_contrasena", usuario.getContrasenha());
+        parametrosEntrada.put("p_fecha_venc", new Date(usuario.getFechaVencimiento().getTime()));
+        if(usuario.getActivo()) parametrosEntrada.put("p_activo", "S");
+            parametrosEntrada.put("p_activo", "N");
+        parametrosEntrada.put("p_ultimo_logeo", usuario.getUltimoLogueo() != null ? new Date(usuario.getUltimoLogueo().getTime()) : new Date(System.currentTimeMillis()));
+        parametrosEntrada.put("p_tipo_doc", usuario.getTipoDocumento().name());
+        parametrosEntrada.put("p_documento", usuario.getDocumento());
+        parametrosEntrada.put("p_rol", null);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        parametrosSalida.put("p_idUsuario", 12);
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("InsertarUsuario", parametrosEntrada, parametrosSalida);
     }
    
     @Override
     public void modificar(int id,Usuario usuario) {
-        CallableStatement cs;
-        String query = "{CALL ModificarUsuario(?,?,?,?,?,?,?,?,?,?,?,?)}";
-        int resultado = 0;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
         
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, id);
-            cs.setDate(2, new Date(usuario.getFecha().getTime()));
-            cs.setString(3, usuario.getNombre());
-            cs.setString(4,usuario.getApPaterno());
-            cs.setString(5,usuario.getApMaterno());
-            cs.setString(6, usuario.getContrasenha());
-            cs.setDate(7, new Date(usuario.getFechaVencimiento().getTime()));
-            if(usuario.getActivo()) cs.setString(8,"S");
-            else cs.setString(8,"N");
-            cs.setDate(9, usuario.getUltimoLogueo() != null ? new Date(usuario.getUltimoLogueo().getTime()) : new Date(System.currentTimeMillis()));
-            cs.setBoolean(10,false);
-            cs.setString(11, usuario.getTipoDocumento().name());
-            cs.setString(12, usuario.getDocumento());
-            
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        parametrosEntrada.put("p_usuario_id", id);
+        parametrosEntrada.put("p_fecha", new Date(usuario.getFecha().getTime()));
+        parametrosEntrada.put("p_nombre", usuario.getNombre());
+        parametrosEntrada.put("p_ap_paterno", usuario.getApPaterno());
+        parametrosEntrada.put("p_ap_materno", usuario.getApMaterno());
+        parametrosEntrada.put("p_contrasena", usuario.getContrasenha());
+        parametrosEntrada.put("p_fecha_venc", new Date(usuario.getFechaVencimiento().getTime()));
+        if(usuario.getActivo()) parametrosEntrada.put("p_activo", "S");
+            parametrosEntrada.put("p_activo", "N");
+        parametrosEntrada.put("p_ultimo_logeo", usuario.getUltimoLogueo() != null ? new Date(usuario.getUltimoLogueo().getTime()) : new Date(System.currentTimeMillis()));
+        parametrosEntrada.put("p_clase", 1);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarUsuario", parametrosEntrada, parametrosSalida);
+
     }
 
     @Override
     public void eliminar(int id) {
-        CallableStatement cs;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_id", id);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
         String query = "{CALL EliminarUsuario(?)}";
-        int resultado = 0;
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarUsuario", parametrosEntrada, parametrosSalida);
         
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, id);
-            
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
-    public Usuario obtenerPorId(int id) {
-        CallableStatement cs;
+    public UsuarioInstancia obtenerPorId(int id) {
+        UsuarioInstancia user = new UsuarioInstancia();
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_id", id);
+        
         String query = "{CALL ObtenerUsuario(?)}";
-        int resultado = 0;
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerUsuario", parametrosEntrada);
         
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, id);
-            
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null; //por ahora es null, necesito ver qué añadirle
-    }
-    
-    @Override
-    public UsuarioInstancia obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
-        UsuarioInstancia user = null;
-        Connection conn = null;
-        CallableStatement cs = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerUsuarioPorDocIdentidad(?, ?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, docIden);
-            cs.setString(2, tipoDocIden);
-            rs = cs.executeQuery();
-
             if (rs.next()) {
                 String tipoDocStr = rs.getString("tipo_doc");
                 if (tipoDocStr == null) {
@@ -166,20 +127,53 @@ public class UsuarioMySQL implements UsuarioDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
+        }
+        return user; //por ahora es null, necesito ver qué añadirle
+    }
+    
+    @Override
+    public UsuarioInstancia obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
+        UsuarioInstancia user = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_doc_iden", docIden);
+        parametrosEntrada.put("p_tipo_doc_iden", tipoDocIden);
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerUsuarioPorDocIdentidad", parametrosEntrada);
+
+        try {
+            if (rs.next()) {
+                String tipoDocStr = rs.getString("tipo_doc");
+                if (tipoDocStr == null) {
+                    tipoDocStr = "DNI"; //Por defecto es peruano
                 }
-                if (cs != null) {
-                    cs.close();
+                TipoDocumento tipoDoc = null;
+                try {
+                    tipoDoc = TipoDocumento.valueOf(tipoDocStr);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e);
                 }
-                if (conn != null) {
-                    conn.close();
+                Rol rol = null;
+                try {
+                    rol = Rol.valueOf(rs.getString("rol"));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e);
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                user = new UsuarioInstancia(
+                        rs.getInt("usuario_id"),
+                        rs.getDate("fecha"),
+                        rs.getString("nombre"),
+                        rs.getString("ap_paterno"),
+                        rs.getString("ap_materno"),
+                        rs.getString("contrasena"),
+                        rs.getDate("fecha_venc"),
+                        rs.getBoolean("activo"),
+                        tipoDoc,
+                        rs.getString("documento"),
+                        rol
+                );
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return user;
     }
@@ -187,13 +181,10 @@ public class UsuarioMySQL implements UsuarioDAO{
     @Override
     public List<Usuario> listarTodos() {
         List<Usuario> usuarios = new ArrayList<>();
-        CallableStatement cs = null;
-        String query = "{CALL ListarUsuarios()}";
-        ResultSet rs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarUsuarios", parametrosEntrada);
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);            
-            rs = cs.executeQuery();
+
             while (rs.next()) {
                 
                 String tipoDocStr = rs.getString("tipo_doc");
@@ -222,14 +213,6 @@ public class UsuarioMySQL implements UsuarioDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
-            try{
-                if(rs != null) rs.close();
-                if(cs != null) cs.close();
-                if(conexion!=null) conexion.close();
-            } catch(SQLException e){
-                e.printStackTrace();
-            }
         }
         return usuarios;
     }    

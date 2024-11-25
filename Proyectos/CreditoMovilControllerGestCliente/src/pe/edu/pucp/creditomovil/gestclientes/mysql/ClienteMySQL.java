@@ -4,13 +4,14 @@
  */
 package pe.edu.pucp.creditomovil.gestclientes.mysql;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Types;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.gestclientes.dao.ClienteDAO;
 import pe.edu.pucp.creditomovil.model.Cliente;
@@ -22,185 +23,110 @@ import pe.edu.pucp.creditomovil.model.TipoDocumento;
  */
 public class ClienteMySQL implements ClienteDAO {
 
-    private Connection conexion;
-    private ResultSet rs;
 
     @Override
     public boolean insertar(Cliente cliente) {
-        Connection conn = null;
-        CallableStatement stmtUsuario = null;
-        CallableStatement stmtCliente = null;
 
-        try {
-            conn = DBManager.getInstance().getConnection();
-            conn.setAutoCommit(false); // Inicia una transacción
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_fecha", new java.sql.Date(cliente.getFecha().getTime()));
+        parametrosEntrada.put("p_nombre", cliente.getNombre());
+        parametrosEntrada.put("p_ap_paterno", cliente.getApPaterno());
+        parametrosEntrada.put("p_ap_materno", cliente.getApMaterno());
+        parametrosEntrada.put("p_contrasena", cliente.getContrasenha());
+        parametrosEntrada.put("p_fecha_venc", new java.sql.Date(cliente.getFechaVencimiento().getTime()));
+        parametrosEntrada.put("p_activo", true);
+        parametrosEntrada.put("p_ultimo_logeo", cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : null);
+        parametrosEntrada.put("p_tipo_doc", cliente.getTipoDocumento().name());
+        parametrosEntrada.put("p_documento", cliente.getDocumento());
+        parametrosEntrada.put("p_rol", cliente.getRol().name());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        parametrosSalida.put("p_idUsuario", 12);
+        
+        int usuarioId = DBManager.getInstance().ejecutarProcedimiento("InsertarUsuario", parametrosEntrada, parametrosSalida);
+        cliente.setIdUsuario(usuarioId); // Asignar el ID al objeto cliente
 
-            // Llamada al procedimiento `InsertarUsuario`
-            String sqlInsertarUsuario = "{ CALL InsertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?) }";
-            stmtUsuario = conn.prepareCall(sqlInsertarUsuario);
-            stmtUsuario.setDate(1, new java.sql.Date(cliente.getFecha().getTime()));
-            stmtUsuario.setString(2, cliente.getNombre());
-            stmtUsuario.setString(3, cliente.getApPaterno());
-            stmtUsuario.setString(4, cliente.getApMaterno());
-            stmtUsuario.setString(5, cliente.getContrasenha());
-            stmtUsuario.setDate(6, new java.sql.Date(cliente.getFechaVencimiento().getTime()));
-            stmtUsuario.setBoolean(7, true);
-            stmtUsuario.setDate(8, cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : null);
-            stmtUsuario.setString(9, cliente.getTipoDocumento().name());
-            stmtUsuario.setString(10, cliente.getDocumento());
-            stmtUsuario.setString(11, cliente.getRol().name());
+        parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_usuario_id", usuarioId);
+        parametrosEntrada.put("p_direccion", cliente.getDireccion());
+        parametrosEntrada.put("p_telefono", cliente.getTelefono());
+        parametrosEntrada.put("p_email", cliente.getEmail());
+        parametrosEntrada.put("p_tipo_cliente", cliente.getTipoCliente());
+        parametrosEntrada.put("p_ranking", cliente.getRanking());
+        
+        parametrosSalida = new HashMap<>();
+        
+        parametrosSalida.put("p_codigo_cliente",7);
+        
+        int clienteId = DBManager.getInstance().ejecutarProcedimiento("InsertarCliente", parametrosEntrada, parametrosSalida);
+        cliente.setCodigoCliente(clienteId);
 
-            stmtUsuario.registerOutParameter(12, Types.INTEGER); // Para capturar el ID generado
-            stmtUsuario.executeUpdate();
-
-            // Obtener el ID generado
-            int usuarioId = stmtUsuario.getInt(12);
-            cliente.setIdUsuario(usuarioId); // Asignar el ID al objeto cliente
-
-            // Llamada al procedimiento `InsertarCliente`
-            String sqlInsertarCliente = "{ CALL InsertarCliente(?, ?, ?, ?, ?, ?, ?) }";
-            stmtCliente = conn.prepareCall(sqlInsertarCliente);
-            stmtCliente.setInt(1, usuarioId);
-            stmtCliente.setString(2, cliente.getDireccion());
-            stmtCliente.setString(3, cliente.getTelefono());
-            stmtCliente.setString(4, cliente.getEmail());
-            stmtCliente.setString(5, cliente.getTipoCliente());
-            stmtCliente.setDouble(6, cliente.getRanking());
-
-            stmtCliente.registerOutParameter(7, Types.INTEGER);
-            stmtCliente.executeUpdate();
-
-            int clienteId = stmtCliente.getInt(7);
-            cliente.setCodigoCliente(clienteId);
-
-            conn.commit(); // Confirma la transacción
-            return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            try {
-                if (conn != null) {
-                    conn.rollback(); // Deshace la transacción en caso de error
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            return false;
-        } finally {
-            try {
-                if (stmtCliente != null) {
-                    stmtCliente.close();
-                }
-                if (stmtUsuario != null) {
-                    stmtUsuario.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        return (usuarioId!=-1 && clienteId!=-1);
     }
 
     @Override
     public boolean modificar(Cliente cliente) {
-        Connection conn = null;
-        CallableStatement cs = null;
-
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ModificarCliente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
-            cs = conn.prepareCall(sql);
-
-            // Parámetros para la tabla usuario
-            cs.setInt(1, cliente.getIdUsuario());
-            cs.setInt(2, cliente.getCodigoCliente());
-            cs.setDate(3, new java.sql.Date(cliente.getFecha().getTime()));
-            cs.setString(4, cliente.getNombre());
-            cs.setString(5, cliente.getApPaterno());
-            cs.setString(6, cliente.getApMaterno());
-            cs.setString(7, cliente.getContrasenha());
-            cs.setDate(8, new java.sql.Date(cliente.getFechaVencimiento().getTime()));
-            cs.setBoolean(9, cliente.getActivo());
-            cs.setDate(10, cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : null);
-            cs.setString(11, cliente.getTipoDocumento().name());
-            cs.setString(12, cliente.getDocumento());
-            // Parámetros para la tabla cliente
-            cs.setString(13, cliente.getDireccion());
-            cs.setString(14, cliente.getTelefono());
-            cs.setString(15, cliente.getEmail());
-            cs.setString(16, cliente.getTipoCliente());
-            cs.setDouble(17, cliente.getRanking());
-
-            int filasAfectadas = cs.executeUpdate();
-            return filasAfectadas > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_usuario_id", cliente.getIdUsuario());
+        parametrosEntrada.put("p_codigo_cliente", cliente.getCodigoCliente());
+        parametrosEntrada.put("p_fecha", new java.sql.Date(cliente.getFecha().getTime()));
+        parametrosEntrada.put("p_nombre", cliente.getNombre());
+        parametrosEntrada.put("p_ap_paterno", cliente.getApPaterno());
+        parametrosEntrada.put("p_ap_materno", cliente.getApMaterno());
+        parametrosEntrada.put("p_contrasena", cliente.getContrasenha());
+        parametrosEntrada.put("p_fecha_venc", new java.sql.Date(cliente.getFechaVencimiento().getTime()));
+        parametrosEntrada.put("p_activo", cliente.getActivo());
+        parametrosEntrada.put("p_ultimo_logeo", cliente.getUltimoLogueo() != null ? new java.sql.Date(cliente.getUltimoLogueo().getTime()) : null);
+        parametrosEntrada.put("p_tipo_doc", cliente.getTipoDocumento().name());
+        parametrosEntrada.put("p_documento", cliente.getDocumento());
+        parametrosEntrada.put("p_direccion", cliente.getDireccion());
+        parametrosEntrada.put("p_telefono", cliente.getTelefono());
+        parametrosEntrada.put("p_email", cliente.getEmail());
+        parametrosEntrada.put("p_tipo_cliente", cliente.getTipoCliente());
+        parametrosEntrada.put("p_ranking", cliente.getRanking());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarCliente", parametrosEntrada, parametrosSalida);
+        
+        return resultado>0;
     }
 
     @Override
     public boolean eliminar(String id) {
-        Connection conn = null;
-        CallableStatement cs = null;
-
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL EliminarCliente(?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, id);
-
-            int filasAfectadas = cs.executeUpdate();
-            return filasAfectadas > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codigo_cliente", id);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarCliente", parametrosEntrada, parametrosSalida);
+        return resultado>0;
+    
     }
     
     @Override
     public int validarEmail(String email){
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+            parametrosEntrada.put("p_email", email);
+        
         ResultSet rs = null;
-        try{
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerClientePorEmail(?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, email);
-            rs = cs.executeQuery();
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerClientePorEmail", parametrosEntrada);
+        
+        try {
             if(rs.next()){
                 int resultado = rs.getInt("codigo_cliente");
                 return resultado;
             }
-        }catch (SQLException ex) {
-                ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }
@@ -208,38 +134,30 @@ public class ClienteMySQL implements ClienteDAO {
     
     @Override
     public boolean cambiarContra(int codcli, String contra){
-        Connection conn = null;
-        CallableStatement cs = null;
-        try{
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL CambiarContra(?,?) }";
-            cs = conn.prepareCall(sql);
-            cs.setInt(1, codcli);
-            cs.setString(2,contra);
-            
-            int resultado = cs.executeUpdate();
-            return resultado != 0;
-        }catch (SQLException ex) {
-                ex.printStackTrace();
-        }
-        return false;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codcli", codcli);
+        parametrosEntrada.put("p_contra", contra);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("CambiarContra", parametrosEntrada, parametrosSalida);
+        return resultado!=0;
     }
     
 
     @Override
     public Cliente obtenerPorId(int id) {
         Cliente cli = null;
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codigo_cliente", id);
+        
         ResultSet rs = null;
 
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerClientePorId", parametrosEntrada);
+        
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerClientePorId(?) }";
-            cs = conn.prepareCall(sql);
-            cs.setInt(1, id);
-            rs = cs.executeQuery();
-
             if (rs.next()) {
                 String tipoDocStr = rs.getString("tipo_doc");
                 if (tipoDocStr == null) {
@@ -275,39 +193,24 @@ public class ClienteMySQL implements ClienteDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        } 
         return cli;
     }
 
     @Override
     public Cliente obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
         Cliente cli = null;
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_doc_iden_cliente", docIden);
+        parametrosEntrada.put("p_tipo_doc_iden", tipoDocIden);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
         ResultSet rs = null;
 
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerClientePorDocIdentidad", parametrosEntrada);
+        
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerClientePorDocIdentidad(?, ?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, docIden);
-            cs.setString(2, tipoDocIden);
-            rs = cs.executeQuery();
-
             if (rs.next()) {
                 String tipoDocStr = rs.getString("tipo_doc");
                 if (tipoDocStr == null) {
@@ -340,20 +243,6 @@ public class ClienteMySQL implements ClienteDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return cli;
     }
@@ -361,18 +250,15 @@ public class ClienteMySQL implements ClienteDAO {
     @Override
     public List<Cliente> listarPorRanking(double rankini, double rankfin) {
         List<Cliente> listaClientes = new ArrayList<>();
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("ranking_inicio",rankini);
+        parametrosEntrada.put("ranking_fin",rankfin);
+        
         ResultSet rs = null;
-
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarClientesPorRanking", parametrosEntrada);
+        
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ListarClientesPorRanking(?, ?) }";
-            cs = conn.prepareCall(sql);
-            cs.setDouble(1, rankini);
-            cs.setDouble(2, rankfin);
-            rs = cs.executeQuery();
-
             while (rs.next()) {
                 // Crea un nuevo objeto Cliente y llena sus datos
 
@@ -409,20 +295,6 @@ public class ClienteMySQL implements ClienteDAO {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return listaClientes;
     }
@@ -430,16 +302,12 @@ public class ClienteMySQL implements ClienteDAO {
     @Override
     public List<Cliente> listarTodos() {
         List<Cliente> listaClientes = new ArrayList<>();
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
         ResultSet rs = null;
-
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarClientes", parametrosEntrada);
+        
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ListarClientes() }";
-            cs = conn.prepareCall(sql);
-            rs = cs.executeQuery();
-
             while (rs.next()) {
                 // Crea un nuevo objeto Cliente y llena sus datos
 
@@ -476,20 +344,6 @@ public class ClienteMySQL implements ClienteDAO {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return listaClientes;
     }

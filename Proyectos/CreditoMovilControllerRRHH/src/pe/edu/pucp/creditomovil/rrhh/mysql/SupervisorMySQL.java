@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.rrhh.dao.SupervisorDAO;
@@ -27,124 +28,70 @@ public class SupervisorMySQL implements SupervisorDAO {
 
     @Override
     public boolean insertar(Supervisor supervisor) {
-        Connection con = null;
-        CallableStatement cs = null;
-        boolean resultado = false;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_fecha", new java.sql.Date(supervisor.getFecha().getTime()));
+        parametrosEntrada.put("p_nombre", supervisor.getNombre());
+        parametrosEntrada.put("p_ap_paterno", supervisor.getApPaterno());
+        parametrosEntrada.put("p_ap_materno", supervisor.getApMaterno());
+        parametrosEntrada.put("p_contrasena", supervisor.getContrasenha());
+        parametrosEntrada.put("p_fecha_venc", new java.sql.Date(supervisor.getFechaVencimiento().getTime()));
+        parametrosEntrada.put("p_activo", supervisor.getActivo()? "1" : "0");
+        parametrosEntrada.put("p_tipo_doc", supervisor.getTipoDocumento().name());
+        parametrosEntrada.put("p_documento", supervisor.getDocumento());
+        parametrosEntrada.put("p_codigo_sup", supervisor.getCodigoEv());
+        parametrosEntrada.put("p_codigo_cargo", supervisor.getCodigoCargo());
+        parametrosEntrada.put("p_agencia_asignacion", supervisor.getAgenciaAsignacion());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("InsertarSupervisor", parametrosEntrada, parametrosSalida);
 
-        try {
-            // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
-
-            // Preparar la llamada al procedimiento almacenado
-            cs = con.prepareCall("{CALL InsertarSupervisor(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-
-            // Asignar valores a los parámetros
-            cs.setDate(1, new java.sql.Date(supervisor.getFecha().getTime()));
-            cs.setString(2, supervisor.getNombre());
-            cs.setString(3, supervisor.getApPaterno());
-            cs.setString(4, supervisor.getApMaterno());
-            cs.setString(5, supervisor.getContrasenha());
-            cs.setDate(6, new java.sql.Date(supervisor.getFechaVencimiento().getTime()));
-            cs.setString(7, supervisor.getActivo()? "1" : "0");
-            
-            cs.setString(8, supervisor.getTipoDocumento().name());
-            cs.setString(9, supervisor.getDocumento());
-            
-            cs.setString(10, supervisor.getCodigoEv());
-            cs.setInt(11, supervisor.getCodigoCargo());
-            cs.setString(12, supervisor.getAgenciaAsignacion());
-
-            // Ejecutar el procedimiento
-            resultado = cs.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Cerrar recursos
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return resultado;
+        return resultado>0;
     }
 
     @Override
     public void modificar(int id, Supervisor supervisor) {
-        CallableStatement cs;
-        String query = "{CALL ModificarSupervisor(?,?,?,?)}";
-        int resultado = 0;
-
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, id);
-            cs.setString(2, supervisor.getCodigoEv());
-            cs.setInt(3, supervisor.getCodigoCargo());
-            cs.setString(4, supervisor.getAgenciaAsignacion());
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_usuario_id", id);
+        parametrosEntrada.put("p_codigo_sup", supervisor.getCodigoEv());
+        parametrosEntrada.put("p_fecha", new java.sql.Date(supervisor.getFecha().getTime()));
+        parametrosEntrada.put("p_nombre", supervisor.getNombre());
+        parametrosEntrada.put("p_ap_paterno", supervisor.getApPaterno());
+        parametrosEntrada.put("p_ap_materno", supervisor.getApMaterno());
+        parametrosEntrada.put("p_contrasena", supervisor.getContrasenha());
+        parametrosEntrada.put("p_fecha_venc", new java.sql.Date(supervisor.getFechaVencimiento().getTime()));
+        parametrosEntrada.put("p_activo", supervisor.getActivo()? "1" : "0");
+        parametrosEntrada.put("p_ultimo_logeo", null);
+        parametrosEntrada.put("p_codigo_cargo", supervisor.getCodigoCargo());
+        parametrosEntrada.put("p_agencia_asignacion", supervisor.getAgenciaAsignacion());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarSupervisor", parametrosEntrada, parametrosSalida);
     }
 
     @Override
     public void eliminar(int usuarioId) {
-        CallableStatement cs;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codigo_supervisor", usuarioId);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
         String query = "{CALL EliminarSupervisor(?)}";
-        int resultado = 0;
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarSupervisor", parametrosEntrada, parametrosSalida);
 
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, usuarioId);
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public Supervisor obtenerPorId(int usuarioId) {
-        CallableStatement cs;
-        String query = "{CALL ObtenerSupervisor(?)}";
-        int resultado = 0;
+        Supervisor sup = new Supervisor();
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codigo_supervisor", usuarioId);
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerSupervisor", parametrosEntrada);
 
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, usuarioId);
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null; //por ahora es null, necesito ver qué añadirle
-    }
-    
-        @Override
-    public Supervisor obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
-        Supervisor sup = null;
-        Connection conn = null;
-        CallableStatement cs = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerSupervisorPorDocIdentidad(?, ?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, docIden);
-            cs.setString(2, tipoDocIden);
-            rs = cs.executeQuery();
-            
-            
             if(rs.next()){
                 String tipoDocStr = rs.getString("tipo_doc");
                 if(tipoDocStr ==null) tipoDocStr = "DNI"; //Por defecto es peruano
@@ -172,20 +119,48 @@ public class SupervisorMySQL implements SupervisorDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
+        }
+        return sup;
+    }
+    
+        @Override
+    public Supervisor obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
+        Supervisor sup = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_doc_iden_sup", docIden);
+        parametrosEntrada.put("p_tipo_doc_sup", tipoDocIden);
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerSupervisorPorDocIdentidad", parametrosEntrada);
+
+        try {
+            if(rs.next()){
+                String tipoDocStr = rs.getString("tipo_doc");
+                if(tipoDocStr ==null) tipoDocStr = "DNI"; //Por defecto es peruano
+                TipoDocumento tipoDoc = null;
+                try {
+                    tipoDoc = TipoDocumento.valueOf(tipoDocStr);
+                } catch (IllegalArgumentException e) { 
+                    System.out.println("Error: " + e);
                 }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                sup = new Supervisor(
+                    rs.getInt("usuario_id"),
+                    rs.getDate("fecha"),
+                    rs.getString("nombre"),
+                    rs.getString("ap_paterno"),
+                    rs.getString("ap_materno"),
+                    rs.getString("contrasena"),
+                    rs.getDate("fecha_venc"),
+                    rs.getBoolean("activo"),
+                    tipoDoc,
+                    rs.getString("documento"),
+                    rs.getString("codigo_sup"),
+                    rs.getInt("codigo_cargo"),
+                    rs.getString("agencia_asignacion")
+                );
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return sup; 
     }
@@ -193,13 +168,11 @@ public class SupervisorMySQL implements SupervisorDAO {
     @Override
     public List<Supervisor> listarTodos() {
         List<Supervisor> supervisores = new ArrayList<>();
-        CallableStatement cs = null;
-        ResultSet rs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarSupervisores", parametrosEntrada);
         try {
-            conexion = DBManager.getInstance().getConnection();
-            String query = "{CALL ListarSupervisores()}";
-            cs = conexion.prepareCall(query);
-            rs = cs.executeQuery();
             while (rs.next()) {
                 
                 String tipoDocStr = rs.getString("tipo_doc");
@@ -230,20 +203,6 @@ public class SupervisorMySQL implements SupervisorDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return supervisores;
     }

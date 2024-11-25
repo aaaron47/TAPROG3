@@ -10,7 +10,10 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.rrhh.dao.AdministradorDAO;
 import pe.edu.pucp.creditomovil.model.Administrador;
@@ -27,92 +30,92 @@ public class AdministradorMySQL implements AdministradorDAO {
 
     @Override
     public void insertar(Administrador administrador) {
-        CallableStatement cs;
-        String query = "{CALL InsertarAdmin(?,?,?)}";
-        int resultado = 0;
-
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, administrador.getIdUsuario());
-            cs.setString(2, administrador.getCodigoAdm());
-            cs.setInt(3, administrador.getCodigoCargo());
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_usuario_id", administrador.getIdUsuario());
+        parametrosEntrada.put("p_codigo_admin", administrador.getCodigoAdm());
+        parametrosEntrada.put("p_codigo_cargo", administrador.getCodigoCargo());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("InsertarAdmin", parametrosEntrada, parametrosSalida);
     }
 
     @Override
     public void modificar(int id, Administrador administrador) {
-        CallableStatement cs;
-        String query = "{CALL ModificarAdmin(?,?,?)}";
-        int resultado = 0;
-
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, administrador.getIdUsuario());
-            cs.setString(2, administrador.getCodigoAdm());
-            cs.setInt(3, administrador.getCodigoCargo());
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_usuario_usuario_id", administrador.getIdUsuario());
+        parametrosEntrada.put("p_codigo_admin", administrador.getCodigoAdm());
+        parametrosEntrada.put("p_codigo_cargo", administrador.getCodigoCargo());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarAdmin", parametrosEntrada, parametrosSalida);
+        
     }
 
     @Override
     public void eliminar(String codigoAdmin) {
-        CallableStatement cs;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codigo_admin", codigoAdmin);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
         String query = "{CALL EliminarAdmin(?)}";
-        int resultado = 0;
-
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setString(1, codigoAdmin);
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarAdmin", parametrosEntrada, parametrosSalida);
     }
 
     @Override
     public Administrador obtenerPorId(String codigoAdmin) {
-        CallableStatement cs;
-        String query = "{CALL ObtenerAdmin(?)}";
-        int resultado = 0;
-
+        Administrador admin = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_codigo_admin", codigoAdmin);
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerAdmin", parametrosEntrada);
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setString(1, codigoAdmin);
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null; //por ahora es null, necesito ver qué añadirle
+            if (rs.next()) {
+                String tipoDocStr = rs.getString("tipo_doc");
+                if (tipoDocStr == null) {
+                    tipoDocStr = "DNI"; //Por defecto es peruano
+                }
+                TipoDocumento tipoDoc = null;
+                try {
+                    tipoDoc = TipoDocumento.valueOf(tipoDocStr);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e);
+                }
+                admin = new Administrador(
+                        rs.getInt("usuario_id"),
+                        rs.getDate("fecha"),
+                        rs.getString("nombre"),
+                        rs.getString("ap_paterno"),
+                        rs.getString("ap_materno"),
+                        rs.getString("contrasena"),
+                        rs.getDate("fecha_venc"),
+                        rs.getBoolean("activo"),
+                        tipoDoc,
+                        rs.getString("documento"),
+                        rs.getString("codigo_admin"),
+                        rs.getInt("codigo_cargo")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministradorMySQL.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return admin;
     }
 
     @Override
     public Administrador obtenerPorDocIdentidad(String docIden, String tipoDocIden) {
         Administrador admin = null;
-        Connection conn = null;
-        CallableStatement cs = null;
-        ResultSet rs = null;
-
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_doc_iden_sup", docIden);
+        parametrosEntrada.put("p_tipo_doc_sup", tipoDocIden);
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerAdminPorDocIdentidad", parametrosEntrada);
+        
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerAdminPorDocIdentidad(?, ?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, docIden);
-            cs.setString(2, tipoDocIden);
-            rs = cs.executeQuery();
-
             if (rs.next()) {
                 String tipoDocStr = rs.getString("tipo_doc");
                 if (tipoDocStr == null) {
@@ -141,20 +144,6 @@ public class AdministradorMySQL implements AdministradorDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return admin;
     }
@@ -162,13 +151,10 @@ public class AdministradorMySQL implements AdministradorDAO {
     @Override
     public List<Administrador> listarTodos() {
         List<Administrador> administradores = new ArrayList<>();
-        CallableStatement cs = null;
-        String query = "{CALL ListarAdmin()}";
-        ResultSet rs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarAdmin", parametrosEntrada);
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            rs = cs.executeQuery();
             while (rs.next()) {
                 //
                 Administrador admin = new Administrador(
@@ -181,20 +167,6 @@ public class AdministradorMySQL implements AdministradorDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return administradores;
     }

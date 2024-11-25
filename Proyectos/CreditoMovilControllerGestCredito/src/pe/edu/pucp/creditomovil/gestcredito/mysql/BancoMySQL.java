@@ -7,6 +7,7 @@ import java.sql.Types;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.gestcredito.dao.BancoDAO;
@@ -18,150 +19,72 @@ public class BancoMySQL implements BancoDAO{
 
     @Override
     public boolean insertar(Banco banco) {
-        Connection conn = null;
-        CallableStatement stmtMetodoPago = null;
-        CallableStatement stmtBanco = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_foto", banco.getFoto());
+        parametrosEntrada.put("p_nombreTitular", banco.getNombreTitular());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        parametrosSalida.put("p_idMetodoPago", 3);
 
-        try {
-            conn = DBManager.getInstance().getConnection();
-            conn.setAutoCommit(false); // Inicia una transacción
-
-            // Llamada al procedimiento InsertarCliente
-            String sqlInsertarMetodoPago = "{ CALL InsertarMetodoPago(?, ?, ?) }";
-            stmtMetodoPago = conn.prepareCall(sqlInsertarMetodoPago);
-            stmtMetodoPago.setBytes(1, banco.getFoto());
-            stmtMetodoPago.setString(2, banco.getNombreTitular());
-            stmtMetodoPago.registerOutParameter(3, Types.INTEGER); // Para capturar el ID generado
-            stmtMetodoPago.executeUpdate();
-            // Obtener el ID generado
-            int metodoPagoId = stmtMetodoPago.getInt(3);
-            banco.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
-            
-            // Llamada al procedimiento metodo
-            String sqlInsertarBanco = "{ CALL InsertarBanco(?, ?, ?, ?) }";
-            stmtBanco = conn.prepareCall(sqlInsertarBanco);
-            stmtBanco.setInt(1, banco.getIdMetodoPago());
-            stmtBanco.setString(2, banco.getCCI());
-            stmtBanco.setString(3, banco.getTipoCuenta());
-            stmtBanco.setString(4, banco.getNombreBanco());//ACA NUEVO//ACA NUEVO//ACA NUEVO
-            stmtBanco.executeUpdate();            
-
-            stmtBanco.executeUpdate();
-
-            conn.commit(); // Confirma la transacción
-            return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            try {
-                if (conn != null) {
-                    conn.rollback(); // Deshace la transacción en caso de error
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-            return false;
-        } finally {
-            try {
-                if (stmtBanco != null) {
-                    stmtBanco.close();
-                }
-                if(stmtMetodoPago != null){
-                    stmtMetodoPago.close();
-                }
-                if (stmtMetodoPago != null) {
-                    stmtMetodoPago.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        int metodoPagoId = DBManager.getInstance().ejecutarProcedimiento("InsertarMetodoPago", parametrosEntrada, parametrosSalida);
+        banco.setIdMetodoPago(metodoPagoId); // Asignar el ID al objeto cliente
+        
+        parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_idMetodoPago", metodoPagoId);
+        parametrosEntrada.put("p_CCI", banco.getCCI());
+        parametrosEntrada.put("p_tipoCuenta", banco.getTipoCuenta());
+        parametrosEntrada.put("p_nombreBanco", banco.getNombreBanco());
+        
+        parametrosSalida = new HashMap<>();
+        
+        int result = DBManager.getInstance().ejecutarProcedimiento("InsertarBanco", parametrosEntrada, parametrosSalida);
+        
+        return (metodoPagoId != -1 && result != 0);
     }
 
     @Override
     public boolean modificar(Banco banco) {
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
         
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ModificarCliente(?, ?, ?, ?, ?, ?) }";
-            cs = conexion.prepareCall(sql);
-            
-            cs.setInt(1, banco.getIdMetodoPago());
-            cs.setBytes(2, banco.getFoto());
-            cs.setString(3, banco.getNombreTitular());
-            cs.setString(4, banco.getCCI());
-            cs.setString(5, banco.getTipoCuenta());
-            cs.setString(6, banco.getNombreBanco());//ACA NUEVO//ACA NUEVO//ACA NUEVO
-            
-            int filasAfectadas = cs.executeUpdate();
-            return filasAfectadas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        parametrosEntrada.put("p_idMetodoPago", banco.getIdMetodoPago());
+        parametrosEntrada.put("p_foto", banco.getFoto());
+        parametrosEntrada.put("p_nombreTitular", banco.getNombreTitular());
+        parametrosEntrada.put("p_CCI", banco.getCCI());
+        parametrosEntrada.put("p_tipoCuenta", banco.getTipoCuenta());
+        parametrosEntrada.put("p_nombreCuenta", banco.getNombreBanco());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarBanco", parametrosEntrada, parametrosSalida);
+        
+        return resultado>0;
     }
 
     @Override
     public boolean eliminar(int idMetodoPago) {
-        Connection conn = null;
-        CallableStatement cs = null;
-
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String query = "{CALL EliminarBanco(?)}";
-            cs = conn.prepareCall(query);
-            cs.setInt(1, idMetodoPago);
-            
-            int filasAfectadas = cs.executeUpdate();
-            return filasAfectadas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_idMetodoPago", idMetodoPago);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarBanco", parametrosEntrada, parametrosSalida);
+        return resultado>0;
     }
 
     @Override
     public Banco obtenerPorId(int idMetodoPago) {
         Banco bank = null;
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_idMetodoPago", idMetodoPago);
+        
         ResultSet rs = null;
-
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerBancoPorID", parametrosEntrada);
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerBancoPorID(?) }";
-            cs = conn.prepareCall(sql);
-            cs.setInt(1, idMetodoPago);
-            rs = cs.executeQuery();
-            
-            
             if(rs.next()){
                 bank = new Banco(
                     rs.getInt("idMetodoPago"),
@@ -177,20 +100,6 @@ public class BancoMySQL implements BancoDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return bank;
     }
@@ -198,18 +107,13 @@ public class BancoMySQL implements BancoDAO{
     @Override
     public Banco obtenerPorNombre(String nombre) {
         Banco bank = null;
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_nombreBanco", nombre);
+        
         ResultSet rs = null;
-
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerBancoPorNombre", parametrosEntrada);
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ObtenerBancoPorNombre(?) }";
-            cs = conn.prepareCall(sql);
-            cs.setString(1, nombre);
-            rs = cs.executeQuery();
-            
-            
             if(rs.next()){
                 bank = new Banco(
                     rs.getInt("idMetodoPago"),
@@ -225,20 +129,6 @@ public class BancoMySQL implements BancoDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return bank;
     }
@@ -247,16 +137,11 @@ public class BancoMySQL implements BancoDAO{
     @Override
     public List<Banco> listarTodos() {
         List<Banco> listaBancos = new ArrayList<>();
-        Connection conn = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
         ResultSet rs = null;
-
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarBancos", parametrosEntrada);
         try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL ListarBancos() }";
-            cs = conn.prepareCall(sql);
-            rs = cs.executeQuery();
-            
             while(rs.next()){
                 Banco bank = new Banco(
                     rs.getInt("idMetodoPago"),
@@ -271,20 +156,6 @@ public class BancoMySQL implements BancoDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return listaBancos;
     }
