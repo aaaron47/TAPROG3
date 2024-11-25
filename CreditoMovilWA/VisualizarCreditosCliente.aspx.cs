@@ -195,6 +195,12 @@ namespace CreditoMovilWA
                 }
                 else
                 {
+                    // Generar notificación
+                    Main masterPage = (Main)this.Master;
+                    string estadoCredito = cred.numCuotas == cred.cantCuotasPagadas ? "Cancelado" : "En proceso";
+                    string mensajeNotificacion = $"Transacción completada: El cliente pagó la cuota número {cred.cantCuotasPagadas} del crédito con ID {idCredito}. Monto: S/. {trans.monto:0.00}. Estado del crédito: {estadoCredito}.";
+                    masterPage.AgregarNotificacion(mensajeNotificacion);
+
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "CloseModal", "closeModal();", true);
                     daoCredito.modificarCredito(cred);
                     lblErrorModal.Text = "";

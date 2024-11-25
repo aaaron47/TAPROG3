@@ -123,6 +123,10 @@ namespace CreditoMovilWA
             int id = (int)Session["idCredito"];
 
             Byte[] reporte = daoCliente.generarDesembolso(cli.codigoCliente, id);
+            credito cred = daoCredito.obtenerPorIDCredito(id);
+
+            Main masterPage = (Main)this.Master;
+            masterPage.AgregarNotificacion($"El cliente {cli.nombre} ha solicitado un desembolso por un monto de S/. {cred.monto} para el crédito con ID {id}.");
         }
     }
 }

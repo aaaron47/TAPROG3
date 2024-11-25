@@ -149,6 +149,9 @@ namespace CreditoMovilWA
 
             // aca pa actualizar base de dates
             daoEvaluacion.modificarEvaluacion(ev);
+            Main masterPage = (Main)this.Master;
+            masterPage.AgregarNotificacion($"La evaluación del negocio '{ev.nombreNegocio}' asignado al cliente '{clienteAsignado}' fue actualizada correctamente. Puntaje: {ev.puntaje:0.00}.");
+
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

@@ -71,7 +71,8 @@ namespace CreditoMovilWA
             cred.monto = monto;
             cred.numCuotas = cuotas; // no sé cómo colocar esto btw, creo que es así, vamos a ver
             cred.numCredito = 0;//se autogenera
-            cred.fechaOtorgamientoSpecified = false;  // Indica que no se envía la fecha de otorgamiento
+            cred.fechaOtorgamiento = DateTime.MinValue; // Establece la fecha más baja válida
+            cred.fechaOtorgamientoSpecified = true; // Indica que la fecha será enviada
 
             daoCredito.insertarCredito(cred,cli.documento,cli.tipoDocumento.ToString());
             
