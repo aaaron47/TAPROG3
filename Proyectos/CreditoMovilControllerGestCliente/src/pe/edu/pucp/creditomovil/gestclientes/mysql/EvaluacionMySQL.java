@@ -10,6 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.model.Cliente;
@@ -28,129 +29,95 @@ public class EvaluacionMySQL implements EvaluacionDAO {
 
     @Override
     public boolean insertar(Evaluacion evaluacion, String codigoSupervisor, int codigoCliente) {
-        Connection conn = null;
-        CallableStatement cs = null;
-        CallableStatement csAsociar = null;
-        boolean resultado = false;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_clienteCodigoCliente", codigoCliente);
+        parametrosEntrada.put("p_fechaRegistro", new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
+        parametrosEntrada.put("p_nombreNegocio", evaluacion.getNombreNegocio());
+        parametrosEntrada.put("p_direccionNegocio", evaluacion.getDireccionNegocio());
+        parametrosEntrada.put("p_telefonoNegocio", evaluacion.getTelefonoNegocio());
+        parametrosEntrada.put("p_ventasDiarias", evaluacion.getVentasDiarias());
+        parametrosEntrada.put("p_inventario", evaluacion.getInventario());
+        parametrosEntrada.put("p_costoVentas", evaluacion.getCostoVentas());
+        parametrosEntrada.put("p_margenGanancia", evaluacion.getMargenGanancia());
+        parametrosEntrada.put("p_activo", evaluacion.isActivo());
+        parametrosEntrada.put("p_puntaje", evaluacion.getPuntaje());
+        parametrosEntrada.put("p_observaciones", evaluacion.getObservaciones());
+        parametrosEntrada.put("p_foto", evaluacion.getFoto());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        parametrosSalida.put("p_num_evaluacion", 14);
+        
+        int numEv = DBManager.getInstance().ejecutarProcedimiento("InsertarEvaluacion", parametrosEntrada, parametrosSalida);
+        evaluacion.setNumeroEvaluacion(numEv);
+        
+        parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_supervisor_codigo_sup", codigoSupervisor);
+        parametrosEntrada.put("p_evaluacion_num_evaluacion", numEv);
+        
+        parametrosSalida = new HashMap<>();
+        
+        int res = DBManager.getInstance().ejecutarProcedimiento("AsociarEvaluacionASupervisor", parametrosEntrada, parametrosSalida);
 
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL InsertarEvaluacion(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
-            cs = conn.prepareCall(sql);
-
-            // Configura los parámetros
-            cs.registerOutParameter(1, java.sql.Types.INTEGER);
-            cs.setInt(2, codigoCliente);
-            cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
-            cs.setString(4, evaluacion.getNombreNegocio());
-            cs.setString(5, evaluacion.getDireccionNegocio());
-            cs.setString(6, evaluacion.getTelefonoNegocio());
-            cs.setDouble(7, evaluacion.getVentasDiarias());
-            cs.setDouble(8, evaluacion.getInventario());
-            cs.setDouble(9, evaluacion.getCostoVentas());
-            cs.setDouble(10, evaluacion.getMargenGanancia());
-            cs.setBoolean(11, evaluacion.isActivo());
-            cs.setDouble(12, evaluacion.getPuntaje());
-            cs.setString(13, evaluacion.getObservaciones());
-            cs.setBytes(14, evaluacion.getFoto());
-
-            // Ejecuta la consulta
-            resultado = cs.executeUpdate() > 0;
-            
-            int numEvaluacionGenerado = cs.getInt(1);
-            evaluacion.setNumeroEvaluacion(numEvaluacionGenerado);
-            
-            String sqlAsociar = "{ CALL AsociarEvaluacionASupervisor(?, ?) }";
-            csAsociar = conn.prepareCall(sqlAsociar);
-            csAsociar.setString(1, codigoSupervisor);
-            csAsociar.setInt(2, numEvaluacionGenerado);
-            csAsociar.execute();
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        return resultado;
+        return res>0;
     }
 
     @Override
     public void modificar(Evaluacion evaluacion) {
-        CallableStatement cs;
-        String query = "{CALL ModificarEvaluacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-        int resultado = 0;
-
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, evaluacion.getNumeroEvaluacion());
-            Cliente cli = (Cliente) evaluacion.getClienteAsignado();
-            if (cli.getCodigoCliente() != 0) {
-                cs.setInt(2, cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
-            } else {
-                cs.setString(2, " ");
-            }
-            cs.setDate(3, new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
-            cs.setString(4, evaluacion.getNombreNegocio());
-            cs.setString(5, evaluacion.getDireccionNegocio());
-            cs.setString(6, evaluacion.getTelefonoNegocio());
-            cs.setDouble(7, evaluacion.getVentasDiarias());
-            cs.setDouble(8, evaluacion.getInventario());
-            cs.setDouble(9, evaluacion.getCostoVentas());
-            cs.setDouble(10, evaluacion.getMargenGanancia());
-            cs.setBoolean(11, evaluacion.isActivo());
-            cs.setDouble(12, evaluacion.getPuntaje());
-            cs.setString(13, evaluacion.getObservaciones());
-            cs.setBytes(14, evaluacion.getFoto());
-
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_numero_evaluacion", evaluacion.getNumeroEvaluacion());
+        Cliente cli = (Cliente) evaluacion.getClienteAsignado();
+        if (cli.getCodigoCliente() != 0) {
+            parametrosEntrada.put("p_cliente_codigo_cliente", cli.getCodigoCliente()); // Asegúrate de que clienteAsignado no sea null
+        } else {
+            parametrosEntrada.put("p_cliente_codigo_cliente", 0);
         }
+        parametrosEntrada.put("p_fecha_registro", new java.sql.Date(evaluacion.getFechaRegistro().getTime()));
+        parametrosEntrada.put("p_nombre_negocio", evaluacion.getNombreNegocio());
+        parametrosEntrada.put("p_direccion_negocio", evaluacion.getDireccionNegocio());
+        parametrosEntrada.put("p_telefono_negocio", evaluacion.getTelefonoNegocio());
+        parametrosEntrada.put("p_ventas_diarias", evaluacion.getVentasDiarias());
+        parametrosEntrada.put("p_inventario", evaluacion.getInventario());
+        parametrosEntrada.put("p_costo_ventas", evaluacion.getCostoVentas());
+        parametrosEntrada.put("p_margen_ganancia", evaluacion.getMargenGanancia());
+        parametrosEntrada.put("p_activo", evaluacion.isActivo());
+        parametrosEntrada.put("p_puntaje", evaluacion.getPuntaje());
+        parametrosEntrada.put("p_observaciones", evaluacion.getObservaciones());
+        parametrosEntrada.put("p_foto", evaluacion.getFoto());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarEvaluacion", parametrosEntrada, parametrosSalida);
     }
 
     @Override
     public void eliminar(int idEvaluacion) {
-        CallableStatement cs;
-        String query = "{CALL EliminarEvaluacion(?)}";
-        int resultado = 0;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_numero_evaluacion", idEvaluacion);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
 
-        try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, idEvaluacion);
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarEvaluacion", parametrosEntrada, parametrosSalida);
 
-            resultado = cs.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public Evaluacion obtenerPorId(int idEvaluacion) {
         ClienteDAO daoCliente = new ClienteMySQL();
         Evaluacion ev = new Evaluacion();
-        CallableStatement cs;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_numero_evaluacion", idEvaluacion);
         String query = "{CALL ObtenerEvaluacion(?)}";
-        int resultado = 0;
+        ResultSet rs = null;
 
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerEvaluacion", parametrosEntrada);
+        
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, idEvaluacion);
-
-            rs = cs.executeQuery();
-
             if (rs.next()) {
                 ev.setActivo(true);
                 Cliente cli = daoCliente.obtenerPorId(rs.getInt("cliente_codigo_cliente"));
@@ -172,23 +139,23 @@ public class EvaluacionMySQL implements EvaluacionDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ev; //por ahora es null, necesito ver qué añadirle
+        return ev; 
     }
 
     @Override
     public List<Evaluacion> listarPorSupervisor(String codSup) {
         List<Evaluacion> evaluaciones = new ArrayList<>();
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("codigoSupervisor", codSup);
+        
         String query = "{CALL ListarEvaluacionesPorSupervisor(?)}";
-        CallableStatement stmtCliente = null;
-
+        
+        ResultSet rs = null;
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarEvaluacionesPorSupervisor", parametrosEntrada);
+        
         ClienteDAO clienteDAO = new ClienteMySQL();
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setString(1, codSup);
-
-            rs = cs.executeQuery();
             while (rs.next()) {
                 int numEva = rs.getInt("num_evaluacion");
                 int codClien = rs.getInt("cliente_codigo_cliente");
@@ -214,20 +181,6 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return evaluaciones;
     }
@@ -235,15 +188,16 @@ public class EvaluacionMySQL implements EvaluacionDAO {
     @Override
     public List<Evaluacion> listarTodos() {
         List<Evaluacion> evaluaciones = new ArrayList<>();
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
         String query = "{CALL ListarEvaluaciones()}";
-        CallableStatement stmtCliente = null;
 
+        ResultSet rs = null;
+        
+        rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarEvaluaciones", parametrosEntrada);
+        
         ClienteDAO clienteDAO = new ClienteMySQL();
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            rs = cs.executeQuery();
             while (rs.next()) {
                 int numEva = rs.getInt("num_evaluacion");
                 int codClien = rs.getInt("cliente_codigo_cliente");
@@ -269,42 +223,27 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return evaluaciones;
     }
 
     @Override
     public List<Evaluacion> listarPorFechas(Date fechaini, Date fechafin) {
+        java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
+        java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
         List<Evaluacion> evaluaciones = new ArrayList<>();
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("fecha_inicio", fechainiSQL);
+        parametrosEntrada.put("fecha_fin", fechafinSQL);
+        
         String query = "{CALL ListarEvaluacionesPorRangoFechas(?, ?)}";
 
         ClienteDAO clienteDAO = new ClienteMySQL();
-        java.sql.Date fechainiSQL = new java.sql.Date(fechaini.getTime());
-        java.sql.Date fechafinSQL = new java.sql.Date(fechafin.getTime());
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarEvaluacionesPorRangoFechas", parametrosEntrada);
 
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setDate(1, fechainiSQL);
-            cs.setDate(2, fechafinSQL);
-
-            rs = cs.executeQuery();
-
             while (rs.next()) {
                 int numEva = rs.getInt("num_evaluacion");
                 int codClien = rs.getInt("cliente_codigo_cliente");
@@ -345,20 +284,6 @@ public class EvaluacionMySQL implements EvaluacionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return evaluaciones;
     }

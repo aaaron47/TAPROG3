@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import pe.edu.pucp.creditomovil.conexion.DBManager;
 import pe.edu.pucp.creditomovil.model.Transaccion;
@@ -26,141 +27,65 @@ public class TransaccionMySQL implements TransaccionDAO {
 
     @Override
     public boolean insertar(Transaccion transaccion, int idUsuario, int idCredito, int idMetodo) {
-        Connection conn = null;
-        CallableStatement cs = null;
-        boolean resultado = false;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
         
-        try {
-            conn = DBManager.getInstance().getConnection();
-            String sql = "{ CALL InsertarTransaccion(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
-            cs = conn.prepareCall(sql);
+        parametrosEntrada.put("p_usuario_usuario_id", idUsuario);
+        parametrosEntrada.put("p_fecha_y_hora", new java.sql.Timestamp(transaccion.getFecha().getTime()));
+        parametrosEntrada.put("p_concepto", transaccion.getConcepto());
+        parametrosEntrada.put("p_monto", transaccion.getMonto());
+        parametrosEntrada.put("p_anulado", transaccion.isAnulado());
+        parametrosEntrada.put("p_agencia", transaccion.getAgencia());
+        parametrosEntrada.put("p_credito_num_credito", idCredito);
+        parametrosEntrada.put("p_foto", transaccion.getFoto());
+        parametrosEntrada.put("p_metodo_metodo_pago_id", idMetodo);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
 
-            // Configura los parámetros
-            cs.setInt(1, idUsuario); 
-            cs.setTimestamp(2, new java.sql.Timestamp(transaccion.getFecha().getTime()));
-            cs.setString(3, transaccion.getConcepto());
-            cs.setDouble(4, transaccion.getMonto());
-            cs.setBoolean(5, transaccion.isAnulado());
-            cs.setString(6, transaccion.getAgencia());
-            cs.setInt(7, idCredito);
-            cs.setBytes(8, transaccion.getFoto());
-            cs.setInt(9, idMetodo);
-
-            // Ejecuta la consulta
-            resultado = cs.executeUpdate() > 0;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        return resultado;
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("InsertarTransaccion", parametrosEntrada, parametrosSalida);
+        return resultado > 0;
     }
 
     @Override
     public boolean modificar(Transaccion transaccion) {
-        Connection con = null;
-        CallableStatement cs = null;
-        boolean modificado = false;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_num_transaccion", transaccion.getNumOperacion());
+        parametrosEntrada.put("p_usuario_usuario_id", transaccion.getUsuarioRegistrado().getIdUsuario());
+        parametrosEntrada.put("p_fecha_y_hora", new java.sql.Timestamp(transaccion.getFecha().getTime()));
+        parametrosEntrada.put("p_concepto", transaccion.getConcepto());
+        parametrosEntrada.put("p_monto", transaccion.getMonto());
+        parametrosEntrada.put("p_anulado", transaccion.isAnulado());
+        parametrosEntrada.put("p_agencia", transaccion.getAgencia());
+        parametrosEntrada.put("p_foto", transaccion.getFoto());
+        parametrosEntrada.put("p_metodo_metodo_pago_id", transaccion.getMetodoPago().getIdMetodoPago());
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
 
-        try {
-            // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
-
-            // Preparar la llamada al procedimiento almacenado
-            cs = con.prepareCall("{CALL ModificarTransaccion(?, ?, ?, ?, ?, ?, ?, ?)}");
-
-            // Establecer los parámetros de entrada
-            cs.setInt(1, transaccion.getNumOperacion());
-            cs.setInt(2, transaccion.getUsuarioRegistrado().getIdUsuario());
-            cs.setTimestamp(3, new java.sql.Timestamp(transaccion.getFecha().getTime()));
-            cs.setString(4, transaccion.getConcepto());
-            cs.setDouble(5, transaccion.getMonto());
-            cs.setBoolean(6, transaccion.isAnulado());
-            cs.setString(7, transaccion.getAgencia());
-            cs.setBytes(8, transaccion.getFoto());
-            cs.setInt(9, transaccion.getMetodoPago().getIdMetodoPago());
-
-            // Ejecutar el procedimiento y verificar si se modificó correctamente
-            modificado = (cs.executeUpdate() > 0);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Cerrar recursos
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return modificado;
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("ModificarTransaccion", parametrosEntrada, parametrosSalida);
+        return resultado > 0;
     }
 
     @Override
     public boolean eliminar(int numOperacion) {
-        Connection con = null;
-        CallableStatement cs = null;
-        boolean eliminado = false;
-
-        try {
-            // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
-
-            // Preparar la llamada al procedimiento almacenado
-            cs = con.prepareCall("{CALL EliminarTransaccion(?)}");
-
-            // Establecer el parámetro de entrada
-            cs.setInt(1, numOperacion);
-
-            // Ejecutar el procedimiento y verificar si se eliminó correctamente
-            eliminado = (cs.executeUpdate() > 0);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Cerrar recursos
-            try {
-                if (cs != null) {
-                    cs.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return eliminado;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_num_transaccion", numOperacion);
+        
+        HashMap<String, Object> parametrosSalida = new HashMap<>();
+        
+        int resultado = DBManager.getInstance().ejecutarProcedimiento("EliminarTransaccion", parametrosEntrada, parametrosSalida);
+        return resultado > 0;
     }
 
     @Override
     public Transaccion obtenerPorId(int numOperacion) {
         Transaccion trans = new Transaccion();
-        CallableStatement cs;
-        String query = "{CALL ObtenerTransaccion(?)}";
-        int resultado = 0;
-
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_num_transaccion", numOperacion);
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerTransaccion", parametrosEntrada);
         try {
-            conexion = DBManager.getInstance().getConnection();
-            cs = conexion.prepareCall(query);
-            cs.setInt(1, numOperacion);
-
-            rs = cs.executeQuery();
             if(rs.next()){
                 trans.setAgencia(rs.getString("agencia"));
                 trans.setAnulado(rs.getInt("anulado")==0?false:true);
@@ -181,20 +106,13 @@ public class TransaccionMySQL implements TransaccionDAO {
     
     @Override
     public List<Transaccion> listarPorCredito(int numCred){
-        Connection con = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
+        parametrosEntrada.put("p_num_credito", numCred);
         List<Transaccion> transacciones = new ArrayList<>();
-
+        
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ObtenerTransaccionesPorCredito", parametrosEntrada);
         try {
-            // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
-
-            // Preparar la llamada al procedimiento almacenado
-            cs = con.prepareCall("{CALL ObtenerTransaccionesPorCredito(?)}");
-            cs.setInt(1, numCred);
-            // Ejecutar el procedimiento y obtener el resultado
-            rs = cs.executeQuery();
-
             // Procesar el ResultSet y convertirlo en objetos Transaccion
             while (rs.next()) {
                 int numOperacion = rs.getInt("num_transaccion");
@@ -226,41 +144,18 @@ public class TransaccionMySQL implements TransaccionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Cerrar recursos
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return transacciones;
     }
 
     @Override
     public List<Transaccion> listarTodos() {
-        Connection con = null;
-        CallableStatement cs = null;
+        HashMap<String, Object> parametrosEntrada = new HashMap<>();
+        
         List<Transaccion> transacciones = new ArrayList<>();
 
+        ResultSet rs = DBManager.getInstance().ejecutarProcedimientoLectura("ListarTransacciones", parametrosEntrada);
         try {
-            // Obtener la conexión a la base de datos
-            con = DBManager.getInstance().getConnection();
-
-            // Preparar la llamada al procedimiento almacenado
-            cs = con.prepareCall("{CALL ListarTransacciones()}");
-
-            // Ejecutar el procedimiento y obtener el resultado
-            rs = cs.executeQuery();
-
             // Procesar el ResultSet y convertirlo en objetos Transaccion
             while (rs.next()) {
                 int numOperacion = rs.getInt("num_transaccion");
@@ -292,21 +187,6 @@ public class TransaccionMySQL implements TransaccionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Cerrar recursos
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (cs != null) {
-                    cs.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return transacciones;
     }
