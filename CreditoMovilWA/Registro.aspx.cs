@@ -5,6 +5,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.UI;
@@ -62,7 +64,7 @@ namespace CreditoMovilWA
                 return;
             }
 
-            if(contrasena .Length < 8 || ! contieneNumero(contrasena))
+            if (contrasena.Length < 8 || !contieneNumero(contrasena))
             {
                 lblError.Text = "La contraseña debe tener al menos 8 caracteres y un número.";
                 return;
@@ -89,6 +91,7 @@ namespace CreditoMovilWA
             bool resultado = daoCliente.insertarCliente(Cliente);
             if (resultado)
             {
+                enviarCorreo(Cliente.email);
                 Response.Redirect("Home.aspx");
             }
 
@@ -108,11 +111,60 @@ namespace CreditoMovilWA
 
         private bool contieneNumero(string password)
         {
-            for(int i=0; i<password.Length; i++)
+            for (int i = 0; i < password.Length; i++)
             {
-                if(password[i] >= '0' && password[i]<='9') return true;
+                if (password[i] >= '0' && password[i] <= '9') return true;
             }
             return false;
+        }
+
+        protected void enviarCorreo(String email)
+        {
+            MailMessage mensaje = new MailMessage();
+            mensaje.From = new MailAddress(ConfigurationManager.AppSettings["Email"]);
+            mensaje.To.Add(email);
+            mensaje.Subject = "Registro de Cuenta - CreditoMovil";
+            mensaje.Body = @"
+            <!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Registro de Cuenta</title>
+                <style>
+                    body { font-family: Arial, sans-serif; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+                    h2 { color: #4CAF50; }
+                    a { text-decoration: none; color: #ffffff; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; font-weight: bold; }
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <h2>Registro de Cuenta</h2>
+                    <p>Hola,</p>
+                    <p>Se ha registrado correctamente su cuenta en Crédito Movil. Agradacemos por elegirnos como su empresa de confianza.</p>
+                    <br>
+                    <p>Saludos cordiales,</p>
+                    <p>El equipo de soporte de CreditoMovil</p>
+                </div>
+            </body>
+            </html>";
+
+            mensaje.IsBodyHtml = true;
+
+            SmtpClient clienteSmtp = new SmtpClient(ConfigurationManager.AppSettings["SmtpHost"], int.Parse(ConfigurationManager.AppSettings["SmtpPort"])); // Servidor SMTP
+            clienteSmtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["Email"], ConfigurationManager.AppSettings["EmailPassword"]);
+            clienteSmtp.EnableSsl = true;
+
+            try
+            {
+                clienteSmtp.Send(mensaje);
+                Console.WriteLine("Correo enviado exitosamente.");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("Error al enviar el correo: " + ex.Message);
+            }
         }
     }
 }

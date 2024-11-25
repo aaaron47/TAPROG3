@@ -78,6 +78,7 @@ namespace CreditoMovilWA
                         cred.estado = estado.Aprobado;
                         break;
                     case "Desembolsado":
+                        cred.estado = estado.Desembolsado;
                         cred.fechaOtorgamiento = DateTime.Now;
                         cred.fechaOtorgamientoSpecified = true;
                         break;
@@ -128,7 +129,7 @@ namespace CreditoMovilWA
             txtNumeroCuotas.Text = cred.numCuotas.ToString();
             txtTasaInteres.Text = cred.tasaInteres.ToString();
 
-            if (cred.estado.ToString() == "APROBADO")
+            if (cred.estado.ToString() == "ARPOBADO")
             {
                 btnDesembolso.Visible = true;
             }
